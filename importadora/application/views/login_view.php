@@ -49,6 +49,32 @@ $(document).ready(function(){
 					<tr><td colspan="2" align="right"><input type="submit" value="Entrar"></td></tr>
 				</table>	
 				<br>				
+				<br>
+				<center>Ultimos 20 pedidos</center>
+				<table width="700" style="position: absolute; top: 250px; left: 90px;">
+					<tr>
+						<td align="center">ID</td>						
+						<td align="center">Nombre</td>
+						<td align="center">Fecha pedido</td>
+						<td align="center">Status</td>
+					</tr>
+					<?php 
+					if (isset($pedidos))
+					{
+						foreach ($pedidos as $row)
+						{
+							?>
+							<tr>
+								<td><?php echo $row->orderid?></td>
+								<td><?php echo $row->name?></td>
+								<td><?php echo $row->date?></td>
+								<td><?php echo $row->status?></td>
+							</tr>
+							<?php 
+						}
+					}
+					?>
+				</table>
 			</form>
 		</div>
 	</div>	

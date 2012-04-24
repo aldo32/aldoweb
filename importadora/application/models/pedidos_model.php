@@ -103,14 +103,14 @@ class pedidos_model extends CI_Model
     			p.description AS description,
     			p.price AS price,
     			p.code AS code,
-    			COUNT(op.amount) AS amount 
+    			SUM(op.amount) AS amount 
     		FROM
     			orders o, products p, orderdetail op
     		WHERE 
     			o.orderid=op.orderid AND
     			p.productid=op.productid AND
     			op.orderid=?
-    			GROUP BY op.amount, op.productid ORDER BY op.detailid    			 
+    			GROUP BY op.productid ORDER BY op.detailid    			 
     	";
     	
     	$q=$this->db->query($sql, array($orderid));
@@ -181,6 +181,36 @@ class pedidos_model extends CI_Model
     {
     	$sql="UPDATE orders SET statusid=? WHERE orderid=?";
     	$q=$this->db->query($sql, array($status, $orderid));
+    	
+    	return $q;
+    }
+    
+    function getLastPedidos()
+    {
+    	$sql="
+    		SELECT 
+    			*, 
+    			(SELECT CONCAT(name,'  ',lastname) FROM users WHERE userid=orders.userid) AS name,
+    			(SELECT description FROM status WHERE statusid=orders.statusid) AS status 
+    		FROM 
+    			orders ORDER BY date DESC LIMIT 20
+    	";
+    	
+    	$q=$this->db->query($sql);    	
+    	if ($q->num_rows() > 0)
+    	{
+    		foreach ($q->result() as $row)
+    			$data[]=$row;
+
+    		$q->free_result();
+    		return $data;
+    	}
+    }
+    
+    function updateamountproduct($orderid, $productid, $amount)
+    {
+    	$sql="UPDATE orderdetail SET amount=$amount WHERE orderid=$orderid AND productid=$productid;";
+    	$q=$this->db->query($sql, array($amount, $orderid, $amount));
     	
     	return $q;
     }

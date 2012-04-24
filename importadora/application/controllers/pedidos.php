@@ -16,6 +16,8 @@ class pedidos extends CI_Controller {
 		{
 			$data['message']="Se cancelo la orden actual";
 		}
+		
+		$data['pedidos']=$this->pedidos_model->getLastPedidos();
 		$this->load->view('login_view', $data);
 	}
 	
@@ -48,7 +50,7 @@ class pedidos extends CI_Controller {
 		
 		$config['base_url'] = base_url()."pedidos/catalogo/";
 		$config['total_rows'] = count($catalog);		
-		$config['per_page'] = '12'; 
+		$config['per_page'] = '20'; 
 		$config['uri_segment'] = 3;
 		$config['first_link'] = 'Primera';		
 		$config['last_link'] = '&Uacute;ltima';
@@ -72,7 +74,7 @@ class pedidos extends CI_Controller {
 	{
 		$productid=$this->input->post('productid');
 		$orderid=$this->input->post('orderid');
-		$amount=1;
+		$amount=$this->input->post('amount');
 		
 		$res=$this->pedidos_model->saveProductOrder($productid, $orderid, $amount);	
 		$orderproduct=$this->pedidos_model->getProductsByOrderid($orderid);
@@ -190,6 +192,7 @@ class pedidos extends CI_Controller {
 		/*send mail*/				
 		$message='Se ha registradio un nuevo pedido.<br><br>Por favor visite el siguiente link para darle seguimiento <a href="'.base_url().'pedidos/validarpedido/'.$orderid.'/'.$userid.'">Pedido</a><br><br><a href="'.base_url().'pdf/'.$orderid.'_order.pdf"><br><br>Liga para descargar el PDF</>';		
 		$this->sendmail('direccion@importadorarym.com.mx', $message, 'Nuevo pedido');
+		//$this->sendmail('aldo.maranon@gbmobile.com', $message, 'Nuevo pedido');
 		/*--------*/
 		
 		$this->pedidos_model->updateStatusOrder($orderid, '2'); //1: iniciado   2:validad   3: Finalizado				
@@ -227,7 +230,8 @@ class pedidos extends CI_Controller {
 	function mensaje($message)
 	{
 		$data=$this->general('');
-		$data['message']=$message;		
+		$data['message']=$message;	
+		$data['pedidos']=$this->pedidos_model->getLastPedidos();	
 		$this->load->view('login_view', $data);
 	}
 	
@@ -345,6 +349,17 @@ class pedidos extends CI_Controller {
 		
 		$this->pedidos_model->updateStatusOrder($orderid, '3'); //1: iniciado   2:validad   3: Finalizado
 		$this->mensaje("El pedido se ha finalizado correctamente");
+	}
+	
+	function updateamountproduct()
+	{
+		$orderid=$this->input->post('orderid');
+		$productid=$this->input->post('productid');
+		$amount=$this->input->post('amount');
+
+		$res=$this->pedidos_model->updateamountproduct($orderid, $productid, $amount);
+		
+		echo json_encode(array('status'=>'success'));
 	}
 	
 	function general($info)

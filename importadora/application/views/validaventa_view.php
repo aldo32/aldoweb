@@ -45,6 +45,22 @@ function cancelOrder(orderid, userid)
         type: "POST"
 	});	
 }
+
+function updateOrder(orderid, productid, amount)
+{
+	$.ajax({										
+        url: "<?php echo base_url()?>pedidos/updateamountproduct",        
+        data: 'orderid='+orderid+'&productid='+productid+'&amount='+amount,     			     
+        dataType: "json",           	                	       
+        success: function(datos){	
+	        if (datos.status=='success')
+	        {
+		        $('#message').hide().html('Se cambio la cantidad del producto con éxito').fadeIn('slow').delay(4000).fadeOut('slow');
+		    }	               																			
+        },        
+        type: "POST"
+	});
+}
 </script>
 
 <div id="page">
@@ -54,13 +70,14 @@ function cancelOrder(orderid, userid)
 	
 	<form name="formvalid" id="formvalid" action="<?php echo base_url()?>pedidos/finalizaventa" method="post">
 		<div id="products">
-		<table id="list-product" width="800">
+		<table id="list-product" width="950">
 			<tr>
 				<td width="50"><strong>Id</strong></td>
 				<td><strong>Nombre</strong></td>
 				<td><strong>Cantidad</strong></td>
 				<td><strong>Precio/U</strong></td>
 				<td><strong>Borrar</strong></td>
+				<td><strong>&nbsp;</strong></td>
 			</tr>
 			<?php 
 			$total=0;
@@ -73,9 +90,10 @@ function cancelOrder(orderid, userid)
 					<tr>
 						<td><?php echo $row->productid;?></td>
 						<td><?php echo $row->description;?></td>				
-						<td align="center"><?php echo $row->amount;?></td>
+						<td align="center"> <input type="text" id="amount<?php echo $row->productid;?>" size="3" maxlength="3" value="<?php echo $row->amount;?>"></td>
 						<td>$<?php echo $row->price;?></td>
 						<td align="center" width="20"><a href="#" onclick="delProductOrder(<?php echo $row->orderid?>, <?php echo $row->productid;?>, '<?php echo $row->description;?>')"; style="color: red;"><strong>X</strong></a></td>
+						<td><input type="button" value="Guardar nueva cantidad" onclick="updateOrder(<?php echo $orderid?>, <?php echo $row->productid?>, $('#amount<?php echo $row->productid?>').val());"></td>
 					</tr>
 					<?php 
 				}
@@ -91,7 +109,9 @@ function cancelOrder(orderid, userid)
 			<tr><td align="center" colspan="5">
 				<input type="submit" value="Validar"><br><br>
 				<input type="button" value="Cancelar pedido" onclick="cancelOrder(<?php echo $orderid;?>, <?php echo $userid;?>)">				
-			</td></tr>									
+			</td></tr>				
+			<tr><td>&nbsp;</td></tr>
+			<tr><td id="message" align="center" colspan="5">&nbsp;</td></tr>					
 		</table>
 		</div>
 		<input type="hidden" name="orderid" value="<?php echo $orderid;?>">

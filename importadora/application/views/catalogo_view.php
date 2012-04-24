@@ -28,11 +28,11 @@ $(document).ready(function(){
 	
 });
 
-function addProduct(productid, orderid, description)
-{																					
+function addProduct(productid, orderid, description, amount)
+{																
 	$.ajax({										
         url: "<?php echo base_url()?>pedidos/saveProductInOrder",        
-        data: 'productid='+productid+'&orderid='+orderid,     			     
+        data: 'productid='+productid+'&orderid='+orderid+"&amount="+amount,     			     
         dataType: "html",           	                	       
         success: function(datos){	
 	        $('#order').html(datos);
@@ -73,7 +73,7 @@ function cancelOrder(orderid, userid)
 }
 </script>
 
-<div id="order">
+<div id="order">	
 	<strong>Pedido No <?php echo $orderid?></strong>
 	<div>Cliente: <strong><?php echo $_SESSION['name']." ".$_SESSION['lastname']?></strong></div><br>
 	<div id="products">
@@ -135,7 +135,7 @@ function cancelOrder(orderid, userid)
 					<img alt="p1" src="<?php echo base_url().$row->imageurl?>" width="140" height="100">
 					<div class="p-description"><?php echo $row->description?></div>
 					<div class="p-price">Precio: <strong>$<?php echo $row->price?></strong></div>
-					<div class="p-pedir"><a href="#" onclick="addProduct(<?php echo $row->productid?>, <?php echo $_SESSION['orderid'];?>, '<?php echo $row->description ?>')"><strong>Comprar</strong></a></div>
+					<div class="p-pedir"><input type="text" id="amount<?php echo $row->productid;?>" size="3" maxlength="3" value="1">&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="addProduct(<?php echo $row->productid?>, <?php echo $_SESSION['orderid'];?>, '<?php echo $row->description ?>', $('#amount<?php echo $row->productid;?>').val())"><strong>Comprar</strong></a></div>
 				</li>
 				<?php 
 			}
