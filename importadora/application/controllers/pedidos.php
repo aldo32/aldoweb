@@ -46,7 +46,12 @@ class pedidos extends CI_Controller {
 	function catalogo()
 	{
 		$data=$this->general('');
-		$catalog=$this->pedidos_model->getProductsByCatalogid($_SESSION['catalogid']);
+		$temp="";
+		
+		$catalogid=$this->input->post('catalogid');
+		if ($catalogid == "") { $temp=$_SESSION['catalogid']; } else { $temp=$catalogid; }				
+		
+		$catalog=$this->pedidos_model->getProductsByCatalogid($temp);
 		
 		$config['base_url'] = base_url()."pedidos/catalogo/";
 		$config['total_rows'] = count($catalog);		
@@ -61,11 +66,12 @@ class pedidos extends CI_Controller {
 
 		$this->pagination->initialize($config);
 		
-		$data['catalog']=$this->pedidos_model->getProductsByCatalogidPagination($_SESSION['catalogid'], $config['per_page'], (int)$this->uri->segment(3));
+		$data['catalog']=$this->pedidos_model->getProductsByCatalogidPagination($temp, $config['per_page'], (int)$this->uri->segment(3));
 		$orderid=$this->pedidos_model->checkOrderUser($_SESSION['userid']);
 		$data['orderid']=$orderid;
 		$_SESSION['orderid']=$orderid;
 		$data['orderproduct']=$this->pedidos_model->getProductsByOrderid($orderid);
+		$data['catalogid']=$temp;
 		
 		$this->load->view('catalogo_view', $data);
 	}

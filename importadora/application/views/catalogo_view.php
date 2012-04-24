@@ -3,7 +3,7 @@
 <?php echo $menu;?>
 
 <style>
-	#page { position: relative; z-index: 100; width: 800px; height: 450px; top:270px; margin: 0 auto; font-family: Arial,Helvetica,Sans-Serif; font-size: 13px; color: #fff; }		
+	#page { position: relative; z-index: 100; width: 800px; height: 450px; top:250px; margin: 0 auto; font-family: Arial,Helvetica,Sans-Serif; font-size: 13px; color: #fff; }		
 		#catalog { list-style:none;}
 			#catalog li { margin: 0px 45px 10px 0px; width: 140px; height: 200px; float: left; }
 	.p-description {font-size: 10px; margin-bottom: 10px; }
@@ -121,7 +121,16 @@ function cancelOrder(orderid, userid)
 <div id="cancelar-pedido"><input type="button" value="Cancelar pedido" onclick="cancelOrder(<?php echo $orderid;?>, <?php echo $_SESSION['userid']?>)"></div>
  
 <div id="page">
-		
+	<div style="margin-left: 40px;"> Seleccione una familia:
+		<form name="showcatalog" id="showcatalog" method="post" action="<?php echo base_url()?>pedidos/catalogo">
+			<select name="catalogid" onchange="document.showcatalog.submit();">
+				<option value="1" <?php if ($catalogid==1) { echo "SELECTED"; }?>>TODO</option>
+				<option value="2" <?php if ($catalogid==2) { echo "SELECTED"; }?>>MANCERA PISOS</option>
+				<option value="3" <?php if ($catalogid==3) { echo "SELECTED"; }?>>MANCERA COCINA</option>
+				<option value="4" <?php if ($catalogid==4) { echo "SELECTED"; }?>>MANCERA MANTENIMIENTO</option>
+			</select>
+		</form>
+	</div>	
 	<div id="messages"></div>
 	<div id="clearb">
 	<ul id="catalog">
