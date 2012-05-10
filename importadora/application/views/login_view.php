@@ -27,6 +27,22 @@ $(document).ready(function(){
 	        type: "POST"
 		});																			
 	});
+
+	$('#showmyorders').click(function(e) {
+		var user=$('#user').val();
+		var pass=$('#pass').val();
+
+		e.preventDefault();																		
+		$.ajax({										
+	        url: "<?php echo base_url()?>pedidos/showmeorders",        
+	        data: 'user='+user+"&pass="+pass,     			     
+	        dataType: "html",           	                	       
+	        success: function(datos){	
+	        	$('#pedidos').html(datos);																
+	        },        
+	        type: "POST"
+		});
+	});
 });
 </script>
 
@@ -39,42 +55,18 @@ $(document).ready(function(){
 				<table width="300">
 					<tr>
 						<td>Email:</td>
-						<td><input type="text" name="user" size="38"></td>
+						<td><input type="text" name="user" id="user" size="38"></td>
 					</tr>
 					<tr>
 						<td>Password:</td>
-						<td><input type="password" name="pass" size="38"></td>
+						<td><input type="password" name="pass" id="pass" size="38"></td>
 					</tr>
 					<tr><td>&nbsp;</td></tr>
-					<tr><td colspan="2" align="right"><input type="submit" value="Entrar"></td></tr>
+					<tr><td colspan="2" align="right"><input type="button" value="Ver mis pedidos" id="showmyorders">&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Entrar"></td></tr>
 				</table>	
 				<br>				
 				<br>
-				<center>Ultimos 20 pedidos</center>
-				<table width="700" style="position: absolute; top: 250px; left: 90px;">
-					<tr>
-						<td align="center">ID</td>						
-						<td align="center">Nombre</td>
-						<td align="center">Fecha pedido</td>
-						<td align="center">Status</td>
-					</tr>
-					<?php 
-					if (isset($pedidos))
-					{
-						foreach ($pedidos as $row)
-						{
-							?>
-							<tr>
-								<td><?php echo $row->orderid?></td>
-								<td><?php echo $row->name?></td>
-								<td><?php echo $row->date?></td>
-								<td><?php echo $row->status?></td>
-							</tr>
-							<?php 
-						}
-					}
-					?>
-				</table>
+				<div id="pedidos"></div>
 			</form>
 		</div>
 	</div>	

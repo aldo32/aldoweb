@@ -3,7 +3,7 @@
 <?php echo $menu;?>
 
 <style>
-	#page { position: relative; z-index: 100; width: 800px; height: 450px; top:250px; margin: 0 auto; font-family: Arial,Helvetica,Sans-Serif; font-size: 13px; color: #fff; }		
+	#page { position: relative; z-index: 100; width: 800px; height: 450px; top:240px; margin: 0 auto; font-family: Arial,Helvetica,Sans-Serif; font-size: 13px; color: #fff; float: left; clear: both; }		
 		#catalog { list-style:none;}
 			#catalog li { margin: 0px 45px 10px 0px; width: 140px; height: 200px; float: left; }
 	.p-description {font-size: 10px; margin-bottom: 10px; }
@@ -12,10 +12,10 @@
 	#link-pages { width: 100%; text-align: center;}		
 	#messages { width: 100%; text-align: left; font-size: 14px; color: green; margin-bottom: 10px; margin-left: 40px; font-weight: bold; }
 	
-	#order { position: absolute; z-index: 100; width: 320px; height: 210px; top:0px; left: 680px; font-family: Arial,Helvetica,Sans-Serif; font-size: 13px; color: #fff; border: 2px solid green; }
+	#order { position: absolute; z-index: 100; width: 320px; height: 400px; top:320px; left: 780px; font-family: Arial,Helvetica,Sans-Serif; font-size: 13px; color: #fff; border: 2px solid green; }
 		#list-product { font-size: 12px; color: #fff; }
 		#list-product td { font-size: 10px; color: #fff; }	
-		#products { width: 320px; height: 120px; overflow: auto; }
+		#products { width: 320px; height: 320px; overflow: auto; }
 		#send-order { float: right; margin-top: 10px; }
 		#total { float: left; margin-top: 10px; }		
 		#total span { font-size: 18px; }

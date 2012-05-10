@@ -185,7 +185,7 @@ class pedidos_model extends CI_Model
     	return $q;
     }
     
-    function getLastPedidos()
+    function getLastPedidos($userid)
     {
     	$sql="
     		SELECT 
@@ -193,10 +193,13 @@ class pedidos_model extends CI_Model
     			(SELECT CONCAT(name,'  ',lastname) FROM users WHERE userid=orders.userid) AS name,
     			(SELECT description FROM status WHERE statusid=orders.statusid) AS status 
     		FROM 
-    			orders ORDER BY date DESC LIMIT 20
+    			orders
+    		WHERE
+    			userid=?
+    			ORDER BY date
     	";
     	
-    	$q=$this->db->query($sql);    	
+    	$q=$this->db->query($sql, array($userid));    	
     	if ($q->num_rows() > 0)
     	{
     		foreach ($q->result() as $row)

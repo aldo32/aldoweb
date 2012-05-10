@@ -16,8 +16,7 @@ class pedidos extends CI_Controller {
 		{
 			$data['message']="Se cancelo la orden actual";
 		}
-		
-		$data['pedidos']=$this->pedidos_model->getLastPedidos();
+				
 		$this->load->view('login_view', $data);
 	}
 	
@@ -366,6 +365,48 @@ class pedidos extends CI_Controller {
 		$res=$this->pedidos_model->updateamountproduct($orderid, $productid, $amount);
 		
 		echo json_encode(array('status'=>'success'));
+	}
+	
+	function showmeorders()
+	{
+		$user=$this->input->post('user');
+		$pass=$this->input->post('pass');
+
+		$res=$this->pedidos_model->login($user, md5($pass));
+		if ($res)
+		{
+			$pedidos=$this->pedidos_model->getLastPedidos($res->userid);
+			?>
+			<table width="700" style="position: absolute; top: 250px; left: 90px;">
+				<tr>
+					<td align="center">ID</td>						
+					<td align="center">Nombre</td>
+					<td align="center">Fecha pedido</td>
+					<td align="center">Status</td>
+				</tr>
+				<?php 
+				if (isset($pedidos))
+				{
+					foreach ($pedidos as $row)
+					{
+						?>
+						<tr>
+							<td><?php echo $row->orderid?></td>
+							<td><?php echo $row->name?></td>
+							<td><?php echo $row->date?></td>
+							<td><?php echo $row->status?></td>
+						</tr>
+						<?php 
+					}
+				}
+				?>
+			</table>
+			<?php 
+		}
+		else
+		{
+			echo "Los datos para mostrar sus pedidos no son correctos";
+		}
 	}
 	
 	function general($info)
