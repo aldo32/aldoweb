@@ -43,19 +43,29 @@ class pedidos extends CI_Controller {
 	}
 	
 	function catalogo()
-	{
-		$data=$this->general('');
-		$temp="";
+	{		
+		$data=$this->general('');				
+		$temp=$_SESSION['catalogid'];
 		
-		$catalogid=$this->input->post('catalogid');
-		if ($catalogid == "") { $temp=$_SESSION['catalogid']; } else { $temp=$catalogid; }				
+		$cid=$this->uri->segment(3);
+		if ($cid == "") { $cid=$this->input->post('catalogid'); }
+						
+		if ($_SESSION['catalogid'] != 6 && $cid != "")
+		{
+			$temp=$cid;			
+		}
+		else
+		{
+			$temp=$_SESSION['catalogid'];
+		}									
 		
+		echo $temp;
 		$catalog=$this->pedidos_model->getProductsByCatalogid($temp);
 		
-		$config['base_url'] = base_url()."pedidos/catalogo/";
+		$config['base_url'] = base_url()."pedidos/catalogo/$temp";
 		$config['total_rows'] = count($catalog);		
 		$config['per_page'] = '20'; 
-		$config['uri_segment'] = 3;
+		$config['uri_segment'] = 4;
 		$config['first_link'] = 'Primera';		
 		$config['last_link'] = '&Uacute;ltima';
 		$config['next_link'] = 'Siguiente &raquo;';
@@ -65,7 +75,7 @@ class pedidos extends CI_Controller {
 
 		$this->pagination->initialize($config);
 		
-		$data['catalog']=$this->pedidos_model->getProductsByCatalogidPagination($temp, $config['per_page'], (int)$this->uri->segment(3));
+		$data['catalog']=$this->pedidos_model->getProductsByCatalogidPagination($temp, $config['per_page'], (int)$this->uri->segment(4));
 		$orderid=$this->pedidos_model->checkOrderUser($_SESSION['userid']);
 		$data['orderid']=$orderid;
 		$_SESSION['orderid']=$orderid;
@@ -109,7 +119,7 @@ class pedidos extends CI_Controller {
 						<tr>
 							<td><?php echo $row->productid;?></td>
 							<td><?php echo $row->description;?></td>				
-							<td align="center"><?php echo $row->amount;?></td>
+							<td align="center"><input type="text" name="amountp<?php echo $row->productid."_".$row->orderid?>" id="amountp<?php echo $row->productid."_".$row->orderid?>" onkeyup="updateamountp(<?php echo $row->productid;?>, <?php echo $row->orderid;?>);" size="3" value="<?php echo $row->amount;?>"></td>
 							<td>$<?php echo $row->price;?></td>
 							<td align="center" width="20"><a href="#" onclick="delProductOrder(<?php echo $row->orderid?>, <?php echo $row->productid;?>, '<?php echo $row->description;?>')"; style="color: red;"><strong>X</strong></a></td>
 						</tr>
@@ -161,7 +171,7 @@ class pedidos extends CI_Controller {
 						<tr>
 							<td><?php echo $row->productid;?></td>
 							<td><?php echo $row->description;?></td>				
-							<td align="center"><?php echo $row->amount;?></td>
+							<td align="center"><input type="text" name="amountp<?php echo $row->productid."_".$row->orderid?>" id="amountp<?php echo $row->productid."_".$row->orderid?>" onkeyup="updateamountp(<?php echo $row->productid;?>, <?php echo $row->orderid;?>);" size="3" value="<?php echo $row->amount;?>"></td>
 							<td>$<?php echo $row->price;?></td>
 							<td align="center" width="20"><a href="#" onclick="delProductOrder(<?php echo $row->orderid?>, <?php echo $row->productid;?>, '<?php echo $row->description;?>')"; style="color: red;"><strong>X</strong></a></td>
 						</tr>
@@ -192,7 +202,7 @@ class pedidos extends CI_Controller {
 		//$this->load->view('listorder_view', $data);
 		
 		$html = $this->load->view('listorder_view', $data, TRUE);			
-		$this->pdf_create ($html, $orderid);		
+		$this->pdf_create($html, $orderid);		
 
 		/*send mail*/				
 		$message='Se ha registradio un nuevo pedido.<br><br>Por favor visite el siguiente link para darle seguimiento <a href="'.base_url().'pedidos/validarpedido/'.$orderid.'/'.$userid.'">Pedido</a><br><br><a href="'.base_url().'pdf/'.$orderid.'_order.pdf"><br><br>Liga para descargar el PDF</>';		
@@ -221,8 +231,7 @@ class pedidos extends CI_Controller {
 		$dompdf->load_html($html);
 		$dompdf->render();		
 		if ($stream) 
-		{
-			echo "work";
+		{			
 			$dompdf->stream($orderid."_order.pdf");
 		} 
 		else 
@@ -291,7 +300,7 @@ class pedidos extends CI_Controller {
 					<tr>
 						<td><?php echo $row->productid;?></td>
 						<td><?php echo $row->description;?></td>				
-						<td align="center"><?php echo $row->amount;?></td>
+						<td align="center"><input type="text" name="amountp<?php echo $row->productid."_".$row->orderid?>" id="amountp<?php echo $row->productid."_".$row->orderid?>" onkeyup="updateamountp(<?php echo $row->productid;?>, <?php echo $row->orderid;?>);" size="3" value="<?php echo $row->amount;?>"></td>
 						<td>$<?php echo $row->price;?></td>
 						<td align="center" width="20"><a href="#" onclick="delProductOrder(<?php echo $row->orderid?>, <?php echo $row->productid;?>, '<?php echo $row->description;?>')"; style="color: red;"><strong>X</strong></a></td>
 					</tr>
@@ -350,6 +359,7 @@ class pedidos extends CI_Controller {
 		/*send mail*/		
 		$message='Se ha realizado un nuevo pedido.<br><br><a href="'.base_url().'pdf/'.$orderid.'_order.pdf"><br><br>Liga para descargar el PDF del pedido</>';		
 		$this->sendmail('sperdomo@importadorarym.com.mx', $message, 'Nuevo pedido');
+		//$this->sendmail('aldo.maranon@gbmobile.com', $message, 'Nuevo pedido');
 		/*--------*/
 		
 		$this->pedidos_model->updateStatusOrder($orderid, '3'); //1: iniciado   2:validad   3: Finalizado
@@ -415,6 +425,15 @@ class pedidos extends CI_Controller {
 		$data['menu']=$this->load->view('general_menu_view', '', TRUE);
 		
 		return $data;
+	}
+	
+	function updateamountp()
+	{
+		$productid=$this->input->post('productid');
+		$orderid=$this->input->post('orderid');
+		$amount=$this->input->post('amount');
+		
+		$this->pedidos_model->updateAmountOrder($productid, $orderid, $amount);
 	}
 }
 ?>

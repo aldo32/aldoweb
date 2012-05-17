@@ -115,7 +115,7 @@ document.oncontextmenu = function(){return false}
 // End -->
 </script></div>
 
-<div id="text1" style="position:absolute; overflow:hidden; left:0px; top:1400px; width:1000px; height:63px; z-index:2; background-color:#333333">
+<div id="text1" style="position:absolute; overflow:hidden; left:0px; top:1450px; width:1000px; height:63px; z-index:2; background-color:#333333">
 <div class="wpmd">
 <div align=center><font color="#FFFFFF" class="ws8"><BR></font></div>
 <div align=center><font color="#FFFFFF">Importadora RYM, S.A. de C.V.&nbsp;&nbsp;&nbsp; Av. </font><font color="#FFFFFF" class="ws9">San Lorenzo</font><font color="#FFFFFF">&nbsp;&nbsp; No. 279&nbsp;&nbsp; Bodega&nbsp;&nbsp; 27&nbsp;&nbsp; Col.&nbsp; San Nicolas Tolentino&nbsp;&nbsp;&nbsp; Mexico D.F.&nbsp;&nbsp; C.P. 09850&nbsp;&nbsp;&nbsp; Tel: 56121612 </font><font color="#FFFFFF" class="ws9">CON 10 Lineas</font></div>

@@ -217,5 +217,13 @@ class pedidos_model extends CI_Model
     	
     	return $q;
     }
+    
+    function updateAmountOrder($productid, $orderid, $amount)
+    {
+    	$sql="UPDATE orderdetail SET amount=? WHERE productid=? AND orderid=?;";
+    	$q=$this->db->query($sql, array($amount, $productid, $orderid));
+    	
+    	return $q;
+    }
 }
 ?>
