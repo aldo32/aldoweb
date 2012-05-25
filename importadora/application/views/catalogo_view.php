@@ -45,6 +45,8 @@ function addProduct(productid, orderid, description, amount)
 	        },        
 	        type: "POST"
 		});
+
+		$('#amount'+productid).val("");
 	}		
 	else
 	{
@@ -193,7 +195,14 @@ function updateamountp(productid, orderid)
 				<li>
 					<img alt="p1" src="<?php echo base_url().$row->imageurl?>" width="140" height="100">
 					<div class="p-description"><?php echo $row->description?></div>
-					<div class="p-price">Precio: <strong>$<?php echo $row->price?></strong></div>
+					<?php 
+					if ($catalogid != 6)
+					{
+						?>
+						<div class="p-price">Precio: <strong>$<?php echo $row->price?></strong></div>
+						<?php 
+					}
+					?>					
 					<div class="p-pedir"><input type="text" id="amount<?php echo $row->productid;?>" size="3" maxlength="3" value="">&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="addProduct(<?php echo $row->productid?>, <?php echo $_SESSION['orderid'];?>, '<?php echo $row->description ?>', $('#amount<?php echo $row->productid;?>').val())"><strong>Comprar</strong></a></div>
 				</li>
 				<?php 
