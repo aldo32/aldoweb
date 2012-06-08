@@ -31,13 +31,14 @@ $(document).ready(function() {
 	
 	$('#right').click(function(e) {
 		e.preventDefault();								
-						
+		
 		if(currentItem < (items-1)) {						
 			$('#carrusel').stop(true);				
 			currentItem=currentItem+1;					
 			var newPos = -itemWidth * currentItem;			
-			$('#carrusel li').fadeOut('100', function () { $('#carrusel').stop(true, true).animate({'left': newPos}, 840); }).delay(100).fadeIn('slow', function() {  });		
-			//$('#carrusel:not(:animated)').animate({'left': newPos}, 600, function() { $('.btn-banner').removeClass('active'); $('#btn-banner-'+(currentItem+1)).addClass('active'); /*animationInterval = setInterval("moveBanners('interval')", 5000);*/ });
+			//$('#carrusel li').fadeOut('100', function () { $('#carrusel').stop(true, true).animate({'left': newPos}, 840); }).delay(100).fadeIn('slow');
+			alert(newPos);
+			$('#carrusel').animate({'top': newPos}, 600);					
 			
 			if(currentItem >= (items-1)) {
 				$(this).css('opacity', 0.5);
