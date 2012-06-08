@@ -21,6 +21,8 @@
 		#total span { font-size: 18px; }
 		#cancelar-pedido { margin-left: 440px; margin-top: -15px; position: relative; }
 	#clearb { clear: both; }
+	
+	#elaborate { position: absolute; z-index: 100; width: 320px; height: 33px; top:730px; left: 780px; font-family: Arial,Helvetica,Sans-Serif; font-size: 13px; color: #fff; border: 2px solid green; padding-top: 10px; }
 </style>
 
 <script>
@@ -143,7 +145,7 @@ function updateamountp(productid, orderid)
 						<td><?php echo $row->description;?></td>				
 						<td align="center"><input type="text" name="amountp<?php echo $row->productid."_".$row->orderid?>" id="amountp<?php echo $row->productid."_".$row->orderid?>" onkeyup="updateamountp(<?php echo $row->productid;?>, <?php echo $row->orderid;?>);" size="3" value="<?php echo $row->amount;?>"></td>
 						<td>$<?php echo $row->price;?></td>
-						<td align="center" width="20"><a href="#" onclick="delProductOrder(<?php echo $row->orderid?>, <?php echo $row->productid;?>, '<?php echo $row->description;?>')"; style="color: red;"><strong>X</strong></a></td>
+						<td align="center" width="20"><a href="#" onclick="delProductOrder(<?php echo $row->orderid?>, <?php echo $row->productid;?>, '<?php echo str_replace('"', '', $row->description);?>')"; style="color: red;"><strong>X</strong></a></td>
 					</tr>
 					<?php 
 				}
@@ -154,13 +156,16 @@ function updateamountp(productid, orderid)
 			}
 			?>											
 		</table>
-	</div>	
+	</div>		
 	<div id="total">Total del pedido <span>$<?php echo $total;?></span></div>
-	<div id="send-order"><input type="submit" value="Enviar pedido" onclick="document.orderform.submit();"></div>
+	<div id="send-order"><input type="submit" value="Enviar pedido" onclick="if(document.orderform.elaboratename.value == '') { alert('Debe escribir el nombre de quien elabora el pedido.'); } else { document.orderform.submit(); }"></div>
 </div>
 <form name="orderform" id="orderform" action="<?php echo base_url()?>pedidos/enviarpedido" method="post">
 	<input type="hidden" name="orderid" value="<?php echo $orderid;?>">
 	<input type="hidden" name="userid" value="<?php echo $_SESSION['userid'];?>">
+	<div id="elaborate">
+		Elaboro:&nbsp;&nbsp;&nbsp;<input type="text" name="elaboratename" id="elaboratename" size="35" maxlength="60">
+	</div>
 </form>
 <div id="cancelar-pedido"><input type="button" value="Cancelar pedido" onclick="cancelOrder(<?php echo $orderid;?>, <?php echo $_SESSION['userid']?>)"></div>
  
@@ -183,7 +188,7 @@ function updateamountp(productid, orderid)
 		<?php
 	} 
 	?>	
-	<div id="messages"></div>
+	<div id="messages"><?php if (isset($messages)) { echo urldecode($messages); }?></div>
 	<div id="clearb">
 	<ul id="catalog">
 		<?php 
@@ -203,7 +208,7 @@ function updateamountp(productid, orderid)
 						<?php 
 					}
 					?>					
-					<div class="p-pedir"><input type="text" id="amount<?php echo $row->productid;?>" size="3" maxlength="3" value="">&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="addProduct(<?php echo $row->productid?>, <?php echo $_SESSION['orderid'];?>, '<?php echo $row->description ?>', $('#amount<?php echo $row->productid;?>').val())"><strong>Comprar</strong></a></div>
+					<div class="p-pedir"><input type="text" id="amount<?php echo $row->productid;?>" size="3" maxlength="3" value="">&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="addProduct(<?php echo $row->productid?>, <?php echo $_SESSION['orderid'];?>, '<?php echo str_replace('"', '', $row->description); ?>', $('#amount<?php echo $row->productid;?>').val())"><strong>Comprar</strong></a></div>
 				</li>
 				<?php 
 			}

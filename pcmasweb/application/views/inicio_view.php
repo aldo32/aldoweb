@@ -13,7 +13,65 @@
 <link href="<?php echo base_url()?>resources/styles/templatemo_style.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo base_url()?>resources/styles/jquery.ennui.contentslider.css" rel="stylesheet" type="text/css" media="screen,projection" />
 
+<script type="text/javascript" src="<?php echo base_url();?>resources/scripts/jquery-1.7.1.js"></script>
+
 </head>
+
+<script>
+var currentItem = 0;		
+var items=0;
+var itemWidth;
+var ulWidth=0;
+var animationInterval="";
+
+$(document).ready(function() {
+	items = $('#carrusel li').size(); //number of itmes						
+	itemWidth = $('#carrusel li').outerWidth(false);		
+	ulWidth = itemWidth * (items*1);
+	
+	$('#right').click(function(e) {
+		e.preventDefault();								
+						
+		if(currentItem < (items-1)) {						
+			$('#carrusel').stop(true);				
+			currentItem=currentItem+1;					
+			var newPos = -itemWidth * currentItem;			
+			$('#carrusel li').fadeOut('100', function () { $('#carrusel').stop(true, true).animate({'left': newPos}, 840); }).delay(100).fadeIn('slow', function() {  });		
+			//$('#carrusel:not(:animated)').animate({'left': newPos}, 600, function() { $('.btn-banner').removeClass('active'); $('#btn-banner-'+(currentItem+1)).addClass('active'); /*animationInterval = setInterval("moveBanners('interval')", 5000);*/ });
+			
+			if(currentItem >= (items-1)) {
+				$(this).css('opacity', 0.5);
+			}
+
+			if(currentItem > 0) {
+				$('#left').css('opacity', 1);
+			}						
+		}
+	});
+	
+	$('#left').click(function(e) {				
+		e.preventDefault();		
+		
+		if(currentItem > 0) {									
+			$('#carrusel').stop(true);
+			currentItem=currentItem-1;					
+			var newPos = -itemWidth * currentItem;
+			$('#carrusel li').fadeOut('100', function () { $('#carrusel').stop(true, true).animate({'left': newPos}, 840); }).delay(100).fadeIn('slow', function() {  });
+			//$('#carrousel:not(:animated)').animate({'left': newPos}, 600, function() { $('.btn-banner').removeClass('active'); $('#btn-banner-'+(currentItem+1)).addClass('active'); /*animationInterval = setInterval("moveBanners('interval')", 5000);*/ });
+
+			if(currentItem <= 0) {
+				$(this).css('opacity', 0.5);
+			}
+
+			if(currentItem < (items-1)) {
+				$('#right').css('opacity', 1);
+				
+			}
+		}
+	});	
+});
+</script>
+
 <body>
 
 <div id="templatemo_wrapper_outer">
@@ -30,11 +88,11 @@
 			</div> <!-- end of site_title -->
 
 				<ul id="social_box">
-					<li><a href="http://www.facebook.com/templatemo"><img src="<?php echo base_url()?>resources/images/facebook.png" alt="facebook" /></a></li>
-					<li><a href="#"><img src="<?php echo base_url()?>resources/images/twitter.png" alt="twitter" /></a></li>
+					<li><a href="http://www.facebook.com/pages/pcmasweb-Mantenimiento-a-equipo-de-computo/285200734849452"><img src="<?php echo base_url()?>resources/images/facebook.png" alt="facebook" /></a></li>
+					<!-- <li><a href="#"><img src="<?php echo base_url()?>resources/images/twitter.png" alt="twitter" /></a></li>
 					<li><a href="#"><img src="<?php echo base_url()?>resources/images/linkedin.png" alt="linkin" /></a></li>
 					<li><a href="#"><img src="<?php echo base_url()?>resources/images/technorati.png" alt="technorati" /></a></li>
-					<li><a href="#"><img src="<?php echo base_url()?>resources/images/myspace.png" alt="myspace" /></a></li>                
+					<li><a href="#"><img src="<?php echo base_url()?>resources/images/myspace.png" alt="myspace" /></a></li>      -->           
 				</ul>
 			
 			<div class="cleaner"></div>
@@ -53,97 +111,19 @@
         <div id="templatemo_slider_wrapper">
         
         	<div id="templatemo_slider">
-            
-				<div id="one" class="contentslider">
-                    <div class="cs_wrapper">
-                        <div class="cs_slider">
-                        
-                            <div class="cs_article">
-                            	<div class="slider_content_wrapper">
-									
-									<div class="slider_image">
-										<img src="<?php echo base_url()?>resources/images/slider/templatemo_slide01.jpg" width="350" height="200" alt="Mauris quis eros arcu" />
-									</div>
-									
-									<div class="slider_content">
-                                        <h2>Paginas WEB</h2>
-                                        <p>Si necesitas una pagina web nosotros tenemos la solución, ya que diseñamos paginas web a la medida de tus necesidades, ya sea para tu empresa o negocio, nuestros trabajos cuentan con un excelente diseño y al menor costo. </p>
-                                        <p>Somos especialistas en realizar proyectos web con resultados, hacemos sitios que venden, que generan contactos y por supuesto que te ayudamos a medir, analizar y entender los alcances del mismo, algo que poco muy pocos ofrecen.</p>
-										<div class="btn_more"><a href="#">More...</a></div>
-									</div>
-                                
-								</div>
-                            </div><!-- End cs_article -->
-                            
-                            <div class="cs_article">
-                            	<div class="slider_content_wrapper">
-									
-									<div class="slider_image">
-										<img src="<?php echo base_url()?>resources/images/slider/templatemo_slide02.jpg" alt="Cras porta porta turpis" />
-									</div>
-                     			
-									<div class="slider_content">
-                                        <h2>Vestibulum vitae lectus a leo commodo egestas</h2>
-                                        <p>Aliquam nec felis tellus. Sed a dolor lectus. Phasellus ac dolor id nunc pharetra interdum. Fusce magna nulla, elementum nec luctus sit amet, lacinia ut lorem.</p>
-                                        <div class="btn_more"><a href="#">More...</a></div>
-                                    </div>
-                                
-								</div>
-                            </div><!-- End cs_article -->
-                            
-                            <div class="cs_article">
-                            	<div class="slider_content_wrapper">
-									
-									<div class="slider_image">
-										<img src="<?php echo base_url()?>resources/images/slider/templatemo_slide03.jpg" alt="Nullam ac mi id massa consectetur" />
-									</div>
-									
-									<div class="slider_content">
-                                        <h2>Praesent at nunc tellus sed sed auctor odio</h2>
-                                        <p>Nullam fermentum risus vitae lectus posuere sagittis. Praesent faucibus, dui vitae condimentum semper, dolor augue ornare elit, quis congue ante lacus id dui.</p>
-                                        <div class="btn_more"><a href="#">More...</a></div>
-                                    </div>
-                                
-								</div>
-                            </div><!-- End cs_article -->
-                            
-                            <div class="cs_article">
-                            	<div class="slider_content_wrapper">
-									
-									<div class="slider_image">
-										<img src="<?php echo base_url()?>resources/images/slider/templatemo_slide04.jpg" alt="Maecenas venenatis viverra nisi" />
-									</div>
-									
-									<div class="slider_content">
-                                        <h2>Maecenas ut mauris eu ligula placerat tempor vel</h2>
-                                        <p>Suspendisse dolor dui, pretium quis sagittis convallis, placerat et diam. Fusce euismod mattis mauris, ac consequat leo pellentesque non. Nullam ut pharetra diam.</p>
-                                        <div class="btn_more"><a href="#">More...</a></div>
-                                    </div>
-                                
-								</div>
-                            </div><!-- End cs_article -->
-                      
-                        </div><!-- End cs_slider -->
-                    </div><!-- End cs_wrapper -->
-                </div><!-- End contentslider -->
-                
-                <!-- Site JavaScript -->
-                <script type="text/javascript" src="<?php echo base_url()?>resources/scripts/jquery-1.3.1.min.js"></script>
-                <script type="text/javascript" src="<?php echo base_url()?>resources/scripts/jquery.easing.1.3.js"></script>
-                <script type="text/javascript" src="<?php echo base_url()?>resources/scripts/jquery.ennui.contentslider.js"></script>
-                <script type="text/javascript">
-                    $(function() {
-                    $('#one').ContentSlider({
-                    width : '940px',
-                    height : '240px',
-                    speed : 400,
-                    easing : 'easeOutSine'
-                    });
-                    });
-                </script>
-                
-                <div class="cleaner"></div>
-            	
+            	<div id="carrusel-wrap">
+            		<div id="left"></div>
+            		<ul id="carrusel">
+            			<li>Aldo1</li>
+            			<li>Aldo2</li>
+            			<li>Aldo3</li>
+            			<li>Aldo4</li>
+            			<li>Aldo5</li>
+            			<li>Aldo6</li>
+            		</ul>
+            		<div id="right"></div>
+            	</div>			                
+                <div class="cleaner"></div>            	
             </div>
         
         </div>

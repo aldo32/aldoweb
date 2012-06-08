@@ -51,7 +51,7 @@ class pedidos_model extends CI_Model
     			p.productid=cp.productid AND
     			cp.catalogid=cp.catalogid AND
     			cp.catalogid=?
-    			ORDER BY productid LIMIT $limit OFFSET $offset
+    			ORDER BY p.orderp LIMIT $limit OFFSET $offset
     	";
     	
     	$q=$this->db->query($sql, array($catalogid));
@@ -177,10 +177,10 @@ class pedidos_model extends CI_Model
     	}
     }
     
-    function updateStatusOrder($orderid, $status)
+    function updateStatusOrder($orderid, $status, $elaboratename)
     {
-    	$sql="UPDATE orders SET statusid=? WHERE orderid=?";
-    	$q=$this->db->query($sql, array($status, $orderid));
+    	$sql="UPDATE orders SET statusid=?, elaboratename=? WHERE orderid=?";
+    	$q=$this->db->query($sql, array($status, $elaboratename, $orderid));
     	
     	return $q;
     }

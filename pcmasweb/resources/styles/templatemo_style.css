@@ -303,7 +303,7 @@ em { color: #fff; }
 #templatemo_slider {
 	width: 940px;
 	height: 256px;
-	padding: 40px 0;
+	padding-bottom: 80px;
 	background: url(../../resources/images/slider.png) no-repeat;
 }
 
@@ -471,3 +471,14 @@ em { color: #fff; }
 }
 
 /* end of footer */
+
+
+/*Carrusel*/
+#carrusel-wrap { height: 292px; margin: 0 auto; position: relatve; overflow: hidden;}	
+	#left { width: 49px; height: 292px; background: url(../../resources/images/left.png) no-repeat center; float: left; }
+	#carrusel { width: 840px; height: 280px; float: left; margn:0px; padding: 0px; position: relative; }
+		#carrusel li { width: 840px; height: 278px; float: left;}
+	#right { width: 49px; height: 292px; background: url(../../resources/images/right.png) no-repeat center; float: left; }
+
+
+

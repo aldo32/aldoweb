@@ -81,6 +81,7 @@ class pedidos extends CI_Controller {
 		$_SESSION['orderid']=$orderid;
 		$data['orderproduct']=$this->pedidos_model->getProductsByOrderid($orderid);
 		$data['catalogid']=$temp;
+		$data['messages']=$this->uri->segment(4);
 		
 		$this->load->view('catalogo_view', $data);
 	}
@@ -121,7 +122,7 @@ class pedidos extends CI_Controller {
 							<td><?php echo $row->description;?></td>				
 							<td align="center"><input type="text" name="amountp<?php echo $row->productid."_".$row->orderid?>" id="amountp<?php echo $row->productid."_".$row->orderid?>" onkeyup="updateamountp(<?php echo $row->productid;?>, <?php echo $row->orderid;?>);" size="3" value="<?php echo $row->amount;?>"></td>
 							<td>$<?php echo $row->price;?></td>
-							<td align="center" width="20"><a href="#" onclick="delProductOrder(<?php echo $row->orderid?>, <?php echo $row->productid;?>, '<?php echo $row->description;?>')"; style="color: red;"><strong>X</strong></a></td>
+							<td align="center" width="20"><a href="#" onclick="delProductOrder(<?php echo $row->orderid?>, <?php echo $row->productid;?>, '<?php echo str_replace('"', '', $row->description);?>')"; style="color: red;"><strong>X</strong></a></td>
 						</tr>
 						<?php 
 					}
@@ -134,7 +135,7 @@ class pedidos extends CI_Controller {
 			</table>
 		</div>	
 		<div id="total">Total del pedido <span>$<?php echo $total;?></span></div>
-		<div id="send-order"><input type="submit" value="Enviar pedido" onclick="document.orderform.submit();"></div>		
+		<div id="send-order"><input type="submit" value="Enviar pedido" onclick="if(document.orderform.elaboratename.value == '') { alert('Debe escribir el nombre de quien elabora el pedido.'); } else { document.orderform.submit(); }"></div>		
 		<?php 
 	}
 	
@@ -173,7 +174,7 @@ class pedidos extends CI_Controller {
 							<td><?php echo $row->description;?></td>				
 							<td align="center"><input type="text" name="amountp<?php echo $row->productid."_".$row->orderid?>" id="amountp<?php echo $row->productid."_".$row->orderid?>" onkeyup="updateamountp(<?php echo $row->productid;?>, <?php echo $row->orderid;?>);" size="3" value="<?php echo $row->amount;?>"></td>
 							<td>$<?php echo $row->price;?></td>
-							<td align="center" width="20"><a href="#" onclick="delProductOrder(<?php echo $row->orderid?>, <?php echo $row->productid;?>, '<?php echo $row->description;?>')"; style="color: red;"><strong>X</strong></a></td>
+							<td align="center" width="20"><a href="#" onclick="delProductOrder(<?php echo $row->orderid?>, <?php echo $row->productid;?>, '<?php echo str_replace('"', '', $row->description);?>')"; style="color: red;"><strong>X</strong></a></td>
 						</tr>
 						<?php 
 					}
@@ -186,7 +187,7 @@ class pedidos extends CI_Controller {
 			</table>
 		</div>	
 		<div id="total">Total del pedido <span>$<?php echo $total;?></span></div>
-		<div id="send-order"><input type="submit" value="Enviar pedido" onclick="document.orderform.submit();"></div>		
+		<div id="send-order"><input type="submit" value="Enviar pedido" onclick="if(document.orderform.elaboratename.value == '') { alert('Debe escribir el nombre de quien elabora el pedido.'); } else { document.orderform.submit(); }"></div>		
 		<?php
 	}
 		
@@ -194,6 +195,7 @@ class pedidos extends CI_Controller {
 	{		
 		$userid=$this->input->post('userid');
 		$orderid=$this->input->post('orderid');
+		$elaboratename=$this->input->post('elaboratename');
 
 		$data['orderproduct']=$this->pedidos_model->getProductsByOrderid($orderid);		
 		$data['orderid']=$orderid;
@@ -202,16 +204,22 @@ class pedidos extends CI_Controller {
 		//$this->load->view('listorder_view', $data);
 		
 		/*send mail*/				
-		$message='Se ha registradio un nuevo pedido.<br><br>Por favor visite el siguiente link para darle seguimiento <a href="'.base_url().'pedidos/validarpedido/'.$orderid.'/'.$userid.'">Pedido</a><br><br><a href="'.base_url().'pdf/'.$orderid.'_order.pdf"><br><br>Liga para descargar el PDF</>';		
-		$this->sendmail('direccion@importadorarym.com.mx, aldo.maranon@gbmobile.com, julio.mora@mx.ey.com, octavio.lopez.davila@gmail.com', $message, 'Nuevo pedido');
+		//$message='Se ha registradio un nuevo pedido.<br><br>Por favor visite el siguiente link para darle seguimiento <a href="'.base_url().'pedidos/validarpedido/'.$orderid.'/'.$userid.'">Pedido</a><br><br><a href="'.base_url().'pdf/'.$orderid.'_order.pdf"><br><br>Liga para descargar el PDF</>';		
+		//$this->sendmail('direccion@importadorarym.com.mx, aldo.maranon@gbmobile.com, octavio.lopez.davila@gmail.com', $message, 'Nuevo pedido');
 		//$this->sendmail('aldo.maranon@gbmobile.com', $message, 'Nuevo pedido');
 		/*--------*/
 		
-		$this->pedidos_model->updateStatusOrder($orderid, '2'); //1: iniciado   2:validad   3: Finalizado
+		$this->pedidos_model->updateStatusOrder($orderid, '2', $elaboratename); //1: iniciado   2:validad   3: Finalizado
 		
 		$html = $this->load->view('listorder_view', $data, TRUE);			
 		$this->pdf_create($html, $orderid);				
-								
+
+		?>
+		<script>
+		location="<?php echo base_url()?>pedidos/catalogo/<?php echo $_SESSION['catalogid']?>/pedido enviado correctamente";
+		</script>
+		<?php
+		
 		$this->mensaje("Tu pedido ha sido enviado, Espera nuestra respuesta");
 		?>
 		<script>
@@ -308,7 +316,7 @@ class pedidos extends CI_Controller {
 						<td><?php echo $row->description;?></td>				
 						<td align="center"><input type="text" name="amountp<?php echo $row->productid."_".$row->orderid?>" id="amountp<?php echo $row->productid."_".$row->orderid?>" onkeyup="updateamountp(<?php echo $row->productid;?>, <?php echo $row->orderid;?>);" size="3" value="<?php echo $row->amount;?>"></td>
 						<td>$<?php echo $row->price;?></td>
-						<td align="center" width="20"><a href="#" onclick="delProductOrder(<?php echo $row->orderid?>, <?php echo $row->productid;?>, '<?php echo $row->description;?>')"; style="color: red;"><strong>X</strong></a></td>
+						<td align="center" width="20"><a href="#" onclick="delProductOrder(<?php echo $row->orderid?>, <?php echo $row->productid;?>, '<?php echo str_replace('"', '', $row->description);?>')"; style="color: red;"><strong>X</strong></a></td>
 					</tr>
 					<?php 
 				}
