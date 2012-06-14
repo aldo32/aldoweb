@@ -11,7 +11,6 @@
 
 <link rel="shortcut icon" href="<?php echo base_url()?>resources/images/favicon.ico" type="image/x-icon">
 <link href="<?php echo base_url()?>resources/styles/templatemo_style.css" rel="stylesheet" type="text/css" />
-<link href="<?php echo base_url()?>resources/styles/jquery.ennui.contentslider.css" rel="stylesheet" type="text/css" media="screen,projection" />
 
 <script type="text/javascript" src="<?php echo base_url();?>resources/scripts/jquery-1.7.1.js"></script>
 
@@ -24,21 +23,50 @@ var itemWidth;
 var ulWidth=0;
 var animationInterval="";
 
-$(document).ready(function() {
+function move()
+{
 	items = $('#carrusel li').size(); //number of itmes						
 	itemWidth = $('#carrusel li').outerWidth(false);		
 	ulWidth = itemWidth * (items*1);
+
+	$('#carrusel').width(ulWidth);
+	clearInterval(animationInterval);
+	animationInterval = setInterval("moveBanners();", 5000);
+}
+
+function moveBanners()
+{														
+	items = $('#carrusel li').size(); //number of itmes
+	currentItem=currentItem+1;							
+	if(currentItem >= items || currentItem == 0) {
+		currentItem = 0;
+		$('#left').css('opacity', 0.5);
+		$('#right').css('opacity', 1);
+	} else if(currentItem == (items-1)) {
+		$('#right').css('opacity', 0.5);
+		$('#left').css('opacity', 1);
+	} else {
+		$('#right').css('opacity', 1);
+		$('#left').css('opacity', 1);
+	}
+	var newPos = -itemWidth * currentItem;
+	//$('.report-list-home li').fadeOut('100', function () { $('.report-list-home:not(:animated)').animate({'left': newPos}, 600); }).delay(100).fadeIn('slow');				
+	//$('#carrusel').stop(true, true).animate({'left': newPos}, 600);
+	$('#carrusel li').fadeOut('100', function () { $('#carrusel').stop(true, true).animate({'left': newPos}, 600); }).delay(100).fadeIn('slow', function() {  });
+}
+
+$(document).ready(function() {		
+	move();
 	
+	$('#left').css('opacity', 0.3);
 	$('#right').click(function(e) {
 		e.preventDefault();								
-		
+						
 		if(currentItem < (items-1)) {						
 			$('#carrusel').stop(true);				
 			currentItem=currentItem+1;					
 			var newPos = -itemWidth * currentItem;			
-			//$('#carrusel li').fadeOut('100', function () { $('#carrusel').stop(true, true).animate({'left': newPos}, 840); }).delay(100).fadeIn('slow');
-			alert(newPos);
-			$('#carrusel').animate({'top': newPos}, 600);					
+			$('#carrusel li').fadeOut('100', function () { $('#carrusel').stop(true, true).animate({'left': newPos}, 600); }).delay(100).fadeIn('slow', function() {  });					
 			
 			if(currentItem >= (items-1)) {
 				$(this).css('opacity', 0.5);
@@ -48,7 +76,7 @@ $(document).ready(function() {
 				$('#left').css('opacity', 1);
 			}						
 		}
-	});
+	});	
 	
 	$('#left').click(function(e) {				
 		e.preventDefault();		
@@ -114,14 +142,16 @@ $(document).ready(function() {
         	<div id="templatemo_slider">
             	<div id="carrusel-wrap">
             		<div id="left"></div>
-            		<ul id="carrusel">
-            			<li>Aldo1</li>
-            			<li>Aldo2</li>
-            			<li>Aldo3</li>
-            			<li>Aldo4</li>
-            			<li>Aldo5</li>
-            			<li>Aldo6</li>
-            		</ul>
+            		<div id="cwrap">
+		            	<ul id="carrusel">
+		            		<li><img src="<?php echo base_url()?>resources/images/gui/header1.jpg" width="740" height="292" /></li>
+		            		<li><img src="<?php echo base_url()?>resources/images/gui/header2.jpg" width="740" height="292" /></li>
+		            		<li><img src="<?php echo base_url()?>resources/images/gui/header3.jpg" width="740" height="292" /></li>
+		            		<li><img src="<?php echo base_url()?>resources/images/gui/header4.jpg" width="740" height="292" /></li>
+		            		<li><img src="<?php echo base_url()?>resources/images/gui/header5.jpg" width="740" height="292" /></li>
+		            		<li><img src="<?php echo base_url()?>resources/images/gui/header6.jpg" width="740" height="292" /></li>
+		            	</ul>	
+		            </div>
             		<div id="right"></div>
             	</div>			                
                 <div class="cleaner"></div>            	

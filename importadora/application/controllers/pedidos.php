@@ -203,13 +203,13 @@ class pedidos extends CI_Controller {
 		$data['order']=$this->pedidos_model->getOrderByOrderid($orderid);				
 		//$this->load->view('listorder_view', $data);
 		
-		/*send mail*/				
-		//$message='Se ha registradio un nuevo pedido.<br><br>Por favor visite el siguiente link para darle seguimiento <a href="'.base_url().'pedidos/validarpedido/'.$orderid.'/'.$userid.'">Pedido</a><br><br><a href="'.base_url().'pdf/'.$orderid.'_order.pdf"><br><br>Liga para descargar el PDF</>';		
-		//$this->sendmail('direccion@importadorarym.com.mx, aldo.maranon@gbmobile.com, octavio.lopez.davila@gmail.com', $message, 'Nuevo pedido');
-		//$this->sendmail('aldo.maranon@gbmobile.com', $message, 'Nuevo pedido');
-		/*--------*/
-		
 		$this->pedidos_model->updateStatusOrder($orderid, '2', $elaboratename); //1: iniciado   2:validad   3: Finalizado
+		
+		/*send mail*/				
+		$message='Se ha registradio un nuevo pedido.<br><br>Por favor visite el siguiente link para darle seguimiento <a href="'.base_url().'pedidos/validarpedido/'.$orderid.'/'.$userid.'">Pedido</a><br><br><a href="'.base_url().'pdf/'.$orderid.'_order.pdf"><br><br>Liga para descargar el PDF</>';		
+		$this->sendmail('direccion@importadorarym.com.mx, octavio.lopez.davila@gmail.com', $message, 'Nuevo pedido');
+		//$this->sendmail('aldo.maranon@gbmobile.com', $message, 'Nuevo pedido');
+		/*--------*/				
 		
 		$html = $this->load->view('listorder_view', $data, TRUE);			
 		$this->pdf_create($html, $orderid);				
@@ -372,7 +372,8 @@ class pedidos extends CI_Controller {
 		
 		/*send mail*/		
 		$message='Se ha realizado un nuevo pedido.<br><br><a href="'.base_url().'pdf/'.$orderid.'_order.pdf"><br><br>Liga para descargar el PDF del pedido</>';		
-		$this->sendmail('sperdomo@importadorarym.com.mx, aldo.maranon@gbmobile.com, julio.mora@mx.ey.com, octavio.lopez.davila@gmail.com', $message, 'Nuevo pedido');
+		//$this->sendmail('sperdomo@importadorarym.com.mx, aldo.maranon@gbmobile.com, julio.mora@mx.ey.com, octavio.lopez.davila@gmail.com', $message, 'Nuevo pedido');
+		$this->sendmail('direccion@importadorarym.com.mx, octavio.lopez.davila@gmail.com', $message, 'Nuevo pedido');
 		//$this->sendmail('aldo.maranon@gbmobile.com', $message, 'Nuevo pedido');
 		/*--------*/
 		

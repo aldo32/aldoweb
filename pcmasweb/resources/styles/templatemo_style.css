@@ -1,6 +1,49 @@
-/*
-Credit: http://www.templatemo.com
-*/
+/* RESET */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin:0;
+	padding:0;
+	border:0;
+	font-size:100%;
+	font:inherit;
+	vertical-align:baseline;
+}
+br { height: 50px; }
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display:block;
+}
+ul,ol {list-style:none;}
+body {line-height:1;}
+input, button,fieldset {border:none;}
+a, a img, object {text-decoration:none; outline:none; border:none;}
+h1, h2, h3, h4, h5, h6 {font-weight:normal;}
+address,caption,cite,code,dfn,em,strong,th,var{font-style:normal; font-weight:normal;}
+blockquote, q {quotes:none;}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content:'';
+	content:none;
+}
+table {border-collapse:collapse; border-spacing:0;}
+caption,th {text-align:left;}
+
+/* Bugfixes */
+.clearfix:after {visibility: hidden; display: block; font-size: 0; content: " "; clear: both; height: 0;}
+* html .clearfix {zoom: 1;} /* IE6 */
+*:first-child+html .clearfix {zoom: 1;} /* IE7 */
 		
 body {
 	margin: 0px;
@@ -474,10 +517,11 @@ em { color: #fff; }
 
 
 /*Carrusel*/
-#carrusel-wrap { height: 292px; margin: 0 auto; position: relatve; overflow: hidden;}	
-	#left { width: 49px; height: 292px; background: url(../../resources/images/left.png) no-repeat center; float: left; }
-	#carrusel { width: 840px; height: 280px; float: left; margn:0px; padding: 0px; position: relative; }
-		#carrusel li { width: 840px; height: 278px; float: left;}
+#carrusel-wrap { width: 840px; height: 292px; margin: 0 auto; position: relatve; }
+	#cwrap { width: 740px; height: 292px; position: relative; float: left; overflow: hidden; }
+		#carrusel { width: 740px; height: 292px; margin: 0; padding: 0; position: relative; }
+			#carrusel li { width: 740px; height: 292px; float: left; background: blue; }
+	#left { width: 49px; height: 292px; background: url(../../resources/images/left.png) no-repeat center; float: left; }	
 	#right { width: 49px; height: 292px; background: url(../../resources/images/right.png) no-repeat center; float: left; }
 
 
