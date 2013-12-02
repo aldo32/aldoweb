@@ -1,8 +1,8 @@
 <?php 
 $routeApp=$this->webroot;
-?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
+?>	
+<!DOCTYPE HTML>
+<html lang="en-US">
 	<head>
 		<script> 
         	routeApp = "<?php echo $routeApp ?>";        	
@@ -12,373 +12,177 @@ $routeApp=$this->webroot;
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
-		
+				
 		<title><?php echo $title_for_layout ?></title>
-								
-		<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,700,900" rel="stylesheet" />
-		<!--[if lte IE 8]><script src="/js/html5shiv.js"></script><link rel="stylesheet" href="css/ie8.css" /><![endif]-->
-		<script src="js/jquery.min.js"></script>
-		<script src="js/jquery.dropotron.min.js"></script>
-		<script src="js/config.js"></script>
-		<script src="js/skel.min.js"></script>
-		<script src="js/skel-panels.min.js"></script>
-		<noscript>
-			<link rel="stylesheet" href="css/skel-noscript.css" />
-			<link rel="stylesheet" href="css/style.css" />
-			<link rel="stylesheet" href="css/style-desktop.css" />
-		</noscript>
+
+		<link rel="stylesheet" type="text/css" media="all" href="<?php echo $this->webroot?>css/style.css" />
+		<link rel="stylesheet" type="text/css" href="<?php echo $this->webroot?>css/media-queries.css" />
+		<link rel="stylesheet" type="text/css" href="<?php echo $this->webroot?>js/player/mediaelementplayer.css" />
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,300italic,300,700,700italic|Open+Sans+Condensed:300,700' rel="stylesheet" type='text/css'>
+		
+		<!--[if IE 8]>		
+		<link rel="stylesheet" type="text/css" href="css/ie8.css" media="all" />
+		<![endif]-->
+		<!--[if IE 9]>
+		<link rel="stylesheet" type="text/css" href="css/ie9.css" media="all" />
+		<![endif]-->
+		
+		<script type="text/javascript" src="<?php echo $this->webroot?>js/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="<?php echo $this->webroot?>js/ddsmoothmenu.js"></script>
+		<script type="text/javascript" src="<?php echo $this->webroot?>js/retina.js"></script>
+		<script type="text/javascript" src="<?php echo $this->webroot?>js/selectnav.js"></script>
+		<script type="text/javascript" src="<?php echo $this->webroot?>js/jquery.masonry.min.js"></script>
+		<script type="text/javascript" src="<?php echo $this->webroot?>js/jquery.fitvids.js"></script>
+		<script type="text/javascript" src="<?php echo $this->webroot?>js/jquery.backstretch.min.js"></script>
+		<script type="text/javascript" src="<?php echo $this->webroot?>js/mediaelement.min.js"></script>
+		<script type="text/javascript" src="<?php echo $this->webroot?>js/mediaelementplayer.min.js"></script>
+		<script type="text/javascript" src="<?php echo $this->webroot?>js/jquery.dcflickr.1.0.js"></script>		
+		
+		<script type="text/javascript">
+			$.backstretch("<?php echo $this->webroot?>img/bg/1.jpg");
+		</script>
+		
 	</head>
+<body>
+<div class="scanlines"></div>
+
+<!-- Begin Header -->
+<div class="header-wrapper opacity">
+	<div class="header">
+		<!-- Begin Logo -->
+		<div class="logo">
+		    <a href="index.html">
+				<img src="<?php echo $this->webroot?>img/logo.png" alt="" />
+			</a>
+	    </div>
+		<!-- End Logo -->
+		<!-- Begin Menu -->
+		<div id="menu-wrapper">
+			<div id="menu" class="menu">
+				<ul id="tiny">
+					<li class="active"><a href="index.html">Blog</a>
+						<ul>
+							<li><a href="post.html">Blog Post</a></li>
+						</ul>
+					</li>
+					<li><a href="page-with-sidebar.html">Pages</a>
+						<ul>
+							<li><a href="page-with-sidebar.html">Page With Sidebar</a></li>
+							<li><a href="full-width.html">Full Width</a></li>
+						</ul>
+					</li>
+					<li><a href="typography.html">Styles</a>
+						<ul>
+							<li><a href="typography.html">Typography</a></li>
+							<li><a href="columns.html">Columns</a></li>
+						</ul>
+					</li>
+					<li><a href="contact.html">Contact</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<!-- End Menu -->
+	</div>
+</div>
+<!-- End Header -->
+
+<!-- Begin Wrapper -->
+<div class="wrapper"><!-- Begin Intro -->
+<div class="intro">Nulla vitae elit libero, a pharetra augue. Vivamus sagittis lacus augue laoreet rutrum faucibus dolor auctor. Cras mattis consectetur purus sit amet fermentum, Vestibulum id ligula porta. </div>
+<ul class="social">
+<li><a class="rss" href="#"></a></li><li><a class="facebook" href="#"></a></li><li><a class="twitter" href="#"></a></li><li><a class="pinterest" href="#"></a></li><li><a class="dribbble" href="#"></a></li><li><a class="flickr" href="#"></a></li><li><a class="linkedin" href="#"></a></li></ul><!-- End Intro --> 
+
+<?php echo $content_for_layout ?>
+
+</div>
+<!-- End Wrapper -->
+
+<!-- Begin Footer -->
+<div class="footer-wrapper">
+<div id="footer" class="four">
+		<div id="first" class="widget-area">
+			<div class="widget widget_search">
+				<h3 class="widget-title">Search</h3>
+				<form class="searchform" method="get" action="#">
+					<input type="text" name="s" value="type and hit enter" onFocus="this.value=''" onBlur="this.value='type and hit enter'"/>
+				</form>
+			</div>
+			<div class="widget widget_archive">
+				<h3 class="widget-title">Archives</h3>
+				<ul>
+					<li><a href="#">September 2012</a> (6)</li>
+					<li><a href="#">August 2012</a> (2)</li>
+					<li><a href="#">July 2012</a> (2)</li>
+					<li><a href="#">June 2012</a> (4)</li>
+					<li><a href="#">May 2012</a> (3)</li>
+					<li><a href="#">January 2012</a> (1)</li>
+				</ul>
+			</div>	
+		</div><!-- #first .widget-area -->
 	
-	<body class="homepage">
-
-		<!-- Header Wrapper -->
-			<div id="header-wrapper" class="wrapper">
-				<div class="container">
-					<div class="row">
-						<div class="12u">
-						
-							<!-- Header -->
-								<div id="header">
-									
-									<!-- Logo -->
-										<div id="logo">
-											<h1><a href="#">Escape Velocity</a></h1>
-											<span class="byline">A free responsive site template by HTML5 UP</span>
-										</div>
-									<!-- /Logo -->
-									
-									<!-- Nav -->
-										<nav id="nav">
-											<ul>
-												<li class="current_page_item"><a href="index.html">Home</a></li>
-												<li>
-													<span>Dropdown</span>
-													<ul>
-														<li><a href="#">Lorem ipsum</a></li>
-														<li><a href="#">Magna veroeros</a></li>
-														<li><a href="#">Etiam nisl</a></li>
-														<li>
-															<span>Sed consequat</span>
-															<ul>
-																<li><a href="#">Lorem dolor</a></li>
-																<li><a href="#">Amet consequat</a></li>
-																<li><a href="#">Magna phasellus</a></li>
-																<li><a href="#">Etiam nisl</a></li>
-																<li><a href="#">Sed feugiat</a></li>
-															</ul>
-														</li>
-														<li><a href="#">Nisl tempus</a></li>
-													</ul>
-												</li>
-												<li><a href="right-sidebar.html">Right Sidebar</a></li>
-												<li><a href="left-sidebar.html">Left Sidebar</a></li>
-												<li><a href="no-sidebar.html">No Sidebar</a></li>
-											</ul>
-										</nav>
-									<!-- /Nav -->
-
-								</div>
-							<!-- /Header -->
-
-						</div>
+		<div id="second" class="widget-area">
+			<div id="twitter-2" class="widget widget_twitter">
+					<h3 class="widget-title">Twitter</h3>
+					
+					<div id="twitter-wrapper">
+						<div id="twitter"></div>
+						<span class="username"><a href="http://twitter.com/elemisdesign">→ Follow @elemisdesign</a></span>
 					</div>
-				</div>
 			</div>
-		<!-- /Header Wrapper -->
+		</div><!-- #second .widget-area -->
+	
+		<div id="third" class="widget-area">
+		<div id="example-widget-3" class="widget example">
+			<h3 class="widget-title">Popular Posts</h3>
+			<ul class="post-list">
+			  	<li> 
+			  		<div class="frame">
+			  			<a href="#"><img src="<?php echo $this->webroot?>img/art/s1.jpg" /></a>
+			  		</div>
+					<div class="meta">
+					    <h6><a href="#">Charming Winter</a></h6>
+					    <em>28th Sep 2012</em>
+				    </div>
+				</li>
+				<li> 
+			  		<div class="frame">
+			  			<a href="#"><img src="<?php echo $this->webroot?>img/art/s2.jpg" /></a>
+			  		</div>
+					<div class="meta">
+					    <h6><a href="#">Trickling Stream</a></h6>
+					    <em>5th Sep 2012</em>
+				    </div>
+				</li>
+				<li> 
+			  		<div class="frame">
+			  			<a href="#"><img src="<?php echo $this->webroot?>img/art/s3.jpg" /></a>
+			  		</div>
+					<div class="meta">
+					    <h6><a href="#">Morning Glory</a></h6>
+					    <em>26th Sep 2012</em>
+				    </div>
+				</li>
+			</ul>
+			
+		</div>
+		</div><!-- #third .widget-area -->
 		
-		<!-- Intro Wrapper -->
-			<div id="intro-wrapper" class="wrapper wrapper-style1">
-				<div class="title">The Introduction</div>
-				<div class="container">
-					<div class="row">
-						<div class="12u">
-							
-							<!-- Intro -->
-								<section id="intro">
-									<p class="style1">So in case you were wondering what this is all about ...</p>
-									<p class="style2">
-										Escape Velocity is a free responsive<br class="mobile-hide" />
-										site template by <a href="http://html5up.net/" class="nobr">HTML5 UP</a>
-									</p>
-									<p class="style3">It's <strong>responsive</strong>, built on <strong>HTML5</strong> and <strong>CSS3</strong>, and released for
-									free under the <a href="http://html5up.net/license/">Creative Commons Attribution 3.0 license</a>, so use it for any of
-									your personal or commercial projects &ndash; just be sure to credit us!</p>
-									<!--
-									<p class="style3">Mauris tellus lacus, tincidunt eget mattis at, laoreet vel velit. 
-									Aliquam diam ante, aliquet sit amet vulputate lorem at placerat at nisl. 
-									Maecenas et gravida ligula sed lacus euismod tincidunt nullam eget justo orci.</p>
-									-->
-									<ul class="actions">
-										<li><a href="#" class="button button-style3 button-big">Proceed</a></li>
-									</ul>
-								</section>
-							<!-- /Intro -->
-							
-						</div>
-					</div>
-				</div>
-			</div>
-		<!-- /Intro Wrapper -->
-		
-		<!-- Main Wrapper -->
-			<div class="wrapper wrapper-style2">
-				<div class="title">The Details</div>
-				<div class="container">
-					<div class="row">
-						<div class="12u">
-							
-							<!-- Main -->
-								<div id="main">
-									
-									<!-- Image -->
-										<a href="http://fav.me/d5pjw3g" class="image image-featured">
-											<img src="img/pic01.jpg" alt="" />
-										</a>
-									<!-- /Image -->
-									
-									<!-- Features -->
-										<section id="features">
-											<header class="style1">
-												<h2>Dolor consequat feugiat amet veroeros</h2>
-												<p class="byline">Feugiat dolor nullam orci pretium phasellus justo</p>
-											</header>
-											<div class="feature-list">
-												<div>
-													<div class="row">
-														<div class="6u">
-															<section>
-																<h3 class="fa fa-comment">Mattis velit diam vulputate</h3>
-																<p>Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate. Eget mattis at, laoreet vel velit lorem.</p>
-															</section>
-														</div>
-														<div class="6u">
-															<section>
-																<h3 class="fa fa-refresh">Lorem ipsum dolor sit veroeros</h3>
-																<p>Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate. Eget mattis at, laoreet vel velit lorem.</p>
-															</section>
-														</div>
-													</div>
-													<div class="row">
-														<div class="6u">
-															<section>
-																<h3 class="fa fa-picture-o">Pretium phasellus justo lorem</h3>
-																<p>Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate. Eget mattis at, laoreet vel velit lorem.</p>
-															</section>
-														</div>
-														<div class="6u">
-															<section>
-																<h3 class="fa fa-cog">Tempus sed pretium orci</h3>
-																<p>Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate. Eget mattis at, laoreet vel velit lorem.</p>
-															</section>
-														</div>
-													</div>
-													<div class="row">
-														<div class="6u">
-															<section>
-																<h3 class="fa fa-wrench">Aliquam consequat et feugiat</h3>
-																<p>Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate. Eget mattis at, laoreet vel velit lorem.</p>
-															</section>
-														</div>
-														<div class="6u">
-															<section>
-																<h3 class="fa fa-check">Dolore laoreet aliquam mattis</h3>
-																<p>Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate. Eget mattis at, laoreet vel velit lorem.</p>
-															</section>
-														</div>
-													</div>
-												</div>
-											</div>
-											<ul class="actions actions-centered">
-												<li><a href="#" class="button button-style1 button-big">Get Started</a></li>
-												<li><a href="#" class="button button-style2 button-big">More Info</a></li>
-											</ul>
-										</section>
-									<!-- /Features -->
-									
-								</div>
-							<!-- /Main -->
-							
-						</div>
-					</div>
-				</div>
-			</div>
-		<!-- /Main Wrapper -->
-		
-		<!-- Highlights Wrapper -->
-			<div class="wrapper wrapper-style3">
-				<div class="title">The Endorsements</div>
-				<div class="container">
-					<div class="row">
-						<div class="12u">
-							
-							<!-- Highlights -->
-								<div id="highlights">
-									<div>
-										<div class="row">
-											<div class="4u">
-												<section class="highlight highlight-one">
-													<a href="http://fav.me/d59i3b3" class="image image-full"><img src="img/pic02.jpg" alt="" /></a>
-													<h3><a href="#">Aliquam diam consequat</a></h3>
-													<p>Eget mattis at, laoreet vel amet sed velit aliquam diam ante, dolor aliquet sit amet vulputate mattis amet laoreet lorem.</p>
-													<ul class="actions">
-														<li><a href="#" class="button button-style1">Learn More</a></li>
-													</ul>
-												</section>
-											</div>
-											<div class="4u">
-												<section class="highlight highlight-two">
-													<a href="http://fav.me/d4tqyby" class="image image-full"><img src="img/pic03.jpg" alt="" /></a>
-													<h3><a href="#">Nisl adipiscing sed lorem</a></h3>
-													<p>Eget mattis at, laoreet vel amet sed velit aliquam diam ante, dolor aliquet sit amet vulputate mattis amet laoreet lorem.</p>
-													<ul class="actions">
-														<li><a href="#" class="button button-style1">Learn More</a></li>
-													</ul>
-												</section>
-											</div>
-											<div class="4u">
-												<section class="highlight highlight-three">
-													<a href="http://fav.me/d5w2dot" class="image image-full"><img src="img/pic04.jpg" alt="" /></a>
-													<h3><a href="#">Mattis tempus lorem</a></h3>
-													<p>Eget mattis at, laoreet vel amet sed velit aliquam diam ante, dolor aliquet sit amet vulputate mattis amet laoreet lorem.</p>
-													<ul class="actions">
-														<li><a href="#" class="button button-style1">Learn More</a></li>
-													</ul>
-												</section>
-											</div>
-										</div>
-									</div>
-								</div>
-							<!-- /Highlights -->
-							
-						</div>
-					</div>
-				</div>
-			</div>
-		<!-- /Highlights Wrapper -->
-
-		<!-- Footer Wrapper -->
-			<div id="footer-wrapper" class="wrapper">
-				<div class="title">The Rest Of It</div>
-				<div class="container">
-					<div class="row">
-						<div class="12u">
-
-							<!-- Footer -->
-								<div id="footer">
-									<header class="style1">
-										<h2>Ipsum sapien elementum portitor?</h2>
-										<p class="byline">
-											Sed turpis tortor, tincidunt sed ornare in metus porttitor mollis nunc in aliquet.<br />
-											Nam pharetra laoreet imperdiet volutpat etiam consequat feugiat.
-										</p>
-									</header>
-									<hr />
-									<div>
-										<div class="row">
-											<div class="6u">
-
-												<!-- Contact Form -->
-													<section class="footer-one">
-														<form method="post" action="#">
-															<div>
-																<div class="row half">
-																	<div class="6u">
-																		<input type="text" class="text" name="name" id="contact-name" placeholder="Name" />
-																	</div>
-																	<div class="6u">
-																		<input type="text" class="text" name="name" id="contact-email" placeholder="Email" />
-																	</div>
-																</div>
-																<div class="row half">
-																	<div class="12u">
-																		<textarea name="message" id="contact-message" placeholder="Message"></textarea>
-																	</div>
-																</div>
-																<div class="row">
-																	<div class="12u">
-																		<ul class="actions">
-																			<li><input type="submit" class="button button-style1" value="Send" /></li>
-																			<li><input type="reset" class="button button-style2" value="Reset" /></li>
-																		</ul>
-																	</div>
-																</div>
-															</div>
-														</form>
-													</section>
-												<!-- /Contact Form -->
-
-											</div>
-											<div class="6u">
-											
-												<!-- Contacts -->
-													<section class="footer-two">
-														<div class="feature-list feature-list-small">
-															<div>
-																<div class="row">
-																	<div class="6u">
-																		<section>
-																			<h3 class="fa fa-home">Mailing Address</h3>
-																			<p>
-																				Untitled Corporation<br />
-																				1234 Somewhere Rd #987<br />
-																				Nashville, TN 00000-0000
-																			</p>
-																		</section>
-																	</div>
-																	<div class="6u">
-																		<section>
-																			<h3 class="fa fa-comment">Social</h3>
-																			<p>
-																				<a href="http://twitter.com/n33co">@n33co</a><br />
-																				<a href="http://dribbble.com/n33">dribbble.com/n33</a><br />
-																				<a href="#">facebook.com/untitled</a>
-																			</p>
-																		</section>
-																	</div>
-																</div>
-																<div class="row">
-																	<div class="6u">
-																		<section>
-																			<h3 class="fa fa-envelope">Email</h3>
-																			<p>
-																				<a href="#">info@untitled.tld</a>
-																			</p>
-																		</section>
-																	</div>
-																	<div class="6u">
-																		<section>
-																			<h3 class="fa fa-phone">Phone</h3>
-																			<p>
-																				(000) 555-0000
-																			</p>
-																		</section>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</section>
-												<!-- /Contacts -->
-													
-											</div>
-										</div>
-									</div>
-									<hr />
-								</div>
-							<!-- /Footer -->
-
-							<!-- Copyright -->
-								<div id="copyright">
-									<span>
-										&copy; Untitled. Demo Images by <a href="http://ineedchemicalx.deviantart.com/">Felicia Simion</a>. Design by <a href="http://html5up.net/">HTML5 UP</a>.
-									</span>
-								</div>
-							<!-- /Copyright -->
-						
-						</div>
-					</div>
-				</div>
-			</div>
-		<!-- /Footer Wrapper -->
-
-	</body>
-</html>
+		<div id="fourth" class="widget-area">
+		<div class="widget">
+			<h3 class="widget-title">Flickr</h3>
+			<ul class="flickr-feed"></ul>
+			
+		</div>
+		</div><!-- #fourth .widget-area -->
+	</div>
+</div>
+<div class="site-generator-wrapper">
+	<div class="site-generator">Copyright Obscura 2012. Design by <a href="http://elemisfreebies.com">elemis</a>. All rights reserved.</div>
+</div>
+<!-- End Footer --> 
+<script type="text/javascript" src="<?php echo $this->webroot?>js/scripts.js"></script>
+</body>
+</html>	
+	
+	

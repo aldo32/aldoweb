@@ -12,4 +12,12 @@ class HomeController extends AppController {
 	function index() {		
 		
 	}		
+	
+	function mywork () {		
+		
+	}
+	
+	function contact() {
+		
+	}
 }
