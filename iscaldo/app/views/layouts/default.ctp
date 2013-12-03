@@ -39,7 +39,7 @@ $routeApp=$this->webroot;
 		<script type="text/javascript" src="<?php echo $this->webroot?>js/jquery.dcflickr.1.0.js"></script>		
 		
 		<script type="text/javascript">
-			$.backstretch("<?php echo $this->webroot?>img/bg/1.jpg");
+			$.backstretch("<?php echo $this->webroot?>img/bg/10.jpg");
 		</script>
 		
 	</head>
