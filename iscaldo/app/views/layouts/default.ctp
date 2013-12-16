@@ -51,9 +51,7 @@ $routeApp=$this->webroot;
 	<div class="header">
 		<!-- Begin Logo -->
 		<div class="logo">
-		    <a href="index.html">
-				<img src="<?php echo $this->webroot?>img/logo.png" alt="" />
-			</a>
+		    <a href="index.html" class="intro" style="font-size: 26px; font-weight: bold;">ISC. Aldo Marañon Andrade</a>
 	    </div>
 		<!-- End Logo -->
 		<!-- Begin Menu -->
@@ -61,11 +59,11 @@ $routeApp=$this->webroot;
 			<div id="menu" class="menu">
 				<ul id="tiny">
 					<li class="active"><a href="index.html">Blog</a>
-						<ul>
+						<?php /*  <ul>
 							<li><a href="post.html">Blog Post</a></li>
-						</ul>
+						</ul>*/?>
 					</li>
-					<li><a href="page-with-sidebar.html">Pages</a>
+					<li><a href="page-with-sidebar.html">Proyectos</a>
 						<ul>
 							<li><a href="page-with-sidebar.html">Page With Sidebar</a></li>
 							<li><a href="full-width.html">Full Width</a></li>
