@@ -248,3 +248,9 @@ div.col-14, div.col-15, div.col-16, div.col-17, div.col-18, div.col-19, div.col-
 .col-14{width:550px}.col-15{width:590px}.col-16{width:630px}.col-17{width:670px}.col-18{width:710px}.col-19{width:750px}
 .col-20{width:790px}.col-21{width:830px}.col-22{width:870px}.col-23{width:910px}.col-24{width:950px}.col-100{width:100%}
 .last{float:right !important;}
+
+/*BACKGROUNDS*/
+.bBlack { background: #000; }
+.bGrey { background: #343838; }
+.bLio { background: #005F6B; }
+.bDeep { background: #008C9E; }

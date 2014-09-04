@@ -38,6 +38,20 @@ h4 { font-size: 20px; color: #e8e8e8; }
 
 .text { color: #e8e8e8; }
 
+.shadowOpacity {
+	-webkit-box-shadow: 0px 0px 3px 3px rgba(0,0,0,0.65);
+	-moz-box-shadow: 0px 0px 3px 3px rgba(0,0,0,0.65);
+	box-shadow: 0px 0px 3px 3px rgba(0,0,0,0.65);
+	
+	background-color: rgba(0, 0, 0, .60);
+	color: rgba(0, 0, 0, .60);
+	
+	-webkit-border-radius: 2px 2px 2px 2px;
+	border-radius: 2px 2px 2px 2px;
+}
+
+p { margin-top: 15px; margin-bottom: 15px; text-align: justify; }
+
 /*PRINCIPAL PAGE*/
 body { font-size: 14px/16px; font-family: Calibri, Arial; font-weight:normal; text-align:left; color: #e8e8e8; }
 
@@ -45,9 +59,11 @@ body { font-size: 14px/16px; font-family: Calibri, Arial; font-weight:normal; te
 	#back1 { background: url('../images/2blur.jpg') no-repeat top center; }
 	#back2 { background: url('../images/1blur.jpg') no-repeat top center; }
 
-	#page-wrap { width: 1024px; height: 100%; margin: 0 auto; position: relative; z-index: 1; }
+	#page-wrap { width: 1024px; margin: 0 auto; position: relative; z-index: 1; }
 	
-		.menu-item { width: 200px; height: 200px; margin: 25px; text-align: center; opacity: .4; filter: alpha(opacity=40); float: left; 
+		#menu { width: 100%; text-align: center;}
+		
+		.menu-item { width: 200px; height: 200px; text-align: center; opacity: .4; filter: alpha(opacity=40); margin: 20px; 26px; display: inline-block;     
 			-webkit-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.44);
 			-moz-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.44);
 			box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.44);
@@ -74,24 +90,65 @@ body { font-size: 14px/16px; font-family: Calibri, Arial; font-weight:normal; te
 	        -o-transition: opacity .35s ease-in-out;
 	        transition: opacity .35s ease-in-out;
 		}
+		.menu-item-active {
+			zoom: 1;
+	        filter: alpha(opacity=100);
+	        opacity: 1;
+	        -webkit-transition: opacity .35s ease-in-out;
+	        -moz-transition: opacity .35s ease-in-out;
+	        -ms-transition: opacity .35s ease-in-out;
+	        -o-transition: opacity .35s ease-in-out;
+	        transition: opacity .35s ease-in-out;
+		}
+				
 		
-		#content-wrap { width: 1024px; background: red;}
+		#content-wrap { width: 1024px; height: 50%;}
 		
-		#footer { width: 100%; height: 80px; position: fixed; top: 90%; left: 0; background: black; text-align: left; 
+		/*Abaut me*/
+		#about-wrap { width: 100%; }
+			#about-content { width: 100%; position: relative; text-align: left; }
+				#about-do { position: relative; }
+			.w52 { width: 52%; }
+			.w40 { width: 40%; }
+			.w30 { width: 30%; }
+			.w100 { width: 96%; }
+			
+		
+		/*Experience*/
+		#experience-wrap { width: 100%; }
+			#experience-content { width: 100%; position: relative; text-align: left; }
+			
+		/*Proyects*/
+		#proyects-wrap { width: 100%; }
+			#proyects-content { width: 100%; position: relative; text-align: left; }
+			.proyect-item { margin-right: 5px; margin-bottom: 5px; font-weight: bold; float: left; padding: 5px;  }
+			.proyect-item:hover {
+				background-color: #343838;
+				-webkit-transition: background-color 500ms linear;
+			    -moz-transition: background-color 500ms linear;
+			    -o-transition: background-color 500ms linear;
+			    -ms-transition: background-color 500ms linear;
+			    transition: background-color 500ms linear;
+			}		
+			
+		
+		#footer { width: 100%; height: 80px; position: fixed; top: 89%; left: 0; background: black; text-align: left; 
 			background-color: rgba(0, 0, 0, .60);
 			color: rgba(0, 0, 0, .60);
 			color: #e8e8e8;
 		}
 		
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1024px) {
 	#page-wrap { width: 100%;  }	
 	#menu { width: 100%; text-align: center;}	
-	.menu-item {margin: 1%; width: 23%; height: 80px; margin-bottom: 10px; }
+	.menu-item {width: 20%; height: 80px; margin-bottom: 10px; margin: 1%; }
 	.menu-img { float: left; width: 30%; }
 	.text { float: left; margin-left: 15px;}
 	
 	#content-wrap { width: 100%; }
+	
+	.w52, .w40, .w30, w100 { width: 96%; float: none; padding: 4%; height: 100%;}
 	
 	#footer { position: relative; }
 }

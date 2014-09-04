@@ -80,16 +80,16 @@
   /********Dots************/
 	.anim-dots
 	{
-		width: 100%;
+		/*width: 100%;
 		position: absolute;
 		text-align: center;
 		left: 0px;
 		bottom: 20px;
-		z-index: 2000;
+		z-index: 2000;*/
 	}
 	.anim-dots span
 	{
-		display: inline-block;
+		/*display: inline-block;
 		position: relative;
 		width: 14px;
 		height: 14px;
@@ -97,17 +97,17 @@
 		cursor: pointer;
 		box-shadow: 
 			1px 1px 1px rgba(0,0,0,0.1) inset, 
-			1px 1px 1px rgba(255,255,255,0.1);
+			1px 1px 1px rgba(255,255,255,0.1);*/
 	}
 	.anim-dots span.anim-dots-this:after
 	{
-		content: '';
+		/*content: '';
 		width: 10px;
 		height: 10px;
 		position: absolute;
 		top: 2px;
 		left: 2px;
-		background: rgb(255,255,255);
+		background: rgb(255,255,255);*/
 	}
 	
 

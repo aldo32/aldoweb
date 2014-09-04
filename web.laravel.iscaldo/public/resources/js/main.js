@@ -1,6 +1,6 @@
 $(window).load(function() {     
 	$("#status").fadeOut();      
-	$("#preloader").delay(1000).fadeOut("slow");
+	$("#preloader").delay(300).fadeOut("slow");
 });
 
 $(document).ready(function() {
@@ -21,5 +21,37 @@ $(document).ready(function() {
 	    	i = 1;
     	
     }, 5000);
+	
+	var time=500;
+	
+	/*SECTION ABOUT*/
+	$(".menu-item").click(function() {
+		var section = $(this).attr('id');		
 		
+		/*Add and remove class to menu active*/
+		$(".menu-item").removeClass('menu-item-active');
+		$(this).addClass('menu-item-active');
+		
+		/*animations for About*/
+		$('#about-content').hide();
+		$('#experience-content').hide();
+		$('#proyects-content').hide();
+		
+		switch(section) {		
+			case 'aboutSection':										
+				$('#about-content').fadeIn(time);	
+			break;
+			
+			case 'experienceSection':												
+				$('#experience-content').fadeIn(time);	
+			break;
+			
+			case 'proyectsSection':												
+				$('#proyects-content').fadeIn(time);	
+			break;			
+		}		
+	});
+	
+	/*Show initial section*/
+	$('#about-content').fadeIn(time);
 });
