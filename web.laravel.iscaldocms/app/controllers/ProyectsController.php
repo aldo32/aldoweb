@@ -7,7 +7,7 @@ class ProyectsController extends BaseController {
 	}				
 	
 	public function index() {				
-		$proyects = Proyects::orderBy('name', 'desc')->get();
+		$proyects = Proyects::orderBy('name', 'asc')->get();
 		$alert = Session::get('alert');
 	
 		return View::make("proyectos/index")->with('proyects', $proyects)->with('alert', $alert);
@@ -22,7 +22,7 @@ class ProyectsController extends BaseController {
 		if ($proyectid != "" && $proyectid != 0) {
 			$proyect = Proyects::find($proyectid);
 			if ($proyect) {
-				return View::make("proyects/editarproyecto")->with('proyect', $proyect);
+				return View::make("proyectos/editarproyecto")->with('proyect', $proyect);
 			}
 			else {
 				$alert = '<div class="alert alert-danger danger-dismissable"> <i class="fa fa-ban"></i> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button> <b></b> No se encontro el registro </div>';
@@ -48,11 +48,11 @@ class ProyectsController extends BaseController {
 			$validator = Validator::make(Input::all(), Proyects::$rules, $messages);
 		}
 		else {
-			$validator = Validator::make(Input::all(), array('name'=>'required', 'description'=>'required', 'date_start'=>'required|date_format:"Y/m/d"', 'date_end'=>'required|date_format:"Y/m/d"'), $messages);
+			$validator = Validator::make(Input::all(), array('name'=>'required', 'description'=>'required'), $messages);
 		}
 	
 		if ($validator->fails()) {
-			return Redirect::to("/rutas/editarruta/".$proyectid)->withErrors($validator)->withInput();
+			return Redirect::to("/proyectos/editarproyecto/".$proyectid)->withErrors($validator)->withInput();
 		}
 		else {
 			if (Input::hasFile('file')) {
@@ -68,9 +68,7 @@ class ProyectsController extends BaseController {
 				$proyect = new Proyects();
 				$proyect->name = Input::get("name");
 				$proyect->description = Input::get("description");
-				$proyect->image = $location."/".$filename;
-				$proyect->date_start = Input::get("date_start");
-				$proyect->date_end = Input::get("date_end");
+				$proyect->image = $location."/".$filename;				
 	
 				$upload = Input::file('file')->move($location, $filename);
 	
@@ -78,11 +76,11 @@ class ProyectsController extends BaseController {
 					$proyect->save();
 						
 					$alert = '<div class="alert alert-success alert-dismissable"> <i class="fa fa-check"></i> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button> La ruta <b>'.Input::get("name").'</b> se creo correctamente </div>';
-					return Redirect::to('rutas')->with('alert', $alert);
+					return Redirect::to('proyectos')->with('alert', $alert);
 				}
 				else {
 					$alert = '<div class="alert alert-danger danger-dismissable"> <i class="fa fa-ban"></i> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button> <b></b> No se pudo crear la ruta. Intente más tarde </div>';
-					return Redirect::to('rutas')->with('alert', $alert);
+					return Redirect::to('proyectos')->with('alert', $alert);
 				}
 			}
 			/*Actualizando registro*/
@@ -93,28 +91,24 @@ class ProyectsController extends BaseController {
 					if ($upload) {
 						$proyect->name = Input::get("name");
 						$proyect->description = Input::get("description");
-						$proyect->image = $location."/".$filename;
-						$proyect->date_start = Input::get("date_start");
-						$proyect->date_end = Input::get("date_end");
+						$proyect->image = $location."/".$filename;						
 						$proyect->save();
 							
 						$alert = '<div class="alert alert-success alert-dismissable"> <i class="fa fa-check"></i> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button> La ruta <b>'.Input::get("name").'</b> se actualizo correctamente </div>';
-						return Redirect::to('rutas')->with('alert', $alert);
+						return Redirect::to('proyectos')->with('alert', $alert);
 					}
 					else {
 						$alert = '<div class="alert alert-danger danger-dismissable"> <i class="fa fa-ban"></i> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button> <b></b> No se pudo actualizar la ruta. Intente más tarde </div>';
-						return Redirect::to('rutas')->with('alert', $alert);
+						return Redirect::to('proyectos')->with('alert', $alert);
 					}
 				}
 				else {
 					$proyect->name = Input::get("name");
-					$proyect->description = Input::get("description");
-					$proyect->date_start = Input::get("date_start");
-					$proyect->date_end = Input::get("date_end");
+					$proyect->description = Input::get("description");					
 					$proyect->save();
 						
 					$alert = '<div class="alert alert-success alert-dismissable"> <i class="fa fa-check"></i> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button> La ruta <b>'.Input::get("name").'</b> se actualizo correctamente </div>';
-					return Redirect::to('rutas')->with('alert', $alert);
+					return Redirect::to('proyectos')->with('alert', $alert);
 				}
 			}
 		}
@@ -131,19 +125,19 @@ class ProyectsController extends BaseController {
 			$proyect->delete();
 				
 			$alert = '<div class="alert alert-success alert-dismissable"> <i class="fa fa-check"></i> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button> La ruta <b>'.$proyectName.'</b> se eliminó correctamente </div>';
-			return Redirect::to("rutas")->with('alert', $alert);
+			return Redirect::to("proyectos")->with('alert', $alert);
 		}
 		else {
 			$proyect->delete();
 	
 			$alert = '<div class="alert alert-success alert-dismissable"> <i class="fa fa-check"></i> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button> La ruta <b>'.$proyectName.'</b> se eliminó correctamente </div>';
-			return Redirect::to("rutas")->with('alert', $alert);
+			return Redirect::to("proyectos")->with('alert', $alert);
 		}
 	}
 	
 	function deleteimage() {
-		$routid = Input::get("proyectid");
-		$proyect = Proyects::find($routid);
+		$proyectid = Input::get("proyectid");
+		$proyect = Proyects::find($proyectid);
 	
 		$image =  $proyect->image;
 	

@@ -128,7 +128,7 @@ else {
 									?>
 									<label for="exampleInputFile">Imagen:</label>&nbsp;&nbsp;&nbsp;
 									<a href="{{ URL::to('/'); }}/<?php echo $proyect->image?>" class="nyroModal">Ver imagen</a>&nbsp;&nbsp;&nbsp;
-									<a href="#" id="<?php echo $proyect->routid?>" class="deleteImage" style="color: red;">[eliminar]</a>
+									<a href="#" id="<?php echo $proyect->proyectid?>" class="deleteImage" style="color: red;">[eliminar]</a>
 									<?php 
 								}
 								else {
