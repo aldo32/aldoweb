@@ -1,12 +1,13 @@
 <?php
 
+use Illuminate\Support\Facades\Hash;
 class LoginController extends BaseController {	
 
 	public function __construct() {	
 		
 	}
 	
-	public function index() {				
+	public function index() {					
 		if (Auth::check()) { return Redirect::to('inicio'); }		
 		return View::make('login/index');
 	}

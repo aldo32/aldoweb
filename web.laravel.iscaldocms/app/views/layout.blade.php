@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Sáastah | CMS</title>
+        <title>ISCAldo | CMS</title>
         
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>				
 		<link rel="shortcut icon" href="{{ URL::to('/') }}/resources/img/favicon.ico" type="image/x-icon">
@@ -78,7 +78,7 @@
 		<header class="header">
             <a href="{{ URL::to('/'); }}" class="logo">
                 <!-- Add the class icon to your logo image or logo icon to add the margining -->
-                Sáastah CMS
+                ISCAldo CMS
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" role="navigation">
@@ -187,47 +187,22 @@
                             <a href="{{ URL::to('/'); }}/inicio">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                             </a>                            
-                        </li>                                                
-                        <li>
-                            <a href="{{ URL::to('/'); }}/banners">
-                                <i class="fa  fa-picture-o"></i> <span>Banners</span>
-                            </a>                            
-                        </li>
+                        </li>                                                                        
                         <li>
                             <a href="{{ URL::to('/'); }}/info">
                                 <i class="fa  fa-bars"></i> <span>Informacion general</span>                               
                             </a>                                                        
-                        </li>
-                        <?php /*<li>
-                            <a href="#">
-                                <i class="fa  fa-calendar"></i> <span>Eventos</span>                           
-                            </a>                                                       
-                        </li>
+                        </li>                        
                         <li>
-                            <a href="#">
-                                <i class="fa  fa-plane"></i> <span>Viajes</span>                           
-                            </a>                                                        
-                        </li>*/?>
-                        <li>
-                            <a href="{{ URL::to('/'); }}/rutas">
-                                <i class="fa  fa-exchange"></i> <span>Rutas</span>
+                            <a href="{{ URL::to('/'); }}/proyectos">
+                                <i class="fa  fa-exchange"></i> <span>Proyectos</span>
                             </a>                            
                         </li>
                         <li>
-                            <a href="{{ URL::to('/'); }}/galerias">
-                                <i class="fa  fa-camera"></i> <span>Galeria</span>
+                            <a href="{{ URL::to('/'); }}/blog">
+                                <i class="fa  fa-desktop"></i> <span>Blog</span>
                             </a>                            
-                        </li>
-                        <li class="treeview">
-                        	<a href="#">
-                                <i class="fa  fa-envelope"></i><span>Mailing</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                        	<ul class="treeview-menu">
-                        		<li><a href="{{ URL::to('/'); }}/mailing" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i> Administrar correos</a></li>
-                        		<li><a href="{{ URL::to('/'); }}/mailing/enviar" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i> Enviar correo</a></li>
-                        	</ul>                                                       
-                        </li>
+                        </li>                        
                     </ul>
                 </section>
                 <!-- /.sidebar -->

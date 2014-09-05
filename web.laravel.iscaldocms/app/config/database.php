@@ -55,7 +55,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'saastah',
+			'database'  => 'iscaldo',
 			'username'  => 'root',
 			'password'  => 'root',
 			'charset'   => 'utf8',

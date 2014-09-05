@@ -19,29 +19,13 @@ Route::get('login/restorepassword', 'LoginController@restorepassword');
 
 Route::get('inicio', 'InicioController@index');
 
-Route::get('banners', 'BannersController@index');
-Route::get('banners/crearbanner', 'BannersController@crearbanner');
-Route::post('banners/guardarbanner', 'BannersController@guardarbanner');
-Route::get('banners/borrarbanner/{id}', 'BannersController@borrarbanner');
-
 Route::get('info', 'InfoController@index');
 Route::get('info/editar/{id}', 'InfoController@editar');
 Route::post('info/guardar', 'InfoController@guardar');
 
-Route::get('rutas', 'RutasController@index');
-Route::get('rutas/crearruta', 'RutasController@crearruta');
-Route::get('rutas/editarruta/{routeid}', 'RutasController@editarruta');
-Route::post('rutas/guardarruta', 'RutasController@guardarruta');
-Route::post('rutas/eliminarruta', 'RutasController@eliminarruta');
-Route::post('rutas/deleteimage', 'RutasController@deleteimage');
-
-Route::get('galerias', 'GaleriasController@index');
-Route::get('galerias/crear', 'GaleriasController@crear');
-Route::post('galerias/guardar', 'GaleriasController@guardar');
-Route::get('galerias/eliminar/{id}', 'GaleriasController@eliminar');
-
-Route::get('mailing', 'MailingController@index');
-Route::get('mailing/eliminar/{id}', 'MailingController@eliminar');
-Route::get('mailing/enviar', 'MailingController@enviar');
-Route::post('mailing/enviarCorreos', 'MailingController@enviarCorreos');
-Route::get('mailing/testemail', 'MailingController@testemail');
+Route::get('proyectos', 'ProyectsController@index');
+Route::get('proyectos/crearproyecto', 'ProyectsController@crearproyecto');
+Route::get('proyectos/editarproyecto/{routeid}', 'ProyectsController@editarproyecto');
+Route::post('proyectos/guardarproyecto', 'ProyectsController@guardarproyecto');
+Route::post('proyectos/eliminarproyecto', 'ProyectsController@eliminarproyecto');
+Route::post('proyectos/deleteimage', 'ProyectsController@deleteimage');
