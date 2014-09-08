@@ -54,4 +54,23 @@ $(document).ready(function() {
 	
 	/*Show initial section*/
 	$('#about-content').fadeIn(time);
+	
+	
+	/*Proyects*/
+	$('.proyect-item').click(function(e) {
+		e.preventDefault();
+		
+		id = $(this).attr('id');
+		
+		$.ajax({													
+	        url: "/home/getProyectDescription",        
+	        data: "id="+id+"&_token="+$('input[name="_token"]').val(),		             
+	        dataType: "html",		                	                	      
+	        success: function(datos) {   	
+	        	$('#proyectDescription').fadeOut('fast', function() { $('#proyectDescription').html(datos).fadeIn('fast'); });
+	        },
+	        type: "POST"
+		});
+	});
+	
 });

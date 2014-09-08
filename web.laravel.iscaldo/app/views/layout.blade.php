@@ -127,8 +127,10 @@
 							</p>
 						</div>
 						<div class="fleft w52 bGrey padding-15">
-							<h3>Descripción</h3>
-							<p>Da click en un proyecto para ver su descripción</p> 
+							<div id="proyectDescription">
+								<h3>Descripción</h3>
+								<p>Da click en un proyecto para ver su descripción</p>
+							</div>							
 						</div>
 					</div>
 				</div>
