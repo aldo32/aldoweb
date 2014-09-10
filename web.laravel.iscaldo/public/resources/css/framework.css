@@ -5,7 +5,7 @@ a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
 b, u, i, center,
-dl, dt, dd, ol, ul, li,
+dl, dt, dd, ol, 
 table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed, 
 figure, figcaption, footer, header, hgroup, 
@@ -23,7 +23,7 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display:block;
 }
-ul,ol {list-style:none;}
+
 body {line-height:1;}
 input, button,fieldset {border:none;}
 a, a img, object {text-decoration:none; outline:none; border:none;}
@@ -81,6 +81,8 @@ caption,th {text-align:left;}
 .margin-5{margin:5px !important}
 .margin-10{margin:10px !important}
 .margin-15{margin:15px !important}
+.margin-20{margin:20px !important}
+.margin-25{margin:25px !important}
 .margin-T5{margin-top:5px !important}
 .margin-B5{margin-bottom:5px !important}
 .margin-TB5{margin-top:5px;margin-bottom:5px !important}
@@ -251,6 +253,6 @@ div.col-14, div.col-15, div.col-16, div.col-17, div.col-18, div.col-19, div.col-
 
 /*BACKGROUNDS*/
 .bBlack { background: #000; }
-.bGrey { background: #343838; }
-.bLio { background: #005F6B; }
-.bDeep { background: #008C9E; }
+.bGrey { background-color: rgba(52, 56, 56, .80); color: rgba(52, 56, 56, .70); color: #e8e8e8; }
+.bLio {  background-color: rgba(0, 95, 107, .80); color: rgba(0, 95, 107, .70); color: #e8e8e8; }
+.bDeep { background-color: rgba(0, 140, 158, .80); color: rgba(0, 140, 158, .70); color: #e8e8e8; }

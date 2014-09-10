@@ -20,7 +20,7 @@ $(document).ready(function() {
 	   	if(i == 3)
 	    	i = 1;
     	
-    }, 5000);
+    }, 60000);
 	
 	var time=500;
 	
@@ -29,17 +29,18 @@ $(document).ready(function() {
 		var section = $(this).attr('id');		
 		
 		/*Add and remove class to menu active*/
-		$(".menu-item").removeClass('menu-item-active');
-		$(this).addClass('menu-item-active');
-		
-		/*animations for About*/
-		$('#about-content').hide();
+		$(".menu-item").removeClass('active');
+		$(this).addClass('active');
+				
+		$('#services-content').hide();
 		$('#experience-content').hide();
 		$('#proyects-content').hide();
+		$('#blog-content').hide();
+		
 		
 		switch(section) {		
-			case 'aboutSection':										
-				$('#about-content').fadeIn(time);	
+			case 'servicesSection':										
+				$('#services-content').fadeIn(time);	
 			break;
 			
 			case 'experienceSection':												
@@ -48,12 +49,16 @@ $(document).ready(function() {
 			
 			case 'proyectsSection':												
 				$('#proyects-content').fadeIn(time);	
-			break;			
+			break;		
+			
+			case 'blogSection':
+				$('#blog-content').fadeIn(time);
+				break;
 		}		
 	});
 	
 	/*Show initial section*/
-	$('#about-content').fadeIn(time);
+	$('#services-content').fadeIn(time);
 	
 	
 	/*Proyects*/
