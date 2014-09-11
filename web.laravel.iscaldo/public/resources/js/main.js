@@ -3,7 +3,7 @@ $(window).load(function() {
 	$("#preloader").delay(300).fadeOut("slow");
 });
 
-$(document).ready(function() {
+$(document).ready(function() {				
 	var i=1; 		
 	setInterval(function() {
 		if (i==1) {			  
@@ -58,7 +58,8 @@ $(document).ready(function() {
 	});
 	
 	/*Show initial section*/
-	$('#services-content').fadeIn(time);
+	//$('#services-content').fadeIn(time);
+	$('#proyects-content').fadeIn(time);
 	
 	
 	/*Proyects*/
@@ -71,8 +72,8 @@ $(document).ready(function() {
 	        url: "/home/getProyectDescription",        
 	        data: "id="+id+"&_token="+$('input[name="_token"]').val(),		             
 	        dataType: "html",		                	                	      
-	        success: function(datos) {   	
-	        	$('#proyectDescription').fadeOut('fast', function() { $('#proyectDescription').html(datos).fadeIn('fast'); });
+	        success: function(datos) {  	        	
+	        	$('#proyectDescription').fadeOut('fast', function() { $('#proyectDescription').html(datos).fadeIn('fast'); });	        	
 	        },
 	        type: "POST"
 		});

@@ -19,8 +19,14 @@ class HomeController extends BaseController {
 		
 		$proyect = Proyects::find($proyectId);
 		
-		?>
+		?>			
+		<script>
+		$('.nyroModalProyect').nyroModal();
+		</script>
+		
 		<h3><?php echo $proyect->name?></h3>
+		<br>
+		<center><a href="<?php echo URL::to('/')."/".$proyect->image;?>" class="nyroModalProyect"><img src="<?php echo Croppa::url($proyect->image, 450, 280);?>" width="450" height="280"></a></center>
 		<p><?php echo $proyect->description?></p>
 		<?php 
 	}

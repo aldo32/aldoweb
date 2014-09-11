@@ -49,7 +49,7 @@
 		                            	<div class="box-header"><h3 class="box-title" ><?php echo $row->name?></h3></div>		                            			                            
 		                            	<div class="box-body" style="text-align: right;">		                         		                            		   		
 		                                	<a href="{{ URL::to('/'); }}/proyectos/editarproyecto/<?php echo $row->proyectid?>"><button class="btn btn-primary btn-sm">Editar</button></a>                                    
-		                                	<button class="btn btn-danger btn-sm" onclick="if (confirm('Realmente desea eliminar este proyecto?')) { document.deleteproyect.proyectidid.value=<?php echo $row->proyectid?>; document.deleteproyect.submit(); }">Eliminar</button>
+		                                	<button class="btn btn-danger btn-sm" onclick="if (confirm('Realmente desea eliminar este proyecto?')) { document.deleteproyect.proyectid.value=<?php echo $row->proyectid?>; document.deleteproyect.submit(); }">Eliminar</button>
 		                            	</div>
 		                            </div>
 		                        </div>

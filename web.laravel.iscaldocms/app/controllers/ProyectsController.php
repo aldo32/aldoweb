@@ -114,7 +114,7 @@ class ProyectsController extends BaseController {
 		}
 	}
 	
-	function eliminarruta() {
+	function eliminarproyecto() {
 		$proyectId = Input::get("proyectid");
 		$proyect = Proyects::find($proyectId);
 		$proyectName = $proyect->name;
@@ -124,13 +124,13 @@ class ProyectsController extends BaseController {
 				
 			$proyect->delete();
 				
-			$alert = '<div class="alert alert-success alert-dismissable"> <i class="fa fa-check"></i> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button> La ruta <b>'.$proyectName.'</b> se eliminó correctamente </div>';
+			$alert = '<div class="alert alert-success alert-dismissable"> <i class="fa fa-check"></i> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button> El proyecto <b>'.$proyectName.'</b> se eliminó correctamente </div>';
 			return Redirect::to("proyectos")->with('alert', $alert);
 		}
 		else {
 			$proyect->delete();
 	
-			$alert = '<div class="alert alert-success alert-dismissable"> <i class="fa fa-check"></i> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button> La ruta <b>'.$proyectName.'</b> se eliminó correctamente </div>';
+			$alert = '<div class="alert alert-success alert-dismissable"> <i class="fa fa-check"></i> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button> El proyecto <b>'.$proyectName.'</b> se eliminó correctamente </div>';
 			return Redirect::to("proyectos")->with('alert', $alert);
 		}
 	}

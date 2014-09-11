@@ -176,8 +176,8 @@
 								?>															
 							</p>
 						</div>
-						<div class="fleft w52 bGrey padding-15">
-							<div id="proyectDescription">
+						<div class="fleft w52 bGrey">
+							<div id="proyectDescription" style="height: 585px; overflow: auto; padding: 15px;">
 								<h3>Descripción</h3>
 								<p>Da click en un proyecto para ver su descripción</p>
 							</div>							
