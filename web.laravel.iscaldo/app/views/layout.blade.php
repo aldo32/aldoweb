@@ -35,10 +35,10 @@
 		<div id="menu-wrap">			
 			<div id="menu-logo">{{ HTML::image('resources/images/logoaldo.png', '', array('class' => '', 'width'=>'140', 'height'=>'40')) }}</div>
 			<div id="menu-content">
-				<div class="menu-item" id="blogSection">Un poco de todo</div>
-				<div class="menu-item" id="experienceSection">Experiencia</div>
-				<div class="menu-item" id="proyectsSection">Portafolio</div>
-				<div class="menu-item active" id="servicesSection">Servicios</div>
+				<div class="menu-item" id="/blog"><a href="#blog" style="text-decoration: none;">Un poco de todo</a></div>
+				<div class="menu-item" id="/experiencia"><a href="#experiencia" style="text-decoration: none;">Experiencia</a></div>
+				<div class="menu-item" id="/portafolio"><a href="#portafolio" style="text-decoration: none;">Portafolio</a></div>
+				<div class="menu-item active" id="/servicios"><a href="#servicios" style="text-decoration: none;">Servicios</a></div>
 			</div>			
 		</div>
 		<!--  -->
@@ -55,54 +55,23 @@
 					<div id="services-content" class="none">
 						<div id="services-logo">{{ HTML::image('resources/images/logoaldo.png', '', array('id' => 'logoaldo', 'align'=>'center', 'width'=>'291', 'height'=>'74')) }}</div>
 						<div class="padding-15 bGrey w52 fleft margin-R15 margin-T15">
-							<h3>Dessarollo de sitios y aplicaciones</h3>
-							<p>
-								Ofrecemos desarrollos sobre tecnologías web con los más altos estándares de desarrollo y pruebas para obtener resultados sobresalientes para nuestros clientes.<br><br>
-								
-								<ul>
-									<li>Codificación MVC con los frameworks más usados en el mercado</li> 
-								    <li>Codificación HTML para sitios web y plantillas de correo electrónico</li>
-								    <li>Integración, diseño y gestión de base de datos</li>
-								    <li>Diseño de formularios de suscripción, desarrollo e integración</li>
-								    <li>Construcion personalizada de herramientas a la medida para gestión empresarial, marketing uno a uno y aplicaciones de mensajería.</li>
-								    <li>Planificación y gestión de la arquitectura de sistemas, hosting, seguridad y presentación de informes web y herramientas de gestión</li>
-								    <li>Instalación de Servidores Linux, Windows, Apache, Mysql.</li>
-								    <li>Hosting.</li>
-								    <li>Tiendas virtuales, carros de compra.</li>
-								    <li>SSL services</li>
-							    </ul> 													
-							</p>
+							<h3><?php echo $info1->title?></h3>
+							<?php echo $info1->description?>
 						</div>
 						
 						<div class="fleft w40 bLio padding-15 margin-T15">
-							<h3>Consultoria web</h3>
-							<p>																							    
-							    Desde un simple formulario de contacto, una promoción web, hasta una aplicación robusta de comercio electrónico y bases de datos, nosotros podemos desarrollar y automatizar su negocio, o mejor aún, sus operaciones empresariales.<br><br> 
-								Sea uno más en amplio campo de web a través del uso de software y tecnología a la medida. Nosotros ponemos las herramientas correctas, el conocimiento y la experiencia a su servicio, ademas de que desarrollamos con las ultomas tecnologias web que se encuantran en el mercado
-									
-							</p>
+							<h3><?php echo $info2->title?></h3>
+							<?php echo $info2->description?>
 						</div>
 						
-						<div class="fleft w40 bDeep padding-15 margin-T15" style="height: 139px;">
-							<h3>Hospedaje web</h3>
-							<p>
-								Cualquier cosa que haga en internet requiere de una sólida infraestructura que lo sostenga. Nosotros podemos proveerle una solución completa para que pueda descansar seguro de que la presencia en línea de su negocio está en buenas manos.								
-							</p>							
+						<div class="fleft w40 bDeep padding-15 margin-T15" style="height: 152px;">
+							<h3><?php echo $info3->title?></h3>
+							<?php echo $info3->description?>													
 						</div>
 						
 						<div class="padding-15 bLio w100 fleft margin-R15 margin-T15">
-							<h3>Marketing digital</h3>
-							<p>
-								Las redes sociales han cambiado diversos aspectos en la comunicación y convivencia de las personas, y no solo eso, también ha revolucionado la estrategia de las marcas en Internet. El uso continuo de las redes sociales, la fidelidad y aceptación que esto le confiere a las personas, permite que las empresas puedan aprovechar estos canales de comunicación para posicionar empresas e influir en la mente del consumidor.<br><br>
-								
-								Por eso ofrecemmos la mejor integración con las redes sociales como son:
-								<ul>
-									<li>Posicionamiento en google</li>
-									<li>Integración de Facebook</li>
-									<li>Integración de Twitter</li>
-									<li>Paginas html dentro de Facebook</li>
-								</ul>														
-							</p>
+							<h3><?php echo $info3->title?></h3>
+							<?php echo $info3->description?>
 						</div>
 					</div>
 				</div>
@@ -177,7 +146,7 @@
 							</p>
 						</div>
 						<div class="fleft w52 bGrey">
-							<div id="proyectDescription" style="height: 585px; overflow: auto; padding: 15px;">
+							<div id="proyectDescription" style="height: 514px; overflow: auto; padding: 15px;">
 								<h3>Descripción</h3>
 								<p>Da click en un proyecto para ver su descripción</p>
 							</div>							

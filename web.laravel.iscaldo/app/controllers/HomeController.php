@@ -5,13 +5,13 @@ class HomeController extends BaseController {
 
 	public function index()
 	{
-		$about = Info::find(1);
-		$sport = Info::find(2);
-		$hobbie = Info::find(3);
-		$exp = Info::find(4);
+		$info1 = Info::find(1);
+		$info2 = Info::find(2);
+		$info3 = Info::find(3);
+		$info4 = Info::find(4);
 		$proyectos = Proyects::orderBy('name', 'asc')->get();
 		
-		return View::make('home/index')->with('about', $about)->with('sport', $sport)->with('hobbie', $hobbie)->with('exp', $exp)->with('proyectos', $proyectos);
+		return View::make('home/index')->with('info1', $info1)->with('info2', $info2)->with('info3', $info3)->with('info4', $info4)->with('proyectos', $proyectos);
 	}
 	
 	function getProyectDescription() {

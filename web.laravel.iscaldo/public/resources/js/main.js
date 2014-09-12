@@ -21,45 +21,27 @@ $(document).ready(function() {
 	    	i = 1;
     	
     }, 60000);
-	
+		
 	var time=500;
 	
-	/*SECTION ABOUT*/
+	/*Show section*/
 	$(".menu-item").click(function() {
 		var section = $(this).attr('id');		
 		
 		/*Add and remove class to menu active*/
 		$(".menu-item").removeClass('active');
 		$(this).addClass('active');
+		
+		showPage(section, time);
 				
-		$('#services-content').hide();
-		$('#experience-content').hide();
-		$('#proyects-content').hide();
-		$('#blog-content').hide();
-		
-		
-		switch(section) {		
-			case 'servicesSection':										
-				$('#services-content').fadeIn(time);	
-			break;
-			
-			case 'experienceSection':												
-				$('#experience-content').fadeIn(time);	
-			break;
-			
-			case 'proyectsSection':												
-				$('#proyects-content').fadeIn(time);	
-			break;		
-			
-			case 'blogSection':
-				$('#blog-content').fadeIn(time);
-				break;
-		}		
 	});
 	
-	/*Show initial section*/
-	//$('#services-content').fadeIn(time);
-	$('#proyects-content').fadeIn(time);
+	/*show page in F5*/
+	var now = ""+window.location+"";
+	now = "/"+now.substr(now.indexOf('#') + 1);
+
+	showPage(now, time);
+		
 	
 	
 	/*Proyects*/
@@ -77,6 +59,37 @@ $(document).ready(function() {
 	        },
 	        type: "POST"
 		});
-	});
+	});		
 	
 });
+
+
+/*function to show page*/
+function showPage(section, time) {	
+	
+	$('#services-content').hide();
+	$('#experience-content').hide();
+	$('#proyects-content').hide();
+	$('#blog-content').hide();
+	
+	
+	switch(section) {		
+		case '/servicios':										
+			$('#services-content').fadeIn(time);	
+		break;
+		
+		case '/experiencia':												
+			$('#experience-content').fadeIn(time);	
+		break;
+		
+		case '/portafolio':												
+			$('#proyects-content').fadeIn(time);	
+		break;		
+		
+		case '/blog':
+			$('#blog-content').fadeIn(time);
+			break;
+			
+		default: $('#services-content').fadeIn(time); break;
+	}
+}

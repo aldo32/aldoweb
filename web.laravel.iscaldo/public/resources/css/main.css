@@ -139,7 +139,7 @@ body { font-size: 14px/16px; font-family: Calibri, Arial; font-weight:normal; te
 		/*Proyects*/
 		#proyects-wrap { width: 100%; }
 			#proyects-content { width: 100%; position: relative; text-align: left; }
-			.proyect-item { margin-right: 9px; margin-bottom: 9px; font-weight: bold; float: left; padding: 15px;  }
+			.proyect-item { margin-right: 9px; margin-bottom: 9px; font-weight: bold; float: left; padding: 14px;  }
 			.proyect-item:hover {
 				background-color: #343838;
 				-webkit-transition: background-color 500ms linear;
