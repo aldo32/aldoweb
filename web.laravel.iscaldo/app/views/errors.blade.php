@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>        
-        <title>ISC Aldo CMS</title>
+        <title>ISC Aldo</title>
 		<link rel="shortcut icon" href="{{ URL::to('/') }}/resources/images/favicon.ico" type="image/x-icon">
 		<link rel="icon" href="{{ URL::to('/') }}/resources/images/favicon.ico" type="image/x-icon">
 		        

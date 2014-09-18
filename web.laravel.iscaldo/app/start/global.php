@@ -48,7 +48,36 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 
 App::error(function(Exception $exception, $code)
 {
-	Log::error($exception);
+	//	Careful here, any codes which are not specified
+    // will be treated as 500
+
+    if ( ! in_array($code,array(401,403,404,500))){
+       return;
+    }
+
+    // assumes you have app/views/errors/401.blade.php, etc
+    $view = "errors/$code";
+
+    // add data that you want to pass to the view
+    $data = array('code'=>$code);
+
+    // switch statements provided in case you need to add
+    // additional logic for specific error code.
+
+    switch ($code) {
+       /*case 401:
+       return Response::view($view, $data, $code);*/
+
+       /*case 403:
+       return Response::view($view, $data, $code);*/
+
+       case 404:
+       return Response::view($view, $data, $code);
+
+       /*case 500:
+       return Response::view($view, $data, $code);*/
+
+   }	
 });
 
 /*
