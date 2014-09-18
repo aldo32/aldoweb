@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\View;
 class HomeController extends BaseController {	
 
 	public function index()
@@ -10,8 +11,9 @@ class HomeController extends BaseController {
 		$info3 = Info::find(3);
 		$info4 = Info::find(4);
 		$proyectos = Proyects::orderBy('name', 'asc')->get();
+		$blogs = Blog::all();
 		
-		return View::make('home/index')->with('info1', $info1)->with('info2', $info2)->with('info3', $info3)->with('info4', $info4)->with('proyectos', $proyectos);
+		return View::make('home/index')->with('info1', $info1)->with('info2', $info2)->with('info3', $info3)->with('info4', $info4)->with('proyectos', $proyectos)->with('blogs', $blogs);
 	}
 	
 	function getProyectDescription() {
@@ -30,5 +32,20 @@ class HomeController extends BaseController {
 		<p><?php echo $proyect->description?></p>
 		<?php 
 	}
+	
+	function viewEntry($blogid) {
+		$blog = Blog::find($blogid);
+		
+		if (count($blog) > 0) {
+			return View::make('home/viewEntry')->with('blog', $blog); 
+		}
+		else {
+			echo "No existe la entrada solicitada";
+		}
+	}
+	
+	function konami() {
+		return View::make('home/konami');
+	}	
 
 }

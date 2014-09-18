@@ -7,12 +7,15 @@
 		
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="keywords" content="web, desarrollo, aldo, marañon, andrade, css, php, js, javascript, framework, paginas, sitios, portales, proyectos, lider, html, jquery, trabajo, cakephp, codeigniter, laravel, " />
-		<meta name="description" content="Desarrollo de aplicaciones web, portales, paginas, lider de proyectos y desarrollador Sr en php, desarrollo de soluciones empresariales y personales, actitud proactiva y trabajo bajo presion" />
+		<meta name="description" content="Aldo Marañon Andrade Desarrollo de aplicaciones web, portales, paginas, lider de proyectos y desarrollador Sr en php, desarrollo de soluciones empresariales y personales, actitud proactiva y trabajo bajo presion" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
 							
 		{{ HTML::script('resources/js/jquery-2.1.1.min.js') }}		
 		{{ HTML::script('resources/js/jquery.animateSlider.js') }}
 		{{ HTML::script('resources/js/modernizr.js') }}
-		{{ HTML::script('resources/nyroModal/js/jquery.nyroModal.custom.js') }}
+		{{ HTML::script('resources/nyroModal/js/jquery.nyroModal.custom.js') }}		
+		{{ HTML::script('resources/js/konami.js') }}
 		{{ HTML::script('resources/js/main.js') }}
 								
 		{{ HTML::style('resources/css/framework.css') }}
@@ -43,7 +46,7 @@
 		</div>
 		<!--  -->
 				
-		<div id="page-wrap">
+		<div id="page-wrap" class="clearfix">
 			
 			
 			<!-- Content -->
@@ -162,34 +165,38 @@
 				<div id="blog-wrap" class="clearfix">
 					<div id="blog-content" class="clearfix none">
 						
-						<?php 												
-						for ($i=0; $i<=15; $i++) {
-							$random = rand(15, 80);
-							$text="Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de <br>las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido<br> usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas, las cuales contenian pasajes de Lorem Ipsum";
-							
-							$bg[1]='bDeep';
-							$bg[2]='bLio';
-							$bg[3]='bGrey';
-							
-							$n = rand(1, 3);
-							?>
-							<div class="blog-item <?php echo $bg[$n]?>">
-								<div class="blog-item-image">
-									<?php 
-									if ($n == 1) {
-										?>{{ HTML::image('resources/images/yo1.png', '', array('class' => '', 'width'=>'60', 'height'=>'60')) }}<?php 
-									}
-									?>									
+						<?php 	
+						if (count($blogs) > 0) {
+							$i=0;
+							foreach ($blogs as $row) {
+								$random = rand(50, 100);
+								
+								$bg[1]='bDeep';
+								$bg[2]='bLio';
+								$bg[3]='bGrey';
+								
+								$n = rand(1, 3);
+								?>
+								<div class="blog-item <?php echo $bg[$n]?>">
+									<div class="blog-item-image">
+										<?php 
+										if ($row->image != "") {
+											?><a href="{{ URL::to('/'); }}/<?php echo $row->image?>" class="nyroModal">{{ HTML::image(Croppa::url($row->image, 60, 60), '', array('class' => '', 'width'=>'60', 'height'=>'60')) }}</a><?php 
+										}
+										?>									
+									</div>
+									<div class="blog-item-text">
+										<h4><?php echo $row->title?></h4>
+										<p class="fontZ14"><?php echo str_limit(nl2br(strip_tags($row->description)), $random, '...')?></p>
+										<div class="fright"><a href="{{ URL::to('/'); }}/home/viewEntry/<?php echo $row->blogid?>" class="nyroModal">Leer más</a></div>
+									</div>								
 								</div>
-								<div class="blog-item-text">
-									<h4>Titulo de la entrada</h4>
-									<p class="fontZ14"><?php echo str_limit($text, $random, '...')?></p>
-									<div class="fright"><a href="#">Leer más</a></div>
-								</div>								
-							</div>
-							<?php 
-						}
-						?>																														
+								<?php 
+							}
+						}																							
+						?>
+						
+																																		
 					</div>
 				</div>
 				<br>
@@ -209,10 +216,10 @@
 				</div>
 				
 				<div class="margin-15 fright">					
-					<div class="margin-10 fright">{{ HTML::image('resources/images/facebook.png', '', array('title' => '', 'width'=>'32', 'height'=>'32')) }}</div>
-					<div class="margin-10 fright">{{ HTML::image('resources/images/linkedin.png', '', array('title' => '', 'width'=>'32', 'height'=>'32')) }}</div>
-					<div class="margin-10 fright">{{ HTML::image('resources/images/printerest.png', '', array('title' => '', 'width'=>'32', 'height'=>'32')) }}</div>
-					<div class="margin-10 fright">{{ HTML::image('resources/images/twitter.png', '', array('title' => '', 'width'=>'32', 'height'=>'32')) }}</div>
+					<!-- <div class="margin-10 fright">{{ HTML::image('resources/images/facebook.png', '', array('title' => '', 'width'=>'32', 'height'=>'32')) }}</div>  -->
+					<div class="margin-10 fright"><a href="https://www.linkedin.com/pub/aldo-mara%C3%B1on-andrade/14/130/89b" target="_blank">{{ HTML::image('resources/images/linkedin.png', '', array('title' => '', 'width'=>'32', 'height'=>'32')) }}</a></div>
+					<div class="margin-10 fright"><a href="http://es.pinterest.com/aldomaranon/" target="_blank">{{ HTML::image('resources/images/printerest.png', '', array('title' => '', 'width'=>'32', 'height'=>'32')) }}</a></div>
+					<div class="margin-10 fright"><a href="http://twitter.com/isc_aldo_ma" target="_blank">{{ HTML::image('resources/images/twitter.png', '', array('title' => '', 'width'=>'32', 'height'=>'32')) }}</a></div>
 				</div>
 			</div>
 	</section>	

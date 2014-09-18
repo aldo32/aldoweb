@@ -3,7 +3,19 @@ $(window).load(function() {
 	$("#preloader").delay(300).fadeOut("slow");
 });
 
-$(document).ready(function() {				
+$(document).ready(function() {	
+	$( window ).konami({
+		cheat: function() {
+			$.nmManual('/home/konami', {
+				resizable: false,
+                closeOnEscape: true
+			});
+		} // end cheat		
+	});
+
+	
+	$('.nyroModal').nyroModal();
+	
 	var i=1; 		
 	setInterval(function() {
 		if (i==1) {			  
@@ -20,7 +32,7 @@ $(document).ready(function() {
 	   	if(i == 3)
 	    	i = 1;
     	
-    }, 60000);
+    }, 30000);
 		
 	var time=500;
 	
@@ -59,8 +71,26 @@ $(document).ready(function() {
 	        },
 	        type: "POST"
 		});
-	});		
+	});				
+});
+
+/*ajax history*/
+$(window).on("navigate", function (event, data) {
+	var direction = data.state.direction;
+	alert(direction);
+	if (direction == 'back') {
+		alert(now);
+	}
+	if (direction == 'forward') {
+		alert(now);
+	}
+});
+
+$(window).bind('hashchange', function(ev) {
+	var now = ""+window.location+"";
+	now = "/"+now.substr(now.indexOf('#') + 1);
 	
+	showPage(now, 500); 
 });
 
 
@@ -70,12 +100,13 @@ function showPage(section, time) {
 	$('#services-content').hide();
 	$('#experience-content').hide();
 	$('#proyects-content').hide();
-	$('#blog-content').hide();
+	$('#blog-content').hide();	
 	
+	$(".menu-item").removeClass('active');		
 	
 	switch(section) {		
-		case '/servicios':										
-			$('#services-content').fadeIn(time);	
+		case '/servicios':								
+			$('#services-content').fadeIn(time);			
 		break;
 		
 		case '/experiencia':												

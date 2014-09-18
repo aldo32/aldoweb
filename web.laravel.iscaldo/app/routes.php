@@ -13,3 +13,5 @@
 
 Route::get('/', 'HomeController@index');
 Route::post('/home/getProyectDescription', 'HomeController@getProyectDescription');
+Route::get('/home/viewEntry/{blogid}', 'HomeController@viewEntry');
+Route::get('/home/konami', 'HomeController@konami');

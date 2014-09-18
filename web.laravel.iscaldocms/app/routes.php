@@ -29,3 +29,12 @@ Route::get('proyectos/editarproyecto/{routeid}', 'ProyectsController@editarproye
 Route::post('proyectos/guardarproyecto', 'ProyectsController@guardarproyecto');
 Route::post('proyectos/eliminarproyecto', 'ProyectsController@eliminarproyecto');
 Route::post('proyectos/deleteimage', 'ProyectsController@deleteimage');
+
+Route::get('blog', 'BlogController@index');
+Route::get('blog/crearblog', 'BlogController@crearblog');
+Route::post('blog/guardarblog', 'BlogController@guardarblog');
+Route::get('blog/editarblog/{blogid}', 'BlogController@editarblog');
+Route::get('blog/eliminarblog/{blogid}', 'BlogController@eliminarblog');
+Route::post('blog/deleteimage', 'BlogController@deleteimage');
+
+Route::get('blog/carrusel', 'BlogController@carrusel');

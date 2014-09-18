@@ -62,7 +62,7 @@ body { font-size: 14px/16px; font-family: Calibri, Arial; font-weight:normal; te
 	#back1 { background: url('../images/3b.jpg') no-repeat top center; }
 	#back2 { background: url('../images/5b.jpg') no-repeat top center; }
 
-	#page-wrap { width: 1024px; margin: 0 auto; position: relative; z-index: 1; padding-top: 7%; }
+	#page-wrap { width: 1024px; min-height: 700px; margin: 0 auto; position: relative; z-index: 1; padding-top: 7%; }
 	
 		#menu-wrap { width: 100%; height: 60px; line-height: 40px;  position: fixed; z-index: 2; background-color: rgba(0, 0, 0, .60); color: rgba(0, 0, 0, .60); -webkit-box-shadow: 0px 10px 9px 0px rgba(0,0,0,0.75); -moz-box-shadow: 0px 10px 9px 0px rgba(0,0,0,0.75); box-shadow: 0px 10px 9px 0px rgba(0,0,0,0.75); }
 			#menu-logo { width: 14%; float: left; padding-left: 10px; margin-top: 10px; }
@@ -152,7 +152,7 @@ body { font-size: 14px/16px; font-family: Calibri, Arial; font-weight:normal; te
 		/*Blog*/
 		#blog-wrap { width: 100%; }
 			#blog-content { width: 100%; position: relative; text-align: left; }
-				.blog-item { margin-right: 6px; margin-bottom: 6px; float: left; padding: 10px; position: relative;  }
+				.blog-item { margin-right: 8px; margin-bottom: 8px; float: left; padding: 10px; position: relative;  }
 				.blog-item-image { float: left; margin-right: 15px; }
 				.blog-item-text { float: right; }	
 		
