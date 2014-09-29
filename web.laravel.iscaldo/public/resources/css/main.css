@@ -2,7 +2,7 @@
 
 /*PRELOAD*/
 #preloader { height: 100%; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: black; z-index: 999; }
-#status { width: 50px; height: 20px; position: absolute; top: 48%; left: 50%; color: #fff; }
+#status { width: 50px; height: 20px; margin: 0 auto; margin-top: 45%; color: #fff; }
 
 /*GENERALS*/
 .fullscreen {
@@ -164,9 +164,10 @@ body { font-size: 14px/16px; font-family: Calibri, Arial; font-weight:normal; te
 		
 
 @media screen and (max-width: 1024px) {
-	#page-wrap { width: 100%;  }	
+	#page-wrap { width: 100%; padding-top: 25%;  }
+	#menu-wrap { height: 100px; background-color: rgba(0, 0, 0, .80); color: rgba(0, 0, 0, .80); }	
 	#menu { width: 100%; text-align: center;}		
-		.menu-item { font-size: 20px; margin-left: 1%; margin-right: 1%; }
+		.menu-item { font-size: 10px; margin-left: 1%; margin-right: 1%; margin-top: 0px; padding: 1px; cursor: pointer; float: none; display: inline;}
 	#content-wrap { width: 100%; }
 	
 	.w52, .w40, .w30, w100 { width: 96%; float: none; padding: 4%; height: 100%;}

@@ -22,7 +22,17 @@
 		{{ HTML::style('resources/css/font-awesome.css') }}
 		{{ HTML::style('resources/css/jquery.animateSlider.css') }}						
 		{{ HTML::style('resources/nyroModal/styles/nyroModal.css') }}
-		{{ HTML::style('resources/css/main.css') }}											
+		{{ HTML::style('resources/css/main.css') }}
+		
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		
+		  ga('create', 'UA-40966556-2', 'auto');
+		  ga('send', 'pageview');		
+		</script>											
 	</head>
 	
 <body>
@@ -73,8 +83,8 @@
 						</div>
 						
 						<div class="padding-15 bLio w100 fleft margin-R15 margin-T15">
-							<h3><?php echo $info3->title?></h3>
-							<?php echo $info3->description?>
+							<h3><?php echo $info4->title?></h3>
+							<?php echo $info4->description?>
 						</div>
 					</div>
 				</div>
@@ -86,39 +96,39 @@
 				<div id="experience-wrap" class="clearfix">
 					<div id="experience-content" class="none">
 						<div class="fleft w100 bDeep padding-15 margin-B15">
-							<h3>Mi eperiencia</h3>
+							<h3>Mi experiencia</h3>
 							<p>
-								Me considero una persona profesional que sabe manejar la presión laboral y canalizarla hacia el aumento de la experiencia, además de ser autodidacta e ir aprendiendo las nuevas tecnologías que surgen el ambiente de las tecnologías de la información y el web 2.0. Ademas de buscar las metodologias y tecnicas para un desarrollo eficiente y agil.
+								Me considero una persona profesional que sabe manejar la presión laboral y canalizarla hacia el aumento de la experiencia, además de ser autodidacta para aprender las nuevas tecnologías que surgen el ambiente laboral y el web 2.0. Ademas de buscar las metodologias y tecnicas para un desarrollo eficiente y ágil.
 
-								<br><br>Tengpo más de 6 años y contando de experiencia en desarrllo de aplicaciones web, software y de escritorio, estas son las tecnologias que he manejado y que domino ampliamente:
+								<br><br>Tengo más de 6 años de experiencia en desarrollo de aplicaciones web, software y de escritorio, estas son las tecnologías que he manejado y que domino ampliamente:
 								
 								<br><br>
 								<div class="clearfix">
-									<div class="experience-item bLio">PHP</div>
-									<div class="experience-item bLio">MYSQL</div>
-									<div class="experience-item bLio">POSTGRES</div>
-									<div class="experience-item bLio">AJAX</div>
-									<div class="experience-item bLio">HTML</div> 
-									<div class="experience-item bLio">HTML5</div>
-									<div class="experience-item bLio">CSS</div>
-									<div class="experience-item bLio">CSS3</div>
-									<div class="experience-item bLio">JAVA SCRIPT</div>
-									<div class="experience-item bLio">JQUERY</div>
-									<div class="experience-item bLio">CODEIGNITER</div>
-									<div class="experience-item bLio">ZEND</div>
-									<div class="experience-item bLio">CAKE PHP</div>
+									<div class="experience-item bLio">Php</div>
+									<div class="experience-item bLio">MySQL</div>
+									<div class="experience-item bLio">PostgreSQL</div>
+									<div class="experience-item bLio">Ajax</div>
+									<div class="experience-item bLio">Html</div> 
+									<div class="experience-item bLio">Html5</div>
+									<div class="experience-item bLio">Css</div>
+									<div class="experience-item bLio">Css 3</div>
+									<div class="experience-item bLio">Javascript</div>
+									<div class="experience-item bLio">Jquery</div>
+									<div class="experience-item bLio">Codeigniter</div>
+									<div class="experience-item bLio">Zend</div>
+									<div class="experience-item bLio">CakePHP</div>
 									<div class="experience-item bLio">C#</div>
-									<div class="experience-item bLio">SQL AVANZADO</div><div class="experience-item bLio">POO</div><div class="experience-item bLio">IBM DB2</div><div class="experience-item bLio">APACHE</div><div class="experience-item bLio">MICROSOFT OFFICE</div><div class="experience-item bLio">CONEXIONES REMOTAS A BD</div>
-									<div class="experience-item bLio">WEBSERVICES</div><div class="experience-item bLio">ADMINISTRACIÓN DE SERVIDEORES WEB</div><div class="experience-item bLio">LINUX</div><div class="experience-item bLio">PI FACEBOOK</div>
-									<div class="experience-item bLio">SDK FACEBOOK</div><div class="experience-item bLio">API TWITTER</div><div class="experience-item bLio">API GOOGLE MAPS</div><div class="experience-item bLio">LARAVEL</div>
-									<div class="experience-item bLio">MAQUETADO HTML</div><div class="experience-item bLio">SCRUM</div><div class="experience-item bLio">GIT HUB</div><div class="experience-item bLio">TITANIUM APPCELERATOR ETC.</div>
+									<div class="experience-item bLio">SQL Avanzado</div><div class="experience-item bLio">Poo</div><div class="experience-item bLio">IBM DB2</div><div class="experience-item bLio">Apache</div><div class="experience-item bLio">Microsoft Office</div><div class="experience-item bLio">Conexiones remotas a BD</div>
+									<div class="experience-item bLio">Webservices</div><div class="experience-item bLio">Administración de servidores web</div><div class="experience-item bLio">Linux</div><div class="experience-item bLio">API de facebook</div>
+									<div class="experience-item bLio">SDK facebook</div><div class="experience-item bLio">API twitter</div><div class="experience-item bLio">API google maps</div><div class="experience-item bLio">Laravel</div>
+									<div class="experience-item bLio">Maquetado html</div><div class="experience-item bLio">Scrum</div><div class="experience-item bLio">Git hub</div><div class="experience-item bLio">Titanium appcelerator etc.</div>
 								</div>
 								
 								<ul>
-									<li>Framework JavaScript: Ultimas versiones de dequery y Motools</li>
-									<li>Framework PHP: CodeIgniter 2, Zend, Cake php 2, Laravel 4</li>
+									<li>Framework JavaScript: Ultimas versiones de de Jquery y Motools</li>
+									<li>Framework PHP: Codeigniter 2, Zend, Cake php 2, Laravel 4</li>
 									<li>Sistemas Operativos Windows, Linux, Mac OS X</li>
-									<li>Herramientas de diseño web: Adobe Photo Shop CS4</li>
+									<li>Herramientas de diseño web: Adobe Photoshop CS4</li>
 									<li>Diseño y maquetado responsivo</li>
 									<li>Administración de proyectos</li>
 									<li>Lider de proyecto</li>
