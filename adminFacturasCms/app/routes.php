@@ -22,3 +22,9 @@ Route::get('inicio', 'InicioController@index');
 Route::get('usuarios', 'UsuariosController@index');
 Route::get('usuarios/crearusuario', 'UsuariosController@crearusuario');
 Route::post('usuarios/guardarusuario', 'UsuariosController@guardarusuario');
+Route::get('usuarios/editarusuario/{userid}', 'UsuariosController@editarusuario');
+Route::get('usuarios/cambiarpassword/{userid}', 'UsuariosController@cambiarpassword');
+Route::post('usuarios/savePassword', 'UsuariosController@savePassword');
+Route::get('usuarios/eliminarusuario/{iduser}', 'UsuariosController@eliminarusuario');
+
+Route::get('empresas', 'EmpresasController@index');

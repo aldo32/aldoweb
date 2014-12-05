@@ -1,10 +1,10 @@
 @extends('layout')
 
 <?php 
-if ($usuario != "") {
-	$title = "Editando usuario <b>$usuario->name</b>";
+if ($user != "") {
+	$title = "Editando usuario <b>$user->name</b>";
 	$type="update";
-	$usuarioid = $usuario->iduser;		
+	$usuarioid = $user->iduser;		
 }
 else {
 	$title = "Creando nuevo usuario";
@@ -36,7 +36,7 @@ else {
     	<h1>Usuarios<small>&nbsp;</small></h1>        
         <ol class="breadcrumb">
            	<li><a href="{{ URL::to('/'); }}/inicio"><i class="fa fa-dashboard"></i>Dashboard</a></li>
-            <li><a href="{{ URL::to('/'); }}/usuarios">Proyectos</a></li>
+            <li><a href="{{ URL::to('/'); }}/usuarios">Usuarios</a></li>
             <li class="active"><?php echo $title?></li>
         </ol>                
 	</section>
@@ -69,8 +69,8 @@ else {
 					?>
 	            	</br>
 	            	            		            		            	
-	            	@if($usuario != "")
-    					{{ Form::model($usuario, array('action' => array('UsuariosController@guardarusuario', $usuario->iduser), 'method'=>'post', 'name'=>'formusers', 'files' => false)) }}    					
+	            	@if($user != "")
+    					{{ Form::model($user, array('action' => array('UsuariosController@guardarusuario', $user->iduser), 'method'=>'post', 'name'=>'formusers', 'files' => false)) }}    					
 					@else
     					{{ Form::open(array('action' => 'UsuariosController@guardarusuario', 'name'=>'formusers', 'method'=>'post', 'files' => false)) }}
 					@endif
@@ -106,21 +106,37 @@ else {
                         </div>
                         
                         <br>
-                        <div class="form-group">
-                        	<label for="exampleInputFile">Email:</label>
-                        	{{ Form::text('email', null, array('class'=>'form-control', 'placeholder'=>'Email')) }}
-                        	<?php echo ($errors->has('email')) ? "<label for='inputError' class='control-label' style='color: #F56954'><i class='fa fa-times-circle-o'></i> ".$errors->first('email')."</label>" : "";  ?>                            
-                        </div>
-                        <div class="form-group">
-                        	<label for="exampleInputFile">Password:</label>
-                        	{{ Form::text('password', null, array('class'=>'form-control', 'placeholder'=>'Password')) }}
-                        	<?php echo ($errors->has('password')) ? "<label for='inputError' class='control-label' style='color: #F56954'><i class='fa fa-times-circle-o'></i> ".$errors->first('password')."</label>" : "";  ?>                            
-                        </div>
-                        <div class="form-group">
-                        	<label for="exampleInputFile">Confirmar Password:</label>
-                        	{{ Form::text('password', null, array('class'=>'form-control', 'placeholder'=>'Password')) }}
-                        	<?php echo ($errors->has('password_confirmation')) ? "<label for='inputError' class='control-label' style='color: #F56954'><i class='fa fa-times-circle-o'></i> ".$errors->first('password_confirmation')."</label>" : "";  ?>                            
-                        </div>
+                        
+                        <?php 
+                        if ($type=="insert") {
+                        	?>
+                        	<div class="form-group">
+	                        	<label for="exampleInputFile">Email:</label>
+	                        	{{ Form::text('email', null, array('class'=>'form-control', 'placeholder'=>'Email')) }}
+	                        	<?php echo ($errors->has('email')) ? "<label for='inputError' class='control-label' style='color: #F56954'><i class='fa fa-times-circle-o'></i> ".$errors->first('email')."</label>" : "";  ?>                            
+	                        </div>
+	                        <div class="form-group">
+	                        	<label for="exampleInputFile">Password:</label>                        	
+	                        	<input type="password" name="password" class="form-control" placeholder="Password"/>
+	                        	<?php echo ($errors->has('password')) ? "<label for='inputError' class='control-label' style='color: #F56954'><i class='fa fa-times-circle-o'></i> ".$errors->first('password')."</label>" : "";  ?>                            
+	                        </div>
+	                        <div class="form-group">
+	                        	<label for="exampleInputFile">Confirmar Password:</label>                        	
+	                        	<input type="password" name="password_confirmation" class="form-control" placeholder="Confirmar password"/>
+	                        	<?php echo ($errors->has('password_confirmation')) ? "<label for='inputError' class='control-label' style='color: #F56954'><i class='fa fa-times-circle-o'></i> ".$errors->first('password_confirmation')."</label>" : "";  ?>                            
+	                        </div>
+                        	<?php
+                        }
+                        else {
+                        	?>
+                        	<div class="form-group">
+	                        	<label for="exampleInputFile">Email:</label>
+	                        	<strong><?php echo $user->email?></strong>                            
+	                        </div>
+                        	<?php
+                        }
+                        ?>
+                        
                          
                         
                                                                                                                                                  

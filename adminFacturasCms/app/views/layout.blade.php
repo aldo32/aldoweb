@@ -197,10 +197,10 @@
                             </a>                            
                         </li>
                         <li>
-                            <a href="{{ URL::to('/'); }}/reporte">
-                                <i class="fa  fa-file-text"></i> <span>Reporte</span>
+                            <a href="{{ URL::to('/'); }}/empresas">
+                                <i class="fa  fa-cogs"></i> <span>Empresas</span>
                             </a>                            
-                        </li>                        
+                        </li>                                               
                     </ul>
                 </section>
                 <!-- /.sidebar -->

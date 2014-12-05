@@ -10,17 +10,17 @@
     
 	<script>
 	$(document).ready(function() {
-		$('#usuariosTable').dataTable();				
+		$('#empresasTable').dataTable();				
 	});
 	</script>
 
 	<!-- Content Header (Page header) -->
     <section class="content-header">
-    	<h1>Administrar<small>Usuarios</small></h1>        
+    	<h1>Administrar<small>Empresas</small></h1>        
         <ol class="breadcrumb">
            	<li><a href="{{ URL::to('/'); }}/inicio"><i class="fa fa-dashboard"></i>Dashboard</a></li>
             <li>Administrar</li>
-            <li class="active">Usuarios</li>
+            <li class="active">Empresas</li>
         </ol>                
 	</section>
 	
@@ -32,7 +32,7 @@
 	    <div class="col-xs-12">    	
 	    	<div class="box box-primary">
 	    		<div class="box-header">
-	            	<i class="fa fa-users"></i>
+	            	<i class="fa fa-cogs"></i>
 	                <h3 class="box-title">&nbsp;</h3>
 	                <div class="box-tools pull-right">
 	                	<button data-widget="collapse" class="btn btn-default btn-sm"><i class="fa fa-minus"></i></button>                 
@@ -41,35 +41,30 @@
 	            	            	            
 	            <div class="box-body table-responsive">	    
 	            	
-	            	<a href="{{ URL::to('/'); }}/usuarios/crearusuario"><button class="btn btn-primary btn-lg">Crear nuevo usuario</button></a>
+	            	<a href="{{ URL::to('/'); }}/empresas/crearempresa"><button class="btn btn-primary btn-lg">Crear nuevo empresa</button></a>
 	            	<br/><br/>
 	                    	 	            		            	
-                   	<table id="usersTable" class="table table-bordered table-striped">
+                   	<table id="empresasTable" class="table table-bordered table-striped">
                     	<thead>
                         	<tr>
                         		<th>ID</th>
                             	<th>Nombre</th>                                
-                                <th>Apellidos</th>                                                                
-                                <th>Compañia</th>                                
-                                <th>Email</th>
-                                <th width="250">Operaciones</th>
+                                <th>Descripción</th>                                                                                                
+                                <th width="150">Operaciones</th>
                             </tr>
                         </thead>
                         <tbody>
                         	<?php 
-                        	if (count($users) >= 1) {
-				            	foreach ($users AS $row) {
+                        	if (count($empresas) >= 1) {
+				            	foreach ($empresas AS $row) {
 				            		?>
 				            		<tr>
-				            			<td><?php echo $row->iduser?></td>
+				            			<td><?php echo $row->idcompany?></td>
 				            			<td><?php echo $row->name?></td>				            							            			
-				            			<td><?php echo $row->lastname?></td>
-				            			<td><?php echo $row->company['name']?></td>				            			
-				            			<td><?php echo $row->email?></td>				            			
+				            			<td><?php echo $row->description?></td>				            							            		
 				            			<td align="center">
-				            				<a href='{{ URL::to('/'); }}/usuarios/editarusuario/<?php echo $row->iduser?>'><button class="btn btn-primary btn-sm">Editar</button></a>
-				            				<a href='{{ URL::to('/'); }}/usuarios/cambiarpassword/<?php echo $row->iduser?>'><button class="btn btn-primary btn-sm">Cambiar Pasword</button></a>
-				            				<a href='{{ URL::to('/'); }}/usuarios/eliminarusuario/<?php echo $row->iduser?>'><button class="btn btn-danger btn-sm">Borrar</button></a>
+				            				<a href='{{ URL::to('/'); }}/empresas/editarempresa/<?php echo $row->idcompany?>'><button class="btn btn-primary btn-sm">Editar</button></a>				            				
+				            				<a href='{{ URL::to('/'); }}/empresas/eliminarempresa/<?php echo $row->idcompany?>'><button class="btn btn-danger btn-sm">Borrar</button></a>
 				            			</td>
 				            		</tr>
 				            		<?php 

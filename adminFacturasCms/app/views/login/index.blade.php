@@ -2,7 +2,7 @@
 
 @section('content')
 		<div class="form-box" id="login-box">
-            <div class="header">Login Aldosworld CMS</div>
+            <div class="header">AdminFacturas CMS</div>
            	{{ Form::open(array('action' => 'LoginController@access')) }}            
                 <div class="body bg-gray">
                     <div class="form-group">                        
