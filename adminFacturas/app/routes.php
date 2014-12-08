@@ -19,3 +19,4 @@ Route::get('login/logout', 'LoginController@logout');
 Route::get('inicio', 'InicioController@index');
 
 Route::get('subirarchivos', 'SubirController@index');
+Route::post('subirarchivos/uploadFiles', 'SubirController@uploadFiles');

@@ -1,7 +1,7 @@
 @extends('errors')
 
 @section('content')
-	<div>{{ HTML::image('resources/images/logo.png', '', array('class' => '', 'width'=>'480', 'height'=>'140')) }}</div>
+	
 	<br>
 	Página no encontrada!
 	<br><br>

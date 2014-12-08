@@ -47,6 +47,7 @@ class UsuariosController extends BaseController {
 				$user->lastname = Input::get("lastname");
 				$user->address = Input::get("address");
 				$user->email = Input::get("email");
+				$user->password = Hash::make(Input::get("password"));
 				
 				$user->save();
 				

@@ -7,6 +7,10 @@
 	});
 	</script>
 	
+	<?php echo (isset($alert)) ? $alert : 'Aldo';?>
+	<br><br>
+	
+	
 	<table id="facturas" class="display">
     <thead>
         <tr>

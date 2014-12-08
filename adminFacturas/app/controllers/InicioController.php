@@ -7,7 +7,10 @@ class InicioController extends BaseController {
 		View::share('section', 'inicio');
 	}
 	
-	public function index() {						
-		return View::make("inicio/index");
+	public function index() {	
+		$alert = Session::get('alert');
+		$bills = Bill::All();
+		
+		return View::make("inicio/index")->with('alert', $alert)->with('bills', $bills);
 	}
 }

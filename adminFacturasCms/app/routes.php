@@ -1,5 +1,5 @@
-<?php
 
+<?php
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -28,3 +28,7 @@ Route::post('usuarios/savePassword', 'UsuariosController@savePassword');
 Route::get('usuarios/eliminarusuario/{iduser}', 'UsuariosController@eliminarusuario');
 
 Route::get('empresas', 'EmpresasController@index');
+Route::get('empresas/crearempresa', 'EmpresasController@crearempresa');
+Route::post('empresas/guardarempresa', 'EmpresasController@guardarempresa');
+Route::get('empresas/editarempresa/{idcompany}', 'EmpresasController@editarempresa');
+Route::get('empresas/eliminarempresa/{idcompany}', 'EmpresasController@eliminarempresa');

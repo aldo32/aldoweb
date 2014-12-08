@@ -144,7 +144,7 @@ else {
                         <div class="box-footer">
                         	<button class="btn btn-primary" type="submit">Guardar</button>
                         	&nbsp;&nbsp;&nbsp;&nbsp;
-                        	<a href="{{ URL::to('/'); }}/proyectos"><button type="button" class="btn btn-info">Regresar</button></a>
+                        	<a href="{{ URL::to('/'); }}/usuarios"><button type="button" class="btn btn-info">Regresar</button></a>
                         </div>  
                         
                         {{ Form::hidden('usuarioid', $usuarioid) }}                                                                     

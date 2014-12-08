@@ -41,7 +41,7 @@
 	            	            	            
 	            <div class="box-body table-responsive">	    
 	            	
-	            	<a href="{{ URL::to('/'); }}/empresas/crearempresa"><button class="btn btn-primary btn-lg">Crear nuevo empresa</button></a>
+	            	<a href="{{ URL::to('/'); }}/empresas/crearempresa"><button class="btn btn-primary btn-lg">Crear nueva empresa</button></a>
 	            	<br/><br/>
 	                    	 	            		            	
                    	<table id="empresasTable" class="table table-bordered table-striped">

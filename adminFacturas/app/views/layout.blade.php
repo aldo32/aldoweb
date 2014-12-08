@@ -16,9 +16,7 @@
         {{ HTML::style('resources/nyromodal/styles/nyroModal.css') }}                                
         {{ HTML::style('resources/css/jquery.dataTables.css') }}
         
-        {{ HTML::script('resources/js/jquery-2.1.1.min.js') }}
-        {{ HTML::script('resources/js/konami.js') }}
-        {{ HTML::script('resources/js/main.js') }}    
+        {{ HTML::script('resources/js/jquery-2.1.1.min.js') }}   
         {{ HTML::script('resources/js/jquery.dataTables.js') }}           
                 
     </head>
