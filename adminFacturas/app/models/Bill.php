@@ -8,6 +8,7 @@ class Bill extends Eloquent {
 	public static $rules = array(
 		'filepdf'=>'required|max:10000|mimes:pdf',
 		'filexml'=>'required|max:10000|mimes:xml',
+		'message'=>'',
 	);		
 	
 	/**

@@ -15,7 +15,7 @@
                 <div class="footer">                                                               
                     <button type="submit" class="btn bg-olive btn-block">Entrar</button>  
                     
-                    <p>{{ link_to('login/restorepassword', "Perdi mi contraseña", $attributes = array(), $secure = null); }}</p>
+                    <!-- <p>{{ link_to('login/restorepassword', "Perdi mi contraseña", $attributes = array(), $secure = null); }}</p>  -->
                     <br/>                    
                     <?php                                                            
                     foreach ($errors->all() as $message) {

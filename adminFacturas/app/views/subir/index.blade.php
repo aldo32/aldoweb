@@ -25,6 +25,14 @@
 				<tr><td colspan="2"><?php echo ($errors->has('filexml')) ? "<label for='inputError' class='control-label' style='color: orange'><i class='fa fa-times-circle-o'></i> ".$errors->first('filexml')."</label>" : "";  ?></td></tr>
 				
 				<tr><td>&nbsp;</td></tr>
+				
+				<tr>
+					<td>Mensaje:</td>									
+				</tr>
+				<tr><td colspan="2"><textarea rows="5" cols="50" name="message"></textarea></td></tr>
+				<tr><td colspan="2"><?php echo ($errors->has('message')) ? "<label for='inputError' class='control-label' style='color: orange'><i class='fa fa-times-circle-o'></i> ".$errors->first('message')."</label>" : "";  ?></td></tr>
+				
+				<tr><td>&nbsp;</td></tr>
 				<tr><td>&nbsp;</td></tr>
 				
 				<tr><td colspan="2"><input type="submit" class="button" value="Enviar" /></td></tr>

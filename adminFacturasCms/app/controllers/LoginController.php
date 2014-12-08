@@ -7,7 +7,7 @@ class LoginController extends BaseController {
 		
 	}
 	
-	public function index() {					
+	public function index() {						
 		if (Auth::check()) { return Redirect::to('inicio'); }		
 		return View::make('login/index');
 	}
@@ -22,11 +22,12 @@ class LoginController extends BaseController {
 		else{
 			$userdata = array(
 					'email' 	=> Input::get('email'),
-					'password' 	=> Input::get('password')
+					'password' 	=> Input::get('password'),				
+					'idrol' => '1',
 			);
-				
-			if (Auth::attempt($userdata)) {
-				return Redirect::to('inicio');
+										
+			if (Auth::attempt($userdata)) {				
+				return Redirect::intended('inicio');
 			}
 			else {
 				return View::make('login/index')->with('errorAccess', 'Nombre de usuario o contraseña incorrectos')->with('Input', Input::all());

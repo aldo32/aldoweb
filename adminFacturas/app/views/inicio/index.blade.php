@@ -9,24 +9,36 @@
 	
 	<?php echo (isset($alert)) ? $alert : 'Aldo';?>
 	<br><br>
-	
-	
+		
 	<table id="facturas" class="display">
     <thead>
         <tr>
-            <th>Column 1</th>
-            <th>Column 2</th>
+            <th>URL PDF</th>
+            <th>URL XML</th>
+            <th>FECHA</th>
+            <th>OPERACIONES</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>Row 1 Data 1</td>
-            <td>Row 1 Data 2</td>
-        </tr>
-        <tr>
-            <td>Row 2 Data 1</td>
-            <td>Row 2 Data 2</td>
-        </tr>
+        <?php 
+		if (count($bills) >= 1) {
+			foreach ($bills AS $row) {
+				?>
+				<tr>
+					<td><a target="_blank" href="<?php echo app_path()."../".$row->urlpdf?>">Ver PDF</a></td>
+					<td><a target="_blank" href="<?php echo app_path()."../".$row->urlxml?>">Ver XML</a></td>					
+					<td><?php echo $row->created_at?></td>
+					<td>
+						<a href="{{ URL::to('/'); }}/inicio/eliminarFactura/<?php echo $row->idbill?>">[X] Eliminar</a>
+					</td>
+				</tr>
+				<?php
+			}
+		}
+		else {
+			?><tr><td colspan="5">No hay registros</td></tr><?php
+		} 
+		?>
     </tbody>
 </table>
 @stop

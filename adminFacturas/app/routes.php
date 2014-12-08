@@ -17,6 +17,7 @@ Route::post('login/access', 'LoginController@access');
 Route::get('login/logout', 'LoginController@logout');
 
 Route::get('inicio', 'InicioController@index');
+Route::get('inicio/eliminarFactura/{idbill}', 'InicioController@eliminarFactura');
 
 Route::get('subirarchivos', 'SubirController@index');
 Route::post('subirarchivos/uploadFiles', 'SubirController@uploadFiles');
