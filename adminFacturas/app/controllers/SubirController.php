@@ -22,13 +22,13 @@ class SubirController extends BaseController {
 		else {
 			if (Input::hasFile('filepdf') && Input::hasFile('filexml')) {
 				$filepdf = Input::file('filepdf');
-				$locationpdf = "../../uploadsAdminFacturas/pdf";
+				$locationpdf = "uploads/pdf";
 				$filenamepdf = $filepdf->getClientOriginalName();
 				$extensionpdf =$filepdf->getClientOriginalExtension();
 				$filenamepdf = uniqid("file_").".".$extensionpdf;
 				
 				$filexml = Input::file('filexml');
-				$locationxml = "../../uploadsAdminFacturas/xml";
+				$locationxml = "uploads/xml";
 				$filenamexml = $filexml->getClientOriginalName();
 				$extensionxml =$filexml->getClientOriginalExtension();
 				$filenamexml = uniqid("file_").".".$extensionxml;

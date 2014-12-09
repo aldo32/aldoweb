@@ -26,7 +26,7 @@ class Company extends Eloquent {
 	 * Relationships
 	 */		
 	public function user() {
-		return $this->belongsTo('User', 'iduser');
+		return $this->hasMany('User', 'iduser');
 	}
 
 }

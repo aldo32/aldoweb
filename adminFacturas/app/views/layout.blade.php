@@ -32,7 +32,7 @@
 		
 		<div id="page-wrap" class="clearfix">								 
 			<div class="fontBold">Hola: <?php echo $infoUser->name." ".$infoUser->lastname?></div>
-			<div class="fontBold">Compañia: <?php echo Auth::user()->company->name; ?></div>
+			<div class="fontBold">Compañia: <?php echo $companyName->name; ?></div>
 			<br><br>
 			 
     		@yield('content')

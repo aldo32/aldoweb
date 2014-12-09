@@ -32,3 +32,7 @@ Route::get('empresas/crearempresa', 'EmpresasController@crearempresa');
 Route::post('empresas/guardarempresa', 'EmpresasController@guardarempresa');
 Route::get('empresas/editarempresa/{idcompany}', 'EmpresasController@editarempresa');
 Route::get('empresas/eliminarempresa/{idcompany}', 'EmpresasController@eliminarempresa');
+
+Route::get('facturas', 'FacturasController@index');
+Route::get('facturas/eliminarFactura/{idbill}', 'FacturasController@eliminarFactura');
+Route::get('facturas/getDownload/{idbill}/{type}', 'FacturasController@getDownload');

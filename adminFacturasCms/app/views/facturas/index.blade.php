@@ -10,17 +10,17 @@
     
 	<script>
 	$(document).ready(function() {
-		$('#usuariosTable').dataTable();				
+		$('#billsTable').dataTable();				
 	});
 	</script>
 
 	<!-- Content Header (Page header) -->
     <section class="content-header">
-    	<h1>Administrar<small>Usuarios</small></h1>        
+    	<h1>Facturas<small>Proveedores</small></h1>        
         <ol class="breadcrumb">
            	<li><a href="{{ URL::to('/'); }}/inicio"><i class="fa fa-dashboard"></i>Dashboard</a></li>
-            <li>Administrar</li>
-            <li class="active">Usuarios</li>
+            <li>Facturas</li>
+            <li class="active">Proveedores</li>
         </ol>                
 	</section>
 	
@@ -32,7 +32,7 @@
 	    <div class="col-xs-12">    	
 	    	<div class="box box-primary">
 	    		<div class="box-header">
-	            	<i class="fa fa-users"></i>
+	            	<i class="fa fa-file"></i>
 	                <h3 class="box-title">&nbsp;</h3>
 	                <div class="box-tools pull-right">
 	                	<button data-widget="collapse" class="btn btn-default btn-sm"><i class="fa fa-minus"></i></button>                 
@@ -40,36 +40,37 @@
 	            </div>	            	            
 	            	            	            
 	            <div class="box-body table-responsive">	    
-	            	
-	            	<a href="{{ URL::to('/'); }}/usuarios/crearusuario"><button class="btn btn-primary btn-lg">Crear nuevo usuario</button></a>
-	            	<br/><br/>
-	                    	 	            		            	
-                   	<table id="usersTable" class="table table-bordered table-striped">
+	            		            		                    	 	            		            	
+                   	<table id="empresasTable" class="table table-bordered table-striped">
                     	<thead>
                         	<tr>
                         		<th>ID</th>
-                            	<th>Nombre</th>                                
-                                <th>Apellidos</th>                                                                
-                                <th>Empresa</th>                                
+                            	<th>Empresa</th>                                
+                                <th>Nombre</th>                                                                                                
                                 <th>Email</th>
-                                <th width="250">Operaciones</th>
+                                <th>PDF</th>
+                                <th>XML</th>
+                                <th>Fecha</th>
+                                <th>Mensaje</th>
+                                <th width="150">Operaciones</th>
                             </tr>
                         </thead>
                         <tbody>
                         	<?php 
-                        	if (count($users) >= 1) {
-				            	foreach ($users AS $row) {
+                        	if (count($bills) >= 1) {
+				            	foreach ($bills AS $row) {
 				            		?>
 				            		<tr>
-				            			<td><?php echo $row->iduser?></td>
-				            			<td><?php echo $row->name?></td>				            							            			
-				            			<td><?php echo $row->lastname?></td>
-				            			<td><?php echo $row->company['name']?></td>				            			
-				            			<td><?php echo $row->email?></td>				            			
-				            			<td align="center">
-				            				<a href='{{ URL::to('/'); }}/usuarios/editarusuario/<?php echo $row->iduser?>'><button class="btn btn-primary btn-sm">Editar</button></a>
-				            				<a href='{{ URL::to('/'); }}/usuarios/cambiarpassword/<?php echo $row->iduser?>'><button class="btn btn-primary btn-sm">Cambiar Pasword</button></a>
-				            				<a href='{{ URL::to('/'); }}/usuarios/eliminarusuario/<?php echo $row->iduser?>'><button class="btn btn-danger btn-sm">Borrar</button></a>
+				            			<td><?php echo $row->idbill?></td>
+				            			<td><?php echo $row->company?></td>
+				            			<td><?php echo $row->username?></td>				            							            			
+				            			<td><?php echo $row->email?></td>				            							            		
+				            			<td><a href="{{ URL::to('/'); }}/facturas/getDownload/<?php echo $row->idbill?>/pdf" target="_blank">Descargar PDF</a></td>
+				            			<td><a href="{{ URL::to('/'); }}/facturas/getDownload/<?php echo $row->idbill?>/xml" target="_blank">Descargar XML</a></td>
+				            			<td><?php echo $row->created_at?></td>
+				            			<td><?php echo $row->message?></td>
+				            			<td align="center">				            								            			
+				            				<a href='{{ URL::to('/'); }}/facturas/eliminarFactura/<?php echo $row->idbill?>'><button class="btn btn-danger btn-sm">Borrar</button></a>
 				            			</td>
 				            		</tr>
 				            		<?php 

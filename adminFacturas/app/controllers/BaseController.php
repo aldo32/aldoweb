@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 class BaseController extends Controller {
 	
 	public function __construct() {
@@ -8,8 +9,11 @@ class BaseController extends Controller {
 	
 		if (Auth::user()) {
 			$infoUser = json_decode(Auth::user());
+			$companyName = Company::find(Auth::user()->idcompany);
 			View::share('infoUser', $infoUser);
-		}
+			View::share('companyName', $companyName);
+								
+		}						
 	}
 
 	/**

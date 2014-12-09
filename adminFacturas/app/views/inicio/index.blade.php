@@ -25,8 +25,8 @@
 			foreach ($bills AS $row) {
 				?>
 				<tr>
-					<td><a target="_blank" href="<?php echo app_path()."../".$row->urlpdf?>">Ver PDF</a></td>
-					<td><a target="_blank" href="<?php echo app_path()."../".$row->urlxml?>">Ver XML</a></td>					
+					<td><a target="_blank" href="<?php echo asset($row->urlpdf)?>">Ver PDF</a></td>
+					<td><a target="_blank" href="<?php echo asset($row->urlxml)?>">Ver XML</a></td>					
 					<td><?php echo $row->created_at?></td>
 					<td>
 						<a href="{{ URL::to('/'); }}/inicio/eliminarFactura/<?php echo $row->idbill?>">[X] Eliminar</a>

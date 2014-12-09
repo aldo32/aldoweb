@@ -29,7 +29,7 @@ class InicioController extends BaseController {
 				    b.iduser = u.iduser AND
 				    b.idcompany = c.idcompany AND
 				    b.idrol = r.idrol AND
-					b.deleted_at IS NOT NULL AND
+					b.deleted_at IS NULL AND
 				    b.iduser = ?
 				    ORDER BY b.created_at
     	"; 
