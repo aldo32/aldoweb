@@ -1,5 +1,4 @@
-#Mon Sep 01 10:45:43 CDT 2014
 eclipse.preferences.version=1
-include_path=0;/iscaldo
+include_path=0;/web.laravel.iscaldo
 phpVersion=php5.4
 use_asp_tags_as_php=false
