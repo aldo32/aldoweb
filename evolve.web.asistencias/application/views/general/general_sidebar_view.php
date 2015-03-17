@@ -41,7 +41,12 @@
                             <a href="<?php echo base_url("adminegu")?>">
                                 <i class="fa fa-gears"></i> <span>Etapas, grupos y usuarios</span>                                
                             </a>
-                        </li>                        
+                        </li>
+						<li>
+                            <a href="<?php echo base_url("horarios")?>">
+                                <i class="fa fa-clock-o"></i> <span>Horarios</span>                                
+                            </a>
+                        </li>		
                     </ul>
                 </section>
                 <!-- /.sidebar -->
