@@ -45,8 +45,18 @@
 						<li>
                             <a href="<?php echo base_url("horarios")?>">
                                 <i class="fa fa-clock-o"></i> <span>Horarios</span>                                
+                            </a>                            
+                        </li>
+                        <li>
+                            <a href="<?php echo base_url("horariosreglas")?>">
+                                <i class="fa fa-edit"></i> <span>Horarios reglas</span>                                
                             </a>
-                        </li>		
+                        </li>	
+                        <li>
+                            <a href="<?php echo base_url("permisos")?>">
+                                <i class="fa fa-tag"></i> <span>Permisos para faltas</span>                                
+                            </a>
+                        </li>                        
                     </ul>
                 </section>
                 <!-- /.sidebar -->
