@@ -15,7 +15,7 @@
 
 				$.ajax({													
 			        url: "<?php echo base_url()?>adminegu/showUsersByGroup",        
-			        data: "idGrupo="+idGrupo+"&idEtapa=<?php echo $etapa->id?>",		             
+			        data: "idGrupo="+idGrupo+"&idEtapa=<?php echo (isset($etapa->id)) ? $etapa->id : "0" ?>",		             
 			        dataType: "html",		                	                	      
 			        success: function(datos) {  	        	
 			        	$('#content-users-group').fadeOut('fast', function() { $('#content-users-group').html(datos).fadeIn('fast'); });	        	
@@ -27,19 +27,63 @@
 			$("#addItems").click(function(e) {
 				e.preventDefault();
 				usuarios = $("#usuarios").val();
-				idGrupo = $("#grupos").val();
-				idEtapa=<?php echo $etapa->id?>;
+				idGrupo = $("#grupos").val();				
+				idEtapa=<?php echo (isset($etapa->id)) ? $etapa->id : "0" ?>;				
+				
+				if (usuarios != null && idGrupo != "-1") {										
+					$.ajax({										
+				        url: "<?php echo base_url()?>adminegu/addUsersToGroupStage",        
+				        data: "usuarios="+usuarios+"&idEtapa="+idEtapa+"&idGrupo="+idGrupo,     				        
+				        dataType: "json",        	                	       
+				        success: function(datos){
+				        	var combo = $("<select></select>").attr("id", "usuariosGrupo").attr("class", "form-control").attr("style", "width: 250px; height: 280px;").attr("multiple", "multiple");
+				        	
+				        	for (i=0; i<datos.registers.length; i++) {
+					        	combo.append("<option value='"+datos.registers[i].idUsuario+"'>"+datos.registers[i].nombreUsuario+"</option>");					        	
+					        }    		
 
-				$.ajax({													
-			        url: "<?php echo base_url()?>adminegu/addUsersToGroupStage",        
-			        data: "usuarios="+usuarios+"&idEtapa="+idEtapa+"&idGrupo="+idGrupo,		             
-			        dataType: "html",		                	                	      
-			        success: function(datos) {  	        	
-			        	$('#content-users-group').fadeOut('fast', function() { $('#content-users-group').html(datos).fadeIn('fast'); });	        	
-			        },
-			        type: "POST"
-				});
-			});				
+				        	$('#content-users-group').html(combo);	
+
+				        	//Errors
+				        	$("#errorMessages").append(datos.errors);				        				        				         	        	       						        			        	    																									
+				        },        
+				        type: "POST"
+					});										
+				}		
+				else {
+					alert("No se ha seleccionado ningun usuario para agregar o el grupo no es valido");
+				}						
+			});	
+
+			$("#removeItems").click(function(e) {
+				e.preventDefault();
+				usuariosGrupo = $("#usuariosGrupo").val();
+				idGrupo = $("#grupos").val();
+				idEtapa=<?php echo (isset($etapa->id)) ? $etapa->id : "0" ?>;
+
+				if (usuariosGrupo != null) {										
+					$.ajax({										
+				        url: "<?php echo base_url()?>adminegu/deleteUsersOfGroupStage",        
+				        data: "usuariosGrupo="+usuariosGrupo+"&idEtapa="+idEtapa+"&idGrupo="+idGrupo,     				        
+				        dataType: "json",        	                	       
+				        success: function(datos){				        	
+				        	var combo = $("<select></select>").attr("id", "usuariosGrupo").attr("class", "form-control").attr("style", "width: 250px; height: 280px;").attr("multiple", "multiple");
+				        	for (i=0; i<datos.registers.length; i++) {
+					        	combo.append("<option value='"+datos.registers[i].idUsuario+"'>"+datos.registers[i].nombreUsuario+"</option>");					        	
+					        }    		
+
+				        	$('#content-users-group').html(combo);	
+
+				        	//Errors
+				        	$("#errorMessages").append(datos.errors);				        				        				         	        	       						        			        	    																									
+				        },        
+				        type: "POST"
+					});										
+				}		
+				else {
+					alert("No se ha seleccionado ningun usuario para eliminar del grupo");
+				}
+			});			
 		});	
 		</script>
         
@@ -72,6 +116,7 @@
                 <!-- Main content -->
                 <section class="content">
                 	<!-- Alerts -->
+                	<div id="errorMessages"></div>
 					<?php echo (isset($alert)) ? $alert : '';?>
                 
 					<!-- Capa principal -->
@@ -147,7 +192,7 @@
 							            				<?php reset($grupos); echo form_dropdown("grupos", $grupos, key($grupos), "id='grupos'")?>
 							            			</div>
 							            			<div id="content-users-group">
-							            				<select style="width: 250px; height: 280px;" class="form-control" id="usuarios" multiple >
+							            				<select style="width: 250px; height: 280px;" class="form-control" id="usuariosGrupo" multiple >
 							            					<?php 
 							            					if (isset($usuariosPorGrupo)) {
 							            						foreach ($usuariosPorGrupo AS $row) {
@@ -156,7 +201,7 @@
 								            						<?php
 							            						}							            						
 							            					}
-							            					else { echo "<option value='-1'>No hay grupos</option>"; }
+							            					else { echo "<option value='-1'>No hay usuarios</option>"; }
 							            					?>
 							            				</select>
 							            			</div>

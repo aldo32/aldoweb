@@ -63,7 +63,7 @@
 				            </div>	            	            	            	      	            	   
 				            	            	            
 				            <div class="box-body table-responsive">
-				            	<a href="<?php echo base_url("horariosreglas/nuevo")?>"><button class="btn-sm btn-primary">Nueva regla de horario</button></a>
+				            	<a href="<?php echo base_url("horariosreglas/nuevo")?>"><button class="btn btn-sm btn-primary">Nueva regla de horario</button></a>
 	           					<br/><br/>				           		
 				            	            	 	            		            	
 			                   	<table id="reglasTable" class="table table-bordered table-striped">
@@ -89,8 +89,8 @@
 			                        				<td><?php echo $row->horaFin?></td>
 			                        				<td><?php echo $row->multa?></td>			                        				
 			                        				<td align="center" width="250">
-							            				<a href="<?php echo base_url("horariosreglas/editar/".$row->id)?>"><button class="btn-sm btn-primary">Editar</button>&nbsp;&nbsp;										            					            				
-							            				<a href="#" onclick="confirmDelete(<?php echo $row->id?>)"><button class="btn-sm btn-danger">Eliminar</button></a>
+							            				<a href="<?php echo base_url("horariosreglas/editar/".$row->id)?>"><button class="btn btn-sm btn-primary">Editar</button>&nbsp;&nbsp;										            					            				
+							            				<a href="#" onclick="confirmDelete(<?php echo $row->id?>)"><button class="btn btn-sm btn-danger">Eliminar</button></a>
 							            			</td>
 			                        			</tr>
 			                        			<?php 

@@ -54,10 +54,17 @@ class adminegu extends CI_Controller {
 		$usuarios = $query->result();
 		$grupos = $this->grupos_model->getComboGruposByIdEtapa($idEtapa);
 			
-		reset($grupos);
-		$idGrupo = key($grupos);
+		if (isset($grupos)) {		
+			reset($grupos);
+			$idGrupo = key($grupos);
 			
-		$usuariosPorGrupo = $this->usuarios_model->usuariosPorGrupo($idGrupo, $idEtapa);
+			$usuariosPorGrupo = $this->usuarios_model->usuariosPorGrupo($idGrupo, $idEtapa);
+		}
+		else {
+			$grupos = array("-1"=>"Na hay grupos para esta etapa");
+			$usuariosPorGrupo=null;
+		}
+			
 
 		$query = $this->db->get_where("etapas", array("id"=>$idEtapa));
 		$etapa = $query->row();				
@@ -76,7 +83,7 @@ class adminegu extends CI_Controller {
 		$usuariosPorGrupo = $this->usuarios_model->usuariosPorGrupo($idGrupo, $idEtapa);
 		
 		?>
-		<select style="width: 250px; height: 280px;" class="form-control" id="usuarios" multiple >
+		<select style="width: 250px; height: 280px;" class="form-control" id="usuariosGrupo" multiple >
         	<?php 
             if (isset($usuariosPorGrupo)) {
             	foreach ($usuariosPorGrupo AS $row) {
@@ -85,7 +92,7 @@ class adminegu extends CI_Controller {
             		<?php
             	}							            						
             }
-            else { echo "<option value='-1'>No hay grupos</option>"; }
+            else { echo "<option value='-1'>No hay usuarios</option>"; }
             ?>
         </select>
 		<?php 
@@ -101,7 +108,60 @@ class adminegu extends CI_Controller {
 		for ($i=0; $i<sizeof($usuarios); $i++) {
 			/*check if the user is in the table*/
 			$res = $this->usuarios_model->chekUserInGruposEtapasUsuarios($idEtapa, $idGrupo, $usuarios[$i]);
+			
+			if (!$res) {
+				$register["idEtapa"] = $idEtapa;
+				$register["idGrupo"] = $idGrupo;
+				$register["idUsuario"] = $usuarios[$i];
+				
+				$this->db->insert("gruposetapasusuarios", $register);
+			}
+			else {
+				$name=$res->nombreUsuario;								
+				array_push($errors, $name); 
+			}						
 		}
+		
+		if (sizeof($errors) > 0) {
+			$alert1='<div class="alert alert-danger danger-dismissable"> <i class="fa fa-ban"></i> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button> El usuario <strong>';
+			$alert2=' </strong> ya existe en esta etapa y grupo </div>';
+			$tmp="";
+			
+			for ($i=0; $i<sizeof($errors); $i++) {
+				$tmp=$tmp.$errors[$i].", ";
+			}
+			
+			$errors=$alert1." ".$tmp." ".$alert2;
+		}
+		else { $errors == ""; }
+		
+		/*Send registers in json for create the select with the new registers and send errors too*/
+		$usuariosPorGrupo = $this->usuarios_model->usuariosPorGrupo($idGrupo, $idEtapa);	
+
+		if (!isset($usuariosPorGrupo)) {
+			$usuariosPorGrupo = array(array("idUsuario"=>"-1", "nombreUsuario"=>"No hay usuarios"));
+		}
+		
+		echo json_encode(array("registers"=>$usuariosPorGrupo, "errors"=>$errors));		
+	}
+	
+	function deleteUsersOfGroupStage() {
+		$idGrupo = $this->input->post("idGrupo");
+		$idEtapa = $this->input->post("idEtapa");
+		$usuariosGrupo = $this->input->post("usuariosGrupo");
+		$usuariosGrupo = explode(",", $usuariosGrupo);
+		
+		for ($i=0; $i<sizeof($usuariosGrupo); $i++) {
+			$this->db->delete('gruposetapasusuarios', array('idEtapa' => $idEtapa, "idGrupo"=>$idGrupo, "idUsuario"=>$usuariosGrupo[$i]));
+		}
+		
+		$usuariosPorGrupo = $this->usuarios_model->usuariosPorGrupo($idGrupo, $idEtapa);
+		
+		if (!isset($usuariosPorGrupo)) {
+			$usuariosPorGrupo = array(array("idUsuario"=>"-1", "nombreUsuario"=>"No hay usuarios"));
+		} 
+		
+		echo json_encode(array("registers"=>$usuariosPorGrupo, "errors"=>""));
 	}
 	
 	function general($session) {

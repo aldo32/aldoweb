@@ -66,7 +66,7 @@
 				            </div>	            	            	            	      	            	   
 				            	            	            
 				            <div class="box-body table-responsive">
-				            	<a href="<?php echo base_url("usuarios/nuevo")?>"><button class="btn-sm btn-primary">Nuevo usuario</button></a>
+				            	<a href="<?php echo base_url("usuarios/nuevo")?>"><button class="btn btn-sm btn-primary">Nuevo usuario</button></a>
 	           					<br/><br/>				           		
 				            	            	 	            		            	
 			                   	<table id="usersTable" class="table table-bordered table-striped">
@@ -74,9 +74,9 @@
 			                        	<tr>
 			                        		<th>ID</th>
 			                            	<th>Nombre</th>                                
-			                                <th>Puesto</th>			                                
+			                                <th>Puesto</th>			                                			                                
 			                                <th>Sexo</th>
-			                                <th>Complección</th>
+			                                <th>Complexión</th>
 			                                <th>Horario</th>
 			                                <th>Usuario</th>
 			                                <th>Activo</th>                                                                
@@ -91,16 +91,26 @@
 			                        			<tr>
 			                        				<td><?php echo $row->id?></td>
 			                        				<td><?php echo $row->nombre?></td>
-			                        				<td><?php echo $row->puesto?></td>			                        				
+			                        				<td><?php echo $row->puesto?></td>
 			                        				<td><?php echo $row->sexo?></td>
-			                        				<td><?php echo $row->complexion?></td>
+			                        				<td><?php echo $row->complexion?></td>			                        							                        				
 			                        				<td><?php echo $row->horario?></td>
 			                        				<td><?php echo $row->usuario?></td>
 			                        				<td><?php echo ($row->activo == 1) ? "Si" : "No";?></td>
-			                        				<td align="center" width="250">
-							            				<a href="<?php echo base_url("usuarios/editar/".$row->id)?>"><button class="btn-sm btn-primary">Editar</button>&nbsp;&nbsp;			
-							            				<a href="<?php echo base_url("usuarios/cambiarPassword/".$row->id)?>"><button class="btn-sm btn-primary">contraseña</button></a>&nbsp;&nbsp;	            				
-							            				<a href="#" onclick="confirmDelete(<?php echo $row->id?>)"><button class="btn-sm btn-danger">Eliminar</button></a>
+			                        				<td align="center">
+			                        					<div class="input-group input-group-sm">
+					                                        <div class="input-group-btn">
+					                                            <button data-toggle="dropdown" class="btn btn-warning dropdown-toggle" type="button">Operaciones <span class="fa fa-caret-down"></span></button>
+					                                            <ul class="dropdown-menu">
+					                                                <li><a href="<?php echo base_url("usuarios/editar/".$row->id)?>">Editar</a></li>
+					                                                <li><a href="<?php echo base_url("usuarios/cambiarPassword/".$row->id)?>">Cambiar contraseña</a></li>
+					                                                <li><a href="<?php echo base_url("usuarios/agregarPermiso/".$row->id)?>" >Agregar permisos</a></li>
+					                                                <li class="divider"></li>
+					                                                <li><a href="#" onclick="confirmDelete(<?php echo $row->id?>)">Eliminar</a></li>
+					                                            </ul>
+					                                        </div><!-- /btn-group -->
+					                                        <input type="text" class="form-control" style="width: 10px;">
+					                                    </div>					                                    							            				
 							            			</td>
 			                        			</tr>
 			                        			<?php 

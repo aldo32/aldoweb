@@ -63,10 +63,10 @@
 				            </div>	            	            	            	      	            	   
 				            	            	            
 				            <div class="box-body table-responsive">
-				            	<a href="<?php echo base_url("horarios/nuevo")?>"><button class="btn-sm btn-primary">Nuevo horario</button></a>
+				            	<a href="<?php echo base_url("horarios/nuevo")?>"><button class="btn btn-sm btn-primary">Nuevo horario</button></a>
 	           					<br/><br/>				           		
 				            	            	 	            		            	
-			                   	<table id="usersTable" class="table table-bordered table-striped">
+			                   	<table id="horariosTable" class="table table-bordered table-striped">
 			                    	<thead>
 			                        	<tr>
 			                        		<th>ID</th>
@@ -83,8 +83,8 @@
 			                        				<td><?php echo $row->id?></td>
 			                        				<td><?php echo $row->nombre?></td>			                        				
 			                        				<td align="center" width="250">
-							            				<a href="<?php echo base_url("horarios/editar/".$row->id)?>"><button class="btn-sm btn-primary">Editar</button>&nbsp;&nbsp;										            					            				
-							            				<a href="#" onclick="confirmDelete(<?php echo $row->id?>)"><button class="btn-sm btn-danger">Eliminar</button></a>
+							            				<a href="<?php echo base_url("horarios/editar/".$row->id)?>"><button class="btn btn-sm btn-primary">Editar</button>&nbsp;&nbsp;										            					            				
+							            				<a href="#" onclick="confirmDelete(<?php echo $row->id?>)"><button class="btn btn-sm btn-danger">Eliminar</button></a>
 							            			</td>
 			                        			</tr>
 			                        			<?php 

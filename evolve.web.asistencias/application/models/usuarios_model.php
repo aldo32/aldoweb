@@ -64,6 +64,46 @@ class usuarios_model extends CI_Model {
 	}
 	
 	function chekUserInGruposEtapasUsuarios($idEtapa, $idGrupo, $idUsuario) {
-		$sql="";
+		$sql="SELECT *, (SELECT nombre from usuarios WHERE id=gruposetapasusuarios.idUsuario) AS nombreUsuario FROM gruposetapasusuarios WHERE idEtapa=? AND idGrupo=? AND idUsuario=?";
+		$q=$this->db->query($sql, array($idEtapa, $idGrupo, $idUsuario));
+		
+		return ($q->num_rows() > 0) ? $q->row() : false;
+	}
+	
+	function getPermisionsUser($idUsusario) {
+		$sql="SELECT *, (SELECT nombre FROM permisos WHERE idPermiso=permisosusuarios.idPermiso) AS nombrePermiso FROM permisosusuarios ORDER BY permisosusuarios.fecha ASC";
+		$q=$this->db->query($sql);
+			
+		if ($q->num_rows() > 0)
+		{
+			foreach ($q->result() AS $row)
+				$data[]=$row;
+		
+			$q->free_result();
+			return $data;
+		}
+	}
+	
+	function getComboPermisos() {
+		$sql="SELECT * FROM permisos";
+		$q=$this->db->query($sql);
+			
+		if ($q->num_rows() > 0)
+		{
+			$options[-1]="Seleccione un permiso";
+		
+			foreach ($q->result() AS $row)
+				$options[$row->id]=$row->nombre;
+		
+			$q->free_result();
+			return $options;
+		}
+	}
+	
+	function checkPermisoUsuario($id) {
+		$sql="SELECT * FROM permisosusuarios WHERE id=?";
+		$q=$this->db->query($sql, array($id));
+		
+		return ($q->num_rows() > 0) ? $q->row() : false;
 	}
 }	

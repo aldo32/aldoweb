@@ -34,7 +34,7 @@
                         </li>
                         <li>
                             <a href="<?php echo base_url("grupos")?>">
-                                <i class="fa fa-bars"></i> <span>grupos</span>                                
+                                <i class="fa fa-bars"></i> <span>Grupos</span>                                
                             </a>
                         </li>
                         <li>
@@ -54,9 +54,9 @@
                         </li>	
                         <li>
                             <a href="<?php echo base_url("permisos")?>">
-                                <i class="fa fa-tag"></i> <span>Permisos para faltas</span>                                
+                                <i class="fa fa-tag"></i> <span>Catalogo de permisos</span>                                
                             </a>
-                        </li>                        
+                        </li>                                             
                     </ul>
                 </section>
                 <!-- /.sidebar -->

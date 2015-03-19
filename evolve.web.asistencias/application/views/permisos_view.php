@@ -63,7 +63,7 @@
 				            </div>	            	            	            	      	            	   
 				            	            	            
 				            <div class="box-body table-responsive">
-				            	<a href="<?php echo base_url("permisos/nuevo")?>"><button class="btn-sm btn-primary">Nuevo permiso</button></a>
+				            	<a href="<?php echo base_url("permisos/nuevo")?>"><button class="btn btn-sm btn-primary">Nuevo permiso</button></a>
 	           					<br/><br/>				           		
 				            	            	 	            		            	
 			                   	<table id="permisosTable" class="table table-bordered table-striped">
@@ -85,8 +85,8 @@
 			                        				<td><?php echo $row->nombre?></td>
 			                        				<td><?php echo $row->color?></td>			                        				
 			                        				<td align="center" width="250">
-							            				<a href="<?php echo base_url("permisos/editar/".$row->id)?>"><button class="btn-sm btn-primary">Editar</button>&nbsp;&nbsp;										            					            				
-							            				<a href="#" onclick="confirmDelete(<?php echo $row->id?>)"><button class="btn-sm btn-danger">Eliminar</button></a>
+							            				<a href="<?php echo base_url("permisos/editar/".$row->id)?>"><button class="btn btn-sm btn-primary">Editar</button>&nbsp;&nbsp;										            					            				
+							            				<a href="#" onclick="confirmDelete(<?php echo $row->id?>)"><button class="btn btn-sm btn-danger">Eliminar</button></a>
 							            			</td>
 			                        			</tr>
 			                        			<?php 

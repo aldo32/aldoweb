@@ -102,6 +102,10 @@ class permisos extends CI_Controller {
 		redirect("permisos");
 	}
 	
+	function agregarPermisoUsuario() {
+		
+	}
+	
 	function general($session) {
 		$info["session"] =  $session;
 			

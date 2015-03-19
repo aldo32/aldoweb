@@ -187,6 +187,73 @@ class usuarios extends CI_Controller {
 		redirect("usuarios");
 	}
 	
+	function agregarPermiso($idUsuario) {		
+		$data = $this->general($this->sessionData["user_data"]);		
+		$data["alert"] = $this->session->flashdata('alert');
+		
+		$usuario = $this->usuarios_model->checkUser($idUsuario);			
+		
+		if (isset($usuario)) {
+			$data["usuario"] = $usuario;
+			$data["permisosUsuario"] = $this->usuarios_model->getPermisionsUser($idUsuario);
+			$this->load->view('usuarios_permisos_view', $data);
+		}
+		else {
+			$alert = '<div class="alert alert-danger danger-dismissable"> <i class="fa fa-ban"></i> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button> El usuario no existe </div>';
+			$this->session->set_flashdata('alert', $alert);
+			
+			redirect("usuarios");
+		}				
+	}
+	
+	function guardarPermiso() {
+		$idUsuario = $this->input->post("idUsuario");
+		
+		$this->form_validation->set_rules('idPermiso', '', 'valid_combo|trim');
+		$this->form_validation->set_rules('fecha', '', 'required|trim');
+		
+		$this->form_validation->set_message('required', 'Campo obligatorio');
+		$this->form_validation->set_message('valid_combo', 'Seleccione una opción');
+		
+		$data = $this->general($this->sessionData["user_data"]);
+		$data["usuario"] = $this->usuarios_model->checkUser($idUsuario);
+		$data["permisosUsuario"] = $this->usuarios_model->getPermisionsUser($idUsuario);
+		
+		if ($this->form_validation->run()==FALSE) {						
+			$this->form_validation->set_error_delimiters('', '');			
+		}
+		else {
+			$register["idPermiso"] = $this->input->post("idPermiso");
+			$register["idUsuario"] = $idUsuario;
+			$register["fecha"] = $this->input->post("fecha");
+			
+			$this->db->insert("permisosusuarios", $register);
+			
+			redirect("usuarios/agregarPermiso/".$idUsuario);
+		}
+		
+		$this->load->view('usuarios_permisos_view', $data);		
+	}
+	
+	function eliminarPermiso($id=0) {
+		$permisoUsuario = $this->usuarios_model->checkPermisoUsuario($id);
+		
+		if (isset($permisoUsuario)) {					
+			$this->db->delete('permisosusuarios', array('id' => $id));
+				
+			$alert = '<div class="alert alert-success alert-dismissable"> <i class="fa fa-check"></i> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button> Se elimino el permiso con id '.$id.'</div>';
+			$this->session->set_flashdata('alert', $alert);
+						
+			redirect("usuarios/agregarPermiso/".$permisoUsuario->idUsuario);
+		}
+		else {
+			$alert = '<div class="alert alert-danger danger-dismissable"> <i class="fa fa-ban"></i> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button> El permiso del usuario no existe </div>';
+			$this->session->set_flashdata('alert', $alert);
+			
+			redirect("usuarios");
+		}				
+	}
+	
 	function general($session) {	
 		$info["session"] =  $session;
 					
@@ -195,6 +262,7 @@ class usuarios extends CI_Controller {
 		$data["sidebar"] = $this->load->view("general/general_sidebar_view", $info, true);
 		
 		$data["horarios"] = $this->horarios_model->getComboHorario();
+		$data["comboPermisos"] = $this->usuarios_model->getComboPermisos();
 		
 		return $data;
 	}
