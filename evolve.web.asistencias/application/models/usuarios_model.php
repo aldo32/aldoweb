@@ -32,4 +32,38 @@ class usuarios_model extends CI_Model {
 		
 		return ($q->num_rows() > 0) ? $q->row() : false;
 	}
+	
+	function usuariosPorGrupo($idGrupo, $idEtapa) {
+		$sql="
+			SELECT
+			    u.id AS idUsuario,
+				u.nombre AS nombreUsuario,
+				egu.idGrupo AS idGrupo,
+				g.nombre AS nombreGrupo
+			FROM
+				usuarios u,
+				grupos g,
+				gruposetapasusuarios egu
+			WHERE
+				u.id = egu.idUsuario AND
+				g.id = egu.idGrupo AND
+				egu.idGrupo = ? AND
+				egu.idEtapa = ?
+				ORDER BY u.nombre		
+		";
+		$q=$this->db->query($sql, array($idGrupo, $idEtapa));
+			
+		if ($q->num_rows() > 0)
+		{
+			foreach ($q->result() AS $row)
+				$data[]=$row;
+		
+			$q->free_result();
+			return $data;
+		}
+	}
+	
+	function chekUserInGruposEtapasUsuarios($idEtapa, $idGrupo, $idUsuario) {
+		$sql="";
+	}
 }	

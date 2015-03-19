@@ -17,6 +17,17 @@ class inicio extends CI_Controller {
 		$this->load->view('inicio_view', $data);
 	}
 	
+	function loadDataAssists() {
+		/* Obteniendo todos los registros de entradas */
+		$query = $this->db->get('entradas');
+		$entradas = $query->result();
+		
+		foreach ($entradas AS $entrada) {
+			/*obteniendo la etapa a la que pertenece cada usaurio*/
+			//$idEtapa = $this->db->get_where("etapas", array('id'=>$entrada->));
+		}
+	}
+	
 	function general($session) {	
 		$info["session"] =  $session;
 					
