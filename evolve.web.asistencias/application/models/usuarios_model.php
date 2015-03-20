@@ -106,4 +106,33 @@ class usuarios_model extends CI_Model {
 		
 		return ($q->num_rows() > 0) ? $q->row() : false;
 	}
+	
+	function getPermissionByIdUsuario($idUsuario) {
+		$sql="SELECT * FROM permisosusuarios WHERE idUsuario=? AND fecha = CURRENT_DATE";
+		$q=$this->db->query($sql, array($idUsuario));
+		
+		return ($q->num_rows() > 0) ? $q->row() : false;
+	}
+	
+	function getHorarioRegla($idHorario, $time) {
+		$sql="SELECT * FROM horariosreglas WHERE idHorario=? AND horaInicio <= ? AND horaFin >= ?;";
+		$q=$this->db->query($sql, array($idHorario, $time, $time));
+		
+		return ($q->num_rows() > 0) ? $q->row() : false;
+		
+	}
+	
+	function genEntradasByCurrentDay() {
+		$sql="SELECT * FROM entrada WHERE DATE(Time) = '2014-03-18'";
+		$q=$this->db->query($sql);
+			
+		if ($q->num_rows() > 0)
+		{
+			foreach ($q->result() AS $row)
+				$data[]=$row;
+		
+			$q->free_result();
+			return $data;
+		}		
+	}
 }	

@@ -20,21 +20,37 @@ class inicio extends CI_Controller {
 		$this->load->view('inicio_view', $data);
 	}
 	
-	function loadDataAssists() {
-		/* get all registers from entradas */
-		$query = $this->db->get('entrada');
-		$entradas = $query->result(); 
+	//Type 0: only current day		1: All data
+	function loadDataAssists($type=0) {
+		if ($type == 1) {
+			/*delete all registers form table llegadas*/
+			$this->db->truncate("llegadas");
+			
+			/* get all registers from entradas */
+			$query = $this->db->get('entrada');
+			$entradas = $query->result();
+		}
+		else {
+			/*get registers from entradas only current Day*/
+			$entradas = $this->usuarios_model->genEntradasByCurrentDay();
+		}
+		
 		
 		if (isset($entradas)) {
 			foreach ($entradas AS $entrada) {
 				/*get info from user*/
 				$usuario = $this->usuarios_model->checkUser($entrada->No);
 				/*get info from horario*/
-				$horario = $this->horarios_model->checkHorario($usuario->idHorario);				
+				$horario = $this->horarios_model->checkHorario($usuario->idHorario);						
+
+				/*get hour of checkin*/
+				$tmp = explode(" ", $horario->nombre);				
+				$tmp = strtotime($tmp[1]);
+				$horaEntrada = date("H:i:s", $tmp); 
 				
 				/*get stages and groups which the user belong */						
 				$query = $this->db->get_where("gruposetapasusuarios", array('idUsuario'=>$entrada->No));
-				$geus = $query->result();
+				$geus = $query->result();								
 				
 				foreach ($geus AS $geu) {
 					$register["idEtapa"] = $geu->idEtapa;
@@ -44,16 +60,40 @@ class inicio extends CI_Controller {
 					
 					/*get time from datetime*/
 					$time = strtotime($entrada->Time);
-					$time = date("H:i", $time);
-					$register["hrLleagada"] = $time;
+					$time = date("H:i:s", $time);
+					$register["hrLlegada"] = $time;
+					
+					/*check if the user have a permission*/					
+					$permisoUsuario = $this->usuarios_model->getPermissionByIdUsuario($geu->idUsuario);
+					if (isset($permisoUsuario->id)) { $register["permiso"] = $permisoUsuario->id; } else { $register["permiso"]=0; }													
+														
+					/*Calculating the fin, this, if the user not have permission*/
+					if ($register["permiso"] == 0) {
+						/*get value of fin in the table horariosreglas*/																	
+						$regla = $this->usuarios_model->getHorarioRegla($register["idHorario"], $register["hrLlegada"]);
+						
+						/*get minutes of the rest*/
+						$time1 = new DateTime($horaEntrada);
+						$time2 = new DateTime($register["hrLlegada"]);
+						$res = date_diff($time2, $time1);
+						$register["diferenciaMin"] = ($res->invert == 1) ? $res->h.":".$res->i.":".$res->s : 0;
+						$register["multa"] = ($res->h > 0) ? ((($res->h*60)+$res->i) * $regla->multa) : ($res->i * $regla->multa);																		 
+					}
+					
+					/*Calculating time acomulated from all stage*/
+					$register["acumuladoTiempo"]="00:00:00";
+					
+					$this->db->insert("llegadas", $register);
 				}			
 								
 			}
+			
+			echo "Listo";
 		}
 		else {
 			echo "No hay entradas";
 		}
-	}
+	}		
 	
 	function general($session) {	
 		$info["session"] =  $session;
