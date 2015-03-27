@@ -70,7 +70,8 @@
 			                    	<thead>
 			                        	<tr>
 			                        		<th>ID</th>
-			                            	<th>Nombre</th>                                			                                			                                                                                               
+			                            	<th>Nombre</th>
+			                            	<th>Hora</th>                                			                                			                                                                                               
 			                                <th width="200">Operaciones</th>
 			                            </tr>
 			                        </thead>
@@ -81,7 +82,8 @@
 			                        			?>
 			                        			<tr>
 			                        				<td><?php echo $row->id?></td>
-			                        				<td><?php echo $row->nombre?></td>			                        				
+			                        				<td><?php echo $row->nombre?></td>
+			                        				<td><?php echo $row->hora?></td>			                        				
 			                        				<td align="center" width="250">
 							            				<a href="<?php echo base_url("horarios/editar/".$row->id)?>"><button class="btn btn-sm btn-primary">Editar</button>&nbsp;&nbsp;										            					            				
 							            				<a href="#" onclick="confirmDelete(<?php echo $row->id?>)"><button class="btn btn-sm btn-danger">Eliminar</button></a>

@@ -33,7 +33,8 @@ class login extends CI_Controller {
 			$access = $this->usuarios_model->login($user, $password);
 			
 			if ($access) {
-				$this->session->set_userdata("user_data", $access);				
+				$this->session->set_userdata("user_data", $access);	
+				$_SESSION["admin"] = $access->admin;			
 				redirect("inicio");
 			}
 			else {
@@ -45,6 +46,7 @@ class login extends CI_Controller {
 	
 	function logout() {
 		$this->session->sess_destroy();
+		session_destroy();
 		redirect("login");
 	}
 }

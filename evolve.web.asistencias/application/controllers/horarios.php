@@ -54,6 +54,7 @@ class horarios extends CI_Controller {
 		$horario = ($idHorario != "") ? $this->horarios_model->checkHorario($idHorario) : "";
 		
 		$this->form_validation->set_rules('nombre', '', 'required|trim');
+		$this->form_validation->set_rules('hora', '', 'required|trim');
 		$this->form_validation->set_message('required', 'Campo obligatorio');
 
 		if ($this->form_validation->run()==FALSE) {
@@ -65,6 +66,7 @@ class horarios extends CI_Controller {
 		}
 		else {
 			$register["nombre"] = $this->input->post("nombre");
+			$register["hora"] = $this->input->post("hora");
 						
 			if ($type == "insert") {							
 				$this->db->insert("horarios", $register);

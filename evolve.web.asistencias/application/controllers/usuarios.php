@@ -16,6 +16,8 @@ class usuarios extends CI_Controller {
 	}
 	
 	public function index() {				
+		if ($_SESSION["admin"] == 0) { redirect("inicio"); }
+		
 		$data = $this->general($this->sessionData["user_data"]);
 		
 		$data["alert"] = $this->session->flashdata('alert');		
@@ -90,7 +92,7 @@ class usuarios extends CI_Controller {
 			$register["complexion"] = $this->input->post("complexion");
 			$register["idHorario"] = $this->input->post("idHorario");
 			$register["activo"] = $this->input->post("admin");
-			$register["admin"] = $this->input->post("admin");
+			$register["admin"] = $this->input->post("admin");						
 			
 			if ($type == "insert") {
 				$register["password"] = $this->input->post("password");

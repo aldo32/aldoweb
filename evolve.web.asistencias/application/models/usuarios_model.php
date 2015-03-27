@@ -6,7 +6,7 @@ class usuarios_model extends CI_Model {
 	}
 	
 	function login($user, $password) {
-		$sql="SELECT * FROM usuarios WHERE usuario=? AND password=? AND activo=? limit 1";
+		$sql="SELECT *, (SELECT nombre FROM horarios WHERE id = usuarios.idHorario) AS nombreHorario FROM usuarios WHERE usuario=? AND password=? AND activo=? limit 1";
 		$q=$this->db->query($sql, array($user, $password, 1));
 		
 		return ($q->num_rows() > 0) ? $q->row() : false;		
@@ -134,5 +134,126 @@ class usuarios_model extends CI_Model {
 			$q->free_result();
 			return $data;
 		}		
+	}
+	
+	function llegadasUltimaSemana($idEtapa) {
+		$sql="
+			SELECT
+				idUsuario,
+				(SELECT nombre FROM usuarios WHERE id = llegadas.idUsuario) AS nombreUsuario,
+				SUM(ROUND(TIME_TO_SEC(diferenciaMin)/60, 0)) AS minutosTarde
+			FROM	
+				llegadas 
+			WHERE 
+				DATE(hrLlegada) <= CURRENT_DATE AND
+				DATE(hrLlegada) >= DATE_ADD(CURRENT_DATE, INTERVAL '-7' DAY) AND
+				idEtapa = ?
+				GROUP BY idUsuario ORDER BY minutosTarde ASC
+			";
+		$q=$this->db->query($sql, array($idEtapa));
+			
+		if ($q->num_rows() > 0)
+		{
+			foreach ($q->result() AS $row)
+				$data[]=$row;
+		
+			$q->free_result();
+			return $data;
+		}		
+	}
+	
+	function llegadasUltimoMes($idEtapa) {
+		$sql="
+			SELECT
+				idUsuario,
+				(SELECT nombre FROM usuarios WHERE id = llegadas.idUsuario) AS nombreUsuario,
+				SUM(ROUND(TIME_TO_SEC(diferenciaMin)/60, 0)) AS minutosTarde
+			FROM
+				llegadas 
+			WHERE 
+				EXTRACT(MONTH FROM hrLlegada) = EXTRACT(MONTH FROM CURRENT_DATE) AND
+				idEtapa = ?
+				GROUP BY idUsuario ORDER BY minutosTarde ASC
+			";
+		$q=$this->db->query($sql, array($idEtapa));
+			
+		if ($q->num_rows() > 0)
+		{
+			foreach ($q->result() AS $row)
+				$data[]=$row;
+	
+			$q->free_result();
+			return $data;
+		}
+	}
+	
+	function llegadasUltimoAño($idEtapa) {
+		$sql="
+			SELECT
+				idUsuario,
+				(SELECT nombre FROM usuarios WHERE id = llegadas.idUsuario) AS nombreUsuario,
+				SUM(ROUND(TIME_TO_SEC(diferenciaMin)/60, 0)) AS minutosTarde
+			FROM
+				llegadas
+			WHERE
+				EXTRACT(YEAR FROM hrLlegada) = EXTRACT(YEAR FROM CURRENT_DATE) AND
+				idEtapa = ?
+				GROUP BY idUsuario ORDER BY minutosTarde ASC
+			";
+		$q=$this->db->query($sql, array($idEtapa));
+			
+		if ($q->num_rows() > 0)
+		{
+			foreach ($q->result() AS $row)
+				$data[]=$row;
+	
+			$q->free_result();
+			return $data;
+		}
+	}
+	
+	function getLlegadasUsuario($idUsuario) {
+		$sql="
+			SELECT DISTINCT
+				idUsuario, idHorario, hrLlegada, permiso, multa, diferenciaMin, acumuladoTiempo, ultActualizacion, 
+				ROUND(TIME_TO_SEC(diferenciaMin)/60, 0) AS minutosTarde				
+			FROM 
+				llegadas 
+			WHERE 
+				idUsuario=?;";
+		$q=$this->db->query($sql, array($idUsuario));
+			
+		if ($q->num_rows() > 0)
+		{
+			foreach ($q->result() AS $row)
+				$data[]=$row;
+		
+			$q->free_result();
+			return $data;
+		}
+	}
+	
+	function getLlegadasEtapasGrupos($idEtapa) {
+		$sql="
+			SELECT
+				idGrupo,
+				(SELECT nombre FROM grupos WHERE id = llegadas.idGrupo) AS nombreGrupo,
+				SUM(ROUND(TIME_TO_SEC(diferenciaMin)/60, 0)) AS minutosTarde
+			FROM
+				llegadas
+			WHERE
+				idEtapa = ?
+				GROUP BY idGrupo ORDER BY minutosTarde ASC
+			";
+		$q=$this->db->query($sql, array($idEtapa));
+			
+		if ($q->num_rows() > 0)
+		{
+			foreach ($q->result() AS $row)
+				$data[]=$row;
+	
+			$q->free_result();
+			return $data;
+		}
 	}
 }	

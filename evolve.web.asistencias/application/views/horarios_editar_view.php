@@ -3,6 +3,7 @@ if ($horario == ""){
 	class variables {
 		var $id = "";		
 		var $nombre = "";		
+		var $hora = "";
 	}
 	
 	$horario = new variables();
@@ -22,10 +23,15 @@ else {
         <title>Evolve Asistencias</title>
         
         <?php echo $includes?>
+        
+        <link href="<?php echo base_url()?>/resources/css/timepicker/bootstrap-timepicker.min.css" rel="stylesheet"/>
+        <script src="<?php echo base_url()?>/resources/js/plugins/timepicker/bootstrap-timepicker.min.js" type="text/javascript"></script>
                 
 		<script>
 		$(document).ready(function() {
-			
+			$(".timepicker").timepicker({
+				showInputs: false
+            });
 		});
 		</script>
         
@@ -80,7 +86,18 @@ else {
 				                       	<label for="exampleInputFile">Nombre:</label>
 				                       	<?php echo form_input(array('name' => 'nombre', 'id' => 'nombre', 'class'=>'form-control', 'placeholder'=>'Nombre de horario', 'value' =>set_value('nombre', $horario->nombre)));?>
 			                        	<?php echo (form_error('nombre') != "") ? "<label for='inputError' class='control-label' style='color: #F56954'><i class='fa fa-times-circle-o'></i> ".form_error('nombre')."</label>" : ""; ?>	                        			
-			                        </div> 			                        
+			                        </div> 	
+			                        
+			                        <div class="bootstrap-timepicker">	
+			                        <div class="form-group">
+				                       	<label for="exampleInputFile">Horade entrada:</label>
+				                       	<div class="input-group">                                   
+				                       		<?php echo form_input(array('name' => 'hora', 'id' => 'hora', 'class'=>'form-control timepicker', 'value' =>set_value('hora', $horario->hora)));?>                                                         
+                                            <div class="input-group-addon"><i class="fa fa-clock-o"></i></div>
+                                        </div>				                       	
+			                        	<?php echo (form_error('hora') != "") ? "<label for='inputError' class='control-label' style='color: #F56954'><i class='fa fa-times-circle-o'></i> ".form_error('hora')."</label>" : ""; ?>	                        			
+			                        </div>
+			                        </div>		                        
                         			
                         			<br>
                         			<div class="form-group">
