@@ -47,7 +47,7 @@ if (isset($llegadasUsuario)) {
 				if (id != "-1") { 				
 					$.ajax({													
 				        url: "<?php echo base_url()?>inicio/showChartDataUser",        
-				        data: "idEtapa="+id+"&type=1&idUsuario=<?php echo $usuario->id?>",		             
+				        data: "idEtapa="+id+"&type=1&idUsuario=<?php echo $usuario->id?>&<?php echo $this->security->get_csrf_token_name(); ?>=<?php echo $this->security->get_csrf_hash(); ?>",		             
 				        dataType: "script",		                	                	      
 				        success: function(datos) {  	        	
 				        		        	
@@ -66,7 +66,7 @@ if (isset($llegadasUsuario)) {
 				if (id != "-1") { 				
 					$.ajax({													
 				        url: "<?php echo base_url()?>inicio/showChartDataUser",        
-				        data: "idEtapa="+id+"&type=2&idUsuario=<?php echo $usuario->id?>",		             
+				        data: "idEtapa="+id+"&type=2&idUsuario=<?php echo $usuario->id?>&<?php echo $this->security->get_csrf_token_name(); ?>=<?php echo $this->security->get_csrf_hash(); ?>",		             
 				        dataType: "script",		                	                	      
 				        success: function(datos) {  	        	
 				        		        	
@@ -84,7 +84,7 @@ if (isset($llegadasUsuario)) {
 				if (id != "-1") { 				
 					$.ajax({													
 				        url: "<?php echo base_url()?>inicio/showChartDataUser",        
-				        data: "idEtapa="+id+"&type=3&idUsuario=<?php echo $usuario->id?>",		             
+				        data: "idEtapa="+id+"&type=3&idUsuario=<?php echo $usuario->id?>&<?php echo $this->security->get_csrf_token_name(); ?>=<?php echo $this->security->get_csrf_hash(); ?>",		             
 				        dataType: "script",		                	                	      
 				        success: function(datos) {  	        	
 				        		        	
@@ -103,7 +103,7 @@ if (isset($llegadasUsuario)) {
 				if (id != "-1") { 				
 			        $.ajax({													
 				        url: "<?php echo base_url()?>inicio/getChartByStage",        
-				        data: "idEtapa="+id,		             
+				        data: "idEtapa="+id+"&<?php echo $this->security->get_csrf_token_name(); ?>=<?php echo $this->security->get_csrf_hash(); ?>",		             
 				        dataType: "script",		                	                	      
 				        success: function(datos) {  	        	
 				        		        	

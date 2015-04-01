@@ -15,7 +15,7 @@
 
 				$.ajax({													
 			        url: "<?php echo base_url()?>adminegu/showUsersByGroup",        
-			        data: "idGrupo="+idGrupo+"&idEtapa=<?php echo (isset($etapa->id)) ? $etapa->id : "0" ?>",		             
+			        data: "idGrupo="+idGrupo+"&idEtapa=<?php echo (isset($etapa->id)) ? $etapa->id : "0" ?>&<?php echo $this->security->get_csrf_token_name(); ?>=<?php echo $this->security->get_csrf_hash(); ?>",		             
 			        dataType: "html",		                	                	      
 			        success: function(datos) {  	        	
 			        	$('#content-users-group').fadeOut('fast', function() { $('#content-users-group').html(datos).fadeIn('fast'); });	        	
@@ -33,7 +33,7 @@
 				if (usuarios != null && idGrupo != "-1") {										
 					$.ajax({										
 				        url: "<?php echo base_url()?>adminegu/addUsersToGroupStage",        
-				        data: "usuarios="+usuarios+"&idEtapa="+idEtapa+"&idGrupo="+idGrupo,     				        
+				        data: "usuarios="+usuarios+"&idEtapa="+idEtapa+"&idGrupo="+idGrupo+"&<?php echo $this->security->get_csrf_token_name(); ?>=<?php echo $this->security->get_csrf_hash(); ?>",     				        
 				        dataType: "json",        	                	       
 				        success: function(datos){
 				        	var combo = $("<select></select>").attr("id", "usuariosGrupo").attr("class", "form-control").attr("style", "width: 250px; height: 280px;").attr("multiple", "multiple");
@@ -64,7 +64,7 @@
 				if (usuariosGrupo != null) {										
 					$.ajax({										
 				        url: "<?php echo base_url()?>adminegu/deleteUsersOfGroupStage",        
-				        data: "usuariosGrupo="+usuariosGrupo+"&idEtapa="+idEtapa+"&idGrupo="+idGrupo,     				        
+				        data: "usuariosGrupo="+usuariosGrupo+"&idEtapa="+idEtapa+"&idGrupo="+idGrupo+"&<?php echo $this->security->get_csrf_token_name(); ?>=<?php echo $this->security->get_csrf_hash(); ?>",     				        
 				        dataType: "json",        	                	       
 				        success: function(datos){				        	
 				        	var combo = $("<select></select>").attr("id", "usuariosGrupo").attr("class", "form-control").attr("style", "width: 250px; height: 280px;").attr("multiple", "multiple");
