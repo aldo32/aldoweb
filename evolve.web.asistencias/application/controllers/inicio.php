@@ -10,14 +10,14 @@ class inicio extends CI_Controller {
 		$this->load->model("usuarios_model");
 		$this->load->model("horarios_model");
 		$this->load->model("grupos_model");
-		$this->load->library("general_library");
-		
-		/*check session*/
-		$this->sessionData = $this->session->all_userdata();				
-		if ($this->sessionData["user_data"] == "") { redirect("login"); }		
+		$this->load->library("general_library");					
 	}
 	
 	public function index() {		
+		/*check session*/
+		$this->sessionData = $this->session->all_userdata();
+		if ($this->sessionData["user_data"] == "") { redirect("login"); }
+		
 		$usuario = $this->sessionData["user_data"];
 		$data = $this->general($usuario);																			
 		
@@ -33,7 +33,7 @@ class inicio extends CI_Controller {
 	function loadDataAssists($type=0) {
 		if ($type == 1) {
 			/*delete all registers form table llegadas*/
-			$this->db->truncate("llegadas");
+			//$this->db->truncate("llegadas");
 			
 			/* get all registers from entradas */
 			$query = $this->db->get('entrada');
@@ -113,7 +113,9 @@ class inicio extends CI_Controller {
 			case '1':
 				/*last week*/				
 				$llegadasSemana = $this->usuarios_model->llegadasUltimaSemana($idEtapa);
-
+				$dataSemana = "";
+				$x="";
+				
 				if (isset($llegadasSemana)) {
 					$dataSemana = "[";
 					$x="";
@@ -152,7 +154,9 @@ class inicio extends CI_Controller {
 			case '2':
 				/*Grafica ultimo mes*/
 				$llegadasMes = $this->usuarios_model->llegadasUltimoMes($idEtapa);
-
+				$dataMes = "";
+				$m="";
+				
 				if (isset($llegadasMes)) {
 					$dataMes = "[";
 					$m="";
@@ -191,7 +195,9 @@ class inicio extends CI_Controller {
 			case '3':
 				/*Grafica ultimo año*/
 				$llegadasAño = $this->usuarios_model->llegadasUltimoAño($idEtapa);
-
+				$dataAño = "";
+				$y="";
+				
 				if (isset($llegadasAño)) {
 					$dataAño = "[";
 					$y="";

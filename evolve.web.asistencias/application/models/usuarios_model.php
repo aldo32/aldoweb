@@ -123,7 +123,7 @@ class usuarios_model extends CI_Model {
 	}
 	
 	function genEntradasByCurrentDay() {
-		$sql="SELECT * FROM entrada WHERE DATE(Time) = '2014-03-18'";
+		$sql="SELECT * FROM entrada WHERE DATE(Time) = CURRENT_DATE";
 		$q=$this->db->query($sql);
 			
 		if ($q->num_rows() > 0)
@@ -252,6 +252,20 @@ class usuarios_model extends CI_Model {
 			foreach ($q->result() AS $row)
 				$data[]=$row;
 	
+			$q->free_result();
+			return $data;
+		}
+	}
+	
+	function getLlegadasByDate($idUsuario, $fecha) {
+		$sql="SELECT * FROM llegadas WHERE idUsuario = ? AND DATE(hrLlegada) = ?";
+		$q=$this->db->query($sql, array($idUsuario, $fecha));
+			
+		if ($q->num_rows() > 0)
+		{
+			foreach ($q->result() AS $row)
+				$data[]=$row;
+		
 			$q->free_result();
 			return $data;
 		}

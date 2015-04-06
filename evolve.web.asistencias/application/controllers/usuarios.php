@@ -231,6 +231,19 @@ class usuarios extends CI_Controller {
 			
 			$this->db->insert("permisosusuarios", $register);
 			
+			/*update field permiso in table llegadas*/
+			$llegadas = $this->usuarios_model->getLlegadasByDate($idUsuario, $register["fecha"]);
+			
+			if (isset($llegadas)) {								
+				foreach ($llegadas AS $row) {
+					$permiso["permiso"] = $register["idPermiso"];
+					
+					$this->db->where("id", $row->id);
+					$this->db->update("llegadas", $permiso);
+				}	
+			}
+			/* --------- */
+			
 			redirect("usuarios/agregarPermiso/".$idUsuario);
 		}
 		
