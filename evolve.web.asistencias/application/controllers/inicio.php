@@ -33,7 +33,7 @@ class inicio extends CI_Controller {
 	function loadDataAssists($type=0) {
 		if ($type == 1) {
 			/*delete all registers form table llegadas*/
-			//$this->db->truncate("llegadas");
+			$this->db->truncate("llegadas");
 			
 			/* get all registers from entradas */
 			$query = $this->db->get('entrada');
@@ -42,14 +42,35 @@ class inicio extends CI_Controller {
 		else {
 			/*get registers from entradas only current Day*/
 			$entradas = $this->usuarios_model->genEntradasByCurrentDay();
+		}					
+		
+		/*remove registers duplicates in the same date*/
+		$dataRegisters = array();		
+		
+		if (isset($entradas)) {
+			$i=0;
+			foreach ($entradas AS $row) {
+				$tmp = strtotime($row->Time);
+				$date = date("Y-m-d", $tmp);
+				
+				if (!in_array($date."_".$row->No, $dataRegisters)) {										
+					array_push($dataRegisters, $date."_".$row->No);						
+				} else {
+					unset($entradas[$i]);
+				}
+				
+				$i++;
+			}
 		}
 		
+		$entradas = (isset($entradas)) ? array_values($entradas) : null;			
 		
 		if (isset($entradas)) {
 			foreach ($entradas AS $entrada) {
 				/*get info from user*/
-				$usuario = $this->usuarios_model->checkUser($entrada->No);
-				/*get info from horario*/
+				$usuario = $this->usuarios_model->checkUser($entrada->No);								
+				
+				/*get info from horario*/				
 				$horario = $this->horarios_model->checkHorario($usuario->idHorario);						
 
 				/*get hour of checkin*/
@@ -92,7 +113,12 @@ class inicio extends CI_Controller {
 					/*Calculating time acomulated from all stage*/
 					$register["acumuladoTiempo"]="00:00:00";
 					
-					$this->db->insert("llegadas", $register);
+					/*validar entes de insertar registros duplicados con etapa, grupo y usuario*/					
+					$resTmp = $this->usuarios_model->checkRegisterDuplicateLlegadas($register["idEtapa"], $register["idGrupo"], $register["idUsuario"], $register["hrLlegada"]);
+					
+					if (!$resTmp) {
+						$this->db->insert("llegadas", $register);
+					}					
 				}			
 								
 			}
@@ -106,7 +132,7 @@ class inicio extends CI_Controller {
 	
 	function showChartDataUser() {
 		$idUsuario = $this->input->post("idUsuario");
-		echo $idEtapa = $this->input->post("idEtapa");
+		$idEtapa = $this->input->post("idEtapa");
 		$type = $this->input->post("type");		
 		
 		switch ($type) {

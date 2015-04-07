@@ -71,7 +71,7 @@ class usuarios_model extends CI_Model {
 	}
 	
 	function getPermisionsUser($idUsusario) {
-		$sql="SELECT *, (SELECT nombre FROM permisos WHERE idPermiso=permisosusuarios.idPermiso) AS nombrePermiso FROM permisosusuarios ORDER BY permisosusuarios.fecha ASC";
+		$sql="SELECT *, (SELECT nombre FROM permisos WHERE id=permisosusuarios.idPermiso) AS nombrePermiso FROM permisosusuarios ORDER BY permisosusuarios.fecha ASC";
 		$q=$this->db->query($sql);
 			
 		if ($q->num_rows() > 0)
@@ -269,5 +269,12 @@ class usuarios_model extends CI_Model {
 			$q->free_result();
 			return $data;
 		}
+	}
+	
+	function checkRegisterDuplicateLlegadas($idEtapa, $idGrupo, $idUsuario, $hrLlegada) {
+		$sql="SELECT * FROM llegadas WHERE idEtapa=? AND idGrupo=? AND idUsuario=? AND hrLlegada = DATE(?);";
+		$q=$this->db->query($sql, array($idEtapa, $idGrupo, $idUsuario, $hrLlegada));
+		
+		return ($q->num_rows() > 0) ? $q->row() : false;
 	}
 }	
