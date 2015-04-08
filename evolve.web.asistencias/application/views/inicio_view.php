@@ -267,9 +267,11 @@ if (isset($llegadasUsuario)) {
 			                        	<?php 			                        	
 			                        	if (isset($llegadasUsuario)) {
 			                        		foreach ($llegadasUsuario AS $row) {
+			                        			$time = strtok($row->hrLlegada, " ");
+			                        			$time = strtok("");
 			                        			?>
 			                        			<tr>			                        							                        				
-			                        				<td><?php echo $this->general_library->dateFormat($row->hrLlegada)?></td>
+			                        				<td><?php echo $this->general_library->dateFormat($row->hrLlegada)." - ".$time?></td>
 			                        				<td><?php echo $row->minutosTarde?></td>
 			                        				<td><?php echo ($row->permiso == 0) ? "No" : Si;?></td>
 			                        				<td><?php echo "$".$row->multa?></td>			                        							                        				

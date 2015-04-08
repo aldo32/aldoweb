@@ -123,12 +123,17 @@ class inicio extends CI_Controller {
 								
 			}
 			
+			//Check if existe registers in all dates, if no records, then insert once in the table to indicate lacks for each stage
+			$this->InsertRegistersForAbsence();								
+			
 			echo "Listo";
 		}
 		else {
 			echo "No hay entradas";
-		}
+		}		
 	}
+	
+	
 	
 	function showChartDataUser() {
 		$idUsuario = $this->input->post("idUsuario");

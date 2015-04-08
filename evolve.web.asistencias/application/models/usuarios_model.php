@@ -48,7 +48,8 @@ class usuarios_model extends CI_Model {
 				u.id = egu.idUsuario AND
 				g.id = egu.idGrupo AND
 				egu.idGrupo = ? AND
-				egu.idEtapa = ?
+				egu.idEtapa = ? AND
+				u.activo = 1
 				ORDER BY u.nombre		
 		";
 		$q=$this->db->query($sql, array($idGrupo, $idEtapa));
@@ -276,5 +277,51 @@ class usuarios_model extends CI_Model {
 		$q=$this->db->query($sql, array($idEtapa, $idGrupo, $idUsuario, $hrLlegada));
 		
 		return ($q->num_rows() > 0) ? $q->row() : false;
+	}
+	
+	function getAllActiveUsers() {
+		$sql="SELECT * FROM usuarios WHERE activo = 1 ORDER BY id ASC";
+		$q=$this->db->query($sql);
+			
+		if ($q->num_rows() > 0)
+		{
+			foreach ($q->result() AS $row)
+				$data[]=$row;
+		
+			$q->free_result();
+			return $data;
+		}
+	}
+	
+	function getFirstDateFromLlegadas() {
+		$sql="SELECT MIN(DATE(hrLlegada)) AS firstDate FROM llegadas";
+		$q=$this->db->query($sql);
+		
+		return ($q->num_rows() > 0) ? $q->row() : false;
+	}
+	
+	function getUsersNotCheckByDate($date) {
+		$sql="
+			SELECT DISTINCT
+			    t1.id, DATE(t2.hrLlegada), t1.nombre
+			FROM 
+			    usuarios t1
+			LEFT JOIN 
+			    llegadas t2 ON t2.idUsuario = t1.id AND
+			    DATE(t2.hrLlegada) IN(?)
+			WHERE
+				t1.activo=1 AND		
+				DATE(t2.hrLlegada) IS NULL
+		";
+		$q=$this->db->query($sql, array($date));
+			
+		if ($q->num_rows() > 0)
+		{
+			foreach ($q->result() AS $row)
+				$data[]=$row;
+		
+			$q->free_result();
+			return $data;
+		}
 	}
 }	
