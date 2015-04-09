@@ -88,7 +88,7 @@ class grupos extends CI_Controller {
 	}
 	
 	function eliminar($idGrupo = 0) {
-		$grupo = $this->gruops_model->checkEtapa($idGrupo);
+		$grupo = $this->etapas_model->checkEtapa($idGrupo);
 	
 		if (isset($grupo)) {
 			$this->db->delete('grupos', array('id' => $idGrupo));

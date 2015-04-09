@@ -72,8 +72,8 @@ class usuarios_model extends CI_Model {
 	}
 	
 	function getPermisionsUser($idUsusario) {
-		$sql="SELECT *, (SELECT nombre FROM permisos WHERE id=permisosusuarios.idPermiso) AS nombrePermiso FROM permisosusuarios ORDER BY permisosusuarios.fecha ASC";
-		$q=$this->db->query($sql);
+		$sql="SELECT *, (SELECT nombre FROM permisos WHERE id=permisosusuarios.idPermiso) AS nombrePermiso FROM permisosusuarios WHERE idUsuario = ? ORDER BY permisosusuarios.fecha ASC";
+		$q=$this->db->query($sql, array($idUsusario));
 			
 		if ($q->num_rows() > 0)
 		{
@@ -108,12 +108,14 @@ class usuarios_model extends CI_Model {
 		return ($q->num_rows() > 0) ? $q->row() : false;
 	}
 	
-	function getPermissionByIdUsuario($idUsuario) {
-		$sql="SELECT * FROM permisosusuarios WHERE idUsuario=? AND fecha = CURRENT_DATE";
-		$q=$this->db->query($sql, array($idUsuario));
+	function getPermissionByIdUsuario($idUsuario, $fecha) {
+		$sql="SELECT * FROM permisosusuarios WHERE idUsuario=$idUsuario AND fecha = '".$fecha."'";
+		//echo $sql."<br>";
+		$q=$this->db->query($sql, array($idUsuario, $fecha));
 		
 		return ($q->num_rows() > 0) ? $q->row() : false;
 	}
+		
 	
 	function getHorarioRegla($idHorario, $time) {
 		$sql="SELECT * FROM horariosreglas WHERE idHorario=? AND horaInicio <= ? AND horaFin >= ?;";
@@ -273,7 +275,7 @@ class usuarios_model extends CI_Model {
 	}
 	
 	function checkRegisterDuplicateLlegadas($idEtapa, $idGrupo, $idUsuario, $hrLlegada) {
-		$sql="SELECT * FROM llegadas WHERE idEtapa=? AND idGrupo=? AND idUsuario=? AND hrLlegada = DATE(?);";
+		$sql="SELECT * FROM llegadas WHERE idEtapa=? AND idGrupo=? AND idUsuario=? AND DATE(hrLlegada) = DATE(?);";
 		$q=$this->db->query($sql, array($idEtapa, $idGrupo, $idUsuario, $hrLlegada));
 		
 		return ($q->num_rows() > 0) ? $q->row() : false;
@@ -323,5 +325,36 @@ class usuarios_model extends CI_Model {
 			$q->free_result();
 			return $data;
 		}
+	}
+	
+	function checkLlegadaUsuario($idUsuario, $fecha) {
+		$sql="SELECT * FROM llegadas WHERE idUsuario = $idUsuario AND DATE(hrLlegada) = DATE('".$fecha."')";
+		//echo "<br>".$sql;		
+		$q=$this->db->query($sql);
+		
+		if ($q->num_rows() > 0)
+		{
+			foreach ($q->result() AS $row)
+				$data[]=$row;
+		
+			$q->free_result();
+			return $data;
+		}
+		else return false;
+	}
+	
+	function getDatesFromEntradas() {
+		$sql="SELECT DISTINCT DATE(TIME) AS fecha FROM entrada";
+		$q=$this->db->query($sql);
+		
+		if ($q->num_rows() > 0)
+		{
+			foreach ($q->result() AS $row)
+				$data[]=$row;
+		
+			$q->free_result();
+			return $data;
+		}
+		else return false;
 	}
 }	

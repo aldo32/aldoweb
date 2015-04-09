@@ -30,18 +30,18 @@ class inicio extends CI_Controller {
 	}
 	
 	//Type 0: only current day		1: All data
-	function loadDataAssists($type=0) {
+	function loadDataAssists($type=0) {		
 		if ($type == 1) {
 			/*delete all registers form table llegadas*/
 			$this->db->truncate("llegadas");
 			
 			/* get all registers from entradas */
 			$query = $this->db->get('entrada');
-			$entradas = $query->result();
+			$entradas = $query->result();			
 		}
 		else {
 			/*get registers from entradas only current Day*/
-			$entradas = $this->usuarios_model->genEntradasByCurrentDay();
+			$entradas = $this->usuarios_model->genEntradasByCurrentDay();			
 		}					
 		
 		/*remove registers duplicates in the same date*/
@@ -63,7 +63,7 @@ class inicio extends CI_Controller {
 			}
 		}
 		
-		$entradas = (isset($entradas)) ? array_values($entradas) : null;			
+		$entradas = (isset($entradas)) ? array_values($entradas) : null;					
 		
 		if (isset($entradas)) {
 			foreach ($entradas AS $entrada) {
@@ -80,56 +80,132 @@ class inicio extends CI_Controller {
 				
 				/*get stages and groups which the user belong */						
 				$query = $this->db->get_where("gruposetapasusuarios", array('idUsuario'=>$entrada->No));
-				$geus = $query->result();								
+				$geus = $query->result();
+
+				/*check if the user have a permission*/				
+				$permisoUsuario = $this->usuarios_model->getPermissionByIdUsuario($usuario->id, strtok($entrada->Time, " "));
+				if ($permisoUsuario) { $register["permiso"] = $permisoUsuario->id; } else { $register["permiso"]=0; }
+				
+				//echo $usuario->id." - ".$entrada->Time." - ".$register["permiso"]."<br>";
 				
 				foreach ($geus AS $geu) {
+					//echo $geu->idUsuario." - ".$register["permiso"]."<br>";
 					$register["idEtapa"] = $geu->idEtapa;
 					$register["idGrupo"] = $geu->idGrupo;
 					$register["idUsuario"] = $geu->idUsuario;
 					$register["idHorario"] = $horario->id;
 					$register["hrLlegada"] = $entrada->Time;
 					
-					/*get time from hrllegada*/
+					//get time from hrllegada7
 					$time = strtotime($entrada->Time);
-					$time = date("H:i:s", $time);					
+					$time = date("H:i:s", $time);																																								
 					
-					/*check if the user have a permission*/					
-					$permisoUsuario = $this->usuarios_model->getPermissionByIdUsuario($geu->idUsuario);
-					if (isset($permisoUsuario->id)) { $register["permiso"] = $permisoUsuario->id; } else { $register["permiso"]=0; }													
-														
-					/*Calculating the fin, this, if the user not have permission*/
-					if ($register["permiso"] == 0) {
-						/*get value of fin in the table horariosreglas*/																	
+					/*initialize diferenciaMin y multa*/
+					$register["diferenciaMin"] = "";
+					$register["multa"] = "";
+					
+					//Calculating the fin, this, if the user not have permission					
+					if ($register["permiso"] === 0) {								
+						//echo "calcula mulpa para:".$geu->idUsuario." para fecha ".$entrada->Time."<br>";		
+						//get value of fin in the table horariosreglas																	
 						$regla = $this->usuarios_model->getHorarioRegla($register["idHorario"], $time);
 						
-						/*get minutes of the rest*/
+						//get minutes of the rest
 						$time1 = new DateTime($horaEntrada);
 						$time2 = new DateTime($time);
 						$res = date_diff($time2, $time1);
 						$register["diferenciaMin"] = ($res->invert == 1) ? $res->h.":".$res->i.":".$res->s : 0;
-						$register["multa"] = ($res->h > 0) ? ((($res->h*60)+$res->i) * $regla->multa) : ($res->i * $regla->multa);																		 
+						$register["multa"] = ($res->h > 0) ? ((($res->h*60)+$res->i) * $regla->multa) : ($res->i * $regla->multa);																	 
 					}
 					
-					/*Calculating time acomulated from all stage*/
-					$register["acumuladoTiempo"]="00:00:00";
+					//Calculating time acomulated from all stage
+					$register["acumuladoTiempo"]="00:00:00";										
 					
-					/*validar entes de insertar registros duplicados con etapa, grupo y usuario*/					
-					$resTmp = $this->usuarios_model->checkRegisterDuplicateLlegadas($register["idEtapa"], $register["idGrupo"], $register["idUsuario"], $register["hrLlegada"]);
+					//validar entes de insertar registros duplicados con etapa, grupo y usuario									
+					$resTmp = $this->usuarios_model->checkRegisterDuplicateLlegadas($register["idEtapa"], $register["idGrupo"], $register["idUsuario"], $register["hrLlegada"]);														
 					
 					if (!$resTmp) {
 						$this->db->insert("llegadas", $register);
-					}					
-				}			
+					}	
+									
+				}		
 								
-			}
+			}													
 			
-			//Check if existe registers in all dates, if no records, then insert once in the table to indicate lacks for each stage
-			$this->InsertRegistersForAbsence();								
-			
-			echo "Listo";
+			echo "Listo";						
 		}
 		else {
 			echo "No hay entradas";
+		}
+				
+		/*Insert register empty with fin for not check in the date*/
+		$this->insertRegisterBlankInLlegadas();
+	}
+	
+	function insertRegisterBlankInLlegadas() {
+		$register = array();
+		
+		/*get all active users*/		
+		$query = $this->db->get_where("usuarios", array("activo"=>1));
+		$usuarios = $query->result();
+		
+		/*get dates checks*/
+		$dates = $this->usuarios_model->getDatesFromEntradas();				
+		
+		foreach ($usuarios AS $usuario) {								
+			foreach ($dates AS $date) {				
+				$llegada = $this->usuarios_model->checkLlegadaUsuario($usuario->id, $date->fecha);
+				
+				if (!$llegada) {
+					echo "<br>inserter registro multa a ".$usuario->id." con fecha ".$date->fecha;
+					/*get stages and groups which the user belong */
+					$query = $this->db->get_where("gruposetapasusuarios", array('idUsuario'=>$usuario->id));
+					$geus = $query->result();
+					
+					/*get info from horario*/
+					$horario = $this->horarios_model->checkHorario($usuario->idHorario);
+					
+					/*check if the user have a permission*/									
+					$permisoUsuario = $this->usuarios_model->getPermissionByIdUsuario($usuario->id, $date->fecha);					
+										
+					if (isset($permisoUsuario->id)) { $register["permiso"] = $permisoUsuario->id; } else { $register["permiso"]=0; }														
+					
+					foreach ($geus AS $geu) {
+						//add 3 hours to time 
+						$tmp = strtotime($horario->hora);
+						$horaEntrada = date("H:i:s", $tmp);
+						
+						$time = date('H:i:s', strtotime($horaEntrada. ' + 3 Hours'));	
+
+						$register["idEtapa"] = $geu->idEtapa;
+						$register["idGrupo"] = $geu->idGrupo;
+						$register["idUsuario"] = $geu->idUsuario;
+						$register["idHorario"] = $horario->id;
+						$register["hrLlegada"] = $date->fecha." ".$time;
+						
+						/*initialize diferenciaMin y multa*/
+						$register["diferenciaMin"] = "";
+						$register["multa"] = "";
+						
+						if ($register["permiso"] === 0) {
+							/*get value of fin in the table horariosreglas*/
+							$regla = $this->usuarios_model->getHorarioRegla($register["idHorario"], $time);
+							
+							/*get minutes of the rest*/
+							$time1 = new DateTime($horaEntrada);
+							$time2 = new DateTime($time);
+							$res = date_diff($time2, $time1);						
+							$register["diferenciaMin"] = ($res->invert == 1) ? $res->h.":".$res->i.":".$res->s : 0;
+							$register["multa"] = ($res->h > 0) ? ((($res->h*60)+$res->i) * $regla->multa) : ($res->i * $regla->multa);
+						}												
+						
+						$register["acumuladoTiempo"]="00:00:00";
+						
+						$this->db->insert("llegadas", $register);
+					}					
+				}
+			}			
+						
 		}		
 	}
 	
