@@ -29,7 +29,17 @@
 	                            <a href="<?php echo base_url("usuarios")?>">
 	                                <i class="fa fa-users"></i> <span>Usuarios</span>                                
 	                            </a>
-	                        </li>                        
+	                        </li>         
+	                        <li class="treeview">
+	                            <a href="#">
+	                                <i class="fa  fa-bar-chart-o"></i> <span>Reportes</span>
+	                                <i class="fa pull-right fa-angle-down"></i>
+	                            </a>
+	                            <ul class="treeview-menu">
+	                                <li><a href="<?php echo base_url("reportes")?>" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i> Todos los evo's</a></li>
+	                                <li><a href="<?php echo base_url("reportes/unico")?>" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i> Por cada evo</a></li>	                                
+	                            </ul>
+	                        </li>               
 	                        <li>
 	                            <a href="<?php echo base_url("etapas")?>">
 	                                <i class="fa fa-calendar"></i> <span>Etapas</span>                                
@@ -59,7 +69,7 @@
 	                            <a href="<?php echo base_url("permisos")?>">
 	                                <i class="fa fa-tag"></i> <span>Catalogo de permisos</span>                                
 	                            </a>
-	                        </li>
+	                        </li>	                         
 	                    <?php 
                         }
                         else {

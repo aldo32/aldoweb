@@ -236,6 +236,27 @@ class usuarios_model extends CI_Model {
 		}
 	}
 	
+	function getLlegadasAll() {
+		$sql="
+			SELECT DISTINCT
+				idUsuario, idHorario, hrLlegada, permiso, multa, diferenciaMin, acumuladoTiempo, ultActualizacion,
+				ROUND(TIME_TO_SEC(diferenciaMin)/60, 0) AS minutosTarde,
+				(SELECT nombre FROM usuarios WHERE id = llegadas.idUsuario) AS nombre
+			FROM
+				llegadas ORDER BY nombre ASC
+		";
+		$q=$this->db->query($sql);
+			
+		if ($q->num_rows() > 0)
+		{
+			foreach ($q->result() AS $row)
+				$data[]=$row;
+	
+			$q->free_result();
+			return $data;
+		}
+	}
+	
 	function getLlegadasEtapasGrupos($idEtapa) {
 		$sql="
 			SELECT

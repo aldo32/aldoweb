@@ -273,7 +273,7 @@ if (isset($llegadasUsuario)) {
 			                        			<tr>			                        							                        				
 			                        				<td><?php echo $this->general_library->dateFormat($row->hrLlegada)." - ".$time?></td>
 			                        				<td><?php echo $row->minutosTarde?></td>
-			                        				<td><?php echo ($row->permiso == 0) ? "No" : Si;?></td>
+			                        				<td><?php echo ($row->permiso == 0) ? "No" : "Si";?></td>
 			                        				<td><?php echo "$".$row->multa?></td>			                        							                        				
 			                        			</tr>
 			                        			<?php 

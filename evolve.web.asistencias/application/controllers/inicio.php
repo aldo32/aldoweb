@@ -344,9 +344,10 @@ class inicio extends CI_Controller {
 		
 
 	function getChartByStage() {
+		$session = $this->session->all_userdata();				
 		$idEtapa = $this->input->post("idEtapa");
-		$usuario = $this->sessionData["user_data"];				
-		$entradas = $this->usuarios_model->getLlegadasEtapasGrupos($idEtapa);
+		$usuario = $session["user_data"];				
+		$entradas = $this->usuarios_model->getLlegadasEtapasGrupos($idEtapa);				
 		$g="'xx'";
 		$data="";
 		$nombresString = "";
@@ -356,15 +357,17 @@ class inicio extends CI_Controller {
 			$i=0;
 			$n=0;
 			foreach ($entradas AS $row) {								
-				//echo "idEntapa: ".$idEtapa."  -  idGrupo: ".$row->idGrupo."  -  idUsuario: ".$usuario->id;
+				//echo "idEntapa: ".$idEtapa."  -  idGrupo: ".$row->idGrupo."  -  idUsuario: ".$usuario->id;								
 				$etapaGrupoUsuario = $this->usuarios_model->chekUserInGruposEtapasUsuarios($idEtapa, $row->idGrupo, $usuario->id);	
-				$usuariosPorGrupo = $this->usuarios_model->usuariosPorGrupo($row->idGrupo, $idEtapa);
+				$usuariosPorGrupo = $this->usuarios_model->usuariosPorGrupo($row->idGrupo, $idEtapa);															
 				
-				$nombresString .= "<tr><td>".$row->nombreGrupo.":</td>";
-				foreach ($usuariosPorGrupo AS $nombres) {
-					$nombresString .= "<td>".$nombres->nombreUsuario."</td>";
+				if (isset($usuariosPorGrupo)) {
+					$nombresString .= "<tr><td>".$row->nombreGrupo.":</td>";
+					foreach ($usuariosPorGrupo AS $nombres) {
+						$nombresString .= "<td>".$nombres->nombreUsuario."</td>";
+					}
+					$nombresString .= "</tr>";
 				}
-				$nombresString .= "</tr>";
 				
 				$data .= "{name: '".$row->nombreGrupo."', minutos: ".$row->minutosTarde."},";
 				if ($etapaGrupoUsuario) { $g=$i; }
@@ -405,7 +408,7 @@ class inicio extends CI_Controller {
 	}
 	
 	function general($session) {	
-		$info["session"] =  $session;
+		$info["session"] =  $session;		
 					
 		$data["includes"] = $this->load->view("general/general_includes_view", $info, true);
 		$data["header"] = $this->load->view("general/general_header_view", $info, true);

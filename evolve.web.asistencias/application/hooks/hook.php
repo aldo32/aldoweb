@@ -9,7 +9,7 @@ class Hook extends CI_Controller {
 	
 	function checkLogin() {
 		$this->CI =& get_instance();		
-		$privatescontrollers=array('adminegu', 'etapas', 'grupos', 'horarios', 'horariosreglas', 'permisos');
+		$privatescontrollers=array('adminegu', 'etapas', 'grupos', 'horarios', 'horariosreglas', 'permisos', 'reportes');
    		 
    		$router =& load_class('Router', 'core');
 		$rout = $router->fetch_class();								   		   		   	   		   	   	
