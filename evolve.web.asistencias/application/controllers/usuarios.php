@@ -213,6 +213,7 @@ class usuarios extends CI_Controller {
 		
 		$this->form_validation->set_rules('idPermiso', '', 'valid_combo|trim');
 		$this->form_validation->set_rules('fecha', '', 'required|trim');
+		$this->form_validation->set_rules('comentario', '', 'trim');
 		
 		$this->form_validation->set_message('required', 'Campo obligatorio');
 		$this->form_validation->set_message('valid_combo', 'Seleccione una opción');
@@ -228,15 +229,19 @@ class usuarios extends CI_Controller {
 			$register["idPermiso"] = $this->input->post("idPermiso");
 			$register["idUsuario"] = $idUsuario;
 			$register["fecha"] = $this->input->post("fecha");
+			$register["comentario"] = $this->input->post("comentario");
 			
 			$this->db->insert("permisosusuarios", $register);
+			$idPermisosUsuarios = $this->db->insert_id();
 			
 			/*update field permiso in table llegadas*/
 			$llegadas = $this->usuarios_model->getLlegadasByDate($idUsuario, $register["fecha"]);
 			
 			if (isset($llegadas)) {								
 				foreach ($llegadas AS $row) {
-					$permiso["permiso"] = $register["idPermiso"];
+					$permiso["permiso"] = $idPermisosUsuarios;		
+					$permiso["multa"] = 0;
+					$permiso["diferenciaMin"] = 0;
 					
 					$this->db->where("id", $row->id);
 					$this->db->update("llegadas", $permiso);
@@ -248,18 +253,40 @@ class usuarios extends CI_Controller {
 		}
 		
 		$this->load->view('usuarios_permisos_view', $data);		
-	}
+	}	
 	
-	function eliminarPermiso($id=0) {
+	function eliminarPermiso($id=0, $idUsuario=0) {		
 		$permisoUsuario = $this->usuarios_model->checkPermisoUsuario($id);
 		
 		if (isset($permisoUsuario)) {					
 			$this->db->delete('permisosusuarios', array('id' => $id));
+						
+			$llegadas = $this->usuarios_model->getLlegadasByDate($idUsuario, $permisoUsuario->fecha);			
+				
+			if (isset($llegadas)) {
+				foreach ($llegadas AS $row) {
+					//Calculando multa
+					/*get info from user*/
+					$usuario = $this->usuarios_model->checkUser($idUsuario);
+					$entrada = $this->usuarios_model->getEntradaByUserDate($idUsuario, $permisoUsuario->fecha);
+					$horario = $this->horarios_model->checkHorario($usuario->idHorario);					
+					
+					$multa = $this->recalcularMulta($entrada, $horario);															
+					
+					$permiso["permiso"] = 0;
+					$permiso["multa"] = $multa["multa"];
+					$permiso["diferenciaMin"] = $multa["diferenciaMin"];
+					
+					$this->db->where("id", $row->id);
+					$this->db->update("llegadas", $permiso);
+				}
+			}			
+			/* --------- */
 				
 			$alert = '<div class="alert alert-success alert-dismissable"> <i class="fa fa-check"></i> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button> Se elimino el permiso con id '.$id.'</div>';
 			$this->session->set_flashdata('alert', $alert);
 						
-			redirect("usuarios/agregarPermiso/".$permisoUsuario->idUsuario);
+			redirect("usuarios/agregarPermiso/".$idUsuario);
 		}
 		else {
 			$alert = '<div class="alert alert-danger danger-dismissable"> <i class="fa fa-ban"></i> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button> El permiso del usuario no existe </div>';
@@ -267,6 +294,35 @@ class usuarios extends CI_Controller {
 			
 			redirect("usuarios");
 		}				
+	}
+	
+	function recalcularMulta($entrada, $horario) {
+		/*get hour of checkin*/
+		$tmp = explode(" ", $horario->nombre);
+		$tmp = strtotime($tmp[1]);
+		$horaEntrada = date("H:i:s", $tmp);
+		
+		//get time from hrllegada7
+		$time = strtotime($entrada->Time);
+		$time = date("H:i:s", $time);
+			
+		/*initialize diferenciaMin y multa*/
+		$register["diferenciaMin"] = "";
+		$register["multa"] = "";
+			
+		
+		//echo "calcula mulpa para:".$geu->idUsuario." para fecha ".$entrada->Time."<br>";
+		//get value of fin in the table horariosreglas
+		$regla = $this->usuarios_model->getHorarioRegla($horario->id, $time);
+		
+		//get minutes of the rest
+		$time1 = new DateTime($horaEntrada);
+		$time2 = new DateTime($time);
+		$res = date_diff($time2, $time1);
+		$register["diferenciaMin"] = ($res->invert == 1) ? $res->h.":".$res->i.":".$res->s : 0;
+		$register["multa"] = ($res->h > 0) ? ((($res->h*60)+$res->i) * $regla->multa) : ($res->i * $regla->multa);
+
+		return $register;
 	}
 	
 	function general($session) {	

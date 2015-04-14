@@ -20,8 +20,8 @@
 			$(".data-mask").inputmask();					
 		});
 
-		function confirmDelete(id) {			
-			if (confirm('Desea eliminar el permiso?')) { location="<?php echo base_url('usuarios/eliminarPermiso')?>/"+id; }
+		function confirmDelete(id, idUsuario) {			
+			if (confirm('Desea eliminar el permiso?')) { location="<?php echo base_url('usuarios/eliminarPermiso')?>/"+id+"/"+idUsuario; }
 		}
 		</script>
         
@@ -70,10 +70,10 @@
 				            <div class="box-body table-responsive">				            					            	            	 	            		            
 			                   	<table id="usersTable" class="table table-condensed">
 			                    	<thead>
-			                        	<tr>
-			                        		<th>ID</th>
+			                        	<tr>			                        		
 			                            	<th>Permiso</th>                                
-			                                <th>Fecha</th>			                                			                                
+			                                <th>Fecha</th>
+			                                <th>Comentario</th>			                                			                                
 			                                <th>Creado</th>			                                                                                              
 			                                <th width="150">Operaciones</th>
 			                            </tr>
@@ -83,13 +83,13 @@
 			                        	if (isset($permisosUsuario)) {
 			                        		foreach ($permisosUsuario AS $row) {
 			                        			?>
-			                        			<tr>
-			                        				<td><?php echo $row->id?></td>
+			                        			<tr>			                        				
 			                        				<td><?php echo $row->nombrePermiso?></td>
 			                        				<td><?php echo $row->fecha?></td>
+			                        				<td><?php echo $row->comentario?></td>
 			                        				<td><?php echo $row->fechaCreacion?></td>			                        				
 			                        				<td align="center" width="150">							            														            					            			
-							            				<a href="" onclick="confirmDelete(<?php echo $row->id?>)"><button class="btn btn-sm btn-danger">Eliminar</button></a>
+							            				<a href="" onclick="confirmDelete(<?php echo $row->id?>, <?php echo $usuario->id?>)"><button class="btn btn-sm btn-danger">Eliminar</button></a>
 							            			</td>
 			                        			</tr>
 			                        			<?php 
@@ -130,6 +130,12 @@
 			                            </div>
 			                            <?php echo (form_error('fecha') != "") ? "<label for='inputError' class='control-label' style='color: #F56954'><i class='fa fa-times-circle-o'></i> ".form_error('fecha')."</label>" : ""; ?>
 			                        </div>
+			                        
+			                        <div class="form-group">
+			                        	<label for="exampleInputFile">Comentario:</label>
+			                        	<?php echo form_input(array('name' => 'comentario', 'id' => 'comentario', 'class'=>'form-control', 'placeholder'=>'Comentario', 'value' =>set_value('comentario')));?>
+			                        	<?php echo (form_error('comentario') != "") ? "<label for='inputError' class='control-label' style='color: #F56954'><i class='fa fa-times-circle-o'></i> ".form_error('comentario')."</label>" : ""; ?>                        				                        	   			                        	                                                
+                        			</div>
 			                        
 			                        <br>
                         			<div class="form-group">

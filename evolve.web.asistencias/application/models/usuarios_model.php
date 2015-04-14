@@ -223,7 +223,7 @@ class usuarios_model extends CI_Model {
 			FROM 
 				llegadas 
 			WHERE 
-				idUsuario=?;";
+				idUsuario=? ORDER BY hrLlegada ASC;";
 		$q=$this->db->query($sql, array($idUsuario));
 			
 		if ($q->num_rows() > 0)
@@ -316,6 +316,22 @@ class usuarios_model extends CI_Model {
 		}
 	}
 	
+	function getAllActiveUsersCombo() {
+		$sql="SELECT * FROM usuarios WHERE activo = 1 ORDER BY nombre ASC";
+		$q=$this->db->query($sql);
+			
+		if ($q->num_rows() > 0)
+		{
+			$options[-1]="Seleccione un usuario";
+		
+			foreach ($q->result() AS $row)
+				$options[$row->id]=$row->nombre;
+		
+			$q->free_result();
+			return $options;
+		}
+	}		
+	
 	function getFirstDateFromLlegadas() {
 		$sql="SELECT MIN(DATE(hrLlegada)) AS firstDate FROM llegadas";
 		$q=$this->db->query($sql);
@@ -377,5 +393,28 @@ class usuarios_model extends CI_Model {
 			return $data;
 		}
 		else return false;
+	}
+	
+	function getEntradaByUserDate($idUsuario, $fecha) {
+		$sql="SELECT * FROM entrada WHERE No=? AND DATE(Time) = ?";
+		$q=$this->db->query($sql, array($idUsuario, $fecha));
+		
+		return ($q->num_rows() > 0) ? $q->row() : false;
+	}
+	
+	function getComboPermisosUser() {
+		$sql="SELECT * FROM permisos";
+		$q=$this->db->query($sql);
+			
+		if ($q->num_rows() > 0)
+		{
+			$options["0"]="Sin permiso";
+		
+			foreach ($q->result() AS $row)
+				$options[$row->id]=$row->nombre;
+		
+			$q->free_result();
+			return $options;
+		}
 	}
 }	
