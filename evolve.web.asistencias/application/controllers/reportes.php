@@ -99,24 +99,37 @@ class reportes extends CI_Controller {
 					        type: "POST"
 						});
 				    }
-			        else {
-			        	alert("Opción aun no disponible");
-			        	$('#showUser').html("Cargando...");			
-						$.ajax({													
-					        url: "<?php echo base_url()?>reportes/showUserAssistance",        
-					        data: "idUsuario="+idUsuario+"&<?php echo $this->security->get_csrf_token_name(); ?>=<?php echo $this->security->get_csrf_hash(); ?>",		             
-					        dataType: "html",		                	                	      
-					        success: function(datos) {  	        	
-					        	$('#showUser').fadeOut('fast', function() { $('#showUser').html(datos).fadeIn('fast'); });	        	
+			        else {			        				        				        						
+			        	$.ajax({													
+					        url: "<?php echo base_url()?>reportes/getPermisoUsuarioId",        
+					        data: "idUsuario="+idUsuario+"&fecha="+fecha+"&idPermiso="+idPermiso+"&<?php echo $this->security->get_csrf_token_name(); ?>=<?php echo $this->security->get_csrf_hash(); ?>",		             
+					        dataType: "json",		                	                	      
+					        success: function(datos) {  	  						              	
+					        	$.ajax({													
+							        url: "<?php echo base_url()?>usuarios/eliminarPermiso/"+datos.idPermisoUsuario+"/"+idUsuario,        
+							        data: "<?php echo $this->security->get_csrf_token_name(); ?>=<?php echo $this->security->get_csrf_hash(); ?>",		             
+							        dataType: "html",		                	                	      
+							        success: function(datos) {  	  						              	
+							        	$('#showUser').html("Cargando...");				
+										$.ajax({													
+									        url: "<?php echo base_url()?>reportes/showUserAssistance",        
+									        data: "idUsuario="+idUsuario+"&<?php echo $this->security->get_csrf_token_name(); ?>=<?php echo $this->security->get_csrf_hash(); ?>",		             
+									        dataType: "html",		                	                	      
+									        success: function(datos) {  	        	
+									        	$('#showUser').fadeOut('fast', function() { $('#showUser').html(datos).fadeIn('fast'); });	        	
+									        },
+									        type: "POST"
+										}); 
+							        },
+							        type: "GET"
+								});      	
 					        },
 					        type: "POST"
-						});        						    
+						});								        												  
 				    }
 			    });		        
 			});    			
 		</script>
-		
-		<div class="chart" id="personal" style="height: 300px;"></div>		
 		
 		<div class="box-body table-responsive">
         	<table id="llegadasTable" class="table table-bordered table-striped">
@@ -155,6 +168,8 @@ class reportes extends CI_Controller {
             
             <a href="<?php echo base_url("reportes/exportar/".$idUsuario)?>" id=""><button class="btn btn-sm btn-success">Exportar a Excel</button></a>
         </div>
+		
+		<div class="chart" id="personal" style="height: 300px;"></div>						
 		<?php 
 	}
 	
@@ -176,6 +191,17 @@ class reportes extends CI_Controller {
 		}
 		
 		$this->load->view("reportes_export_view", $data);
+	}
+	
+	function getPermisoUsuarioId() {
+		$idPermiso = $this->input->post("idPermiso");
+		$fecha = $this->input->post("fecha");
+		$idUsuario = $this->input->post("idUsuario");
+		
+		$query = $this->db->get_where("permisosusuarios", array("fecha"=>$fecha, "idUsuario"=>$idUsuario));
+		$res = $query->row();		
+
+		echo json_encode(array("idPermisoUsuario"=>$res->id));
 	}
 	
 	function general($session) {
