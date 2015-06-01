@@ -1,0 +1,62 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.mark2.aldo.mark2.DetalleTodo">
+
+    <TextView android:text="Titulo del todo" android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="22dp"
+        android:id="@+id/textTodo" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/textFecha"
+        android:textSize="18dp"
+        android:layout_below="@+id/textTodo"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Status"
+        android:id="@+id/textStatus"
+        android:textSize="20dp"
+        android:layout_alignParentEnd="true"
+        android:textStyle="bold"
+        android:layout_below="@+id/textFecha"
+        android:textAlignment="center" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Terminado"
+        android:id="@+id/buttonStatus"
+        android:layout_marginTop="37dp"
+        android:padding="15dp"
+        android:background="#ff1a5b72"
+        android:layout_below="@+id/textStatus"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:onClick="finishTodo" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Eliminar"
+        android:id="@+id/buttonEliminar"
+        android:padding="15dp"
+        android:background="#d0960002"
+        android:layout_alignBottom="@+id/buttonStatus"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="deleteTodo"
+        android:nestedScrollingEnabled="false" />
+
+</RelativeLayout>

@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".InicioActivity">
+
+    <item android:id="@+id/add"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="Agregar"
+        android:orderInCategory="1"
+        android:showAsAction="ifRoom"/>
+    <item android:id="@+id/search"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="Buscar"
+        android:orderInCategory="2"
+        android:showAsAction="ifRoom|collapseActionView"
+        android:actionLayout="@layout/search_layout"
+        />
+    <item android:id="@+id/action_settings"
+        android:title="Configurar"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
+</menu>
