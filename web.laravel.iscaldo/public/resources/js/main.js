@@ -21,7 +21,7 @@ $(document).ready(function() {
 	    	i = 1;
     	
     }, 60000);
-		
+			
 	var time=500;
 	
 	/*Show section*/
