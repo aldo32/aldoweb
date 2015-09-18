@@ -10,7 +10,7 @@ class Inicio extends CI_Controller {
 	public function index() {
 		$data = $this->general();
 		$this->load->view('inicio_view', $data);
-	}
+	}	
 
 	function general() {
 		$data['includes'] = $this->load->view("general/general_includes_view", '', true);
