@@ -8,7 +8,32 @@
 
 		<script type="text/javascript">
 		$(document).ready(function() {
+			$("#loginForm").submit(function(e) {
+				e.preventDefault();
 
+				email=$("#email").val();
+				password=$("#password").val();
+
+				if(email != "" && password != "") {
+					$.ajax({
+				        url: "./login/access",
+				        data: "email="+email+"&password="+password+"&<?php echo $this->security->get_csrf_token_name()?>=<?php echo $this->security->get_csrf_hash()?>",
+				        dataType: "json",
+				        success: function(datos) {
+							if (datos.status == "error") {
+								$("#messageLogin").html(datos.message);
+							}
+							else {
+								$("#inicioForm").submit();
+							}
+				        },
+				        type: "POST"
+					});
+				}
+				else {
+					$("#messageLogin").html("Debe escribir un usuario y password para continuar");
+				}
+			});
 		});
 		</script>
 	</head>
@@ -22,22 +47,25 @@
             <p class="login-box-msg">Login de inicio de sesión</p>
             <?php echo form_open("login/access", array("name"=>"loginForm", "id"=>"loginForm"), array()); ?>
                 <div class="form-group has-feedback">
-                    <input type="email" class="form-control" placeholder="Email">
+                    <input type="email" name="email" id="email" class="form-control" placeholder="Email">
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback">
-                    <input type="password" class="form-control" placeholder="Password">
+                    <input type="password" name="password" id="password" class="form-control" placeholder="Password">
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
                 <div class="row">
                     <div class="col-xs-4" style="float: right;">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">Entrar</button>
                     </div><!-- /.col -->
                 </div>
             <?php echo form_close(); ?>
 
-            <br>
-            <a href="#">Restablecer password</a><br>            
+			<?php echo form_open("inicio", array("name"=>"inicioForm", "id"=>"inicioForm"), array()); form_close(); ?>
+
+			<br>
+			<div id="messageLogin" style="font-weight: bold;"></div>
+            <a href="#">Restablecer password</a><br>
 
         </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->
