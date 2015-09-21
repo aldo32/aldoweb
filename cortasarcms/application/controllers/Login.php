@@ -5,6 +5,7 @@ class Login extends CI_Controller {
 
 	function __construct() {
 		parent::__construct();
+		$this->load->model("Model_usuarios", "usuarios");
 	}
 
 	public function index() {
@@ -30,8 +31,7 @@ class Login extends CI_Controller {
 			$email = $this->input->post("email");
 			$password = $this->input->post("password");
 
-			$query = $this->db->get_where("usuarios", array("email"=>$email, "password"=>sha1(md5($password))));
-			$usuario = $query->row();
+			$usuario = $this->usuarios->login($email, sha1(md5($password)));
 
 			if(isset($usuario)) {
 				$this->session->set_userdata("usuario", $usuario);

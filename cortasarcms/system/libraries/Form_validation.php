@@ -1347,6 +1347,19 @@ class CI_Form_validation {
 	// --------------------------------------------------------------------
 
 	/**
+	 * valid_combo
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	bool
+	 */
+	function valid_combo($str)
+	{
+		return ($str == '-1' || $str=="") ? FALSE : TRUE;
+	}
+	
+
+	/**
 	 * Numeric
 	 *
 	 * @param	string
