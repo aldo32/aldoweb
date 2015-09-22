@@ -12,13 +12,21 @@ class Usuarios extends CI_Controller {
 		$this->load->model("Model_usuarios", "usuarios");
 	}
 
-	public function index() {
+	public function index($alert="") {
 		$data = $this->general();
+
+		//set messages to alert .... check how to use session flash fot the messages
+		switch ($alert) {
+			case '1': $alert = "El usuario se creó correctamente"; break;
+			case '2': $alert = "El usuario se modificó correctamente"; break;
+			default: break;
+		}
 
         //get all users actives
         $query = $this->db->get("usuarios");
         $usuarios = $query->result();
         $data["usuarios"] = $usuarios;
+		$data["alert"] = $alert;
 
 		$this->load->view('usuarios_view', $data);
 	}
@@ -42,6 +50,7 @@ class Usuarios extends CI_Controller {
 		$this->form_validation->set_rules('email', '<strong>Email</strong>', 'required|trim|valid_email');
 		$this->form_validation->set_rules('idPerfil', '<strong>Perfil</strong>', 'required|trim|valid_combo');
 		$this->form_validation->set_rules('password', '<strong>Password</strong>', 'required|trim|matches[cpassword]');
+		$this->form_validation->set_rules('cpassword', '<strong>Password</strong>', 'trim');
 
 		$this->form_validation->set_message('required', 'El campo %s es obligatorio');
 		$this->form_validation->set_message('valid_email', 'El email no es valido');
@@ -55,6 +64,23 @@ class Usuarios extends CI_Controller {
 			$this->load->view("usuarios_editar_view", $data);
 		}
 		else {
+			$register["nombre"] = $this->input->post("nombre");
+			$register["apellidos"] = $this->input->post("apellidos");
+			$register["telefono"] = $this->input->post("telefono");
+			$register["email"] = $this->input->post("email");
+			$register["password"] = sha1(md5($this->input->post("password")));
+			$register["idPerfil"] = $this->input->post("idPerfil");
+			$register["activo"] = $this->input->post("activo");
+
+			if ($type == "insert") {
+				$this->db->insert("usuarios", $register);
+				redirect("usuarios/index/1");
+			}
+			else {
+				$this->db->where("id", $user->id);
+				$this->db->update("usuarios", $register);
+				redirect("usuarios/index/2");
+			}
 		}
 	}
 

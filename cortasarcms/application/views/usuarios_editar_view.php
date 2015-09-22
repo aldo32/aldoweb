@@ -45,7 +45,6 @@ class user {
     					closeOnEscape: true,
     					closeOnClick: true,
     					showCloseButton: false,
-                        modal: true,
     					callbacks: {
     			            afterClose: function() {
     			            }
@@ -84,7 +83,7 @@ class user {
 			<section class="content">
                 <div class="box">
                     <div class="box-body">
-                        <?php echo form_open("usuarios/guardar", array("name"=>"userForm", "id"=>"userForm"), array("isUsuario"=>$user->idUsuario)); ?>
+                        <?php echo form_open("usuarios/guardar", array("name"=>"userForm", "id"=>"userForm"), array("isUsuario"=>$user->idUsuario, "activo"=>1)); ?>
                             <div class="row">
                                 <div class="form-group col-md-4">
                                     <label>Nombre</label>
@@ -116,7 +115,7 @@ class user {
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>Confirmar password</label>
-                                    <?php echo form_input(array('name'=>'cpassword','id'=>'cpassword', 'type'=>'password', 'class'=>'form-control input-sm', 'value' =>set_value('')));?>
+                                    <?php echo form_input(array('name'=>'cpassword','id'=>'cpassword', 'type'=>'password', 'class'=>'form-control input-sm', 'value'=>""));?>
                                 </div>
                             </div>
                             <button class="btn btn-primary" type="submit">Guardar</button>
@@ -130,7 +129,7 @@ class user {
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <a onclick="$.nmTop().close(); clear();"><button aria-label="Close" data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span></button></a>
-                                            <h4 class="modal-title">Campos faltantes</h4>
+                                            <h4 class="modal-title">Advertencia</h4>
                                         </div>
                                         <div class="modal-body">
                                             <p><?php echo (validation_errors() != "") ? validation_errors() : ""; ?></p>

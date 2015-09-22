@@ -47,7 +47,21 @@
                     <div class="box-header">
                         <h3 class="box-title">Listado de usuarios</h3>
                     </div>
+
                     <div class="box-body">
+						<?php
+						//Mejorar el funcionamiento de los alert
+						if ($alert != "") {
+							?>
+							<div class="alert alert-success alert-dismissable">
+		                    	<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+		                    	<h4><i class="icon fa fa-check"></i> Notificación!</h4>
+		                    	<?php echo $alert; ?>
+		                  	</div>
+							<?php
+						}
+						?>
+
                         <a href="<?php echo base_url("usuarios/nuevo") ?>"><button class="btn btn-primary">Crear nuevo usuario</button></a>
                         <br><br>
 
