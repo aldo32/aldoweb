@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-09-2015 a las 01:58:02
+-- Tiempo de generación: 24-09-2015 a las 01:57:17
 -- Versión del servidor: 5.6.17
 -- Versión de PHP: 5.5.12
 
@@ -31,7 +31,15 @@ CREATE TABLE IF NOT EXISTS `categorias` (
   `nombre` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   `creado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
+--
+-- Volcado de datos para la tabla `categorias`
+--
+
+INSERT INTO `categorias` (`id`, `nombre`, `creado`) VALUES
+(1, 'Categoria 1 x', '2015-09-23 23:47:34'),
+(2, 'Categoria 2', '2015-09-23 23:47:47');
 
 -- --------------------------------------------------------
 
@@ -65,9 +73,19 @@ CREATE TABLE IF NOT EXISTS `subcategorias` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idCategoria` int(11) NOT NULL,
   `nombre` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `creado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `idCategoria` (`idCategoria`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+
+--
+-- Volcado de datos para la tabla `subcategorias`
+--
+
+INSERT INTO `subcategorias` (`id`, `idCategoria`, `nombre`, `creado`) VALUES
+(1, 1, 'Subcategoria 1', '2015-09-23 23:53:04'),
+(2, 1, 'Subcategoria 1 x', '2015-09-23 23:54:27'),
+(3, 1, 'aldo', '2015-09-23 23:55:17');
 
 -- --------------------------------------------------------
 
@@ -100,17 +118,30 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `password` text COLLATE utf8_unicode_ci NOT NULL,
   `creado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `idPerfil` int(11) NOT NULL,
-  `activo` tinyint(1) NOT NULL,
+  `activo` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`),
   KEY `idPerfil` (`idPerfil`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Tabla de usuarios' AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Tabla de usuarios' AUTO_INCREMENT=43 ;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `apellidos`, `telefono`, `email`, `password`, `creado`, `idPerfil`, `activo`) VALUES
-(1, 'Aldo', 'Marañon Andrade', '5531224198', 'isc.aldo@gmail.com', 'abc670835d93413f158e695bf9148eb4eb672425', '2015-09-20 00:53:19', 1, 1);
+(1, 'Aldo', 'Marañon Andrade', '5531224198', 'isc.aldo@gmail.com', 'abc670835d93413f158e695bf9148eb4eb672425', '2015-09-20 00:53:19', 1, 1),
+(2, 'Usuario 1', 'apellidos de prueba 1', '654651324165', 'isc.aldo@hotmail.com', '1be45c6297a880d125fbdcca65282a0dacca0113', '2015-09-22 22:58:04', 1, 1),
+(30, 'Usuario 2', 'apellidos de prueba 2', '646546546546', 'root@root.com', 'abc670835d93413f158e695bf9148eb4eb672425', '2015-09-23 16:11:59', 1, 1),
+(31, 'Usuario 3', 'apellidos de prueba 3', '74546543546', 'root1@root.com', 'abc670835d93413f158e695bf9148eb4eb672425', '2015-09-23 16:46:10', 2, 1),
+(32, 'Usuario 4', 'apellidos de prueba 4', '4654214654654', 'root3@root.com', 'abc670835d93413f158e695bf9148eb4eb672425', '2015-09-23 16:55:24', 2, 1),
+(33, 'fsdf', 'fsdfsd', 'fsdfs', 'fsdfsdfs', 'ffsdfsd', '2015-09-23 18:30:03', 2, 1),
+(34, 'fsd', 'hfghf', '', 'hjgmjjhmh', 'ghfghfg', '2015-09-23 18:31:06', 1, 1),
+(35, 'fdfg', 'gdfg', 'gdfgd', 'adasd', 'fsdfsd', '2015-09-23 18:31:28', 1, 1),
+(36, 'sdfs', 'sdfd', 'fsdf', 'jklkds', 'fsdfs', '2015-09-23 18:31:28', 1, 1),
+(38, 'dfdsf', 'fsdfsd', 'fsdf', 'sdfssssss', 'fsdfsdfsd', '2015-09-23 18:31:50', 2, 1),
+(39, 'vcbcvb', 'bcvbc', 'bcvb', 'sdfghjhjgfdsadsfg', 'fsdfsd', '2015-09-23 18:32:18', 1, 1),
+(41, 'ffgdfgdfggdfg', 'gdfgdfgfd', '54654654', 'root4@root.com', '0937afa17f4dc08f3c0e5dc908158370ce64df86', '2015-09-23 18:55:59', 2, 1),
+(42, 'ffgdfgdfggdfg', 'gdfgdfgfd', '54654654', 'root5@root.com', '0937afa17f4dc08f3c0e5dc908158370ce64df86', '2015-09-23 18:58:01', 2, 1);
 
 --
 -- Restricciones para tablas volcadas
