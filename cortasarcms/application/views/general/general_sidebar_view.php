@@ -37,6 +37,11 @@
 						<i class="fa fa-users"></i> <span>Usuarios</span>
 					</a>
 				</li>
+				<li class="treeview  <?php echo ($page == "categorias") ? "active" : ""; ?>">
+					<a href="<?php echo base_url("categorias") ?>">
+						<i class="fa fa-folder"></i> <span>Categorias</span>
+					</a>
+				</li>
 
 
 				<!--
