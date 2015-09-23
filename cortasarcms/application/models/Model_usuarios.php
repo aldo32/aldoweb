@@ -6,7 +6,7 @@ class Model_usuarios extends CI_Model {
 	}
 
 	function login($email, $password) {
-		$sql="SELECT u.id AS idUsuario, u.nombre AS nombre, u.apellidos AS apellidos, u.email AS email, p.nombre AS perfil, p.id AS idPerfil FROM usuarios u, perfiles p WHERE u.idPerfil=p.id AND u.email=? AND u.password=?";
+		$sql="SELECT u.id AS idUsuario, u.nombre AS nombre, u.apellidos AS apellidos, u.email AS email, p.nombre AS perfil, p.id AS idPerfil FROM usuarios u, perfiles p WHERE u.idPerfil=p.id AND u.email=? AND u.password=? AND activo=1";
 		$q=$this->db->query($sql, array($email, $password));
 
 		return ($q->num_rows() > 0) ? $q->row() : false;

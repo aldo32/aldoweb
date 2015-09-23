@@ -1,6 +1,7 @@
 <?php
 //constants
 define("MODAL_CLASS", "modal-primary");
+define("TIMER_ALERT", "7000");
 
 /*
  *---------------------------------------------------------------

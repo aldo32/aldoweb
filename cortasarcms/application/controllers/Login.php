@@ -13,7 +13,7 @@ class Login extends CI_Controller {
 		$data = $this->general();
 
 		//echo sha1(md5("aldoma"));
-		$this->load->view('login_view', $data);
+		$this->load->view('login/login_view', $data);
 	}
 
 	function access() {
@@ -33,7 +33,7 @@ class Login extends CI_Controller {
 
 			$usuario = $this->usuarios->login($email, sha1(md5($password)));
 
-			if(isset($usuario)) {
+			if(!empty($usuario)) {
 				$this->session->set_userdata("usuario", $usuario);
 				//$this->session->has_userdata("usuario");
 				echo json_encode(array("status"=>"success"));

@@ -18,6 +18,25 @@
             $("#tablaUsuarios").DataTable({
                 stateSave: true,
             });
+
+			$("#messageAlert").delay(<?php echo TIMER_ALERT ?>).fadeOut("slow");
+
+			$(".nyroModal").nyroModal({
+				closeOnEscape: true,
+				closeOnClick: true,
+				showCloseButton: false,
+				callbacks: {
+					afterClose: function() {
+					}
+				}
+			});
+
+			$(document).on("click", ".elimarUsuario", function(e) {
+				e.preventDefault();
+				if (confirm("Realmente desea eliminar el usaurio?")) {
+					window.location.href = $(this).attr("href");
+				}
+			});
 		});
 		</script>
 	</head>
@@ -49,13 +68,13 @@
                     </div>
 
                     <div class="box-body">
-						<?php						
+						<?php
 						if ($alert != "") {
 							?>
-							<div class="alert alert-success alert-dismissable">
+							<div class="alert <?php echo $alert["type"] ?> alert-dismissable" id="messageAlert">
 		                    	<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-		                    	<h4><i class="icon fa fa-check"></i> Notificación!</h4>
-		                    	<?php echo $alert; ?>
+		                    	<h4><i class="icon fa <?php echo $alert["image"] ?>"></i> Mensaje!</h4>
+		                    	<?php echo $alert["message"]; ?>
 		                  	</div>
 							<?php
 						}
@@ -89,11 +108,17 @@
                                                         <span class="caret"></span>
                                                         <span class="sr-only">Toggle Dropdown</span>
                                                     </button>
+													<?php
+													$activo = ($row->activo == 1) ? 0 : 1;
+													$messageActivo = ($row->activo == 1) ? "Dessactivar" : "Activar";
+													?>
                                                     <ul role="menu" class="dropdown-menu">
-                                                        <li><a href="#">Editar</a></li>
-                                                        <li><a href="#">Desactivar</a></li>
+                                                        <li><a href="<?php echo base_url('usuarios/editar/'.$row->id); ?>">Editar</a></li>
+														<li><a href="<?php echo base_url('usuarios/password/'.$row->id); ?>" class="nyroModal">Cambiar password</a></li>
+                                                        <li><a href="<?php echo base_url('usuarios/desactivar/'.$row->id.'/'.$activo); ?>"><?php echo $messageActivo ?></a></li>
+														<li><a href="#">Permisos</a></li>
                                                         <li class="divider"></li>
-                                                        <li><a href="#">Eliminar</a></li>
+                                                        <li><a href="<?php echo base_url('usuarios/eliminar/'.$row->id); ?>" class="elimarUsuario">Eliminar</a></li>
                                                     </ul>
                                                 </div>
                                             </td>

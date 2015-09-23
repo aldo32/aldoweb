@@ -65,7 +65,7 @@
 
 			<br>
 			<div id="messageLogin" style="font-weight: bold;"></div>
-            <a href="#">Restablecer password</a><br>
+            <!-- <a href="#">Restablecer password</a><br> -->
 
         </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->
