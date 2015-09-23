@@ -12,21 +12,15 @@ class Usuarios extends CI_Controller {
 		$this->load->model("Model_usuarios", "usuarios");
 	}
 
-	public function index($alert="") {
+	public function index() {
 		$data = $this->general();
-
-		//set messages to alert .... check how to use session flash fot the messages
-		switch ($alert) {
-			case '1': $alert = "El usuario se creó correctamente"; break;
-			case '2': $alert = "El usuario se modificó correctamente"; break;
-			default: break;
-		}
 
         //get all users actives
         $query = $this->db->get("usuarios");
         $usuarios = $query->result();
         $data["usuarios"] = $usuarios;
-		$data["alert"] = $alert;
+
+		$data["alert"] = "";
 
 		$this->load->view('usuarios_view', $data);
 	}
@@ -74,12 +68,15 @@ class Usuarios extends CI_Controller {
 
 			if ($type == "insert") {
 				$this->db->insert("usuarios", $register);
-				redirect("usuarios/index/1");
+				$_SESSION["alert"] = "El usuario <b>".$register['nombre']." ".$register["nombre"]."</b> se creó correctamente";
+				$this->session->set_flashdata('alert', "dasda");
+				redirect("usuarios");
 			}
 			else {
 				$this->db->where("id", $user->id);
 				$this->db->update("usuarios", $register);
-				redirect("usuarios/index/2");
+				$this->session->set_tempdata('alert', 'El usuario <b>'.$register['nombre'].' '.$register["nombre"].'</b> se actualizó correctamente');
+				redirect("usuarios");
 			}
 		}
 	}

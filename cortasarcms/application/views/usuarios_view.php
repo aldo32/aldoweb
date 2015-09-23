@@ -49,8 +49,7 @@
                     </div>
 
                     <div class="box-body">
-						<?php
-						//Mejorar el funcionamiento de los alert
+						<?php						
 						if ($alert != "") {
 							?>
 							<div class="alert alert-success alert-dismissable">
