@@ -34,6 +34,24 @@
 					$("#messageLogin").html("Debe escribir un usuario y password para continuar");
 				}
 			});
+
+			$("#restorePassword").click(function() {
+				email=$("#email").val();
+
+				if (email == "") alert("Ingrese su correo para poder restablecer su contraseña");
+				else {
+					$("#messageLogin").html("Cargando...");
+					$.ajax({
+				        url: "./login/restorePassword",
+				        data: "email="+email+"&<?php echo $this->security->get_csrf_token_name()?>=<?php echo $this->security->get_csrf_hash()?>",
+				        dataType: "html",
+				        success: function(datos) {
+							$("#messageLogin").html(datos);
+				        },
+				        type: "POST"
+					});
+				}
+			});
 		});
 		</script>
 	</head>
@@ -65,7 +83,7 @@
 
 			<br>
 			<div id="messageLogin" style="font-weight: bold;"></div>
-            <!-- <a href="#">Restablecer password</a><br> -->
+            <a href="#" id="restorePassword">Restablecer password</a><br>
 
         </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->
