@@ -33,4 +33,11 @@ class Model_usuarios extends CI_Model {
 
 		return ($q->num_rows() > 0) ? $q->row() : false;
 	}
+
+	function getUserByEmail($email) {
+		$sql="SELECT * FROM usuarios WHERE email=?";
+		$q=$this->db->query($sql, array($email));
+
+		return ($q->num_rows() > 0) ? $q->row() : false;
+	}
 }

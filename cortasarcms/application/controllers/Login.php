@@ -60,22 +60,32 @@ class Login extends CI_Controller {
 			echo validation_errors();
 		}
 		else {
-			$config = Array(
-			    'protocol' => 'smtp',
-			    'smtp_host' => 'ssl://smtp.googlemail.com',
-			    'smtp_port' => 465,
-			    'smtp_user' => 'isc.aldo@gmail.com',
-			    'smtp_pass' => 'aldoma32',
-			    'mailtype'  => 'html',
-			    'charset'   => 'iso-8859-1'
-			);
+			$password ="cortasar".rand(1000, 9000);
+			$newPassword = sha1(md5($password));
+
+			$this->db->where('email', $email);
+			$this->db->update('usuarios', array("password"=>$newPassword));
+
+			$message = "<b>CORTASAR CMS</b><br><br>Usuario: $email<br><br>Su nueva contraseña es: $password<br><br>Cualquier duda acerca de su cuanta contacte al administrador.";
+
+			$config['protocol']    = 'smtp';
+	        $config['smtp_host']    = 'ssl://smtp.gmail.com';
+	        $config['smtp_port']    = '465';
+	        $config['smtp_timeout'] = '7';
+	        $config['smtp_user']    = 'isc.aldo@gmail.com';
+	        $config['smtp_pass']    = 'aldoma32';
+	        $config['charset']    = 'utf-8';
+	        $config['newline']    = "\r\n";
+	        $config['mailtype'] = 'html'; // or html
+	        $config['validation'] = TRUE; // bool whether to validate email or
+
 			$this->load->library('email', $config);
 
 			$this->email->from('isc.aldo@gmail.com', 'Administrador Cortasar CMS');
 			$this->email->to($email);
 
-			$this->email->subject('Email Test');
-			$this->email->message('Testing the email class.');
+			$this->email->subject('Restaurar password, Cortasar CMS');
+			$this->email->message($message);
 
 			$this->email->send();
 			$this->email->print_debugger();

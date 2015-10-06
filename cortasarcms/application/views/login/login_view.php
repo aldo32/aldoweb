@@ -40,7 +40,7 @@
 
 				if (email == "") alert("Ingrese su correo para poder restablecer su contraseña");
 				else {
-					$("#messageLogin").html("Cargando...");
+					$("#messageLogin").html("<i class='fa fa-refresh fa-spin'></i>&nbsp;&nbsp;Cargando...");
 					$.ajax({
 				        url: "./login/restorePassword",
 				        data: "email="+email+"&<?php echo $this->security->get_csrf_token_name()?>=<?php echo $this->security->get_csrf_hash()?>",

@@ -59,10 +59,10 @@ class Model_categorias extends CI_Model {
 
 	function deleteCategory($id, $type) {
 		$table = ($type == "cat") ? "categorias" : "subcategorias";
+		  
 
-        echo $sql = "DELETE FROM ";
+			$sql = "DELETE FROM $table WHERE id=?";
+	        $q=$this->db->query($sql, array($id));
 
-        $q=$this->db->query($sql, array($id));
-        return ($q->num_rows() > 0) ? $q->row() : false;
 	}
 }
