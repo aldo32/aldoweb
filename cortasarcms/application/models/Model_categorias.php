@@ -48,6 +48,21 @@ class Model_categorias extends CI_Model {
 		}
     }
 
+	function getComboSubCategorias() {
+        $sql = "SELECT * FROM subcategorias";
+
+        $q=$this->db->query($sql);
+        $options["-1"] = "Seleccione una subcategoria";
+        if ($q->num_rows() > 0)
+		{
+			foreach ($q->result() AS $row)
+				$options[$row->id]=$row->nombre;
+
+			$q->free_result();
+			return $options;
+		}
+    }
+
     function getCategoriaById($id, $type) {
         $table = ($type == "cat") ? "categorias" : "subcategorias";
 
@@ -59,10 +74,19 @@ class Model_categorias extends CI_Model {
 
 	function deleteCategory($id, $type) {
 		$table = ($type == "cat") ? "categorias" : "subcategorias";
-		  
 
-			$sql = "DELETE FROM $table WHERE id=?";
-	        $q=$this->db->query($sql, array($id));
+		if ($type == "cat") {
+			//TO DO Agregar la busque de tramites asociados a la categoria tambien
+			$sql = "SELECT * FROM subcategorias WHERE idCategoria = $id LIMIT 1";
+			$q=$this->db->query($sql);
+			if ($q->num_rows() > 0) {
+				return FALSE;
+			}
+		}
 
+		$sql = "DELETE FROM $table WHERE id=?";
+	    $q=$this->db->query($sql, array($id));
+
+		return TRUE;
 	}
 }

@@ -119,10 +119,15 @@ class Categorias extends CI_Controller {
 			$categoria = $this->categorias->getCategoriaById($id, $type);
 
 			if ($categoria) {
-				$this->categorias->deleteCategory($id, $type);
-
-				$this->session->set_flashdata("alert", array("type"=>"alert-success", "image"=>"fa-check", "message"=>"La categoria/subcategoria con id: $id se eliminó correctamente"));
-				redirect("categorias");
+				$res = $this->categorias->deleteCategory($id, $type);
+				if ($res) {
+					$this->session->set_flashdata("alert", array("type"=>"alert-success", "image"=>"fa-check", "message"=>"La categoria/subcategoria con id: $id se eliminó correctamente"));
+					redirect("categorias");
+				}
+				else {
+					$this->session->set_flashdata("alert", array("type"=>"alert-danger", "image"=>"fa-ban", "message"=>"Ne se puede eliminar la categoria, borre primero todos los registros asociados a este."));
+					redirect("categorias");
+				}
 			}
 			else {
 				$this->session->set_flashdata("alert", array("type"=>"alert-danger", "image"=>"fa-ban", "message"=>"No se encontro el registro en la base de datos"));
@@ -134,7 +139,6 @@ class Categorias extends CI_Controller {
 			redirect("categorias");
 		}
 	}
-
 
 
 
