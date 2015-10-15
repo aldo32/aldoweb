@@ -47,7 +47,6 @@ class Tramites extends CI_Controller {
 
 		$tramite = $this->tramites->getTramiteById($id);
 
-		if ($type == "sub") $this->form_validation->set_rules('idCategoria', '<strong>Categoria</strong>', 'trim|valid_combo');
 		$this->form_validation->set_rules('nombre', '<strong>Nombre</strong>', 'required|trim');
 
 		$this->form_validation->set_message('required', 'El campo %s es obligatorio');
