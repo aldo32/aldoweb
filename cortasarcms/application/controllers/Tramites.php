@@ -16,6 +16,7 @@ class Tramites extends CI_Controller {
 	public function index() {
 		$data = $this->general();
         $data["alert"] = $this->session->flashdata('alert');
+		$data["tramites"] = $this->tramites->getTramites();
 
         $this->load->view("tramites/tramites_view", $data);
     }
@@ -48,6 +49,9 @@ class Tramites extends CI_Controller {
 		$tramite = $this->tramites->getTramiteById($id);
 
 		$this->form_validation->set_rules('nombre', '<strong>Nombre</strong>', 'required|trim');
+		$this->form_validation->set_rules('descripcion', '<strong>Descripcion</strong>', 'required|trim');
+		$this->form_validation->set_rules('idCategoria', '<strong>Categoria</strong>', 'required|valid_combo');
+		$this->form_validation->set_rules('idSubCategoria', '<strong>Subcategoria</strong>', 'required|valid_combo');
 
 		$this->form_validation->set_message('required', 'El campo %s es obligatorio');
 		$this->form_validation->set_message('valid_combo', 'Seleccione una opción para el campo %s');
@@ -57,12 +61,43 @@ class Tramites extends CI_Controller {
 
 			$data = $this->general();
 			$data["type"] = $type;
-			$data["categoria"] = $categoria;
+			$data["tramite"] = $tramite;
 
-			$this->load->view("categorias/categorias_editar_view", $data);
+			$this->load->view("tramites/tramites_editar_view", $data);
 		}
 		else {
+			$register["nombre"] = $this->input->post("nombre");
+			$register["descripcion"] = $this->input->post("descripcion");
+			$register["idCategoria"] = $this->input->post("idCategoria");
+			$register["idSubCategoria"] = $this->input->post("idSubCategoria");
+
+			if ($type == "insert") {
+				$this->db->insert("tramites", $register);
+				$this->session->set_flashdata("alert", array("type"=>"alert-success", "image"=>"fa-check", "message"=>"El tramite <b>".$register['nombre']."</b> se creó correctamente"));
+				redirect("tramites");
+			}
+			else {
+				$this->db->where("id", $tramite->id);
+				$this->db->update("tramites", $register);
+				$this->session->set_flashdata("alert", array("type"=>"alert-success", "image"=>"fa-check", "message"=>"El tramite <b>".$register['nombre']."</b> se actualizó correctamente"));
+				redirect("tramites");
+			}
+		}
     }
+
+	function eliminar($id) {
+		$tramite = $this->tramites->getTramiteById($id);
+		if ($tramite) {
+			$this->db->delete('tramites', array('id' => $tramite->id));
+
+			$this->session->set_flashdata("alert", array("type"=>"alert-success", "image"=>"fa-check", "message"=>"Se eliminó el tramite correctamente"));
+			redirect("tramites");
+		}
+		else {
+			$this->session->set_flashdata("alert", array("type"=>"alert-danger", "image"=>"fa-ban", "message"=>"No se encontro el tramite en la base de datos"));
+			redirect("tramites");
+		}
+	}
 
     function general() {
 		$config['usuario'] = $this->userSession;
