@@ -16,6 +16,7 @@ class tramite {
     var $idCategoria;
     var $idSubCategoria;
     var $creado;
+    var $reglas;
 }
 ?>
 
@@ -35,8 +36,15 @@ class tramite {
         <script src="<?php echo base_url()?>/resources/plugins/datatables/jquery.dataTables.js"></script>
         <script src="<?php echo base_url()?>/resources/plugins/datatables/dataTables.bootstrap.min.js"></script>
 
+        <!-- bootstrap wysihtml5 - text editor -->
+        <link rel="stylesheet" href="<?php echo base_url()?>/resources/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+
+        <script src="<?php echo base_url()?>/resources/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+
 		<script type="text/javascript">
 		$(document).ready(function() {
+            $("#reglas").wysihtml5();
+
             <?php
             if (validation_errors() != "") {
                 ?>
@@ -98,6 +106,14 @@ class tramite {
                                 <div class="form-group col-md-4">
                                     <label>Sub Categoria</label>
                                     <?php echo form_dropdown("idSubCategoria", $comboSubCategorias, set_value("idSubCategoria", $tramite->idSubCategoria), "class='form-control input-sm' id='idSubCategoria'");?>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-8">
+                                    <textarea class="form-control input-sm" style="width: 100%" name="reglas" placeholder="Reglas del tramite" id="reglas">
+                                        <?php echo set_value("reglas", $tramite->reglas) ?>
+                                    </textarea>
                                 </div>
                             </div>
 

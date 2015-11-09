@@ -52,6 +52,7 @@ class Tramites extends CI_Controller {
 		$this->form_validation->set_rules('descripcion', '<strong>Descripcion</strong>', 'required|trim');
 		$this->form_validation->set_rules('idCategoria', '<strong>Categoria</strong>', 'required|valid_combo');
 		$this->form_validation->set_rules('idSubCategoria', '<strong>Subcategoria</strong>', 'required|valid_combo');
+	    $this->form_validation->set_rules('reglas', '<strong>Reglas</strong>', 'required|trim');
 
 		$this->form_validation->set_message('required', 'El campo %s es obligatorio');
 		$this->form_validation->set_message('valid_combo', 'Seleccione una opción para el campo %s');
@@ -70,6 +71,7 @@ class Tramites extends CI_Controller {
 			$register["descripcion"] = $this->input->post("descripcion");
 			$register["idCategoria"] = $this->input->post("idCategoria");
 			$register["idSubCategoria"] = $this->input->post("idSubCategoria");
+			$register["reglas"] = $this->input->post("reglas");
 
 			if ($type == "insert") {
 				$this->db->insert("tramites", $register);
@@ -97,6 +99,11 @@ class Tramites extends CI_Controller {
 			$this->session->set_flashdata("alert", array("type"=>"alert-danger", "image"=>"fa-ban", "message"=>"No se encontro el tramite en la base de datos"));
 			redirect("tramites");
 		}
+	}
+
+	function archivos() {
+		$data = $this->general();
+		$this->load->view("tramites/tramites_archivos_view", $data);
 	}
 
     function general() {
