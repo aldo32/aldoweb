@@ -67,28 +67,7 @@ class Login extends CI_Controller {
 			$this->db->update('usuarios', array("password"=>$newPassword));
 
 			$message = "<b>CORTASAR CMS</b><br><br>Usuario: $email<br><br>Su nueva contraseña es: $password<br><br>Cualquier duda acerca de su cuanta contacte al administrador.";
-
-			$config['protocol']    = 'smtp';
-	        $config['smtp_host']    = 'ssl://smtp.gmail.com';
-	        $config['smtp_port']    = '465';
-	        $config['smtp_timeout'] = '7';
-	        $config['smtp_user']    = 'isc.aldo@gmail.com';
-	        $config['smtp_pass']    = 'aldoma32';
-	        $config['charset']    = 'utf-8';
-	        $config['newline']    = "\r\n";
-	        $config['mailtype'] = 'html'; // or html
-	        $config['validation'] = TRUE; // bool whether to validate email or
-
-			$this->load->library('email', $config);
-
-			$this->email->from('isc.aldo@gmail.com', 'Administrador Cortasar CMS');
-			$this->email->to($email);
-
-			$this->email->subject('Restaurar password, Cortasar CMS');
-			$this->email->message($message);
-
-			$this->email->send();
-			$this->email->print_debugger();
+			$this->generallib->sendEmail($message, 'isc.aldo@gmail.com', 'Administrador Cortasar CMS', $email, 'Restaurar password, Cortasar CMS');
 
 			echo "Se envio tu nueva contraseña a tu correo.";
 		}

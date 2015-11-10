@@ -105,7 +105,7 @@ class user {
                                     if ($type == "insert")
                                         echo form_input(array('name'=>'email','id'=>'email', 'type'=>'email', 'class'=>'form-control input-sm', 'value' =>set_value('email', $user->email)));
                                     else
-                                        echo form_input(array('name'=>'email','id'=>'email', 'type'=>'email', 'readonly'=>$readOnly, 'class'=>'form-control input-sm', 'value' =>set_value('email', $user->email)));
+                                        echo form_input(array('name'=>'email','id'=>'email', 'type'=>'email', 'readonly'=>"", 'class'=>'form-control input-sm', 'value' =>set_value('email', $user->email)));
                                     ?>
                                 </div>
                                 <div class="form-group col-md-4">

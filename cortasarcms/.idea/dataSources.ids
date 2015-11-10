@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - cortasar@localhost" uuid="e33c681a-bfba-47f9-a4e3-c74a5b31a9b6">
+    <database-info product="MySQL" version="5.6.17" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="cortasar"/>
+    <table name="categorias" schema="" catalog="cortasar" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="nombre" sqlType="VARCHAR" precision="250" scale="0" nullable="false" jdbcType="12"/>
+      <column name="creado" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="subcategorias_ibfk_1" table="subcategorias" schema="" catalog="cortasar" columns="idCategoria"/>
+      <exported-key name="tramites_ibfk_1" table="tramites" schema="" catalog="cortasar" columns="idCategoria"/>
+    </table>
+    <table name="perfiles" schema="" catalog="cortasar" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="nombre" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="descripcion" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="creado" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="usuarios_ibfk_1" table="usuarios" schema="" catalog="cortasar" columns="idPerfil"/>
+    </table>
+    <table name="subcategorias" schema="" catalog="cortasar" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="idCategoria" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="nombre" sqlType="VARCHAR" precision="250" scale="0" nullable="false" jdbcType="12"/>
+      <column name="creado" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="subcategorias_ibfk_1" columns="idCategoria" ref-table="categorias" ref-schema="" ref-catalog="cortasar" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="tramites_ibfk_2" table="tramites" schema="" catalog="cortasar" columns="idSubCategoria"/>
+    </table>
+    <table name="tramites" schema="" catalog="cortasar" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="nombre" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="descripcion" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="idCategoria" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="idSubCategoria" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="creado" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="reglas" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="tramites_ibfk_1" columns="idCategoria" ref-table="categorias" ref-schema="" ref-catalog="cortasar" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="tramites_ibfk_2" columns="idSubCategoria" ref-table="subcategorias" ref-schema="" ref-catalog="cortasar" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="tramites_archivos_ibfk_1" table="tramites_archivos" schema="" catalog="cortasar" columns="idTramite"/>
+      <index name="idCategoria" unique="false" columns="idSubCategoria"/>
+    </table>
+    <table name="tramites_archivos" schema="" catalog="cortasar" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="idTramite" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="archivo" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="tipo" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12" remarks="dXBsb2FkLCBkb3dubG9hZA=="/>
+      <column name="descripcion" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="creado" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="modificado" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="tramites_archivos_ibfk_1" columns="idTramite" ref-table="tramites" ref-schema="" ref-catalog="cortasar" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+    <table name="usuarios" schema="" catalog="cortasar" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="nombre" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="apellidos" sqlType="VARCHAR" precision="250" scale="0" nullable="false" jdbcType="12"/>
+      <column name="telefono" sqlType="VARCHAR" precision="15" scale="0" nullable="false" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="password" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="creado" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="idPerfil" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="activo" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MQ=="/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="usuarios_ibfk_1" columns="idPerfil" ref-table="perfiles" ref-schema="" ref-catalog="cortasar" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="email" unique="true" columns="email"/>
+    </table>
+  </data-source>
+</component>
