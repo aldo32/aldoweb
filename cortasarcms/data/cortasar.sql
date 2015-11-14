@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-11-2015 a las 01:50:30
+-- Tiempo de generación: 14-11-2015 a las 01:00:58
 -- Versión del servidor: 5.6.17
 -- Versión de PHP: 5.5.12
 
@@ -126,8 +126,19 @@ CREATE TABLE IF NOT EXISTS `tramites_archivos` (
   `descripcion` text COLLATE utf8_unicode_ci NOT NULL,
   `creado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modificado` timestamp NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+  PRIMARY KEY (`id`),
+  KEY `idTramite` (`idTramite`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
+
+--
+-- Volcado de datos para la tabla `tramites_archivos`
+--
+
+INSERT INTO `tramites_archivos` (`id`, `idTramite`, `archivo`, `tipo`, `descripcion`, `creado`, `modificado`) VALUES
+(3, 1, 'C:/Users/Aldo/Documents/GitHub/aldoweb/cortasarcms/uploads/tramites/upload/mrprintables-fruit-templates-pineapple-02.pdf', 'upload', 'uploads/tramites/upload/mrprintables-fruit-templates-pineapple-02.pdf', '2015-11-09 23:40:16', '0000-00-00 00:00:00'),
+(4, 1, 'C:/Users/Aldo/Documents/GitHub/aldoweb/cortasarcms/uploads/tramites/upload/mrprintables-fruit-templates-apple-pear-03.pdf', 'upload', 'uploads/tramites/upload/mrprintables-fruit-templates-apple-pear-03.pdf', '2015-11-09 23:40:16', '0000-00-00 00:00:00'),
+(5, 1, 'uploads/tramites/upload/mrprintables-fruit-templates-pineapple-02.pdf', 'upload', 'dfd fasdf asdf asdf asdf asdf asdfasd ggfhkghjk hfg dsf asdf asdf  asdf asdf asd', '2015-11-09 23:41:19', '0000-00-00 00:00:00'),
+(6, 1, 'uploads/tramites/upload/mrprintables-fruit-templates-apple-pear-03.pdf', 'upload', 'dfd fasdf asdf asdf asdf asdf asdfasd ggfhkghjk hfg dsf asdf asdf  asdf asdf asd', '2015-11-09 23:41:19', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -155,8 +166,8 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `apellidos`, `telefono`, `email`, `password`, `creado`, `idPerfil`, `activo`) VALUES
-(1, 'Aldo', 'Marañon Andrade', '5531224198', 'isc.aldo@gmail.com', 'abc670835d93413f158e695bf9148eb4eb672425', '2015-09-20 00:53:19', 1, 1),
-(2, 'Usuario 1', 'apellidos de prueba 1', '654651324165', 'isc.aldo@hotmail.com', '1be45c6297a880d125fbdcca65282a0dacca0113', '2015-09-22 22:58:04', 1, 1),
+(1, 'aldo2', 'marañon andradé2', '15531224198', '1isc.aldo@hotmail.com', 'abc670835d93413f158e695bf9148eb4eb672425', '2015-09-20 00:53:19', 2, 0),
+(2, 'Usuario 1', 'apellidos de prueba 1', '654651324165', 'isc.aldo@hotmail.com', 'abc670835d93413f158e695bf9148eb4eb672425', '2015-09-22 22:58:04', 1, 1),
 (30, 'Usuario 2', 'apellidos de prueba 2', '646546546546', 'root@root.com', 'abc670835d93413f158e695bf9148eb4eb672425', '2015-09-23 16:11:59', 1, 1),
 (31, 'Usuario 3', 'apellidos de prueba 3', '74546543546', 'root1@root.com', 'abc670835d93413f158e695bf9148eb4eb672425', '2015-09-23 16:46:10', 2, 1),
 (32, 'Usuario 4', 'apellidos de prueba 4', '4654214654654', 'root3@root.com', 'abc670835d93413f158e695bf9148eb4eb672425', '2015-09-23 16:55:24', 2, 1),
@@ -184,6 +195,12 @@ ALTER TABLE `subcategorias`
 ALTER TABLE `tramites`
   ADD CONSTRAINT `tramites_ibfk_1` FOREIGN KEY (`idCategoria`) REFERENCES `categorias` (`id`),
   ADD CONSTRAINT `tramites_ibfk_2` FOREIGN KEY (`idSubCategoria`) REFERENCES `subcategorias` (`id`);
+
+--
+-- Filtros para la tabla `tramites_archivos`
+--
+ALTER TABLE `tramites_archivos`
+  ADD CONSTRAINT `tramites_archivos_ibfk_1` FOREIGN KEY (`idTramite`) REFERENCES `tramites` (`id`);
 
 --
 -- Filtros para la tabla `usuarios`
