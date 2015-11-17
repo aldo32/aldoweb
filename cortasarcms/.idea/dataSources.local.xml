@@ -7,5 +7,11 @@
       <schema-pattern>cortasar.*</schema-pattern>
       <default-schemas>cortasar.*</default-schemas>
     </data-source>
+    <data-source name="MySQL - cubogeneral@localhost" uuid="ef7e28b4-4f6e-4a48-91b7-92b04af91c00">
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <schema-pattern>cubogeneral.*</schema-pattern>
+      <default-schemas>cubogeneral.*</default-schemas>
+    </data-source>
   </component>
 </project>
