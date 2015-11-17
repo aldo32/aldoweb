@@ -57,4 +57,11 @@ class Model_tramites extends CI_Model {
 
 		return ($q->num_rows() > 0) ? $q->row() : false;
 	}
+
+	function getReglasTramite($idTramite) {
+		$sql = "SELECT * FROM tramites_reglas WHERE idTramite = $idTramite";
+		$q = $this->db->query($sql);
+
+		return $q->result();
+	}
 }

@@ -52,7 +52,6 @@ class Tramites extends CI_Controller {
 		$this->form_validation->set_rules('descripcion', '<strong>Descripcion</strong>', 'required|trim');
 		$this->form_validation->set_rules('idCategoria', '<strong>Categoria</strong>', 'required|valid_combo');
 		$this->form_validation->set_rules('idSubCategoria', '<strong>Subcategoria</strong>', 'required|valid_combo');
-	    $this->form_validation->set_rules('reglas', '<strong>Reglas</strong>', 'required|trim');
 
 		$this->form_validation->set_message('required', 'El campo %s es obligatorio');
 		$this->form_validation->set_message('valid_combo', 'Seleccione una opción para el campo %s');
@@ -71,7 +70,6 @@ class Tramites extends CI_Controller {
 			$register["descripcion"] = $this->input->post("descripcion");
 			$register["idCategoria"] = $this->input->post("idCategoria");
 			$register["idSubCategoria"] = $this->input->post("idSubCategoria");
-			$register["reglas"] = $this->input->post("reglas");
 
 			if ($type == "insert") {
 				$this->db->insert("tramites", $register);
@@ -101,6 +99,129 @@ class Tramites extends CI_Controller {
 		}
 	}
 
+	function RDC($id) {
+		$data = $this->general();
+		$data["tramite"] = $this->tramites->getTramiteById($id);
+		$data["alert"]="";
+
+		if ($data["tramite"]) {
+			$data["reglas"] = $this->tramites->getReglasTramite($data["tramite"]->id);
+			$this->load->view("tramites/tramites_rdc_view", $data);
+		}
+		else {
+			$this->session->set_flashdata("alert", array("type"=>"alert-danger", "image"=>"fa-ban", "message"=>"No se encontro el tramite en la base de datos"));
+			redirect("tramites");
+		}
+	}
+
+	function RDCaddRule() {
+		$idTramite = $this->input->post("idTramite");
+		$regla = $this->input->post("regla");
+
+		$register["idTramite"] = $idTramite;
+		$register["regla"] = $regla;
+
+		$this->db->insert("tramites_reglas", $register);
+
+		$reglas = $this->tramites->getReglasTramite($idTramite);
+
+		?>
+		<!-- DataTables -->
+		<link rel="stylesheet" href="<?php echo base_url()?>/resources/plugins/datatables/dataTables.bootstrap.css">
+
+		<!-- DataTables -->
+		<script src="<?php echo base_url()?>/resources/plugins/datatables/jquery.dataTables.js"></script>
+		<script src="<?php echo base_url()?>/resources/plugins/datatables/dataTables.bootstrap.min.js"></script>
+
+		<script type="text/javascript">
+		$(document).ready(function() {
+			$("#tablaReglas").DataTable({
+				stateSave: true,
+			});
+		});
+		</script>
+		<table id="tablaReglas" class="table table-bordered table-striped">
+			<thead>
+			<tr>
+				<th>ID</th>
+				<th>Nombre</th>
+				<th>Creado</th>
+				<th width="50">Operaciones</th>
+			</tr>
+			</thead>
+			<tbody>
+			<?php
+			if ($reglas) {
+				foreach($reglas AS $row) {
+					?>
+					<tr>
+						<td><?php echo $row->id ?></td>
+						<td><?php echo $row->regla ?></td>
+						<td><?php echo $row->creado ?></td>
+						<td><a href="#" class="eliminarRegla" id="<?php echo $row->id ?>"><button class="btn btn-block btn-danger btn-xs">Eliminar</button></a></td>
+					</tr>
+					<?php
+				}
+			}
+			?>
+			</tbody>
+		</table>
+		<?php
+	}
+
+	function RDCdeleteRule() {
+		$idTramite = $this->input->post("idTramite");
+		$idRegla = $this->input->post("idRegla");
+
+		$this->db->delete('tramites_reglas', array('id' => $idRegla));
+
+		$reglas = $this->tramites->getReglasTramite($idTramite);
+
+		?>
+		<!-- DataTables -->
+		<link rel="stylesheet" href="<?php echo base_url()?>/resources/plugins/datatables/dataTables.bootstrap.css">
+
+		<!-- DataTables -->
+		<script src="<?php echo base_url()?>/resources/plugins/datatables/jquery.dataTables.js"></script>
+		<script src="<?php echo base_url()?>/resources/plugins/datatables/dataTables.bootstrap.min.js"></script>
+
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#tablaReglas").DataTable({
+					stateSave: true,
+				});
+			});
+		</script>
+		<table id="tablaReglas" class="table table-bordered table-striped">
+			<thead>
+			<tr>
+				<th>ID</th>
+				<th>Nombre</th>
+				<th>Creado</th>
+				<th width="50">Operaciones</th>
+			</tr>
+			</thead>
+			<tbody>
+			<?php
+			if ($reglas) {
+				foreach($reglas AS $row) {
+					?>
+					<tr>
+						<td><?php echo $row->id ?></td>
+						<td><?php echo $row->regla ?></td>
+						<td><?php echo $row->creado ?></td>
+						<td><a href="#" class="eliminarRegla" id="<?php echo $row->id ?>"><button class="btn btn-block btn-danger btn-xs">Eliminar</button></a></td>
+					</tr>
+					<?php
+				}
+			}
+			?>
+			</tbody>
+		</table>
+		<?php
+	}
+
+	/*
 	function archivos() {
 		$data = $this->general();
         $data["alert"] = $this->session->flashdata('alert');
@@ -191,7 +312,7 @@ class Tramites extends CI_Controller {
 			$this->session->set_flashdata("alert", array("type"=>"alert-danger", "image"=>"fa-ban", "message"=>"No se encontro el archivo en la base de datos"));
 			redirect("tramites/archivos");
 		}
-	}
+	}*/
 
     function general() {
 		$config['usuario'] = $this->userSession;
@@ -208,4 +329,3 @@ class Tramites extends CI_Controller {
 		return $data;
 	}
 }
-?>

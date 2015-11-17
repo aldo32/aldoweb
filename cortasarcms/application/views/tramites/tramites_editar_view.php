@@ -109,14 +109,6 @@ class tramite {
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="form-group col-md-8">
-                                    <textarea class="form-control input-sm" style="width: 100%" name="reglas" placeholder="Reglas del tramite" id="reglas">
-                                        <?php echo set_value("reglas", $tramite->reglas) ?>
-                                    </textarea>
-                                </div>
-                            </div>
-
                             <button class="btn btn-primary" type="submit">Guardar</button>
                             <br>
                         <?php echo form_close(); ?>

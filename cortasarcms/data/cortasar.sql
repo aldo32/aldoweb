@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-11-2015 a las 01:00:58
+-- Tiempo de generación: 17-11-2015 a las 01:34:46
 -- Versión del servidor: 5.6.17
 -- Versión de PHP: 5.5.12
 
@@ -99,46 +99,104 @@ CREATE TABLE IF NOT EXISTS `tramites` (
   `idCategoria` int(11) NOT NULL,
   `idSubCategoria` int(11) NOT NULL,
   `creado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `reglas` text COLLATE utf8_unicode_ci NOT NULL,
+  `estatus` int(11) NOT NULL DEFAULT '0' COMMENT '0: Revición   1: Proceso   2:Finalizado',
   PRIMARY KEY (`id`),
   KEY `idCategoria` (`idCategoria`,`idSubCategoria`),
   KEY `idSubCategoria` (`idSubCategoria`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `tramites`
 --
 
-INSERT INTO `tramites` (`id`, `nombre`, `descripcion`, `idCategoria`, `idSubCategoria`, `creado`, `reglas`) VALUES
-(1, 'Tramite de prueba', 'Descripcion de prueba', 1, 1, '2015-11-07 23:36:28', '<p><strong>Lorem Ipsum</strong> es simplemente el texto de relleno de las \r\nimprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno \r\nestándar de las industrias desde el año 1500, cuando un impresor (N. del\r\n T. persona que se dedica a la imprenta) desconocido usó una galería de \r\ntextos y los mezcló de tal manera que logró hacer un libro de textos \r\nespecimen. No sólo sobrevivió 500 años, sino que tambien ingresó como \r\ntexto de relleno en documentos xxx<br></p>');
+INSERT INTO `tramites` (`id`, `nombre`, `descripcion`, `idCategoria`, `idSubCategoria`, `creado`, `estatus`) VALUES
+(1, 'Tramite de prueba', 'Descripcion de prueba', 1, 1, '2015-11-07 23:36:28', 0),
+(2, 'Tramite de prueba 2', 'ninguna', 1, 3, '2015-11-16 17:19:22', 0);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tramites_archivos`
+-- Estructura de tabla para la tabla `tramites_correos`
 --
 
-CREATE TABLE IF NOT EXISTS `tramites_archivos` (
+CREATE TABLE IF NOT EXISTS `tramites_correos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idTramite` int(11) NOT NULL,
+  `mensaje` text COLLATE utf8_unicode_ci NOT NULL,
+  `creado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modificado` timestamp NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idTramite` (`idTramite`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tramites_correos_archivos`
+--
+
+CREATE TABLE IF NOT EXISTS `tramites_correos_archivos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idTramite` int(11) NOT NULL,
+  `idCorreo` int(11) NOT NULL,
+  `archivo` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `descripcion` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
+  `creado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `idTramite` (`idTramite`,`idCorreo`),
+  KEY `idCorreo` (`idCorreo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tramites_documentos`
+--
+
+CREATE TABLE IF NOT EXISTS `tramites_documentos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idTramite` int(11) NOT NULL,
   `archivo` text COLLATE utf8_unicode_ci NOT NULL,
-  `tipo` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'upload, download',
   `descripcion` text COLLATE utf8_unicode_ci NOT NULL,
   `creado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modificado` timestamp NOT NULL,
+  `url` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `idTramite` (`idTramite`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
 
 --
--- Volcado de datos para la tabla `tramites_archivos`
+-- Volcado de datos para la tabla `tramites_documentos`
 --
 
-INSERT INTO `tramites_archivos` (`id`, `idTramite`, `archivo`, `tipo`, `descripcion`, `creado`, `modificado`) VALUES
-(3, 1, 'C:/Users/Aldo/Documents/GitHub/aldoweb/cortasarcms/uploads/tramites/upload/mrprintables-fruit-templates-pineapple-02.pdf', 'upload', 'uploads/tramites/upload/mrprintables-fruit-templates-pineapple-02.pdf', '2015-11-09 23:40:16', '0000-00-00 00:00:00'),
-(4, 1, 'C:/Users/Aldo/Documents/GitHub/aldoweb/cortasarcms/uploads/tramites/upload/mrprintables-fruit-templates-apple-pear-03.pdf', 'upload', 'uploads/tramites/upload/mrprintables-fruit-templates-apple-pear-03.pdf', '2015-11-09 23:40:16', '0000-00-00 00:00:00'),
-(5, 1, 'uploads/tramites/upload/mrprintables-fruit-templates-pineapple-02.pdf', 'upload', 'dfd fasdf asdf asdf asdf asdf asdfasd ggfhkghjk hfg dsf asdf asdf  asdf asdf asd', '2015-11-09 23:41:19', '0000-00-00 00:00:00'),
-(6, 1, 'uploads/tramites/upload/mrprintables-fruit-templates-apple-pear-03.pdf', 'upload', 'dfd fasdf asdf asdf asdf asdf asdfasd ggfhkghjk hfg dsf asdf asdf  asdf asdf asd', '2015-11-09 23:41:19', '0000-00-00 00:00:00');
+INSERT INTO `tramites_documentos` (`id`, `idTramite`, `archivo`, `descripcion`, `creado`, `modificado`, `url`) VALUES
+(3, 1, 'C:/Users/Aldo/Documents/GitHub/aldoweb/cortasarcms/uploads/tramites/upload/mrprintables-fruit-templates-pineapple-02.pdf', 'uploads/tramites/upload/mrprintables-fruit-templates-pineapple-02.pdf', '2015-11-09 23:40:16', '0000-00-00 00:00:00', ''),
+(4, 1, 'C:/Users/Aldo/Documents/GitHub/aldoweb/cortasarcms/uploads/tramites/upload/mrprintables-fruit-templates-apple-pear-03.pdf', 'uploads/tramites/upload/mrprintables-fruit-templates-apple-pear-03.pdf', '2015-11-09 23:40:16', '0000-00-00 00:00:00', ''),
+(5, 1, 'uploads/tramites/upload/mrprintables-fruit-templates-pineapple-02.pdf', 'dfd fasdf asdf asdf asdf asdf asdfasd ggfhkghjk hfg dsf asdf asdf  asdf asdf asd', '2015-11-09 23:41:19', '0000-00-00 00:00:00', ''),
+(6, 1, 'uploads/tramites/upload/mrprintables-fruit-templates-apple-pear-03.pdf', 'dfd fasdf asdf asdf asdf asdf asdfasd ggfhkghjk hfg dsf asdf asdf  asdf asdf asd', '2015-11-09 23:41:19', '0000-00-00 00:00:00', '');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tramites_reglas`
+--
+
+CREATE TABLE IF NOT EXISTS `tramites_reglas` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idTramite` int(11) NOT NULL,
+  `regla` text COLLATE utf8_unicode_ci NOT NULL,
+  `creado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `idTramite` (`idTramite`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
+
+--
+-- Volcado de datos para la tabla `tramites_reglas`
+--
+
+INSERT INTO `tramites_reglas` (`id`, `idTramite`, `regla`, `creado`) VALUES
+(1, 1, 'sadasdasdasdsa', '2015-11-16 22:34:08'),
+(2, 1, 'dasdasdasdas', '2015-11-16 22:34:29');
 
 -- --------------------------------------------------------
 
@@ -197,10 +255,29 @@ ALTER TABLE `tramites`
   ADD CONSTRAINT `tramites_ibfk_2` FOREIGN KEY (`idSubCategoria`) REFERENCES `subcategorias` (`id`);
 
 --
--- Filtros para la tabla `tramites_archivos`
+-- Filtros para la tabla `tramites_correos`
 --
-ALTER TABLE `tramites_archivos`
-  ADD CONSTRAINT `tramites_archivos_ibfk_1` FOREIGN KEY (`idTramite`) REFERENCES `tramites` (`id`);
+ALTER TABLE `tramites_correos`
+  ADD CONSTRAINT `tramites_correos_ibfk_1` FOREIGN KEY (`idTramite`) REFERENCES `tramites` (`id`);
+
+--
+-- Filtros para la tabla `tramites_correos_archivos`
+--
+ALTER TABLE `tramites_correos_archivos`
+  ADD CONSTRAINT `tramites_correos_archivos_ibfk_2` FOREIGN KEY (`idCorreo`) REFERENCES `tramites_correos` (`id`),
+  ADD CONSTRAINT `tramites_correos_archivos_ibfk_1` FOREIGN KEY (`idTramite`) REFERENCES `tramites` (`id`);
+
+--
+-- Filtros para la tabla `tramites_documentos`
+--
+ALTER TABLE `tramites_documentos`
+  ADD CONSTRAINT `tramites_documentos_ibfk_1` FOREIGN KEY (`idTramite`) REFERENCES `tramites` (`id`);
+
+--
+-- Filtros para la tabla `tramites_reglas`
+--
+ALTER TABLE `tramites_reglas`
+  ADD CONSTRAINT `tramites_reglas_ibfk_1` FOREIGN KEY (`idTramite`) REFERENCES `tramites` (`id`);
 
 --
 -- Filtros para la tabla `usuarios`

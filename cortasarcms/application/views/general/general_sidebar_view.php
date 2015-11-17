@@ -43,14 +43,9 @@
 					</a>
 				</li>
 				<li class="treeview  <?php echo ($page == "tramites") ? "active" : ""; ?>">
-					<a href="#">
-						<i class="fa fa-files-o"></i> <span>Tramites</span>
-                        <i class="fa fa-angle-left pull-right"></i>
+					<a href="<?php echo base_url("tramites") ?>">
+                        <i class="fa fa-files-o"></i>Tramites</a></li>
 					</a>
-                    <ul class="treeview-menu">
-                        <li><a href="<?php echo base_url("tramites") ?>"><i class="fa fa-gear"></i>Administrar</a></li>
-                        <li><a href="<?php echo base_url("tramites/archivos") ?>"><i class="fa fa-file"></i>Archivos</a></li>
-                    </ul>
 				</li>
 
 
