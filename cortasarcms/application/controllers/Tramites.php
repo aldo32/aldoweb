@@ -106,6 +106,7 @@ class Tramites extends CI_Controller {
 
 		if ($data["tramite"]) {
 			$data["reglas"] = $this->tramites->getReglasTramite($data["tramite"]->id);
+            $data["documentos"] = $this->tramites->getDocumentosTramite($data["tramite"]->id);
 			$this->load->view("tramites/tramites_rdc_view", $data);
 		}
 		else {
@@ -158,7 +159,7 @@ class Tramites extends CI_Controller {
 						<td><?php echo $row->id ?></td>
 						<td><?php echo $row->regla ?></td>
 						<td><?php echo $row->creado ?></td>
-						<td><a href="#" class="eliminarRegla" id="<?php echo $row->id ?>"><button class="btn btn-block btn-danger btn-xs">Eliminar</button></a></td>
+						<td><a href="javascript:void(0);" class="eliminarRegla" id="<?php echo $row->id ?>"><button class="btn btn-block btn-danger btn-xs">Eliminar</button></a></td>
 					</tr>
 					<?php
 				}
@@ -210,7 +211,7 @@ class Tramites extends CI_Controller {
 						<td><?php echo $row->id ?></td>
 						<td><?php echo $row->regla ?></td>
 						<td><?php echo $row->creado ?></td>
-						<td><a href="#" class="eliminarRegla" id="<?php echo $row->id ?>"><button class="btn btn-block btn-danger btn-xs">Eliminar</button></a></td>
+						<td><a href="javascript:void(0);" class="eliminarRegla" id="<?php echo $row->id ?>"><button class="btn btn-block btn-danger btn-xs">Eliminar</button></a></td>
 					</tr>
 					<?php
 				}
@@ -220,6 +221,122 @@ class Tramites extends CI_Controller {
 		</table>
 		<?php
 	}
+
+    function RDCaddDocument()
+    {
+        $idTramite = $this->input->post("idTramite");
+        $documento = $this->input->post("documento");
+        $descripcion = $this->input->post("descripcion");
+
+        $register["idTramite"] = $idTramite;
+        $register["archivo"] = $documento;
+        $register["descripcion"] = $descripcion;
+
+        $this->db->insert("tramites_documentos", $register);
+
+        $documentos = $this->tramites->getDocumentosTramite($idTramite);
+
+        ?>
+        <!-- DataTables -->
+        <link rel="stylesheet" href="<?php echo base_url()?>/resources/plugins/datatables/dataTables.bootstrap.css">
+
+        <!-- DataTables -->
+        <script src="<?php echo base_url()?>/resources/plugins/datatables/jquery.dataTables.js"></script>
+        <script src="<?php echo base_url()?>/resources/plugins/datatables/dataTables.bootstrap.min.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#tablaDocumentos").DataTable({
+                    stateSave: true,
+                });
+            });
+        </script>
+
+        <table id="tablaDocumentos" class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Documento</th>
+                <th>Descripción</th>
+                <th>Creado</th>
+                <th width="50">Operaciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            if ($documentos) {
+                foreach($documentos AS $row) {
+                    ?>
+                    <tr>
+                        <td><?php echo $row->id ?></td>
+                        <td><?php echo $row->archivo ?></td>
+                        <td><?php echo $row->descripcion ?></td>
+                        <td><?php echo $row->creado ?></td>
+                        <td><a href="javascript:void(0);" class="eliminarDocumento" id="<?php echo $row->id ?>"><button class="btn btn-block btn-danger btn-xs">Eliminar</button></a></td>
+                    </tr>
+                    <?php
+                }
+            }
+            ?>
+            </tbody>
+        </table>
+        <?php
+    }
+
+    function RDCdeleteDocument() {
+        $idTramite = $this->input->post("idTramite");
+        $idDocumento = $this->input->post("idDocumento");
+
+        $this->db->delete('tramites_documentos', array('id' => $idDocumento));
+
+        $documentos = $this->tramites->getDocumentosTramite($idTramite);
+
+        ?>
+        <!-- DataTables -->
+        <link rel="stylesheet" href="<?php echo base_url()?>/resources/plugins/datatables/dataTables.bootstrap.css">
+
+        <!-- DataTables -->
+        <script src="<?php echo base_url()?>/resources/plugins/datatables/jquery.dataTables.js"></script>
+        <script src="<?php echo base_url()?>/resources/plugins/datatables/dataTables.bootstrap.min.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#tablaDocumentos").DataTable({
+                    stateSave: true,
+                });
+            });
+        </script>
+
+        <table id="tablaDocumentos" class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Documento</th>
+                <th>Descripción</th>
+                <th>Creado</th>
+                <th width="50">Operaciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            if ($documentos) {
+                foreach($documentos AS $row) {
+                    ?>
+                    <tr>
+                        <td><?php echo $row->id ?></td>
+                        <td><?php echo $row->archivo ?></td>
+                        <td><?php echo $row->descripcion ?></td>
+                        <td><?php echo $row->creado ?></td>
+                        <td><a href="javascript:void(0);" class="eliminarDocumento" id="<?php echo $row->id ?>"><button class="btn btn-block btn-danger btn-xs">Eliminar</button></a></td>
+                    </tr>
+                    <?php
+                }
+            }
+            ?>
+            </tbody>
+        </table>
+        <?php
+    }
 
 	/*
 	function archivos() {

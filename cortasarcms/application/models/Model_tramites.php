@@ -64,4 +64,11 @@ class Model_tramites extends CI_Model {
 
 		return $q->result();
 	}
+
+	function getDocumentosTramite($idTramite) {
+		$sql = "SELECT * FROM tramites_documentos WHERE idTramite = $idTramite";
+		$q = $this->db->query($sql);
+
+		return $q->result();
+	}
 }

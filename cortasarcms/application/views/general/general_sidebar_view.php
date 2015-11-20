@@ -3,12 +3,12 @@
 		<!-- sidebar: style can be found in sidebar.less -->
 		<section class="sidebar">
 			<!-- Sidebar user panel -->
-			<div class="user-panel">
+			<div class="user-panel" style="padding: 15px;">
 				<div class="pull-left image">
 					<img src="<?php echo base_url()?>/resources/images/user-default.jpg" class="img-circle" alt="User Image" />
 				</div>
 				<div class="pull-left info">
-					<p><?php echo $usuario->nombre." ".$usuario->apellidos ?></p>
+					<p><?php echo $usuario->nombre."<br>".$usuario->apellidos ?></p>
 					<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 				</div>
 			</div>

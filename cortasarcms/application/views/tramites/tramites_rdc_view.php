@@ -27,6 +27,10 @@
                 stateSave: true,
             });
 
+            $("#tablaDocumentos").DataTable({
+                stateSave: true,
+            });
+
             //add new rule
             $("#addRule").click(function() {
                 regla = $("#regla");
@@ -59,6 +63,45 @@
                     },
                     type: "POST"
                 });
+            });
+
+            //add new document
+            $("#addDocument").click(function() {
+                documento = $("#documento");
+                descripcion = $("#descripcion");
+                if (documento.val() == "") alert("Debe escribir una documento para el tramite");
+                else {
+                    $("#messageDocumento").html("<i class='fa fa-refresh fa-spin'></i>&nbsp;&nbsp;Guardando...");
+                    $.ajax({
+                        url: "<?php echo base_url("tramites/RDCaddDocument") ?>",
+                        data: "idTramite="+idTramite+"&documento="+documento.val()+"&descripcion="+documento.val()+"&<?php echo $this->security->get_csrf_token_name()?>=<?php echo $this->security->get_csrf_hash()?>",
+                        dataType: "html",
+                        success: function(datos) {
+                            $("#messageDocumento").html(datos);
+                        },
+                        type: "POST"
+                    });
+                }
+            });
+
+            //delete document
+            $(document).on("click", ".eliminarDocumento", function() {
+                idDocumento = $(this).attr("id");
+
+                $("#messageDocumento").html("<i class='fa fa-refresh fa-spin'></i>&nbsp;&nbsp;Eliminando...");
+                $.ajax({
+                    url: "<?php echo base_url("tramites/RDCdeleteDocument") ?>",
+                    data: "idTramite="+idTramite+"&idDocumento="+idDocumento+"&<?php echo $this->security->get_csrf_token_name()?>=<?php echo $this->security->get_csrf_hash()?>",
+                    dataType: "html",
+                    success: function(datos) {
+                        $("#messageDocumento").html(datos);
+                    },
+                    type: "POST"
+                });
+            });
+
+            $("#addFileEmail").click(function() {
+                $("#filesContent").append("<div class='form-group col-md-12'><input type='file' name='archivoAdjunto[]' id='archivoAdjunto'></div>");
             });
 		});
 	</script>
@@ -117,7 +160,7 @@
                                             <td><?php echo $row->id ?></td>
                                             <td><?php echo $row->regla ?></td>
                                             <td><?php echo $row->creado ?></td>
-                                            <td><a href="#" class="eliminarRegla" id="<?php echo $row->id ?>"><button class="btn btn-block btn-danger btn-xs">Eliminar</button></a></td>
+                                            <td><a href="javascript:void(0);" class="eliminarRegla" id="<?php echo $row->id ?>"><button class="btn btn-block btn-danger btn-xs">Eliminar</button></a></td>
                                         </tr>
                                         <?php
                                     }
@@ -141,20 +184,20 @@
                             <?php echo form_input(array('name'=>'documento','id'=>'documento', 'class'=>'form-control input-sm', 'value' =>set_value('documento')));?>
                         </div>
                         <div class="form-group col-md-12">
-                            <label>DescripciÛn</label>
+                            <label>Descripci√≥n</label>
                             <?php echo form_input(array('name'=>'descripcion','id'=>'descripcion', 'class'=>'form-control input-sm', 'value' =>set_value('descripcion')));?>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary" id="addRule">Agregar Documento</button>
+                    <button type="button" class="btn btn-primary" id="addDocument">Agregar Documento</button>
 
                     <br><br>
-                    <div id="messageRegla">
-                        <table id="tablaReglas" class="table table-bordered table-striped">
+                    <div id="messageDocumento">
+                        <table id="tablaDocumentos" class="table table-bordered table-striped">
                             <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Documento</th>
-                                <th>DescripciÛn</th>
+                                <th>Descripci√≥n</th>
                                 <th>Creado</th>
                                 <th width="50">Operaciones</th>
                             </tr>
@@ -169,7 +212,7 @@
                                         <td><?php echo $row->archivo ?></td>
                                         <td><?php echo $row->descripcion ?></td>
                                         <td><?php echo $row->creado ?></td>
-                                        <td><a href="#" class="eliminarDocumento" id="<?php echo $row->id ?>"><button class="btn btn-block btn-danger btn-xs">Eliminar</button></a></td>
+                                        <td><a href="javascript:void(0);" class="eliminarDocumento" id="<?php echo $row->id ?>"><button class="btn btn-block btn-danger btn-xs">Eliminar</button></a></td>
                                     </tr>
                                     <?php
                                 }
@@ -183,11 +226,33 @@
 
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Correos que se mandan al recibir los documentos</h3>
+                    <h3 class="box-title">Configuraci√≥n de correos por tramite</h3>
                 </div>
 
                 <div class="box-body">
-
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label>Titulo del correo</label>
+                            <?php echo form_input(array('name'=>'titulo','id'=>'titulo', 'class'=>'form-control input-sm', 'value' =>set_value('titulo')));?>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label>Correo</label>
+                            <textarea class="form-control input-sm" name="correo" id="correo" cols="50" rows="6">
+                                <?php echo set_value("correo") ?>
+                            </textarea>
+                        </div>
+                        <div id="filesContent">
+                            <div class="form-group col-md-12">
+                                <label>Adjuntar archivos</label>
+                                <input type="file" name="archivoAdjunto[]" id="archivoAdjunto">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <a href="javascript:void(0);" id="addFileEmail">Agregar otro archivo</a>
+                        </div>
+                    </div>
+                    <br>
+                    <button type="button" class="btn btn-primary" id="addRule">Guardar correo</button>
                 </div>
             </div>
 
