@@ -71,4 +71,37 @@ class Model_tramites extends CI_Model {
 
 		return $q->result();
 	}
+
+	function getCorreoTramite($idTramite) {
+		$sql = "SELECT * FROM tramites_correos WHERE idTramite = $idTramite LIMIT 1";
+		$q = $this->db->query($sql);
+
+		return $q->row();
+	}
+
+	function getArchivosCorreoTramite($idTramite, $idCorreo) {
+		if ($idCorreo != "") {
+			$sql = "SELECT * FROM tramites_correos_archivos WHERE idTramite = $idTramite AND idCorreo = $idCorreo";
+			$q = $this->db->query($sql);
+
+			return $q->result();
+		}
+		else {
+			return false;
+		}
+	}
+
+	function checkUrlFile($archivo, $idCorreo) {
+		$sql = "SELECT * FROM tramites_correos_archivos WHERE archivo LIKE '%$archivo%' AND idCorreo = $idCorreo LIMIT 1";
+		$q = $this->db->query($sql);
+
+		return $q->row();
+	}
+
+	function getFileCorreoById($id) {
+		$sql = "SELECT * FROM tramites_correos_archivos WHERE id = $id";
+		$q = $this->db->query($sql);
+
+		return $q->row();
+	}
 }

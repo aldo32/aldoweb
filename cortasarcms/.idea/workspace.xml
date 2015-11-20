@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/application/views/tramites/tramites_rdc_view.php" line="104" mnemonic="3" />
+    <bookmark url="file://$PROJECT_DIR$/application/views/tramites/tramites_rdc_view.php" line="122" mnemonic="3" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3817723a-2f7e-4b06-a43f-9b8a89ab508e" name="Default" comment="" />
@@ -58,7 +58,25 @@
         <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
       </PATH_ELEMENT>
       <PATH_ELEMENT>
-        <option name="myItemId" value="tramites_documentos" />
+        <option name="myItemId" value="tramites_correos_archivos" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+    </PATH>
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DbRootNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="MySQL - cortasar@localhost" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="cortasar" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="tramites_correos" />
         <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
       </PATH_ELEMENT>
     </PATH>
@@ -72,42 +90,62 @@
       <file leaf-file-name="Tramites.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/Tramites.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-16.923077">
-              <caret line="329" column="56" selection-start-line="329" selection-start-column="56" selection-end-line="329" selection-end-column="56" />
+            <state vertical-scroll-proportion="-8.5">
+              <caret line="397" column="57" selection-start-line="397" selection-start-column="45" selection-end-line="397" selection-end-column="57" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Model_tramites.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Model_tramites.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/models/Model_tramites.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.653846">
-              <caret line="68" column="49" selection-start-line="68" selection-start-column="49" selection-end-line="68" selection-end-column="49" />
+            <state vertical-scroll-proportion="0.42708334">
+              <caret line="94" column="112" selection-start-line="94" selection-start-column="112" selection-end-line="94" selection-end-column="112" />
               <folding>
-                <marker date="1447892329242" expanded="true" signature="142:175" placeholder="SELECT * FRO..tramites..." />
-                <marker date="1447892329242" expanded="true" signature="311:510" placeholder="SELECT *, (S..tramites..." />
-                <marker date="1447892329242" expanded="true" signature="322:383" placeholder="SELECT nombr..categorias..." />
-                <marker date="1447892329242" expanded="true" signature="406:473" placeholder="SELECT nombr..subcategorias..." />
-                <marker date="1447892329242" expanded="true" signature="610:632" placeholder="SELECT * FRO..tramites..." />
-                <marker date="1447892329242" expanded="true" signature="908:1238" placeholder="SELECT ta.id..tramites_archivos..." />
-                <marker date="1447892329242" expanded="true" signature="1133:1184" placeholder="SELECT nombr..tramites..." />
-                <marker date="1447892329242" expanded="true" signature="1342:1383" placeholder="SELECT * FRO..tramites_archivos..." />
-                <marker date="1447892329242" expanded="true" signature="1525:1573" placeholder="SELECT * FRO..tramites_reglas..." />
-                <marker date="1447892329242" expanded="true" signature="1700:1752" placeholder="SELECT * FRO..tramites_documentos..." />
+                <marker date="1448050775337" expanded="true" signature="142:175" placeholder="SELECT * FRO..tramites..." />
+                <marker date="1448050775337" expanded="true" signature="311:510" placeholder="SELECT *, (S..tramites..." />
+                <marker date="1448050775337" expanded="true" signature="322:383" placeholder="SELECT nombr..categorias..." />
+                <marker date="1448050775337" expanded="true" signature="406:473" placeholder="SELECT nombr..subcategorias..." />
+                <marker date="1448050775337" expanded="true" signature="610:632" placeholder="SELECT * FRO..tramites..." />
+                <marker date="1448050775337" expanded="true" signature="908:1238" placeholder="SELECT ta.id..tramites_archivos..." />
+                <marker date="1448050775337" expanded="true" signature="1133:1184" placeholder="SELECT nombr..tramites..." />
+                <marker date="1448050775337" expanded="true" signature="1342:1383" placeholder="SELECT * FRO..tramites_archivos..." />
+                <marker date="1448050775337" expanded="true" signature="1525:1573" placeholder="SELECT * FRO..tramites_reglas..." />
+                <marker date="1448050775337" expanded="true" signature="1700:1752" placeholder="SELECT * FRO..tramites_documentos..." />
+                <marker date="1448050775337" expanded="true" signature="1875:1924" placeholder="SELECT * FRO..tramites_correos..." />
+                <marker date="1448050775337" expanded="true" signature="1875:1942" placeholder="SELECT * FRO..tramites_correos..." />
+                <marker date="1448050775337" expanded="true" signature="2097:2155" placeholder="SELECT * FRO..tramites_correos_archivos..." />
+                <marker date="1448050775337" expanded="true" signature="2097:2165" placeholder="SELECT * FRO..tramites_correos_archivos..." />
+                <marker date="1448050775337" expanded="true" signature="2097:2180" placeholder="SELECT * FRO..tramites_correos_archivos..." />
+                <marker date="1448050775337" expanded="true" signature="2097:2181" placeholder="SELECT * FRO..tramites_correos_archivos..." />
+                <marker date="1448050775337" expanded="true" signature="2344:2448" placeholder="SELECT * FRO..tramites_correos_archivos..." />
+                <marker date="1448050775337" expanded="true" signature="2552:2603" placeholder="SELECT * FRO..tramites_correos_archivos..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tramites_rdc_view.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="tramites_rdc_view.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/tramites/tramites_rdc_view.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8783542">
-              <caret line="253" column="24" selection-start-line="253" selection-start-column="24" selection-end-line="253" selection-end-column="24" />
+            <state vertical-scroll-proportion="-4.9615383">
+              <caret line="353" column="148" selection-start-line="353" selection-start-column="148" selection-end-line="353" selection-end-column="148" />
               <folding>
                 <element signature="n#style#0;n#section#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#3;n#section#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="console.sql" pinned="false" current-in-tab="false">
+        <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/e33c681a-bfba-47f9-a4e3-c74a5b31a9b6/console.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.56666666">
+              <caret line="1" column="40" selection-start-line="1" selection-start-column="40" selection-end-line="1" selection-end-column="40" />
+              <folding>
+                <marker date="1448046990331" expanded="true" signature="32:71" placeholder="select * fro..tramites_correos_archivos..." />
               </folding>
             </state>
           </provider>
@@ -147,11 +185,11 @@
         <option value="$PROJECT_DIR$/../reporteador/application/models/Model_reportes.php" />
         <option value="$PROJECT_DIR$/../reporteador/application/controllers/Dashboard.php" />
         <option value="$PROJECT_DIR$/../reporteador/application/models/Model_usuarios.php" />
-        <option value="$PROJECT_DIR$/application/models/Model_tramites.php" />
-        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/e33c681a-bfba-47f9-a4e3-c74a5b31a9b6/console.sql" />
         <option value="$PROJECT_DIR$/application/views/general/general_sidebar_view.php" />
-        <option value="$PROJECT_DIR$/application/controllers/Tramites.php" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/e33c681a-bfba-47f9-a4e3-c74a5b31a9b6/console.sql" />
         <option value="$PROJECT_DIR$/application/views/tramites/tramites_rdc_view.php" />
+        <option value="$PROJECT_DIR$/application/controllers/Tramites.php" />
+        <option value="$PROJECT_DIR$/application/models/Model_tramites.php" />
       </list>
     </option>
   </component>
@@ -217,16 +255,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -242,6 +270,38 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="www" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cortasarcms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="www" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="emetrix-web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cortasarcms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="www" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="emetrix-web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="contenido" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -371,6 +431,16 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="Scratches" />
     </panes>
   </component>
@@ -424,28 +494,28 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19742814" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28548124" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20045386" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15885022" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952693" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28874388" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -466,13 +536,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/system/core/Controller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34707904">
-          <caret line="77" column="8" selection-start-line="77" selection-start-column="8" selection-end-line="77" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Inicio.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.14604811">
@@ -553,14 +616,14 @@
       </provider>
     </entry>
     <entry file="dbDummy://dbtable:/e68af2c9/e33c681a-bfba-47f9-a4e3-c74a5b31a9b6/cortasar..tramites_archivos">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -590,14 +653,14 @@
       </provider>
     </entry>
     <entry file="dbDummy://dbtable:/e68af2c9/e33c681a-bfba-47f9-a4e3-c74a5b31a9b6/cortasar..categorias">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -832,14 +895,14 @@
       </provider>
     </entry>
     <entry file="dbDummy://dbtable:/e68af2c9/e33c681a-bfba-47f9-a4e3-c74a5b31a9b6/cortasar..tramites">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -851,21 +914,14 @@
       </provider>
     </entry>
     <entry file="dbDummy://dbtable:/e68af2c9/e33c681a-bfba-47f9-a4e3-c74a5b31a9b6/cortasar..tramites_documentos">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/e33c681a-bfba-47f9-a4e3-c74a5b31a9b6/console.sql">
-      <provider selected="true" editor-type-id="text-editor">
+      <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="33" selection-start-line="0" selection-start-column="33" selection-end-line="0" selection-end-column="33" />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -873,44 +929,69 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="4.6153846">
           <caret line="12" column="22" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../emetrix-web/contenido/bcr_pedidos.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.5">
+          <caret line="502" column="117" selection-start-line="502" selection-start-column="4" selection-end-line="502" selection-end-column="117" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Tramites.php">
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/e33c681a-bfba-47f9-a4e3-c74a5b31a9b6/console.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.923077">
-          <caret line="329" column="56" selection-start-line="329" selection-start-column="56" selection-end-line="329" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/Model_tramites.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.653846">
-          <caret line="68" column="49" selection-start-line="68" selection-start-column="49" selection-end-line="68" selection-end-column="49" />
+        <state vertical-scroll-proportion="-0.56666666">
+          <caret line="1" column="40" selection-start-line="1" selection-start-column="40" selection-end-line="1" selection-end-column="40" />
           <folding>
-            <marker date="1447892329242" expanded="true" signature="142:175" placeholder="SELECT * FRO..tramites..." />
-            <marker date="1447892329242" expanded="true" signature="311:510" placeholder="SELECT *, (S..tramites..." />
-            <marker date="1447892329242" expanded="true" signature="322:383" placeholder="SELECT nombr..categorias..." />
-            <marker date="1447892329242" expanded="true" signature="406:473" placeholder="SELECT nombr..subcategorias..." />
-            <marker date="1447892329242" expanded="true" signature="610:632" placeholder="SELECT * FRO..tramites..." />
-            <marker date="1447892329242" expanded="true" signature="908:1238" placeholder="SELECT ta.id..tramites_archivos..." />
-            <marker date="1447892329242" expanded="true" signature="1133:1184" placeholder="SELECT nombr..tramites..." />
-            <marker date="1447892329242" expanded="true" signature="1342:1383" placeholder="SELECT * FRO..tramites_archivos..." />
-            <marker date="1447892329242" expanded="true" signature="1525:1573" placeholder="SELECT * FRO..tramites_reglas..." />
-            <marker date="1447892329242" expanded="true" signature="1700:1752" placeholder="SELECT * FRO..tramites_documentos..." />
+            <marker date="1448046990331" expanded="true" signature="32:71" placeholder="select * fro..tramites_correos_archivos..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/tramites/tramites_rdc_view.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8783542">
-          <caret line="253" column="24" selection-start-line="253" selection-start-column="24" selection-end-line="253" selection-end-column="24" />
+        <state vertical-scroll-proportion="-4.9615383">
+          <caret line="353" column="148" selection-start-line="353" selection-start-column="148" selection-end-line="353" selection-end-column="148" />
           <folding>
             <element signature="n#style#0;n#section#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#3;n#section#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Tramites.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.5">
+          <caret line="397" column="57" selection-start-line="397" selection-start-column="45" selection-end-line="397" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/Model_tramites.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42708334">
+          <caret line="94" column="112" selection-start-line="94" selection-start-column="112" selection-end-line="94" selection-end-column="112" />
+          <folding>
+            <marker date="1448050775337" expanded="true" signature="142:175" placeholder="SELECT * FRO..tramites..." />
+            <marker date="1448050775337" expanded="true" signature="311:510" placeholder="SELECT *, (S..tramites..." />
+            <marker date="1448050775337" expanded="true" signature="322:383" placeholder="SELECT nombr..categorias..." />
+            <marker date="1448050775337" expanded="true" signature="406:473" placeholder="SELECT nombr..subcategorias..." />
+            <marker date="1448050775337" expanded="true" signature="610:632" placeholder="SELECT * FRO..tramites..." />
+            <marker date="1448050775337" expanded="true" signature="908:1238" placeholder="SELECT ta.id..tramites_archivos..." />
+            <marker date="1448050775337" expanded="true" signature="1133:1184" placeholder="SELECT nombr..tramites..." />
+            <marker date="1448050775337" expanded="true" signature="1342:1383" placeholder="SELECT * FRO..tramites_archivos..." />
+            <marker date="1448050775337" expanded="true" signature="1525:1573" placeholder="SELECT * FRO..tramites_reglas..." />
+            <marker date="1448050775337" expanded="true" signature="1700:1752" placeholder="SELECT * FRO..tramites_documentos..." />
+            <marker date="1448050775337" expanded="true" signature="1875:1924" placeholder="SELECT * FRO..tramites_correos..." />
+            <marker date="1448050775337" expanded="true" signature="1875:1942" placeholder="SELECT * FRO..tramites_correos..." />
+            <marker date="1448050775337" expanded="true" signature="2097:2155" placeholder="SELECT * FRO..tramites_correos_archivos..." />
+            <marker date="1448050775337" expanded="true" signature="2097:2165" placeholder="SELECT * FRO..tramites_correos_archivos..." />
+            <marker date="1448050775337" expanded="true" signature="2097:2180" placeholder="SELECT * FRO..tramites_correos_archivos..." />
+            <marker date="1448050775337" expanded="true" signature="2097:2181" placeholder="SELECT * FRO..tramites_correos_archivos..." />
+            <marker date="1448050775337" expanded="true" signature="2344:2448" placeholder="SELECT * FRO..tramites_correos_archivos..." />
+            <marker date="1448050775337" expanded="true" signature="2552:2603" placeholder="SELECT * FRO..tramites_correos_archivos..." />
           </folding>
         </state>
       </provider>

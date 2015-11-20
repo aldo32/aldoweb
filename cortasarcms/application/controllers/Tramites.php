@@ -107,6 +107,7 @@ class Tramites extends CI_Controller {
 		if ($data["tramite"]) {
 			$data["reglas"] = $this->tramites->getReglasTramite($data["tramite"]->id);
             $data["documentos"] = $this->tramites->getDocumentosTramite($data["tramite"]->id);
+            $data["correo"] = $this->tramites->getCorreoTramite($data["tramite"]->id);
 			$this->load->view("tramites/tramites_rdc_view", $data);
 		}
 		else {
@@ -336,6 +337,141 @@ class Tramites extends CI_Controller {
             </tbody>
         </table>
         <?php
+    }
+
+    function RDCaddEmail() {
+        //guardando el correo en bd
+        $idTramite = $this->input->post("idTramite");
+        $titulo = $this->input->post("titulo");
+        $correo = $this->input->post("correo");
+        $idCorreo = $this->input->post("idCorreo");
+
+        $register["idTramite"] = $idTramite;
+        $register["titulo"] = $titulo;
+        $register["mensaje"] = $correo;
+
+        if ($idCorreo == "") {
+            $this->db->insert("tramites_correos", $register);
+            $idCorreo = $this->db->insert_id();
+        }
+        else {
+            $this->db->where(array("id"=>$idCorreo));
+            $this->db->update("tramites_correos", $register);
+        }
+
+        //subiendo archivos y guardando la relacion de estos con el correo en la bd
+        $this->load->library('upload');
+
+        $uploadErrors = "";
+        $uploadFiles = "";
+
+        if (isset($_FILES["archivoAdjunto"]["name"])) {
+            for ($i = 0; $i < count($_FILES["archivoAdjunto"]["name"]); $i++) {
+                $_FILES['emailFile']['name'] = $_FILES['archivoAdjunto']['name'][$i];
+                $_FILES['emailFile']['type'] = $_FILES['archivoAdjunto']['type'][$i];
+                $_FILES['emailFile']['tmp_name'] = $_FILES['archivoAdjunto']['tmp_name'][$i];
+                $_FILES['emailFile']['error'] = $_FILES['archivoAdjunto']['error'][$i];
+                $_FILES['emailFile']['size'] = $_FILES['archivoAdjunto']['size'][$i];
+
+                //uploading files
+                $config['upload_path'] = './uploads/tramites/correos';
+                $config['allowed_types'] = 'pdf|doc|docx|xls|xlsx|jpg|png|jpeg';
+                $config['max_size'] = 0;
+                $config['max_width'] = 0;
+                $config['max_height'] = 0;
+                $config['remove_spaces'] = true;
+                $config['overwrite'] = true;
+
+                $this->upload->initialize($config);
+
+                if (!$this->upload->do_upload('emailFile')) {
+                    $uploadErrors .= "Archivo <b>" . $_FILES['emailFile']['name'] . "</b> " . $this->upload->display_errors("", "") . "<br>";
+                } else {
+                    //guardando en bd
+                    $register = "";
+                    $register["idTramite"] = $idTramite;
+                    $register["idCorreo"] = $idCorreo;
+                    $register["archivo"] = "uploads/tramites/correos/" . $this->upload->data('file_name');
+                    $register["descripcion"] = "";
+
+                    //checa si el archivo ya existe para no duplicar registros
+                    $file = $this->tramites->checkUrlFile($register["archivo"], $idCorreo);
+
+                    if (!isset($file))
+                        $this->db->insert("tramites_correos_archivos", $register);
+
+                    $uploadFiles .= "Archivo <b>" . $this->upload->data('file_name') . "</b> correctamente guardado<br>";
+                }
+            }
+            echo json_encode(array("status" => "success", "message"=>"Se actualizo correctamente el correo", "errors" => $uploadErrors, "files" => $uploadFiles, "idCorreo" => $idCorreo));
+        }
+        else {
+            echo json_encode(array("status" => "success", "message" => "Se actualizo correctamente el correo", "errors"=>"", "files"=>"", "idCorreo"=>$idCorreo));
+        }
+    }
+
+    function RDCgetFilesEmail() {
+        $idTramite = $this->input->post("idTramite");
+        $idCorreo = $this->input->post("idCorreo");
+
+        $archivosCorreo = $this->tramites->getArchivosCorreoTramite($idTramite, $idCorreo);
+
+        ?>
+        <!-- DataTables -->
+        <link rel="stylesheet" href="<?php echo base_url()?>/resources/plugins/datatables/dataTables.bootstrap.css">
+
+        <!-- DataTables -->
+        <script src="<?php echo base_url()?>/resources/plugins/datatables/jquery.dataTables.js"></script>
+        <script src="<?php echo base_url()?>/resources/plugins/datatables/dataTables.bootstrap.min.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#tablaFilesEmail").DataTable({
+                    stateSave: true,
+                });
+            });
+        </script>
+
+        <table id="tablaFilesEmail" class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Archivo</th>
+                <th>Creado</th>
+                <th width="50">Operaciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            if ($archivosCorreo) {
+                foreach($archivosCorreo AS $row) {
+                    ?>
+                    <tr>
+                        <td><?php echo $row->id ?></td>
+                        <td><?php echo $row->archivo ?></td>
+                        <td><?php echo $row->creado ?></td>
+                        <td><a href="javascript:void(0);" class="eliminarArchivoEmail" id="<?php echo $row->id."-".$idCorreo ?>"><button class="btn btn-block btn-danger btn-xs">Eliminar</button></a></td>
+                    </tr>
+                    <?php
+                }
+            }
+            ?>
+            </tbody>
+        </table>
+        <?php
+    }
+
+    function RDCdeleteFileMail() {
+        $id = $this->input->post("id");
+
+        $file = $this->tramites->getFileCorreoById($id);
+
+        if (file_exists("./".$file->archivo))
+            unlink("./".$file->archivo);
+
+        $this->db->delete("tramites_correos_archivos", array("id"=>$id));
+
+        echo json_encode(array("status"=>"success"));
     }
 
 	/*

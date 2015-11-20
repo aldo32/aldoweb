@@ -1,3 +1,18 @@
+<?php
+if (!isset($correo)) {
+    $correo = new correo();
+}
+
+class correo {
+    var $id="";
+    var $idTramite="";
+    var $titulo="";
+    var $mensaje="";
+    var $creado="";
+    var $modificado="";
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,6 +58,7 @@
                         dataType: "html",
                         success: function(datos) {
                             $("#messageRegla").html(datos);
+                            $("#regla").val("");
                         },
                         type: "POST"
                     });
@@ -78,6 +94,8 @@
                         dataType: "html",
                         success: function(datos) {
                             $("#messageDocumento").html(datos);
+                            $("#documento").val("");
+                            $("#descripcion").val("");
                         },
                         type: "POST"
                     });
@@ -102,6 +120,100 @@
 
             $("#addFileEmail").click(function() {
                 $("#filesContent").append("<div class='form-group col-md-12'><input type='file' name='archivoAdjunto[]' id='archivoAdjunto'></div>");
+            });
+
+            $("#addEmail").click(function() {
+                titulo = $("#titulo").val();
+                correo = $("#correo").val();
+
+                if (titulo == "") alert("Ingrese un titulo para el correo");
+                else if (correo == "") alert("Ingrese el correo a guardar");
+                else {
+                    //file = document.getElementById("filesForm").elements.namedItem("archivoAdjunto");
+
+                    var formData = new FormData(document.filesForm);
+                    formData.append("<?php echo $this->security->get_csrf_token_name()?>", "<?php echo $this->security->get_csrf_hash()?>");
+                    formData.append("idTramite", idTramite);
+
+                    $("#messageCorreo").html("<i class='fa fa-refresh fa-spin'></i>&nbsp;&nbsp;Actualizando...");
+                    $.ajax({
+                        url: "<?php echo base_url("tramites/RDCaddEmail") ?>",
+                        data: formData,
+                        dataType: "json",
+                        processData: false,
+                        contentType: false,
+                        success: function(datos){
+                            $("#idCorreo").val(datos.idCorreo);
+
+                            $("#messageFileStatus").html("<p>"+datos.message+"</p>"+"<p>"+datos.files+"</p>"+"<p>"+datos.errors+"</p>");
+
+                            $("#messageCorreo").html("<i class='fa fa-refresh fa-spin'></i>&nbsp;&nbsp;Cargando archivos...");
+                            $.ajax({
+                                url: "<?php echo base_url("tramites/RDCgetFilesEmail") ?>",
+                                data: "idTramite="+idTramite+"&idCorreo="+datos.idCorreo+"&<?php echo $this->security->get_csrf_token_name()?>=<?php echo $this->security->get_csrf_hash()?>",
+                                dataType: "html",
+                                success: function(datos) {
+                                    $("#messageCorreo").html(datos);
+                                },
+                                type: "POST"
+                            });
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown) {
+
+                        },
+                        type: "POST"
+                    });
+                }
+            });
+
+            //cargando archivos del correo
+            <?php
+            if ($correo->id != "") {
+                ?>
+                $("#messageCorreo").html("<i class='fa fa-refresh fa-spin'></i>&nbsp;&nbsp;Cargando archivos...");
+                $.ajax({
+                    url: "<?php echo base_url("tramites/RDCgetFilesEmail") ?>",
+                    data: "idTramite="+idTramite+"&idCorreo=+<?php echo $correo->id ?>+&<?php echo $this->security->get_csrf_token_name()?>=<?php echo $this->security->get_csrf_hash()?>",
+                    dataType: "html",
+                    success: function(datos) {
+                        $("#messageCorreo").html(datos);
+                    },
+                    type: "POST"
+                });
+                <?php
+            }
+            ?>
+
+            //delete file from mail
+            $(document).on("click", ".eliminarArchivoEmail", function(e) {
+                e.preventDefault();
+                tmp = $(this).attr("id");
+                tmp = tmp.split("-");
+                id = tmp[0];
+                idCorreo = tmp[1];
+
+                if (confirm("Realmente desea eliminar el archivo?")) {
+                    $.ajax({
+                        url: "<?php echo base_url("tramites/RDCdeleteFileMail") ?>",
+                        data: "id="+id+"&<?php echo $this->security->get_csrf_token_name()?>=<?php echo $this->security->get_csrf_hash()?>",
+                        dataType: "json",
+                        success: function(datos) {
+                            if (datos.status == "success") {
+                                $("#messageCorreo").html("<i class='fa fa-refresh fa-spin'></i>&nbsp;&nbsp;Cargando archivos...");
+                                $.ajax({
+                                    url: "<?php echo base_url("tramites/RDCgetFilesEmail") ?>",
+                                    data: "idTramite="+idTramite+"&idCorreo="+idCorreo+"&<?php echo $this->security->get_csrf_token_name()?>=<?php echo $this->security->get_csrf_hash()?>",
+                                    dataType: "html",
+                                    success: function(datos) {
+                                        $("#messageCorreo").html(datos);
+                                    },
+                                    type: "POST"
+                                });
+                            }
+                        },
+                        type: "POST"
+                    });
+                }
             });
 		});
 	</script>
@@ -230,30 +342,37 @@
                 </div>
 
                 <div class="box-body">
-                    <div class="row">
-                        <div class="form-group col-md-12">
-                            <label>Titulo del correo</label>
-                            <?php echo form_input(array('name'=>'titulo','id'=>'titulo', 'class'=>'form-control input-sm', 'value' =>set_value('titulo')));?>
-                        </div>
-                        <div class="form-group col-md-12">
-                            <label>Correo</label>
-                            <textarea class="form-control input-sm" name="correo" id="correo" cols="50" rows="6">
-                                <?php echo set_value("correo") ?>
-                            </textarea>
-                        </div>
-                        <div id="filesContent">
+                    <form name="filesForm" id="filesForm" enctype="multipart/form-data">
+                        <input type="hidden" name="idCorreo" id="idCorreo" value="<?php echo $correo->id ?>">
+                        <div class="row">
                             <div class="form-group col-md-12">
-                                <label>Adjuntar archivos</label>
-                                <input type="file" name="archivoAdjunto[]" id="archivoAdjunto">
+                                <label>Titulo del correo</label>
+                                <?php echo form_input(array('name'=>'titulo','id'=>'titulo', 'class'=>'form-control input-sm', 'value' =>set_value('titulo', $correo->titulo)));?>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label>Correo</label>
+                                <textarea class="form-control input-sm" name="correo" id="correo" cols="50" rows="6"><?php echo $correo->mensaje; ?></textarea>
+                            </div>
+                            <div id="filesContent">
+                                <div class="form-group col-md-12">
+                                    <label>Adjuntar archivos [pdf|doc|docx|xls|xlsx|jpg|png|jpeg]</label>
+                                    <input type="file" name="archivoAdjunto[]" id="archivoAdjunto">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <a href="javascript:void(0);" id="addFileEmail">Agregar otro archivo</a>
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <a href="javascript:void(0);" id="addFileEmail">Agregar otro archivo</a>
+                        <br>
+                        <button type="button" class="btn btn-primary" id="addEmail">Guardar correo</button>
+
+                        <br><br>
+                        <div id="messageFileStatus"></div>
+                        <br>
+                        <div id="messageCorreo">
                         </div>
                     </div>
-                    <br>
-                    <button type="button" class="btn btn-primary" id="addRule">Guardar correo</button>
-                </div>
+                </form>
             </div>
 
             <!-- Modal window to messages -->

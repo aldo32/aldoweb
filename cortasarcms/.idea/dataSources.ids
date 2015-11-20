@@ -52,6 +52,7 @@
     <table name="tramites_correos" schema="" catalog="cortasar" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="idTramite" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="titulo" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
       <column name="mensaje" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
       <column name="creado" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
       <column name="modificado" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93"/>
@@ -67,8 +68,8 @@
       <column name="descripcion" sqlType="VARCHAR" precision="300" scale="0" nullable="false" jdbcType="12"/>
       <column name="creado" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
       <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="tramites_correos_archivos_ibfk_2" columns="idCorreo" ref-table="tramites_correos" ref-schema="" ref-catalog="cortasar" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="tramites_correos_archivos_ibfk_1" columns="idTramite" ref-table="tramites" ref-schema="" ref-catalog="cortasar" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="tramites_correos_archivos_ibfk_2" columns="idCorreo" ref-table="tramites_correos" ref-schema="" ref-catalog="cortasar" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
       <index name="idTramite" unique="false" columns="idCorreo"/>
     </table>
     <table name="tramites_documentos" schema="" catalog="cortasar" type="TABLE">
