@@ -42,6 +42,44 @@ class RestUsuarios extends REST_Controller {
     }
 
     /***
+     * REST: Obtener usuario
+     * URL: /RestUsuarios/obtenerUsuario?idUsuario=1
+     * RETURN SUCCESS: status, usuario[],
+     * RETURN ERROR: status, message
+     */
+    function obtenerUsuario_get() {
+        $idUsuario = $this->get("idUsuario");
+
+        $q = $this->db->get_where("usuarios", array("id"=>$idUsuario));
+        $usuario = $q->row();
+
+        if (isset($usuario))
+            $response = array("status" => "success", "usuario"=>$usuario);
+        else
+            $response = array("status"=>"error", "message"=>"No se encontro el usuario");
+
+        $this->response($response);
+    }
+
+    /***
+     * REST: Obtener usuario
+     * URL: /RestUsuarios/obtenerTodosUsuarios
+     * RETURN SUCCESS: status, usuarios[],
+     * RETURN ERROR: status, message
+     */
+    function obtenerTodosUsuarios_get() {
+        $q = $this->db->get("usuarios");
+        $usuarios = $q->result();
+
+        if (isset($usuarios))
+            $response = array("status" => "success", "usuarios"=>$usuarios);
+        else
+            $response = array("status"=>"error", "message"=>"No se encontro el usuario");
+
+        $this->response($response);
+    }
+
+    /***
      * REST: Listado de perfiles
      * URL: /RestUsuarios/getPerfiles
      * RETURN SUCCESS: status, message, idUsuario

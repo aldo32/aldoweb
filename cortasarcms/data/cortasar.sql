@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-11-2015 a las 01:34:46
+-- Tiempo de generación: 20-11-2015 a las 23:23:45
 -- Versión del servidor: 5.6.17
 -- Versión de PHP: 5.5.12
 
@@ -31,14 +31,15 @@ CREATE TABLE IF NOT EXISTS `categorias` (
   `nombre` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   `creado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `categorias`
 --
 
 INSERT INTO `categorias` (`id`, `nombre`, `creado`) VALUES
-(1, 'Categoria 1 x', '2015-09-23 23:47:34');
+(1, 'Categoria 1 x', '2015-09-23 23:47:34'),
+(2, 'aldo', '2015-11-20 21:54:02');
 
 -- --------------------------------------------------------
 
@@ -122,12 +123,21 @@ INSERT INTO `tramites` (`id`, `nombre`, `descripcion`, `idCategoria`, `idSubCate
 CREATE TABLE IF NOT EXISTS `tramites_correos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idTramite` int(11) NOT NULL,
+  `titulo` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `mensaje` text COLLATE utf8_unicode_ci NOT NULL,
   `creado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modificado` timestamp NOT NULL,
   PRIMARY KEY (`id`),
   KEY `idTramite` (`idTramite`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+
+--
+-- Volcado de datos para la tabla `tramites_correos`
+--
+
+INSERT INTO `tramites_correos` (`id`, `idTramite`, `titulo`, `mensaje`, `creado`, `modificado`) VALUES
+(2, 2, 'titulo de prueba xx', '                                    sdfsfds fsd fsd fsd                                ', '2015-11-20 18:57:51', '0000-00-00 00:00:00'),
+(3, 1, 'dasdasd a', 'd asd asd asdas das asasd a', '2015-11-20 20:18:11', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -145,7 +155,19 @@ CREATE TABLE IF NOT EXISTS `tramites_correos_archivos` (
   PRIMARY KEY (`id`),
   KEY `idTramite` (`idTramite`,`idCorreo`),
   KEY `idCorreo` (`idCorreo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=45 ;
+
+--
+-- Volcado de datos para la tabla `tramites_correos_archivos`
+--
+
+INSERT INTO `tramites_correos_archivos` (`id`, `idTramite`, `idCorreo`, `archivo`, `descripcion`, `creado`) VALUES
+(39, 2, 2, 'uploads/tramites/correos/Mapas.docx', '', '2015-11-20 20:00:33'),
+(40, 2, 2, 'uploads/tramites/correos/MaquetaXalym.docx', '', '2015-11-20 20:00:33'),
+(41, 2, 2, 'uploads/tramites/correos/HorarioXalym.docx', '', '2015-11-20 20:00:33'),
+(42, 2, 2, 'uploads/tramites/correos/mrprintables-fruit-templates-apple-pear-03.pdf', '', '2015-11-20 20:01:03'),
+(43, 1, 3, 'uploads/tramites/correos/Tablas.docx', '', '2015-11-20 20:18:40'),
+(44, 1, 3, 'uploads/tramites/correos/Mapas.docx', '', '2015-11-20 20:19:41');
 
 -- --------------------------------------------------------
 
@@ -163,17 +185,17 @@ CREATE TABLE IF NOT EXISTS `tramites_documentos` (
   `url` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `idTramite` (`idTramite`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=13 ;
 
 --
 -- Volcado de datos para la tabla `tramites_documentos`
 --
 
 INSERT INTO `tramites_documentos` (`id`, `idTramite`, `archivo`, `descripcion`, `creado`, `modificado`, `url`) VALUES
-(3, 1, 'C:/Users/Aldo/Documents/GitHub/aldoweb/cortasarcms/uploads/tramites/upload/mrprintables-fruit-templates-pineapple-02.pdf', 'uploads/tramites/upload/mrprintables-fruit-templates-pineapple-02.pdf', '2015-11-09 23:40:16', '0000-00-00 00:00:00', ''),
-(4, 1, 'C:/Users/Aldo/Documents/GitHub/aldoweb/cortasarcms/uploads/tramites/upload/mrprintables-fruit-templates-apple-pear-03.pdf', 'uploads/tramites/upload/mrprintables-fruit-templates-apple-pear-03.pdf', '2015-11-09 23:40:16', '0000-00-00 00:00:00', ''),
-(5, 1, 'uploads/tramites/upload/mrprintables-fruit-templates-pineapple-02.pdf', 'dfd fasdf asdf asdf asdf asdf asdfasd ggfhkghjk hfg dsf asdf asdf  asdf asdf asd', '2015-11-09 23:41:19', '0000-00-00 00:00:00', ''),
-(6, 1, 'uploads/tramites/upload/mrprintables-fruit-templates-apple-pear-03.pdf', 'dfd fasdf asdf asdf asdf asdf asdfasd ggfhkghjk hfg dsf asdf asdf  asdf asdf asd', '2015-11-09 23:41:19', '0000-00-00 00:00:00', '');
+(7, 1, 'gdfgsdf sdfs', 'gdfgsdf sdfs', '2015-11-19 00:33:32', '0000-00-00 00:00:00', ''),
+(9, 2, 'dasdasd', 'dasdasd', '2015-11-19 17:25:02', '0000-00-00 00:00:00', ''),
+(11, 1, 'gfdgdfgds', 'gfdgdfgds', '2015-11-19 23:59:32', '0000-00-00 00:00:00', ''),
+(12, 2, 'dfasf asdf asdf asdf', 'dfasf asdf asdf asdf', '2015-11-20 16:21:59', '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
 
@@ -188,7 +210,7 @@ CREATE TABLE IF NOT EXISTS `tramites_reglas` (
   `creado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `idTramite` (`idTramite`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
 
 --
 -- Volcado de datos para la tabla `tramites_reglas`
@@ -196,7 +218,11 @@ CREATE TABLE IF NOT EXISTS `tramites_reglas` (
 
 INSERT INTO `tramites_reglas` (`id`, `idTramite`, `regla`, `creado`) VALUES
 (1, 1, 'sadasdasdasdsa', '2015-11-16 22:34:08'),
-(2, 1, 'dasdasdasdas', '2015-11-16 22:34:29');
+(2, 1, 'dasdasdasdas', '2015-11-16 22:34:29'),
+(6, 1, 'dfas dfasd fasdf ds', '2015-11-19 00:25:40'),
+(7, 2, 'Regla de prueba', '2015-11-19 17:16:32'),
+(8, 2, 'sdfsdf sd fsdfsd', '2015-11-20 16:20:24'),
+(9, 2, 'f asdf asdf sadf asdf asd', '2015-11-20 16:21:31');
 
 -- --------------------------------------------------------
 
@@ -264,8 +290,8 @@ ALTER TABLE `tramites_correos`
 -- Filtros para la tabla `tramites_correos_archivos`
 --
 ALTER TABLE `tramites_correos_archivos`
-  ADD CONSTRAINT `tramites_correos_archivos_ibfk_2` FOREIGN KEY (`idCorreo`) REFERENCES `tramites_correos` (`id`),
-  ADD CONSTRAINT `tramites_correos_archivos_ibfk_1` FOREIGN KEY (`idTramite`) REFERENCES `tramites` (`id`);
+  ADD CONSTRAINT `tramites_correos_archivos_ibfk_1` FOREIGN KEY (`idTramite`) REFERENCES `tramites` (`id`),
+  ADD CONSTRAINT `tramites_correos_archivos_ibfk_2` FOREIGN KEY (`idCorreo`) REFERENCES `tramites_correos` (`id`);
 
 --
 -- Filtros para la tabla `tramites_documentos`

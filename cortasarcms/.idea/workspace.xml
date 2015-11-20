@@ -58,25 +58,7 @@
         <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
       </PATH_ELEMENT>
       <PATH_ELEMENT>
-        <option name="myItemId" value="tramites_correos_archivos" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-    </PATH>
-    <PATH>
-      <PATH_ELEMENT>
-        <option name="myItemId" />
-        <option name="myItemType" value="com.intellij.database.view.DbRootNodeDescriptor" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="MySQL - cortasar@localhost" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="cortasar" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="tramites_correos" />
+        <option name="myItemId" value="categorias" />
         <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
       </PATH_ELEMENT>
     </PATH>
@@ -87,54 +69,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Tramites.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/controllers/Tramites.php">
+      <file leaf-file-name="RestCategorias.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/controllers/RestCategorias.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.5">
-              <caret line="397" column="57" selection-start-line="397" selection-start-column="45" selection-end-line="397" selection-end-column="57" />
+            <state vertical-scroll-proportion="0.42447916">
+              <caret line="61" column="29" selection-start-line="61" selection-start-column="29" selection-end-line="61" selection-end-column="29" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Model_tramites.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/application/models/Model_tramites.php">
+      <file leaf-file-name="RestUsuarios.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/controllers/RestUsuarios.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.42708334">
-              <caret line="94" column="112" selection-start-line="94" selection-start-column="112" selection-end-line="94" selection-end-column="112" />
-              <folding>
-                <marker date="1448050775337" expanded="true" signature="142:175" placeholder="SELECT * FRO..tramites..." />
-                <marker date="1448050775337" expanded="true" signature="311:510" placeholder="SELECT *, (S..tramites..." />
-                <marker date="1448050775337" expanded="true" signature="322:383" placeholder="SELECT nombr..categorias..." />
-                <marker date="1448050775337" expanded="true" signature="406:473" placeholder="SELECT nombr..subcategorias..." />
-                <marker date="1448050775337" expanded="true" signature="610:632" placeholder="SELECT * FRO..tramites..." />
-                <marker date="1448050775337" expanded="true" signature="908:1238" placeholder="SELECT ta.id..tramites_archivos..." />
-                <marker date="1448050775337" expanded="true" signature="1133:1184" placeholder="SELECT nombr..tramites..." />
-                <marker date="1448050775337" expanded="true" signature="1342:1383" placeholder="SELECT * FRO..tramites_archivos..." />
-                <marker date="1448050775337" expanded="true" signature="1525:1573" placeholder="SELECT * FRO..tramites_reglas..." />
-                <marker date="1448050775337" expanded="true" signature="1700:1752" placeholder="SELECT * FRO..tramites_documentos..." />
-                <marker date="1448050775337" expanded="true" signature="1875:1924" placeholder="SELECT * FRO..tramites_correos..." />
-                <marker date="1448050775337" expanded="true" signature="1875:1942" placeholder="SELECT * FRO..tramites_correos..." />
-                <marker date="1448050775337" expanded="true" signature="2097:2155" placeholder="SELECT * FRO..tramites_correos_archivos..." />
-                <marker date="1448050775337" expanded="true" signature="2097:2165" placeholder="SELECT * FRO..tramites_correos_archivos..." />
-                <marker date="1448050775337" expanded="true" signature="2097:2180" placeholder="SELECT * FRO..tramites_correos_archivos..." />
-                <marker date="1448050775337" expanded="true" signature="2097:2181" placeholder="SELECT * FRO..tramites_correos_archivos..." />
-                <marker date="1448050775337" expanded="true" signature="2344:2448" placeholder="SELECT * FRO..tramites_correos_archivos..." />
-                <marker date="1448050775337" expanded="true" signature="2552:2603" placeholder="SELECT * FRO..tramites_correos_archivos..." />
-              </folding>
+            <state vertical-scroll-proportion="-3.0">
+              <caret line="65" column="46" selection-start-line="65" selection-start-column="26" selection-end-line="65" selection-end-column="46" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tramites_rdc_view.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/tramites/tramites_rdc_view.php">
+      <file leaf-file-name="rest.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/config/rest.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.9615383">
-              <caret line="353" column="148" selection-start-line="353" selection-start-column="148" selection-end-line="353" selection-end-column="148" />
-              <folding>
-                <element signature="n#style#0;n#section#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#3;n#section#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="-2.1454546">
+              <caret line="157" column="59" selection-start-line="157" selection-start-column="53" selection-end-line="157" selection-end-column="59" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -142,10 +102,11 @@
       <file leaf-file-name="console.sql" pinned="false" current-in-tab="false">
         <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/e33c681a-bfba-47f9-a4e3-c74a5b31a9b6/console.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.56666666">
-              <caret line="1" column="40" selection-start-line="1" selection-start-column="40" selection-end-line="1" selection-end-column="40" />
+            <state vertical-scroll-proportion="-1.7">
+              <caret line="3" column="22" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
               <folding>
-                <marker date="1448046990331" expanded="true" signature="32:71" placeholder="select * fro..tramites_correos_archivos..." />
+                <marker date="1448057279295" expanded="true" signature="73:97" placeholder="select * fro..categorias..." />
+                <marker date="1448057279295" expanded="true" signature="99:121" placeholder="select * fro..usuarios..." />
               </folding>
             </state>
           </provider>
@@ -164,7 +125,6 @@
         <option value="$PROJECT_DIR$/application/controllers/Login.php" />
         <option value="$PROJECT_DIR$/application/config/autoload.php" />
         <option value="$PROJECT_DIR$/application/libraries/Generallib.php" />
-        <option value="$PROJECT_DIR$/application/controllers/RestUsuarios.php" />
         <option value="$PROJECT_DIR$/application/views/usuarios/usuarios_editar_view.php" />
         <option value="$PROJECT_DIR$/../cortasar/application/config/routes.php" />
         <option value="$PROJECT_DIR$/../cortasar/application/controllers/Inicio.php" />
@@ -186,10 +146,12 @@
         <option value="$PROJECT_DIR$/../reporteador/application/controllers/Dashboard.php" />
         <option value="$PROJECT_DIR$/../reporteador/application/models/Model_usuarios.php" />
         <option value="$PROJECT_DIR$/application/views/general/general_sidebar_view.php" />
-        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/e33c681a-bfba-47f9-a4e3-c74a5b31a9b6/console.sql" />
         <option value="$PROJECT_DIR$/application/views/tramites/tramites_rdc_view.php" />
         <option value="$PROJECT_DIR$/application/controllers/Tramites.php" />
         <option value="$PROJECT_DIR$/application/models/Model_tramites.php" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/e33c681a-bfba-47f9-a4e3-c74a5b31a9b6/console.sql" />
+        <option value="$PROJECT_DIR$/application/controllers/RestUsuarios.php" />
+        <option value="$PROJECT_DIR$/application/controllers/RestCategorias.php" />
       </list>
     </option>
   </component>
@@ -355,76 +317,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cortasarcms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cortasarcms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tramites" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cortasarcms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cortasarcms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cortasarcms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cortasarcms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="controllers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -536,34 +428,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/controllers/Inicio.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14604811">
-          <caret line="5" column="8" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/tramites/tramites_editar_view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.39534885">
-          <caret line="82" column="21" selection-start-line="82" selection-start-column="21" selection-end-line="82" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Categorias.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="6.4150944">
-          <caret line="28" column="40" selection-start-line="28" selection-start-column="40" selection-end-line="28" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/categorias/categorias_editar_view.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37988827">
-          <caret line="98" column="42" selection-start-line="95" selection-start-column="35" selection-end-line="98" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Documents/web/com.gbmobile.web.alkaseltzer/application/controllers/registro.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-14.088398">
@@ -710,13 +574,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.5">
           <caret line="164" column="68" selection-start-line="164" selection-start-column="12" selection-end-line="164" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/RestUsuarios.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-43.807693">
-          <caret line="91" column="19" selection-start-line="91" selection-start-column="19" selection-end-line="91" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -940,19 +797,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/e33c681a-bfba-47f9-a4e3-c74a5b31a9b6/console.sql">
+    <entry file="file://$PROJECT_DIR$/application/models/Model_tramites.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.56666666">
-          <caret line="1" column="40" selection-start-line="1" selection-start-column="40" selection-end-line="1" selection-end-column="40" />
+        <state vertical-scroll-proportion="0.6041667">
+          <caret line="98" column="5" selection-start-line="98" selection-start-column="5" selection-end-line="98" selection-end-column="5" />
           <folding>
-            <marker date="1448046990331" expanded="true" signature="32:71" placeholder="select * fro..tramites_correos_archivos..." />
+            <marker date="1448050775337" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..tramites..." />
+            <marker date="1448050775337" expanded="true" signature="-1:-1" placeholder="SELECT *, (S..tramites..." />
+            <marker date="1448050775337" expanded="true" signature="-1:-1" placeholder="SELECT nombr..categorias..." />
+            <marker date="1448050775337" expanded="true" signature="-1:-1" placeholder="SELECT nombr..subcategorias..." />
+            <marker date="1448050775337" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..tramites..." />
+            <marker date="1448050775337" expanded="true" signature="-1:-1" placeholder="SELECT ta.id..tramites_archivos..." />
+            <marker date="1448050775337" expanded="true" signature="-1:-1" placeholder="SELECT nombr..tramites..." />
+            <marker date="1448050775337" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..tramites_archivos..." />
+            <marker date="1448050775337" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..tramites_reglas..." />
+            <marker date="1448050775337" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..tramites_documentos..." />
+            <marker date="1448050775337" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..tramites_correos..." />
+            <marker date="1448050775337" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..tramites_correos..." />
+            <marker date="1448050775337" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..tramites_correos_archivos..." />
+            <marker date="1448050775337" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..tramites_correos_archivos..." />
+            <marker date="1448050775337" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..tramites_correos_archivos..." />
+            <marker date="1448050775337" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..tramites_correos_archivos..." />
+            <marker date="1448050775337" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..tramites_correos_archivos..." />
+            <marker date="1448050775337" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..tramites_correos_archivos..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Tramites.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5755208">
+          <caret line="397" column="57" selection-start-line="397" selection-start-column="45" selection-end-line="397" selection-end-column="57" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/tramites/tramites_rdc_view.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.9615383">
+        <state vertical-scroll-proportion="0.3359375">
           <caret line="353" column="148" selection-start-line="353" selection-start-column="148" selection-end-line="353" selection-end-column="148" />
           <folding>
             <element signature="n#style#0;n#section#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -961,38 +843,54 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Tramites.php">
+    <entry file="file://$PROJECT_DIR$/application/controllers/RestTramites.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.5">
-          <caret line="397" column="57" selection-start-line="397" selection-start-column="45" selection-end-line="397" selection-end-column="57" />
+        <state vertical-scroll-proportion="-6.5384617">
+          <caret line="10" column="28" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/Model_tramites.php">
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/e33c681a-bfba-47f9-a4e3-c74a5b31a9b6/console.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.42708334">
-          <caret line="94" column="112" selection-start-line="94" selection-start-column="112" selection-end-line="94" selection-end-column="112" />
+        <state vertical-scroll-proportion="-1.7">
+          <caret line="3" column="22" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
           <folding>
-            <marker date="1448050775337" expanded="true" signature="142:175" placeholder="SELECT * FRO..tramites..." />
-            <marker date="1448050775337" expanded="true" signature="311:510" placeholder="SELECT *, (S..tramites..." />
-            <marker date="1448050775337" expanded="true" signature="322:383" placeholder="SELECT nombr..categorias..." />
-            <marker date="1448050775337" expanded="true" signature="406:473" placeholder="SELECT nombr..subcategorias..." />
-            <marker date="1448050775337" expanded="true" signature="610:632" placeholder="SELECT * FRO..tramites..." />
-            <marker date="1448050775337" expanded="true" signature="908:1238" placeholder="SELECT ta.id..tramites_archivos..." />
-            <marker date="1448050775337" expanded="true" signature="1133:1184" placeholder="SELECT nombr..tramites..." />
-            <marker date="1448050775337" expanded="true" signature="1342:1383" placeholder="SELECT * FRO..tramites_archivos..." />
-            <marker date="1448050775337" expanded="true" signature="1525:1573" placeholder="SELECT * FRO..tramites_reglas..." />
-            <marker date="1448050775337" expanded="true" signature="1700:1752" placeholder="SELECT * FRO..tramites_documentos..." />
-            <marker date="1448050775337" expanded="true" signature="1875:1924" placeholder="SELECT * FRO..tramites_correos..." />
-            <marker date="1448050775337" expanded="true" signature="1875:1942" placeholder="SELECT * FRO..tramites_correos..." />
-            <marker date="1448050775337" expanded="true" signature="2097:2155" placeholder="SELECT * FRO..tramites_correos_archivos..." />
-            <marker date="1448050775337" expanded="true" signature="2097:2165" placeholder="SELECT * FRO..tramites_correos_archivos..." />
-            <marker date="1448050775337" expanded="true" signature="2097:2180" placeholder="SELECT * FRO..tramites_correos_archivos..." />
-            <marker date="1448050775337" expanded="true" signature="2097:2181" placeholder="SELECT * FRO..tramites_correos_archivos..." />
-            <marker date="1448050775337" expanded="true" signature="2344:2448" placeholder="SELECT * FRO..tramites_correos_archivos..." />
-            <marker date="1448050775337" expanded="true" signature="2552:2603" placeholder="SELECT * FRO..tramites_correos_archivos..." />
+            <marker date="1448057279295" expanded="true" signature="73:97" placeholder="select * fro..categorias..." />
+            <marker date="1448057279295" expanded="true" signature="99:121" placeholder="select * fro..usuarios..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/language/english/rest_controller_lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5755208">
+          <caret line="15" column="39" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/config/rest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.1454546">
+          <caret line="157" column="59" selection-start-line="157" selection-start-column="53" selection-end-line="157" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/RestUsuarios.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.0">
+          <caret line="65" column="46" selection-start-line="65" selection-start-column="26" selection-end-line="65" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/RestCategorias.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42447916">
+          <caret line="61" column="29" selection-start-line="61" selection-start-column="29" selection-end-line="61" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>
