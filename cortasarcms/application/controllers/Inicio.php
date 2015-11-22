@@ -26,4 +26,8 @@ class Inicio extends CI_Controller {
 		$data['control_sidebar'] = $this->load->view("general/general_control_sidebar_view", '', true);
 		return $data;
 	}
+
+	function test() {
+		echo json_encode(array("status"=>"success"));
+	}
 }

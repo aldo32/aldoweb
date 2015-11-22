@@ -65,7 +65,7 @@
                         <table id="tablaTramites" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>Op</th>
+                                    <th width="70">Op</th>
                                     <th>ID</th>
 									<th>Nombre</th>
                                     <th>Descripción</th>
@@ -90,7 +90,6 @@
                                                     <ul role="menu" class="dropdown-menu">
                                                         <li><a href="<?php echo base_url('tramites/editar/'.$row->id); ?>">Editar</a></li>
                                                         <li><a href="<?php echo base_url('tramites/RDC/'.$row->id); ?>">Reglas, Documentos, Correos</a></li>
-                                                        <li><a href="<?php echo base_url('tramites/archivosCorreos/'.$row->id); ?>">Archivos para correos</a></li>
                                                         <li class="divider"></li>
                                                         <li><a href="<?php echo base_url('tramites/eliminar/'.$row->id); ?>" class="elimarTramite">Eliminar</a></li>
                                                     </ul>

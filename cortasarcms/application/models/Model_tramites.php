@@ -6,14 +6,20 @@ class Model_tramites extends CI_Model {
 	}
 
 	function getTramiteById($id) {
-		$sql="SELECT * FROM tramites WHERE id=?";
+		$sql="SELECT *, CASE estatus WHEN 0 THEN 'Iniciado' WHEN 1 THEN 'Revición' WHEN 2 THEN 'En Proceso' WHEN 3 THEN 'Finalizado' ELSE '' END AS estatusTramite FROM tramites WHERE id=?";
 		$q=$this->db->query($sql, array($id));
 
 		return ($q->num_rows() > 0) ? $q->row() : false;
 	}
 
 	function getTramites() {
-		$sql = "SELECT *, (SELECT nombre FROM categorias WHERE id = tramites.idCategoria) AS nombreCategoria, (SELECT nombre FROM subcategorias WHERE id = tramites.idSubCategoria) AS nombreSubCategoria FROM tramites";
+		$sql = "SELECT
+					*,
+					(SELECT nombre FROM categorias WHERE id = tramites.idCategoria) AS nombreCategoria,
+					(SELECT nombre FROM subcategorias WHERE id = tramites.idSubCategoria) AS nombreSubCategoria,
+					CASE estatus WHEN 0 THEN 'Iniciado' WHEN 1 THEN 'Revición' WHEN 2 THEN 'En Proceso' WHEN 3 THEN 'Finalizado' ELSE '' END AS estatusTramite
+				FROM
+					tramites";
 		$q = $this->db->query($sql);
 		return $q->result();
 	}
@@ -98,10 +104,23 @@ class Model_tramites extends CI_Model {
 		return $q->row();
 	}
 
+	function checkUrlFileDocumento($archivo, $idTramite) {
+		$sql = "SELECT * FROM tramites_documentos_archivos WHERE archivo LIKE '%$archivo%' AND idTramite = $idTramite LIMIT 1";
+		$q = $this->db->query($sql);
+
+		return $q->row();
+	}
+
 	function getFileCorreoById($id) {
 		$sql = "SELECT * FROM tramites_correos_archivos WHERE id = $id";
 		$q = $this->db->query($sql);
 
+		return $q->row();
+	}
+
+	function getNumDocumentsBytramite($idTramite) {
+		$sql="SELECT COUNT(*) as numFiles FROM tramites_documentos WHERE idTramite=$idTramite";
+		$q = $this->db->query($sql);
 		return $q->row();
 	}
 }

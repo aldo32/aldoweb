@@ -44,7 +44,7 @@
 				</li>
 				<li class="treeview  <?php echo ($page == "tramites") ? "active" : ""; ?>">
 					<a href="<?php echo base_url("tramites") ?>">
-                        <i class="fa fa-files-o"></i>Tramites</a></li>
+                        <i class="fa fa-files-o"></i> <span>Tramites</span>
 					</a>
 				</li>
 
