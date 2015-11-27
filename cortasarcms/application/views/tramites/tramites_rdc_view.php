@@ -37,6 +37,7 @@ class correo {
 	<script type="text/javascript">
 		$(document).ready(function() {
             idTramite = <?php echo $tramite->id ?>;
+            $("#correo").wysihtml5();
 
             $("#tablaReglas").DataTable({
                 stateSave: true,
@@ -351,7 +352,8 @@ class correo {
                             </div>
                             <div class="form-group col-md-12">
                                 <label>Correo</label>
-                                <textarea class="form-control input-sm" name="correo" id="correo" cols="50" rows="6"><?php echo $correo->mensaje; ?></textarea>
+                                <!-- <textarea class="form-control input-sm" name="correo" id="correo" cols="50" rows="6"></textarea> -->
+                                <textarea style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid rgb(221, 221, 221); padding: 0px;" name="correo" id="correo" placeholder="Mensaje para el correo"><?php echo $correo->mensaje; ?></textarea>
                             </div>
                             <div id="filesContent">
                                 <div class="form-group col-md-12">

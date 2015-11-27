@@ -73,11 +73,11 @@ class RestTramites extends REST_Controller {
 
         //Guardando tramite en bd
         $regTramite["idTramite"] = $idTramite;
-        $regTramite["documentosTramite"] = $numFilesTramite->numFile;
+        $regTramite["documentosTramite"] = $numFilesTramite->numFiles;
         $regTramite["documentosSubidos"] = $numFilesUpload;
         $regTramite["emailUsuario"] = $email;
 
-        if ($numFilesTramite->numFiles < $numFilesUpload) {
+        if ($numFilesUpload < $numFilesTramite->numFiles) {
             //Se guarda el tramite con estatus de cancelado: 4 y se envia correo de aviso
             $regTramite["estatus"] = 4; //0: iniciado, 1: Revición, 2: Proceso, 3: Finalizado, 4: Cancelado
             $this->db->insert("tramites_iniciados", $regTramite);
@@ -95,7 +95,15 @@ class RestTramites extends REST_Controller {
             $regTramite["estatus"] = 0;
             $this->db->insert("tramites_iniciados", $regTramite);
 
-            //Se envA
+            //Se envia correo que se copnfiguro en el cms para el tramite
+            $correo = $this->tramites->getCorreoTramite($idTramite);
+
+            $message = $correo->mensaje;
+            $from = "isc.aldo@cortasar.com";
+            $fromMessage = $correo->titulo;;
+            $to = $email;
+            $subject = $correo->titulo;
+            $this->generallib->sendEmail($message, $from, $fromMessage, $to, $subject);
         }
 
         $this->response(array(

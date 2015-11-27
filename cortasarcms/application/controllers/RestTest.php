@@ -44,15 +44,16 @@ class RestTest extends CI_Controller
         $params = array(
             "idTramite"=>"3",
             "email"=>"isc.aldo@gmail.com",
-            "upload[0]"=> new CurlFile('C:/Git/aldoweb/cortasarcms/uploads/tramites/correos/doc1.docx', $mimeTtpe1, 'doc1.docx'),
-            "upload[1]"=> new CurlFile('C:/Git/aldoweb/cortasarcms/uploads/tramites/correos/doc1.docx', $mimeTtpe1, 'doc1.docx'),
-            "upload[2]"=> new CurlFile('C:/Git/aldoweb/cortasarcms/uploads/tramites/correos/doc1.docx', $mimeTtpe1, 'doc1.docx'),
+            "upload[0]"=> new CurlFile('C:/Users/Aldo/Downloads/doc1.docx', $mimeTtpe1, 'doc1.docx'),
+            "upload[1]"=> new CurlFile('C:/Users/Aldo/Downloads/doc1.docx', $mimeTtpe1, 'doc1.docx'),
+            "upload[2]"=> new CurlFile('C:/Users/Aldo/Downloads/doc1.docx', $mimeTtpe1, 'doc1.docx'),
         );
 
         $curl_handle = curl_init();
         curl_setopt($curl_handle, CURLOPT_URL, 'http://localhost/cortasarcms/RestTramites/iniciarTramite');
         curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($curl_handle, CURLOPT_POST, 1);
+        curl_setopt($curl_handle, CURLOPT_VERBOSE, 1);
         curl_setopt($curl_handle, CURLOPT_POSTFIELDS, $params);
 
         $buffer = curl_exec($curl_handle);

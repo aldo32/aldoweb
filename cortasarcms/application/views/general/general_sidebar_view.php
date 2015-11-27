@@ -47,6 +47,16 @@
                         <i class="fa fa-files-o"></i> <span>Tramites</span>
 					</a>
 				</li>
+                <li class="treeview  <?php echo ($page == "directorios") ? "active" : ""; ?>">
+                    <a href="<?php echo base_url("directorios") ?>">
+                        <i class="fa fa-file-text-o"></i> <span>Directorio</span>
+                    </a>
+                </li>
+                <li class="treeview  <?php echo ($page == "noticias") ? "active" : ""; ?>">
+                    <a href="<?php echo base_url("noticias") ?>">
+                        <i class="fa fa-newspaper-o"></i> <span>Noticias</span>
+                    </a>
+                </li>
 
 
 				<!--
