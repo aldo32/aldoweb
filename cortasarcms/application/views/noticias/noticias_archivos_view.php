@@ -24,15 +24,40 @@
             $(".nyroModal").nyroModal({
                 closeOnEscape: true,
                 closeOnClick: true,
-                showCloseButton: false,
+                showCloseButton: true,
                 callbacks: {
                     afterClose: function() {
                     }
                 }
             });
 
-            $(document).on("click", ".class", function(e) {
+            $(document).on("click", ".eliminarImagen", function(e) {
+                vid = $(this).attr("vid");
+                tmp = vid.split("-");
+                idArchivo = tmp[0];
+                idNoticia = tmp[1];
 
+                if (confirm("realmente desea aliminar el archivo?")) {
+                    $.ajax({
+                        url: "<?php echo base_url("noticias/eliminarArchivo") ?>",
+                        data: "idNoticia="+idNoticia+"&idArchivo="+idArchivo+"&<?php echo $this->security->get_csrf_token_name()?>=<?php echo $this->security->get_csrf_hash()?>",
+                        dataType: "html",
+                        success: function(datos) {
+                            window.location = "<?php echo base_url("noticias/multimedia/".$noticia->id); ?>";
+                        },
+                        type: "POST"
+                    });
+                }
+            });
+
+            $("#subirarchivo").click(function(e) {
+                e.preventDefault();
+
+                if($("#upload").val() == "") alert("Debe seleccionar un archivo para continuar");
+                else {
+                    $(this).attr("disable", true);
+                    $("#uploadForm").submit();
+                }
             });
         });
     </script>
@@ -60,25 +85,26 @@
         </section>
 
         <section class="content">
-            <div class="box">
+                <div class="box">
                 <div class="box-header">
                     <h3 class="box-title"><?php echo "Noticia: ".$noticia->titulo ?></h3>
                 </div>
 
                 <div class="box-body">
                     <?php
-                    if ($alert != "") {
+                    if (isset($message)) {
                         ?>
-                        <div class="alert <?php echo $alert["type"] ?> alert-dismissable" id="messageAlert">
-                            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                            <h4><i class="icon fa <?php echo $alert["image"] ?>"></i> Mensaje!</h4>
-                            <?php echo $alert["message"]; ?>
-                        </div>
+                        <div><?php echo $message ?></div>
                         <?php
                     }
                     ?>
 
-                    <a href="<?php echo base_url("noticias/nuevoarchivo") ?>"><button class="btn btn-primary">Nueva Noticia</button></a>
+                    <?php echo form_open_multipart("noticias/subirarchivo", array("name"=>"uploadForm", "id"=>"uploadForm"), array("idNoticia"=>$noticia->id)) ?>
+                        Solo formato pdf|mov|avi|mp4|jpg|png|jpeg
+                        <input type="file" name="upload[]" id="upload" multiple>
+                        <br>
+                        <button class="btn btn-primary btn-xs" id="subirarchivo">Agregar archivo multimedia</button>
+                    <?php echo form_close(); ?>
                     <br><br>
 
                     <table id="tablaNoticiasArchivos" class="table table-bordered table-striped">
@@ -99,9 +125,9 @@
                                 <tr>
                                     <td><?php echo $row->id ?></td>
                                     <td><?php echo $row->archivo ?></td>
-                                    <td><a href="<?php echo base_url().$row->archivo?>">Ver archivo</a></td>
+                                    <td><a href="<?php echo base_url().$row->archivo?>" class="nyroModal">Ver archivo</a></td>
                                     <td><?php echo $row->creado ?></td>
-                                    <td><button class="btn btn-danger btn-xs" type="button" id="eliminarImagen" vid="<?php echo $row->id ?>">Eliminar archivo</button></td>
+                                    <td><button class="btn btn-danger btn-xs eliminarImagen" type="button" vid="<?php echo $row->id."-".$noticia->id ?>">Eliminar archivo</button></td>
                                 </tr>
                                 <?php
                             }

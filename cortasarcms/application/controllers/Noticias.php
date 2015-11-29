@@ -150,6 +150,84 @@ class Noticias extends CI_Controller
         }
     }
 
+    function subirarchivo() {
+        $data = $this->general();
+
+        $this->load->library('upload');
+        $idNoticia = $this->input->post("idNoticia");
+
+        $config['upload_path'] = './uploads/noticias/multimedia';
+        $config['allowed_types'] = 'pdf|mov|avi|mp4|jpg|png|jpeg';
+        $config['max_size'] = 0;
+        $config['max_width'] = 0;
+        $config['max_height'] = 0;
+        $config['remove_spaces'] = true;
+        $config['overwrite'] = true;
+
+        $uploadErrors = "";
+
+        if (isset($_FILES["upload"]["name"])) {
+            for ($i = 0; $i < count($_FILES["upload"]["name"]); $i++) {
+                $_FILES['uploadFile']['name'] = $_FILES['upload']['name'][$i];
+                $_FILES['uploadFile']['type'] = $_FILES['upload']['type'][$i];
+                $_FILES['uploadFile']['tmp_name'] = $_FILES['upload']['tmp_name'][$i];
+                $_FILES['uploadFile']['error'] = $_FILES['upload']['error'][$i];
+                $_FILES['uploadFile']['size'] = $_FILES['upload']['size'][$i];
+
+                $this->upload->initialize($config);
+
+                if (!$this->upload->do_upload('uploadFile')) {
+                    $uploadErrors .= "<b>" . $_FILES['uploadFile']['name'] . "</b>: " . $this->upload->display_errors("", "") . "<br>";
+                    $data["message"] = $uploadErrors;
+                    //$this->session->set_flashdata("alert", array("type"=>"alert-danger", "image"=>"fa-ban", "message"=>$uploadErrors));
+                }
+                else {
+                    //guardando en bd
+                    $register["idNoticia"] = $idNoticia;
+                    $register["archivo"] = "uploads/noticias/multimedia/" . $this->upload->data('file_name');
+
+                    //checa si el archivo ya existe para no duplicar registros
+                    $sql = "SELECT * FROM noticias_archivos WHERE archivo LIKE '%".$register["archivo"]."%' AND idNoticia = $idNoticia LIMIT 1";
+                    $q = $this->db->query($sql);
+                    $file = $q->row();
+
+                    if (!isset($file))
+                        $this->db->insert("noticias_archivos", $register);
+
+                    //$this->session->set_flashdata("alert", array("type"=>"alert-success", "image"=>"fa-check", "message"=>"Los archivos se guardaron correctamente"));
+                    $data["message"] = "<div><b>Los archivos se guardaron correctamente</b></div>";
+                }
+            }
+        }
+        else {
+            //$this->session->set_flashdata("alert", array("type"=>"alert-danger", "image"=>"fa-ban", "message"=>"No se ha seleccionado ningun archivo"));
+            $data["message"] = "No se ha seleccionado ningun archivo";
+        }
+
+        $q = $this->db->get_where("noticias_archivos", array("idNoticia"=>$idNoticia));
+        $data["archivos"] = $q->result();
+
+        $q = $this->db->get_where("noticias", array("id"=>$idNoticia));
+        $noticia = $q->row();
+        $data["noticia"] = $noticia;
+
+        $this->load->view("noticias/noticias_archivos_view", $data);
+    }
+
+    function eliminarArchivo() {
+        $idNoticia = $this->input->post("idNoticia");
+        $idArchivo = $this->input->post("idArchivo");
+
+        $q = $this->db->get_where("noticias_archivos", array("id"=>$idArchivo));
+        $noticiaArchivo = $q->row();
+
+        if (file_exists("./".$noticiaArchivo->archivo))
+            unlink("./".$noticiaArchivo->archivo);
+
+        $this->db->delete("noticias_archivos", array("id"=>$idArchivo));
+        echo "success";
+    }
+
     function general()
     {
         $config['usuario'] = $this->userSession;
