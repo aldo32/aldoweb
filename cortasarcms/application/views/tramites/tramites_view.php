@@ -123,6 +123,60 @@
                         </table>
 
                     </div>
+
+
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">Tramites realizados</h3>
+                        </div>
+
+                        <div class="box-body">
+                            <?php
+                            if ($alert != "") {
+                                ?>
+                                <div class="alert <?php echo $alert["type"] ?> alert-dismissable" id="messageAlert">
+                                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                                    <h4><i class="icon fa <?php echo $alert["image"] ?>"></i> Mensaje!</h4>
+                                    <?php echo $alert["message"]; ?>
+                                </div>
+                                <?php
+                            }
+                            ?>
+                            <table id="tablaTramites" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Categoria</th>
+                                    <th>Subcategoria</th>
+                                    <th>Email</th>
+                                    <th>Documentos del tramite</th>
+                                    <th>Documentos subidos</th>
+                                    <th>Estatus</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                if (isset($tramitesIniciados)) {
+                                    foreach ($tramitesIniciados as $row) {
+                                        ?>
+                                        <tr>
+                                            <td><?php echo $row->id ?></td>
+                                            <td><?php echo $row->nombre ?></td>
+                                            <td><?php echo $row->nombreCategoria ?></td>
+                                            <td><?php echo $row->nombreSubCategoria ?></td>
+                                            <td><?php echo $row->emailUsuario ?></td>
+                                            <td><?php echo $row->documentosTramite ?></td>
+                                            <td><?php echo $row->documentosSubidos ?></td>
+                                        </tr>
+                                        <?php
+                                    }
+                                }
+                                ?>
+                                </tbody>
+                            </table>
+
+                        </div>
                 </div>
 			</section>
 		</div>

@@ -30,14 +30,15 @@
       <primary-key name="PRIMARY" columns="id"/>
     </table>
     <table name="noticias" schema="" catalog="cortasar" type="TABLE">
-      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="titulo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="nota" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="descripcion" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="autor" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="titulo" sqlType="VARCHAR" precision="200" scale="0" nullable="false" jdbcType="12"/>
+      <column name="nota" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="descripcion" sqlType="VARCHAR" precision="500" scale="0" nullable="false" jdbcType="12"/>
+      <column name="autor" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
       <column name="formato" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="activo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="creado" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="activo" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MQ=="/>
+      <column name="creado" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <primary-key name="PRIMARY" columns="id"/>
       <exported-key name="noticias_archivos_ibfk_1" table="noticias_archivos" schema="" catalog="cortasar" columns="idNoticia"/>
     </table>
     <table name="noticias_archivos" schema="" catalog="cortasar" type="TABLE">
@@ -216,6 +217,12 @@
       <index name="promotoria" unique="false" columns="promotoria"/>
     </table>
     <table name="catxcadena" schema="" catalog="cubogeneral" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="nombre" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="nombre" unique="false" columns="nombre"/>
+    </table>
+    <table name="catxformato" schema="" catalog="cubogeneral" type="TABLE">
       <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="nombre" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="id"/>

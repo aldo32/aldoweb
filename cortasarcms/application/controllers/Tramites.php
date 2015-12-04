@@ -17,6 +17,7 @@ class Tramites extends CI_Controller {
 		$data = $this->general();
         $data["alert"] = $this->session->flashdata('alert');
 		$data["tramites"] = $this->tramites->getTramites();
+        $data["tramitesIniciados"] = $this->tramites->getTramitesIniciados();
 
         $this->load->view("tramites/tramites_view", $data);
     }

@@ -123,4 +123,27 @@ class Model_tramites extends CI_Model {
 		$q = $this->db->query($sql);
 		return $q->row();
 	}
+
+	function getTramitesIniciados() {
+		$sql="
+			SELECT
+				t.nombre AS nombre,
+				t.id AS idTramite,
+				(SELECT nombre FROM categorias WHERE id=t.idCategoria) AS nombreCategoria,
+				(SELECT nombre FROM subcategorias WHERE id=t.idSubCategoria) AS nombreSubCategoria,
+				ti.documentosTramite AS documentosTramite,
+				ti.documentosSubidos AS documentosSubidos,
+				ti.emailUsuario AS emailUsuario,
+				ti.estatus AS estatus,
+				ti.creado AS creado
+			FROM
+				tramites t,
+				tramites_iniciados ti
+			WHERE
+				t.id=ti.idTramite
+		";
+
+		$q = $this->db->query($sql);
+		return $q->result();
+	}
 }

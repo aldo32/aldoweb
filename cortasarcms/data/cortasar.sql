@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-11-2015 a las 23:50:26
+-- Tiempo de generación: 04-12-2015 a las 23:28:42
 -- Versión del servidor: 5.6.17
 -- Versión de PHP: 5.5.12
 
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `directorio` (
   `activo` tinyint(1) NOT NULL DEFAULT '1',
   `creado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 --
 -- Volcado de datos para la tabla `directorio`
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `noticias` (
   `activo` tinyint(1) NOT NULL DEFAULT '1',
   `creado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `noticias`
