@@ -19,6 +19,10 @@
                 stateSave: true,
             });
 
+            $("#tablaTramitesIniciados").DataTable({
+                stateSave: true,
+            });
+
 			$("#messageAlert").delay(<?php echo TIMER_ALERT ?>).fadeOut("slow");
 		});
 		</script>
@@ -142,7 +146,7 @@
                                 <?php
                             }
                             ?>
-                            <table id="tablaTramites" class="table table-bordered table-striped">
+                            <table id="tablaTramitesIniciados" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
                                     <th>ID</th>
@@ -161,13 +165,14 @@
                                     foreach ($tramitesIniciados as $row) {
                                         ?>
                                         <tr>
-                                            <td><?php echo $row->id ?></td>
+                                            <td><?php echo $row->idTramite ?></td>
                                             <td><?php echo $row->nombre ?></td>
                                             <td><?php echo $row->nombreCategoria ?></td>
                                             <td><?php echo $row->nombreSubCategoria ?></td>
                                             <td><?php echo $row->emailUsuario ?></td>
                                             <td><?php echo $row->documentosTramite ?></td>
                                             <td><?php echo $row->documentosSubidos ?></td>
+                                            <td><?php echo $row->estatus ?></td>
                                         </tr>
                                         <?php
                                     }
