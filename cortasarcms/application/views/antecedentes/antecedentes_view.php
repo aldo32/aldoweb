@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>CortasarCMS - Noticias</title>
+    <title>CortasarCMS - Antecedentes</title>
 
     <?php echo $includes?>
 
@@ -15,11 +15,9 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            $("#tablaNoticias").DataTable({
+            $("#tablaAntecedentes").DataTable({
                 stateSave: true,
             });
-
-            $("#messageAlert").delay(<?php echo TIMER_ALERT ?>).fadeOut("slow");
 
             $(".nyroModal").nyroModal({
                 closeOnEscape: true,
@@ -29,10 +27,6 @@
                     afterClose: function() {
                     }
                 }
-            });
-
-            $(document).on("click", ".class", function(e) {
-
             });
         });
     </script>
@@ -47,10 +41,10 @@
 
     <div class="content-wrapper">
         <section class="content-header" style="margin-left: 0px;">
-            <h1>Modulo de Noticias<small>  </small></h1>
+            <h1>Modulo de Antecedentes<small>  </small></h1>
             <ol class="breadcrumb">
                 <li><a href="<?php echo base_url("inicio") ?>"><i class="fa fa-dashboard"></i> Inicio</a></li>
-                <li class="active">Administrar Noticias</li>
+                <li class="active">Administrar Antecedentes</li>
                 <!--
                 <li><a href="#">Tables</a></li>
                 <li class="active">Data tables</li>
@@ -61,7 +55,7 @@
         <section class="content">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Noticias</h3>
+                    <h3 class="box-title">Listado de Antecedentes</h3>
                 </div>
 
                 <div class="box-body">
@@ -77,25 +71,23 @@
                     }
                     ?>
 
-                    <a href="<?php echo base_url("noticias/nuevo") ?>"><button class="btn btn-primary">Nueva Noticia</button></a>
+                    <a href="<?php echo base_url("antecedentes/nuevo") ?>"><button class="btn btn-primary">Crear nuevo antecedente</button></a>
+
                     <br><br>
 
-                    <table id="tablaNoticias" class="table table-bordered table-striped">
+                    <table id="tablaAntecedentes" class="table table-bordered table-striped">
                         <thead>
                         <tr>
                             <th>&nbsp;&nbsp;&nbsp;</th>
                             <th>ID</th>
-                            <th>Titulo</th>
-                            <th>Autor</th>
-                            <th>Formato</th>
-                            <th>Banner</th>
-                            <th>Activo</th>
+                            <th>Descripción</th>
+                            <th>Creado</th>
                         </tr>
                         </thead>
                         <tbody>
                         <?php
-                        if (isset($noticias)) {
-                            foreach ($noticias as $row) {
+                        if (isset($antecedentes)) {
+                            foreach ($antecedentes as $row) {
                                 ?>
                                 <tr>
                                     <td>
@@ -105,25 +97,16 @@
                                                 <span class="caret"></span>
                                                 <span class="sr-only">Toggle Dropdown</span>
                                             </button>
-                                            <?php
-                                            $activo = ($row->activo == 1) ? 0 : 1;
-                                            $messageActivo = ($row->activo == 1) ? "Dessactivar" : "Activar";
-                                            ?>
                                             <ul role="menu" class="dropdown-menu">
-                                                <li><a href="<?php echo base_url('noticias/editar/'.$row->id); ?>">Editar</a></li>
-                                                <li><a href="<?php echo base_url('noticias/desactivar/'.$row->id.'/'.$activo); ?>"><?php echo $messageActivo ?></a></li>
-                                                <li><a href="<?php echo base_url('noticias/multimedia/'.$row->id); ?>">Multimedia</a></li>
+                                                <li><a href="<?php echo base_url('antecedentes/editar/'.$row->id); ?>">Editar</a></li>
                                                 <li class="divider"></li>
-                                                <li><a href="<?php echo base_url('noticias/eliminar/'.$row->id); ?>" class="elimarDirectorio">Eliminar</a></li>
+                                                <li><a href="<?php echo base_url('antecedentes/eliminar/'.$row->id); ?>" class="elimarCategoria">Eliminar</a></li>
                                             </ul>
                                         </div>
                                     </td>
                                     <td><?php echo $row->id ?></td>
-                                    <td><?php echo $row->titulo ?></td>
-                                    <td><?php echo $row->autor ?></td>
-                                    <td><?php echo $row->formato ?></td>
-                                    <td><?php echo ($row->banner == 1) ? "Si" : "No" ?></td>
-                                    <td><?php echo ($row->activo == 1) ? "Si" : "No" ?></td>
+                                    <td><?php echo word_limiter($row->descripcion, 8) ?></td>
+                                    <td><?php echo $row->creado ?></td>
                                 </tr>
                                 <?php
                             }

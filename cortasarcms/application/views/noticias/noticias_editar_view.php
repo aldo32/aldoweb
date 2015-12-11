@@ -16,6 +16,7 @@ class noticia {
     var $descripcion;
     var $autor;
     var $formato;
+    var $banner;
 }
 ?>
 
@@ -122,6 +123,14 @@ class noticia {
                             $options = array("-1"=>"Seleccione un formato", "1"=>"Formato 1", "2"=>"Formato 2");
                             echo form_dropdown("formato", $options, set_value("formato", $noticia->formato), "class='form-control input-sm' id='formato'");
                             ?>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label>Banner</label>
+                            Si&nbsp;&nbsp;
+                            <input type="radio" name="banner" value="1" <?php if ($noticia->banner == 1) { echo "checked"; }  ?>  />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            No&nbsp;&nbsp;
+                            <input type="radio" name="banner" value="0" <?php if ($noticia->banner == 0) { echo "checked"; }  ?>  />
                         </div>
                     </div>
 

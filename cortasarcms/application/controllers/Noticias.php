@@ -62,6 +62,7 @@ class Noticias extends CI_Controller
             $register["descripcion"] = $this->input->post("descripcion");
             $register["autor"] = $this->input->post("autor");
             $register["formato"] = $this->input->post("formato");
+            $register["banner"] = $this->input->post("banner");
 
             if ($type == "insert") {
                 $this->db->insert("noticias", $register);

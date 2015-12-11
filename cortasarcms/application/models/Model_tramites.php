@@ -6,7 +6,7 @@ class Model_tramites extends CI_Model {
 	}
 
 	function getTramiteById($id) {
-		$sql="SELECT *, CASE estatus WHEN 0 THEN 'Iniciado' WHEN 1 THEN 'Revición' WHEN 2 THEN 'En Proceso' WHEN 3 THEN 'Finalizado' ELSE '' END AS estatusTramite FROM tramites WHERE id=?";
+		$sql="SELECT * FROM tramites WHERE id=?";
 		$q=$this->db->query($sql, array($id));
 
 		return ($q->num_rows() > 0) ? $q->row() : false;
@@ -16,8 +16,7 @@ class Model_tramites extends CI_Model {
 		$sql = "SELECT
 					*,
 					(SELECT nombre FROM categorias WHERE id = tramites.idCategoria) AS nombreCategoria,
-					(SELECT nombre FROM subcategorias WHERE id = tramites.idSubCategoria) AS nombreSubCategoria,
-					CASE estatus WHEN 0 THEN 'Iniciado' WHEN 1 THEN 'Revición' WHEN 2 THEN 'En Proceso' WHEN 3 THEN 'Finalizado' ELSE '' END AS estatusTramite
+					(SELECT nombre FROM subcategorias WHERE id = tramites.idSubCategoria) AS nombreSubCategoria
 				FROM
 					tramites";
 		$q = $this->db->query($sql);
@@ -127,6 +126,7 @@ class Model_tramites extends CI_Model {
 	function getTramitesIniciados() {
 		$sql="
 			SELECT
+				ti.id AS id,
 				t.nombre AS nombre,
 				t.id AS idTramite,
 				(SELECT nombre FROM categorias WHERE id=t.idCategoria) AS nombreCategoria,

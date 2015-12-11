@@ -446,10 +446,11 @@ class Tramites extends CI_Controller {
             <?php
             if ($archivosCorreo) {
                 foreach($archivosCorreo AS $row) {
+                    $tmp = explode("/", $row->archivo);
                     ?>
                     <tr>
                         <td><?php echo $row->id ?></td>
-                        <td><?php echo $row->archivo ?></td>
+                        <td><a href="<?php echo base_url().$row->archivo?>" target="_blank"><?php echo $tmp[3]; ?></a></td>
                         <td><?php echo $row->creado ?></td>
                         <td><a href="javascript:void(0);" class="eliminarArchivoEmail" id="<?php echo $row->id."-".$idCorreo ?>"><button class="btn btn-block btn-danger btn-xs">Eliminar</button></a></td>
                     </tr>
@@ -475,98 +476,73 @@ class Tramites extends CI_Controller {
         echo json_encode(array("status"=>"success"));
     }
 
-	/*
-	function archivos() {
-		$data = $this->general();
-        $data["alert"] = $this->session->flashdata('alert');
-		$data["tramites"] = $this->tramites->getComboTramites();
-        $data["archivosTramites"] = $this->tramites->getArchivosTramites();
+    function changeStatusTramite() {
+        $idTramiteIniciado = $this->input->post("id");
+        $estatus = $this->input->post("estatus");
 
-		$this->load->view("tramites/tramites_archivos_view", $data);
-	}
+        $this->db->where(array("id"=>$idTramiteIniciado));
+        $this->db->update("tramites_iniciados", array("estatus"=>$estatus));
+    }
 
-	function guardararchivos() {
-        $data = $this->general();
-        $data["alert"]="";
-        $data["tramites"] = $this->tramites->getComboTramites();
+    function viewDownloadDocsTramite($idTramiteIniciado, $idTramite) {
+        $tramitesDocumentos = $this->db->get_where("tramites_documentos", array("idTramite"=>$idTramite));
+        $tramitesDocumentos = $tramitesDocumentos->result();
 
-		$this->form_validation->set_rules('idTramite', '<strong>Tramite</strong>', 'trim|valid_combo');
-		$this->form_validation->set_rules('tipo', '<strong>Tipo</strong>', 'valid_combo|trim');
+        $tramiteIniciado = $this->db->get_where("tramites_iniciados", array("id"=>$idTramiteIniciado));
+        $tramiteIniciado = $tramiteIniciado->result();
 
-		if (isset($_FILES['tramitesFiles'])) {
-			if ($_FILES['tramitesFiles']["name"][0] == "")
-			{
-				$this->form_validation->set_rules('tramitesFiles', '<strong>Archivos</strong>', 'required');
-			}
-		}
+        $tramitesDocumentosArchivos = $this->db->get_where("tramites_documentos_archivos", array("idTramite"=>$idTramite));
+        $tramitesDocumentosArchivos = $tramitesDocumentosArchivos->result();
 
-		$this->form_validation->set_message('required', 'El campo %s es obligatorio');
-		$this->form_validation->set_message('valid_combo', 'Seleccione una opción para el campo %s');
+        ?>
+        <div class="box box-primary" style="width: 400px; height:300px; overflow: auto;">
+            <div class="">
+                <h4 class="box-title" style="margin: 8px;">Documentos necesarios para el tramite</h4>
+            </div>
+            <div class="box-body">
+                <div class="row" style="margin: 0px; padding: 0px;">
+                    <div class="">
+                        <?php
+                        if (isset($tramitesDocumentos)) {
+                            foreach ($tramitesDocumentos AS $row) {
+                                ?>
+                                <ul style="margin: 0px;">
+                                    <li><?php echo $row->archivo." - ".$row->descripcion?></li>
+                                </ul>
+                                <?php
+                            }
+                        }
+                        ?>
+                    </div>
+                </div>
+            </div>
 
-		if ($this->form_validation->run() == FALSE) {
-			$this->form_validation->set_error_delimiters('<small><p>', '</p></small>');
-            $this->load->view("tramites/tramites_archivos_view", $data);
-		}
-		else {
-            $this->load->library('upload');
+            <div class="">
+                <h4 class="box-title" style="margin: 8px;">Documentos subidos por el usuario</h4>
+            </div>
+            <div class="box-body">
+                <div class="row" style="margin: 0px; padding: 0px;">
+                    <div class="">
+                        <?php
+                        if (isset($tramitesDocumentosArchivos)) {
+                            foreach ($tramitesDocumentosArchivos AS $row) {
+                                $tmp = explode("/", $row->archivo);
+                                ?>
+                                <ul style="margin: 0px;">
+                                    <li><a href="<?php echo base_url().$row->archivo?>" target="_blank">[Descargar]</a> <?php echo $tmp[3]; ?></li>
+                                </ul>
+                                <?php
+                            }
+                        }
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php
+    }
 
-		    $tipo = $this->input->post("tipo");
-            $uploadErrors = "";
-            $uploadFiles = "";
 
-            for ($i=0; $i<count($_FILES["tramitesFiles"]["name"]); $i++) {
-                $_FILES['userfile']['name']     = $_FILES['tramitesFiles']['name'][$i];
-                $_FILES['userfile']['type']     = $_FILES['tramitesFiles']['type'][$i];
-                $_FILES['userfile']['tmp_name'] = $_FILES['tramitesFiles']['tmp_name'][$i];
-                $_FILES['userfile']['error']    = $_FILES['tramitesFiles']['error'][$i];
-                $_FILES['userfile']['size']     = $_FILES['tramitesFiles']['size'][$i];
-
-                //uploading files
-                $config['upload_path']          = './uploads/tramites/'.$tipo;
-                $config['allowed_types']        = 'pdf|doc|docx|xls|xlsx|jpg|png|jpeg';
-                $config['max_size']             = 0;
-                $config['max_width']            = 0;
-                $config['max_height']           = 0;
-                $config['remove_spaces']        = true;
-                $config['overwrite']            = true;
-
-                $this->upload->initialize($config);
-
-                if (!$this->upload->do_upload('userfile')) {
-                    $uploadErrors .= "Archivo: <b>".$_FILES['userfile']['name']."</b> ".$this->upload->display_errors("", "")."<br>";
-                    $this->load->view("tramites/tramites_archivos_view", $data);
-                }
-                else {
-                    //guardando en bd
-                    $register["idTramite"] = $this->input->post("idTramite");
-	                $register["archivo"] = "uploads/tramites/".$tipo."/".$this->upload->data('file_name');
-                    $register["tipo"] = $tipo;
-                    $register["descripcion"] = $this->input->post("descripcion");
-
-					$this->db->insert("tramites_archivos", $register);
-
-                    $uploadFiles .= "Archivo: <b>".$this->upload->data('file_name')."</b> correctamente guardado<br>";
-                }
-            }
-
-            $this->session->set_flashdata("alert", array("type"=>"alert-warning", "image"=>"fa-warning", "message"=>$uploadErrors."<br><br>".$uploadFiles));
-            redirect("tramites/archivos");
-		}
-	}
-
-	function eliminararchivo($id) {
-		$archivo = $this->tramites->getArchivoById($id);
-		if ($archivo) {
-			$this->db->delete('tramites_archivos', array('id' => $archivo->id));
-
-			$this->session->set_flashdata("alert", array("type"=>"alert-success", "image"=>"fa-check", "message"=>"Se eliminó el archivo correctamente"));
-			redirect("tramites/archivos");
-		}
-		else {
-			$this->session->set_flashdata("alert", array("type"=>"alert-danger", "image"=>"fa-ban", "message"=>"No se encontro el archivo en la base de datos"));
-			redirect("tramites/archivos");
-		}
-	}*/
 
     function general() {
 		$config['usuario'] = $this->userSession;

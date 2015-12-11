@@ -13,5 +13,11 @@
       <schema-pattern>cubogeneral.*</schema-pattern>
       <default-schemas>cubogeneral.*</default-schemas>
     </data-source>
+    <data-source name="MySQL - emetrix@localhost" uuid="4e523bde-0758-475b-8d29-ed59dcf3dc76">
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <schema-pattern>emetrix.*</schema-pattern>
+      <default-schemas>emetrix.*</default-schemas>
+    </data-source>
   </component>
 </project>

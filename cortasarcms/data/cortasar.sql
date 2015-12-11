@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-12-2015 a las 23:28:42
+-- Tiempo de generación: 11-12-2015 a las 01:35:06
 -- Versión del servidor: 5.6.17
 -- Versión de PHP: 5.5.12
 
@@ -19,6 +19,49 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `cortasar`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `antecedentes`
+--
+
+CREATE TABLE IF NOT EXISTS `antecedentes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `descripcion` text COLLATE utf8_unicode_ci NOT NULL,
+  `creado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+
+--
+-- Volcado de datos para la tabla `antecedentes`
+--
+
+INSERT INTO `antecedentes` (`id`, `descripcion`, `creado`) VALUES
+(1, '<p>df asdf asdf sdf asdfasdf   xxxxx<br></p>', '2015-12-10 22:53:29'),
+(2, '<p>f asdf asdf asdf asdf asdf asdf asdf asd<br></p>', '2015-12-10 22:53:50');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `banners`
+--
+
+CREATE TABLE IF NOT EXISTS `banners` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
+  `archivo` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `tipo` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `creado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+
+--
+-- Volcado de datos para la tabla `banners`
+--
+
+INSERT INTO `banners` (`id`, `titulo`, `archivo`, `tipo`, `creado`) VALUES
+(1, 'dadasdas', 'uploads/banners/gears_logo.png', 'fiestas', '2015-12-10 23:58:30');
 
 -- --------------------------------------------------------
 
@@ -84,17 +127,19 @@ CREATE TABLE IF NOT EXISTS `noticias` (
   `autor` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `formato` int(11) NOT NULL,
   `activo` tinyint(1) NOT NULL DEFAULT '1',
+  `banner` tinyint(1) NOT NULL DEFAULT '0',
   `creado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 --
 -- Volcado de datos para la tabla `noticias`
 --
 
-INSERT INTO `noticias` (`id`, `titulo`, `nota`, `descripcion`, `autor`, `formato`, `activo`, `creado`) VALUES
-(1, 'Noticia 1 xxx', '<p></p><p><strong>Lorem Ipsum</strong> es simplemente el texto de relleno de \r\nlas imprentas y archivos de texto. Lorem Ipsum ha sido el texto de \r\nrelleno estándar de las industrias desde el año 1500, cuando un impresor\r\n (N. del T. persona que se dedica a la imprenta) desconocido usó una \r\ngalería de textos y los mezcló de tal manera que logró hacer un libro de\r\n textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó\r\n como texto de relleno en documentos electrónicos, quedando \r\nesencialmente igual al original. Fue popularizado en los 60s con la \r\ncreación de las hojas "Letraset", las cuales contenian pasajes de Lorem \r\nIpsum, y más recientemente con software de autoedición, como por ejemplo\r\n Aldus  PageMaker, el cual incluye versiones de Lorem Ipsum.</p>dasd<p></p><p> asd as dasd asd asdasdas xxxx<br></p>', 'd asd as dasdxxx', 'dasd asd asdas das xxx', 1, 1, '2015-11-27 20:20:25'),
-(2, 'Noticia 2', '<p></p><p><strong>Lorem Ipsum</strong> es simplemente el texto de relleno de \r\nlas imprentas y archivos de texto. Lorem Ipsum ha sido el texto de \r\nrelleno estándar de las industrias desde el año 1500, cuando un impresor\r\n (N. del T. persona que se dedica a la imprenta) desconocido usó una \r\ngalería de textos y los mezcló de tal manera que logró hacer un libro de\r\n textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó\r\n como texto de relleno en documentos electrónicos, quedando \r\nesencialmente igual al original. Fue popularizado en los 60s con la \r\ncreación de las hojas "Letraset", las cuales contenian pasajes de Lorem \r\nIpsum, y más recientemente con software de autoedición, como por ejemplo\r\n Aldus  PageMaker, el cual incluye versiones de Lorem Ipsum.</p><br><p></p>', 'sad a dasd as', 'Aldo', 1, 1, '2015-11-27 20:20:57');
+INSERT INTO `noticias` (`id`, `titulo`, `nota`, `descripcion`, `autor`, `formato`, `activo`, `banner`, `creado`) VALUES
+(1, 'Noticia 1 xxx', '<p></p><p><strong>Lorem Ipsum</strong> es simplemente el texto de relleno de \r\nlas imprentas y archivos de texto. Lorem Ipsum ha sido el texto de \r\nrelleno estándar de las industrias desde el año 1500, cuando un impresor\r\n (N. del T. persona que se dedica a la imprenta) desconocido usó una \r\ngalería de textos y los mezcló de tal manera que logró hacer un libro de\r\n textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó\r\n como texto de relleno en documentos electrónicos, quedando \r\nesencialmente igual al original. Fue popularizado en los 60s con la \r\ncreación de las hojas "Letraset", las cuales contenian pasajes de Lorem \r\nIpsum, y más recientemente con software de autoedición, como por ejemplo\r\n Aldus  PageMaker, el cual incluye versiones de Lorem Ipsum.</p>dasd<p></p><p> asd as dasd asd asdasdas xxxx<br></p>', '<p>df asdf asdf sdf asdfasdf xxx<br></p>', 'dasd asd asdas das xxx', 1, 1, 0, '2015-11-27 20:20:25'),
+(2, 'Noticia 2', '<p></p><p><strong>Lorem Ipsum</strong> es simplemente el texto de relleno de \r\nlas imprentas y archivos de texto. Lorem Ipsum ha sido el texto de \r\nrelleno estándar de las industrias desde el año 1500, cuando un impresor\r\n (N. del T. persona que se dedica a la imprenta) desconocido usó una \r\ngalería de textos y los mezcló de tal manera que logró hacer un libro de\r\n textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó\r\n como texto de relleno en documentos electrónicos, quedando \r\nesencialmente igual al original. Fue popularizado en los 60s con la \r\ncreación de las hojas "Letraset", las cuales contenian pasajes de Lorem \r\nIpsum, y más recientemente con software de autoedición, como por ejemplo\r\n Aldus  PageMaker, el cual incluye versiones de Lorem Ipsum.</p><br><p></p>', 'sad a dasd as', 'Aldo', 1, 1, 0, '2015-11-27 20:20:57'),
+(3, 'fsdfsfsdf', '<p>fsdfsdfsdfsd<br></p>', 'fsdfsdfsd', 'fsdfsdfsdfds', 1, 1, 0, '2015-12-11 00:22:02');
 
 -- --------------------------------------------------------
 
@@ -145,7 +190,7 @@ CREATE TABLE IF NOT EXISTS `subcategorias` (
   `creado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `idCategoria` (`idCategoria`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
 
 --
 -- Volcado de datos para la tabla `subcategorias`
@@ -157,7 +202,8 @@ INSERT INTO `subcategorias` (`id`, `idCategoria`, `nombre`, `creado`) VALUES
 (3, 1, 'aldo', '2015-09-23 23:55:17'),
 (4, 3, 'Antro', '2015-11-21 17:34:14'),
 (5, 3, 'Restaurante Bar', '2015-11-21 17:34:28'),
-(6, 3, 'Cantina', '2015-11-21 17:34:42');
+(6, 3, 'Cantina', '2015-11-21 17:34:42'),
+(7, 3, 'Putero', '2015-12-07 18:07:20');
 
 -- --------------------------------------------------------
 
@@ -172,20 +218,20 @@ CREATE TABLE IF NOT EXISTS `tramites` (
   `idCategoria` int(11) NOT NULL,
   `idSubCategoria` int(11) NOT NULL,
   `creado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `estatus` int(11) NOT NULL DEFAULT '0' COMMENT '0: Iniciado, 1: Revición, 2: Proceso, 3:Finalizado, 4: cancelado',
   PRIMARY KEY (`id`),
   KEY `idCategoria` (`idCategoria`,`idSubCategoria`),
   KEY `idSubCategoria` (`idSubCategoria`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 --
 -- Volcado de datos para la tabla `tramites`
 --
 
-INSERT INTO `tramites` (`id`, `nombre`, `descripcion`, `idCategoria`, `idSubCategoria`, `creado`, `estatus`) VALUES
-(1, 'Tramite de prueba', 'Descripcion de prueba', 1, 1, '2015-11-07 23:36:28', 0),
-(2, 'Tramite de prueba 2', 'ninguna', 1, 3, '2015-11-16 17:19:22', 0),
-(3, 'Construcción de bar', 'Proceso legal para la licencia del tramite de contrucción de un bar', 3, 5, '2015-11-21 17:35:05', 0);
+INSERT INTO `tramites` (`id`, `nombre`, `descripcion`, `idCategoria`, `idSubCategoria`, `creado`) VALUES
+(1, 'Tramite de prueba', 'Descripcion de prueba', 1, 1, '2015-11-07 23:36:28'),
+(2, 'Tramite de prueba 2', 'ninguna', 1, 3, '2015-11-16 17:19:22'),
+(3, 'Construcción de bar', 'Proceso legal para la licencia del tramite de contrucción de un bar', 3, 5, '2015-11-21 17:35:05'),
+(4, 'Putero', 'Centro de entretenimiento para hombres', 3, 6, '2015-12-07 18:07:52');
 
 -- --------------------------------------------------------
 
@@ -202,7 +248,7 @@ CREATE TABLE IF NOT EXISTS `tramites_correos` (
   `modificado` timestamp NOT NULL,
   PRIMARY KEY (`id`),
   KEY `idTramite` (`idTramite`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `tramites_correos`
@@ -211,7 +257,8 @@ CREATE TABLE IF NOT EXISTS `tramites_correos` (
 INSERT INTO `tramites_correos` (`id`, `idTramite`, `titulo`, `mensaje`, `creado`, `modificado`) VALUES
 (2, 2, 'titulo de prueba xx', '                                    sdfsfds fsd fsd fsd                                ', '2015-11-20 18:57:51', '0000-00-00 00:00:00'),
 (3, 1, 'dasdasd a', 'd asd asd asdas das asasd a', '2015-11-20 20:18:11', '0000-00-00 00:00:00'),
-(4, 3, 'Servicio de tramites  - Cortasar', '<p>Servicio de administracion de tramites <b>CORTASAR</b><br></p>Por este medio se da inicio el proceso de tramites para el siguiente tramite: <b>Construcción de bar<br><br></b>se requiere que envie los siguientes documentos<br><br><ol><li>doc1</li><li>doc2</li><li>doc3</li></ol><p>Sin mas por el momento esperamo el envio de los archivos antes mencionados<br></p><br><br>', '2015-11-21 18:14:50', '0000-00-00 00:00:00');
+(4, 3, 'Servicio de tramites  - Cortasar', '<p>Servicio de administracion de tramites <b>CORTASAR</b><br></p>Por este medio se da inicio el proceso de tramites para el siguiente tramite: <b>Construcción de bar<br><br></b>se requiere que envie los siguientes documentos<br><br><ol><li>doc1</li><li>doc2</li><li>doc3</li></ol><p>Sin mas por el momento esperamo el envio de los archivos antes mencionados<br></p><br><br>', '2015-11-21 18:14:50', '0000-00-00 00:00:00'),
+(5, 4, 'Ahora que ested ha decidido poner un putero', '<p><strong>Ha decidido realizar el tramite de un putero<br></strong></p><p><strong>Lorem Ipsum</strong> es simplemente el texto de relleno de las \r\nimprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno \r\nestándar de las industrias desde el año 1500, cuando un impresor (N. del\r\n T. persona que se dedica a la imprenta) desconocido usó una galería de \r\ntextos y los mezcló de tal manera que logró hacer un libro de textos \r\nespecimen. No sólo sobrevivió 500 años, sino que tambien ingresó como \r\ntexto de relleno en documentos electrónicos, quedando esencialmente \r\nigual al original. Fue popularizado en los 60s con la creación de las \r\nhojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más \r\nrecientemente con software de autoedición, como por ejemplo Aldus  \r\nPageMaker, el cual incluye versiones de Lorem Ipsum.</p><p><br></p><p>Sin mas por el momento... Saludos<br></p>', '2015-12-07 18:14:02', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -229,7 +276,7 @@ CREATE TABLE IF NOT EXISTS `tramites_correos_archivos` (
   PRIMARY KEY (`id`),
   KEY `idTramite` (`idTramite`,`idCorreo`),
   KEY `idCorreo` (`idCorreo`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=48 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=49 ;
 
 --
 -- Volcado de datos para la tabla `tramites_correos_archivos`
@@ -243,7 +290,8 @@ INSERT INTO `tramites_correos_archivos` (`id`, `idTramite`, `idCorreo`, `archivo
 (44, 1, 3, 'uploads/tramites/correos/Mapas.docx', '', '2015-11-20 20:19:41'),
 (45, 3, 4, 'uploads/tramites/correos/doc1.docx', '', '2015-11-21 18:21:54'),
 (46, 3, 4, 'uploads/tramites/correos/doc2.docx', '', '2015-11-21 18:21:54'),
-(47, 3, 4, 'uploads/tramites/correos/doc3.docx', '', '2015-11-21 18:21:54');
+(47, 3, 4, 'uploads/tramites/correos/doc3.docx', '', '2015-11-21 18:21:54'),
+(48, 4, 5, 'uploads/tramites/correos/mrprintables-fruit-templates-apple-pear-03.pdf', '', '2015-12-07 18:14:02');
 
 -- --------------------------------------------------------
 
@@ -261,7 +309,7 @@ CREATE TABLE IF NOT EXISTS `tramites_documentos` (
   `url` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `idTramite` (`idTramite`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=19 ;
 
 --
 -- Volcado de datos para la tabla `tramites_documentos`
@@ -274,7 +322,10 @@ INSERT INTO `tramites_documentos` (`id`, `idTramite`, `archivo`, `descripcion`, 
 (12, 2, 'dfasf asdf asdf asdf', 'dfasf asdf asdf asdf', '2015-11-20 16:21:59', '0000-00-00 00:00:00', ''),
 (13, 3, 'Acta de nacimiento', 'Acta de nacimiento', '2015-11-21 17:37:43', '0000-00-00 00:00:00', ''),
 (14, 3, 'Credencial de elector', 'Credencial de elector', '2015-11-21 17:37:59', '0000-00-00 00:00:00', ''),
-(15, 3, 'Titulo de la tierr', 'Titulo de la tierr', '2015-11-21 17:38:07', '0000-00-00 00:00:00', '');
+(15, 3, 'Titulo de la tierr', 'Titulo de la tierr', '2015-11-21 17:38:07', '0000-00-00 00:00:00', ''),
+(16, 4, 'Titulo de la propiedad', 'Titulo de la propiedad', '2015-12-07 18:09:42', '0000-00-00 00:00:00', ''),
+(17, 4, 'Credencial de elector', 'Credencial de elector', '2015-12-07 18:09:53', '0000-00-00 00:00:00', ''),
+(18, 4, 'Permiso para vender bebidas alcoholicas', 'Permiso para vender bebidas alcoholicas', '2015-12-07 18:10:19', '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
 
@@ -288,14 +339,19 @@ CREATE TABLE IF NOT EXISTS `tramites_documentos_archivos` (
   `archivo` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   `creado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
 
 --
 -- Volcado de datos para la tabla `tramites_documentos_archivos`
 --
 
 INSERT INTO `tramites_documentos_archivos` (`id`, `idTramite`, `archivo`, `creado`) VALUES
-(1, 3, 'uploads/tramites/documentos/doc1.docx', '2015-11-22 19:24:21');
+(1, 3, 'uploads/tramites/documentos/doc1.docx', '2015-11-22 19:24:21'),
+(2, 3, 'uploads/tramites/documentos/doc2.docx', '2015-12-07 18:20:16'),
+(3, 3, 'uploads/tramites/documentos/doc3.docx', '2015-12-07 18:20:16'),
+(4, 4, 'uploads/tramites/documentos/doc1.docx', '2015-12-07 18:23:20'),
+(5, 4, 'uploads/tramites/documentos/doc2.docx', '2015-12-07 18:23:20'),
+(6, 4, 'uploads/tramites/documentos/doc3.docx', '2015-12-07 18:23:20');
 
 -- --------------------------------------------------------
 
@@ -309,12 +365,12 @@ CREATE TABLE IF NOT EXISTS `tramites_iniciados` (
   `documentosTramite` int(11) NOT NULL,
   `documentosSubidos` int(11) NOT NULL,
   `emailUsuario` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
-  `estatus` int(11) NOT NULL,
+  `estatus` int(11) NOT NULL COMMENT '0: Revisión, 1: Aceptado, 2: Rechazado',
   `creado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `actualizado` timestamp NOT NULL,
   PRIMARY KEY (`id`),
   KEY `idTramite` (`idTramite`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=13 ;
 
 --
 -- Volcado de datos para la tabla `tramites_iniciados`
@@ -326,9 +382,13 @@ INSERT INTO `tramites_iniciados` (`id`, `idTramite`, `documentosTramite`, `docum
 (3, 3, 3, 3, 'isc.aldo@gmail.com', 0, '2015-11-23 17:12:27', '0000-00-00 00:00:00'),
 (4, 3, 3, 1, 'isc.aldo@gmail.com', 0, '2015-11-23 17:12:50', '0000-00-00 00:00:00'),
 (5, 3, 3, 1, 'isc.aldo@gmail.com', 0, '2015-11-23 17:14:07', '0000-00-00 00:00:00'),
-(6, 3, 3, 1, 'isc.aldo@gmail.com', 4, '2015-11-23 17:15:09', '0000-00-00 00:00:00'),
+(6, 3, 3, 1, 'isc.aldo@gmail.com', 2, '2015-11-23 17:15:09', '0000-00-00 00:00:00'),
 (7, 3, 3, 3, 'isc.aldo@gmail.com', 0, '2015-11-23 18:06:05', '0000-00-00 00:00:00'),
-(8, 3, 3, 3, 'isc.aldo@gmail.com', 0, '2015-11-23 18:10:14', '0000-00-00 00:00:00');
+(8, 3, 3, 3, 'isc.aldo@gmail.com', 0, '2015-11-23 18:10:14', '0000-00-00 00:00:00'),
+(9, 3, 3, 3, 'isc.aldo@gmail.com', 0, '2015-12-07 18:20:16', '0000-00-00 00:00:00'),
+(10, 4, 3, 3, 'isc.aldo@gmail.com', 0, '2015-12-07 18:23:20', '0000-00-00 00:00:00'),
+(11, 4, 3, 3, 'isc.aldo@gmail.com', 0, '2015-12-07 18:43:48', '0000-00-00 00:00:00'),
+(12, 4, 3, 3, 'isc.aldo@gmail.com', 0, '2015-12-07 18:44:34', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -343,7 +403,7 @@ CREATE TABLE IF NOT EXISTS `tramites_reglas` (
   `creado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `idTramite` (`idTramite`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=17 ;
 
 --
 -- Volcado de datos para la tabla `tramites_reglas`
@@ -358,7 +418,11 @@ INSERT INTO `tramites_reglas` (`id`, `idTramite`, `regla`, `creado`) VALUES
 (9, 2, 'f asdf asdf sadf asdf asd', '2015-11-20 16:21:31'),
 (10, 3, 'Debe estar a mas de 100 metros de cualquier escuela', '2015-11-21 17:36:10'),
 (11, 3, 'Debe cumplir con todo el reglamento por parte del gobierno del estado', '2015-11-21 17:36:47'),
-(12, 3, 'El numero de pisos no debe sobrepasar a 3', '2015-11-21 17:37:19');
+(12, 3, 'El numero de pisos no debe sobrepasar a 3', '2015-11-21 17:37:19'),
+(13, 4, 'Regla 1 para el putero', '2015-12-07 18:08:30'),
+(14, 4, 'Regla 2 para el putero', '2015-12-07 18:08:36'),
+(15, 4, 'Regla 3 para el putero', '2015-12-07 18:08:46'),
+(16, 4, 'etc', '2015-12-07 18:08:51');
 
 -- --------------------------------------------------------
 

@@ -15,6 +15,16 @@
 
 		<script type="text/javascript">
 		$(document).ready(function() {
+            $('.nyroModal').nyroModal({
+                closeOnEscape: true,
+                closeOnClick: true,
+                showCloseButton: true,
+                callbacks: {
+                    afterClose: function() {
+                    }
+                }
+            });
+
             $("#tablaTramites").DataTable({
                 stateSave: true,
             });
@@ -24,6 +34,23 @@
             });
 
 			$("#messageAlert").delay(<?php echo TIMER_ALERT ?>).fadeOut("slow");
+
+            $(document).on("change", ".idEstatus", function() {
+                id = $(this).attr("id");
+                estatus = $(this).val();
+
+                if (confirm("Realmente desea cambiar el estatus del tramite?")) {
+                    $.ajax({
+                        url: "<?php echo base_url("tramites/changeStatusTramite") ?>",
+                        data: "id="+id+"&estatus="+estatus,
+                        dataType: "html",
+                        success: function(datos) {
+                            alert("Se cambio es status del tramite");
+                        },
+                        type: "POST"
+                    });
+                }
+            });
 		});
 		</script>
 	</head>
@@ -109,19 +136,6 @@
                                         <?php
                                     }
                                 }
-                                else {
-                                    ?>
-                                    <tr>
-										<td>No hay datos</td>
-                                        <td>&nbsp;</td>
-                                        <td>&nbsp;</td>
-                                        <td>&nbsp;</td>
-                                        <td>&nbsp;</td>
-                                        <td>&nbsp;</td>
-                                        <td>&nbsp;</td>
-									</tr>
-                                    <?php
-                                }
                                 ?>
                             </tbody>
                         </table>
@@ -163,6 +177,7 @@
                                 <?php
                                 if (isset($tramitesIniciados)) {
                                     foreach ($tramitesIniciados as $row) {
+                                        $opciones = array("0"=>"Revición", "1"=>"Aceptado", "2"=>"Rechazado");
                                         ?>
                                         <tr>
                                             <td><?php echo $row->idTramite ?></td>
@@ -170,9 +185,9 @@
                                             <td><?php echo $row->nombreCategoria ?></td>
                                             <td><?php echo $row->nombreSubCategoria ?></td>
                                             <td><?php echo $row->emailUsuario ?></td>
-                                            <td><?php echo $row->documentosTramite ?></td>
-                                            <td><?php echo $row->documentosSubidos ?></td>
-                                            <td><?php echo $row->estatus ?></td>
+                                            <td><a href="<?php echo base_url("tramites/viewDownloadDocsTramite/".$row->id."/".$row->idTramite); ?>" class="nyroModal"><?php echo $row->documentosTramite ?></a></td>
+                                            <td><a href="<?php echo base_url("tramites/viewDownloadDocsTramite/".$row->id."/".$row->idTramite); ?>" class="nyroModal"><?php echo $row->documentosSubidos ?></a></td>
+                                            <td><?php echo form_dropdown("idEstatus", $opciones, set_value("idEstatus", $row->estatus), "class='form-control input-sm idEstatus' id='".$row->id."'");?></td>
                                         </tr>
                                         <?php
                                     }

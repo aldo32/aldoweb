@@ -57,6 +57,16 @@
                         <i class="fa fa-newspaper-o"></i> <span>Noticias</span>
                     </a>
                 </li>
+                <li class="treeview  <?php echo ($page == "antecedentes") ? "active" : ""; ?>">
+                    <a href="<?php echo base_url("antecedentes") ?>">
+                        <i class="fa fa-circle-o text-aqua"></i> <span>Antecedentes</span>
+                    </a>
+                </li>
+                <li class="treeview  <?php echo ($page == "nuestrasfiestas") ? "active" : ""; ?>">
+                    <a href="<?php echo base_url("nuestrasfiestas") ?>">
+                        <i class="fa fa-circle-o text-aqua"></i> <span>Nuestras Fiestas</span>
+                    </a>
+                </li>
 
 
 				<!--

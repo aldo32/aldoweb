@@ -13,7 +13,7 @@ class RestTest extends CI_Controller
     public function iniciarTramite() {
         $mimeTtpe1 = finfo_file(finfo_open(FILEINFO_MIME_TYPE), "./uploads/tramites/correos/doc1.docx");
         $mimeTtpe2 = finfo_file(finfo_open(FILEINFO_MIME_TYPE), "./uploads/tramites/correos/doc2.docx");
-        $mimeTtpe3 = finfo_file(finfo_open(FILEINFO_MIME_TYPE), "./uploads/tramites/correos/doc2.docx");
+        $mimeTtpe3 = finfo_file(finfo_open(FILEINFO_MIME_TYPE), "./uploads/tramites/correos/doc3.docx");
 
         $params["files[0]"] = new CURLFile("./uploads/tramites/correos/doc1.docx", $mimeTtpe1, "doc1.docx");
         $params["files[1]"] = new CURLFile("./uploads/tramites/correos/doc2.docx", $mimeTtpe2, "doc2.docx");
@@ -40,13 +40,13 @@ class RestTest extends CI_Controller
     }
 
     function pruebas() {
-        $mimeTtpe1 = finfo_file(finfo_open(FILEINFO_MIME_TYPE), "./uploads/tramites/correos/doc1.docx");
+        $mimeTtpe1 = finfo_file(finfo_open(FILEINFO_MIME_TYPE), "C:/Users/Aldo/Downloads/doc1.docx");
         $params = array(
-            "idTramite"=>"3",
+            "idTramite"=>"4",
             "email"=>"isc.aldo@gmail.com",
             "upload[0]"=> new CurlFile('C:/Users/Aldo/Downloads/doc1.docx', $mimeTtpe1, 'doc1.docx'),
-            "upload[1]"=> new CurlFile('C:/Users/Aldo/Downloads/doc1.docx', $mimeTtpe1, 'doc1.docx'),
-            "upload[2]"=> new CurlFile('C:/Users/Aldo/Downloads/doc1.docx', $mimeTtpe1, 'doc1.docx'),
+            "upload[1]"=> new CurlFile('C:/Users/Aldo/Downloads/doc2.docx', $mimeTtpe1, 'doc2.docx'),
+            "upload[2]"=> new CurlFile('C:/Users/Aldo/Downloads/doc3.docx', $mimeTtpe1, 'doc3.docx'),
         );
 
         $curl_handle = curl_init();
