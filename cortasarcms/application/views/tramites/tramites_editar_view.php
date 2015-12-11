@@ -43,6 +43,8 @@ class tramite {
 
 		<script type="text/javascript">
 		$(document).ready(function() {
+            $('#idArchivo').multipleSelect({single: false, placeholder: 'Buscar archivo', filter: true});
+
             $("#reglas").wysihtml5();
 
             <?php
@@ -108,6 +110,14 @@ class tramite {
                                     <?php echo form_dropdown("idSubCategoria", $comboSubCategorias, set_value("idSubCategoria", $tramite->idSubCategoria), "class='form-control input-sm' id='idSubCategoria'");?>
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label>Archivos para el tramite</label>
+                                    <?php echo form_dropdown("idArchivo", $comboArchivos, set_value("idArchivo"), "class='' style='width: 100%' id='idArchivo'");?>
+                                </div>
+                            </div>
+
 
                             <button class="btn btn-primary" type="submit">Guardar</button>
                             <br>

@@ -146,4 +146,18 @@ class Model_tramites extends CI_Model {
 		$q = $this->db->query($sql);
 		return $q->result();
 	}
+
+	function getComboArchivos() {
+		$sql = "SELECT * FROM archivos";
+		$q=$this->db->query($sql);
+
+		if ($q->num_rows() > 0)
+		{
+			foreach ($q->result() AS $row)
+				$options[$row->id]=$row->nombre;
+
+			$q->free_result();
+			return $options;
+		}
+	}
 }

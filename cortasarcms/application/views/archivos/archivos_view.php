@@ -82,7 +82,7 @@
                     if ($alert != "") {
                         ?>
                         <div class="alert <?php echo $alert["type"] ?> alert-dismissable" id="messageAlert">
-                            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">ï¿½</button>
                             <h4><i class="icon fa <?php echo $alert["image"] ?>"></i> Mensaje!</h4>
                             <?php echo $alert["message"]; ?>
                         </div>
@@ -97,7 +97,7 @@
                                 <?php echo form_input(array('name'=>'nombre','id'=>'nombre', 'class'=>'form-control input-sm', 'value' =>set_value('nombre')));?>
                             </div>
                             <div class="form-group col-md-6">
-                                <label>Descripción</label>
+                                <label>DescripciÃ³n</label>
                                 <?php echo form_input(array('name'=>'descripcion','id'=>'descripcion', 'class'=>'form-control input-sm', 'value' =>set_value('descripcion')));?>
                             </div>
                             <?php
@@ -124,7 +124,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Nombre</th>
-                            <th>Descripción</th>
+                            <th>DescripciÃ³n</th>
                             <th>Archivo</th>
                             <th>Creado</th>
                             <th>Operaciones</th>
@@ -159,7 +159,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <a onclick="$.nmTop().close(); clear();"><button aria-label="Close" data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span></button></a>
+                            <a onclick="$.nmTop().close(); clear();"><button aria-label="Close" data-dismiss="modal" class="close" type="button"><span aria-hidden="true">ï¿½</span></button></a>
                             <h4 class="modal-title">Advertencia</h4>
                         </div>
                         <div class="modal-body">

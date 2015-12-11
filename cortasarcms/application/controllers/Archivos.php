@@ -38,7 +38,6 @@ class Archivos extends CI_Controller
             $data["uploadErrors"] = "";
             $data["alert"] = "";
 
-            echo validation_errors();
             $this->load->view('archivos/archivos_view', $data);
         }
         else {
@@ -60,14 +59,33 @@ class Archivos extends CI_Controller
 
                 $this->load->view('archivos/archivos_view', $data);
             } else {
-                $register["nombre"] = $this->input->post("titulo");
+                $register["nombre"] = $this->input->post("nombre");
                 $register["descripcion"] = $this->input->post("descripcion");
                 $register["archivo"] = "uploads/archivos/" . $this->upload->data('file_name');
 
                 $this->db->insert("archivos", $register);
-                $this->session->set_flashdata("alert", array("type"=>"alert-success", "image"=>"fa-check", "message"=>"El archivo se cre� correctamente"));
+                $this->session->set_flashdata("alert", array("type"=>"alert-success", "image"=>"fa-check", "message"=>"El archivo se creó correctamente"));
                 redirect("archivos");
             }
+        }
+    }
+
+    function eliminar($id) {
+        $q = $this->db->get_where("archivos", array("id"=>$id));
+        $archivo = $q->row();
+
+        if ($archivo) {
+            if (file_exists("./".$archivo->archivo))
+                unlink("./".$archivo->archivo);
+
+            $this->db->delete('archivos', array('id' => $archivo->id));
+
+            $this->session->set_flashdata("alert", array("type"=>"alert-success", "image"=>"fa-check", "message"=>"El archivo <b>".$archivo->nombre."</b> se eliminó correctamente"));
+            redirect("archivos");
+        }
+        else {
+            $this->session->set_flashdata("alert", array("type"=>"alert-danger", "image"=>"fa-ban", "message"=>"No se encontro el registro en la base de datos"));
+            redirect("archivos");
         }
     }
 

@@ -49,3 +49,6 @@
 	<script src="<?php echo base_url()?>resources/highcharts/modules/exporting.js" type="text/javascript"></script>
 
 	<script src="<?php echo base_url()?>resources/jqueryui/jquery-ui.js" type="text/javascript"></script>
+
+    <link href="<?php echo base_url()?>resources/select/multiple-select.css" rel="stylesheet"/>
+    <script src="<?php echo base_url()?>resources/select/jquery.multiple.select.js"></script>

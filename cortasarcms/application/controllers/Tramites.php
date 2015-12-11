@@ -44,6 +44,8 @@ class Tramites extends CI_Controller {
 	}
 
     function guardar() {
+        print_r($this->input->post("idArchivo"));
+        exit();
         $id = $this->input->post("id");
 		$type = $this->input->post("type");
 
@@ -556,6 +558,8 @@ class Tramites extends CI_Controller {
 
 		$data["comboCategorias"] = $this->categorias->getComboCategorias();
         $data["comboSubCategorias"] = $this->categorias->getComboSubCategorias();
+        $data["comboArchivos"] = $this->tramites->getComboArchivos();
+
 		return $data;
 	}
 }
