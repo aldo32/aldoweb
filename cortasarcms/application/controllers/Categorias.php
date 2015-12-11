@@ -93,6 +93,7 @@ class Categorias extends CI_Controller {
 		else {
 			if ($type == "sub") $register["idCategoria"] = $this->input->post("idCategoria");
 			$register["nombre"] = $this->input->post("nombre");
+			$register["descripcion"] = $this->input->post("descripcion");
 
 			if ($operation == "insert") {
 				if ($type == "cat")

@@ -104,6 +104,7 @@
                                     <th>ID</th>
 									<?php echo ($type == "sub") ? "<th>Categoria</th>" : ""; ?>
                                     <th>Nombre</th>
+									<th>Descripción</th>
                                     <th>Creado</th>
                                 </tr>
                             </thead>
@@ -130,6 +131,7 @@
                                             <td><?php echo $row->id ?></td>
 											<?php echo ($type == "sub") ? "<td>".$row->nombreCategoria."</td>" : ""; ?>
                                             <td><?php echo $row->nombre ?></td>
+											<td><?php echo word_limiter($row->descripcion, 8) ?></td>
                                             <td><?php echo $row->creado ?></td>
                                         </tr>
                                         <?php

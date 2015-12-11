@@ -67,6 +67,11 @@
                         <i class="fa fa-circle-o text-aqua"></i> <span>Nuestras Fiestas</span>
                     </a>
                 </li>
+				<li class="treeview  <?php echo ($page == "archivos") ? "active" : ""; ?>">
+					<a href="<?php echo base_url("archivos") ?>">
+						<i class="fa fa-circle-o text-aqua"></i> <span>Archivos</span>
+					</a>
+				</li>
 
 
 				<!--

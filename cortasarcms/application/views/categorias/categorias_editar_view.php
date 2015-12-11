@@ -22,6 +22,7 @@ class categoria {
     var $nombre;
     var $idCategoria;
     var $creado;
+    var $descripcion;
 }
 ?>
 
@@ -103,6 +104,10 @@ class categoria {
                                 <div class="form-group col-md-4">
                                     <label>Nombre</label>
                                     <?php echo form_input(array('name'=>'nombre','id'=>'nombre', 'class'=>'form-control input-sm', 'value' =>set_value('nombre', $categoria->nombre)));?>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label>Descripción</label>
+                                    <?php echo form_input(array('name'=>'descripcion','id'=>'descripcion', 'class'=>'form-control input-sm', 'value' =>set_value('descripcion', $categoria->descripcion)));?>
                                 </div>
                             </div>
                             <button class="btn btn-primary" type="submit">Guardar</button>
