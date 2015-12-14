@@ -17,7 +17,7 @@ class correo {
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>CortasarCMS - Tramites</title>
+	<title>CortazarCMS - Tramites</title>
 
 	<?php echo $includes?>
 

@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>CortasarCMS - Nuestras Fiestas</title>
+    <title>CortazarCMS - Nuestras Fiestas</title>
 
     <?php echo $includes?>
 

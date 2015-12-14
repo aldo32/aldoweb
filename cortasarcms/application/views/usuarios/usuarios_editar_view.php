@@ -24,7 +24,7 @@ class user {
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>CortasarCMS - Usuarios</title>
+		<title>CortazarCMS - Usuarios</title>
 
 		<?php echo $includes?>
 

@@ -27,7 +27,7 @@ class directorio {
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>CortasarCMS - Directorio</title>
+    <title>CortazarCMS - Directorio</title>
 
     <?php echo $includes?>
 

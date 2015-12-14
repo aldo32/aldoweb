@@ -24,7 +24,7 @@ class noticia {
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>CortasarCMS - Noticias</title>
+    <title>CortazarCMS - Noticias</title>
 
     <?php echo $includes?>
 

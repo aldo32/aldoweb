@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Cortasar</title>
+		<title>Cortazar</title>
 
 		<?php echo $includes?>
 
@@ -58,7 +58,7 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="../../index2.html"><b>Cortasar</b>CMS</a>
+            <a href="../../index2.html"><b>Cortazar</b>CMS</a>
         </div><!-- /.login-logo -->
 
         <div class="login-box-body">

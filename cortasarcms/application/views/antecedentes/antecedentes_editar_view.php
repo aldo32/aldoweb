@@ -20,7 +20,7 @@ class antecedente {
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>CortasarCMS - Antecedentes</title>
+    <title>CortazarCMS - Antecedentes</title>
 
     <?php echo $includes?>
 

@@ -66,8 +66,8 @@ class Login extends CI_Controller {
 			$this->db->where('email', $email);
 			$this->db->update('usuarios', array("password"=>$newPassword));
 
-			$message = "<b>CORTASAR CMS</b><br><br>Usuario: $email<br><br>Su nueva contraseña es: $password<br><br>Cualquier duda acerca de su cuanta contacte al administrador.";
-			$this->generallib->sendEmail($message, 'isc.aldo@gmail.com', 'Administrador Cortasar CMS', $email, 'Restaurar password, Cortasar CMS');
+			$message = "<b>CORTAZAR CMS</b><br><br>Usuario: $email<br><br>Su nueva contraseña es: $password<br><br>Cualquier duda acerca de su cuanta contacte al administrador.";
+			$this->generallib->sendEmail($message, 'isc.aldo@gmail.com', 'Administrador Cortazar CMS', $email, 'Restaurar password, Cortazar CMS');
 
 			echo "Se envio tu nueva contraseña a tu correo.";
 		}

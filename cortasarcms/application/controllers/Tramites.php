@@ -44,8 +44,8 @@ class Tramites extends CI_Controller {
 	}
 
     function guardar() {
-        print_r($this->input->post("idArchivo"));
-        exit();
+        //print_r($this->input->post("idArchivo"));
+        //exit();
         $id = $this->input->post("id");
 		$type = $this->input->post("type");
 
