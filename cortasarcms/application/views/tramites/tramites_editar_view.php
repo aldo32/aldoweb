@@ -43,6 +43,8 @@ class tramite {
 
 		<script type="text/javascript">
 		$(document).ready(function() {
+		    var archivosTramite = "<?php echo $archivosTramite; ?>";
+
             $('#idArchivo').multipleSelect({single: false, placeholder: 'Buscar archivo', filter: true});
 
             $("#reglas").wysihtml5();
@@ -63,6 +65,16 @@ class tramite {
                 <?php
             }
             ?>
+
+            $("#sendForm").click(function() {
+                $("#archivos").val($("#idArchivo").multipleSelect("getSelects"));
+                $("#tramiteForm").submit();
+            });
+
+            if (archivosTramite != "") {
+                var valuesArray = archivosTramite.split(",");
+                $('#idArchivo').multipleSelect("setSelects", valuesArray);
+            }
 		});
 		</script>
 
@@ -114,12 +126,13 @@ class tramite {
                             <div class="row">
                                 <div class="form-group col-md-4">
                                     <label>Archivos para el tramite</label>
-                                    <?php echo form_dropdown("idArchivo", $comboArchivos, set_value("idArchivo"), "class='' style='width: 100%' id='idArchivo'");?>
+                                    <?php echo form_dropdown("idArchivo", $comboArchivosTramites, set_value("idArchivo"), "class='' style='width: 100%' id='idArchivo'");?>
+                                    <input type="hidden" name="archivos" id="archivos" val="" />
                                 </div>
                             </div>
 
 
-                            <button class="btn btn-primary" type="submit">Guardar</button>
+                            <button class="btn btn-primary" type="button" id="sendForm">Guardar</button>
                             <br>
                         <?php echo form_close(); ?>
 

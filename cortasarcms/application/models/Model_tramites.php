@@ -38,22 +38,10 @@ class Model_tramites extends CI_Model {
 		}
 	}
 
-	function getArchivosTramites() {
-		$sql="
-			SELECT
-			    ta.id AS id,
-			    ta.idTramite AS idTramite,
-			    ta.archivo AS archivo,
-			    ta.tipo AS tipo,
-			    ta.descripcion AS descripcion,
-			    ta.creado AS creado,
-			    ta.modificado AS modificado,
-			    (SELECT nombre FROM tramites WHERE id = ta.idTramite) AS nombreTramite
-			FROM
-			    tramites_archivos ta
-		";
+	function getArchivosTramite($idTramite) {
+		$sql="SELECT GROUP_CONCAT(idArchivo) AS archivos FROM tramites_documentos td WHERE idTramite = $idTramite";
 		$q=$this->db->query($sql);
-		return $q->result();
+		return $q->row();
 	}
 
 	function getArchivoById($id) {
@@ -147,8 +135,8 @@ class Model_tramites extends CI_Model {
 		return $q->result();
 	}
 
-	function getComboArchivos() {
-		$sql = "SELECT * FROM archivos";
+	function getComboArchivosTramites($tipo) {
+		$sql = "SELECT * FROM archivos WHERE tipo=$tipo";
 		$q=$this->db->query($sql);
 
 		if ($q->num_rows() > 0)

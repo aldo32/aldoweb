@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-12-2015 a las 01:35:06
+-- Tiempo de generación: 16-12-2015 a las 00:25:16
 -- Versión del servidor: 5.6.17
 -- Versión de PHP: 5.5.12
 
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `antecedentes` (
   `descripcion` text COLLATE utf8_unicode_ci NOT NULL,
   `creado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `antecedentes`
@@ -40,6 +40,39 @@ CREATE TABLE IF NOT EXISTS `antecedentes` (
 INSERT INTO `antecedentes` (`id`, `descripcion`, `creado`) VALUES
 (1, '<p>df asdf asdf sdf asdfasdf   xxxxx<br></p>', '2015-12-10 22:53:29'),
 (2, '<p>f asdf asdf asdf asdf asdf asdf asdf asd<br></p>', '2015-12-10 22:53:50');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `archivos`
+--
+
+CREATE TABLE IF NOT EXISTS `archivos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `descripcion` text COLLATE utf8_unicode_ci NOT NULL,
+  `tipo` int(11) NOT NULL DEFAULT '1' COMMENT '1: Tramite, 2: Reglas, 3: Correos',
+  `archivo` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `creado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=13 ;
+
+--
+-- Volcado de datos para la tabla `archivos`
+--
+
+INSERT INTO `archivos` (`id`, `nombre`, `descripcion`, `tipo`, `archivo`, `creado`) VALUES
+(1, 'IFE', 'Identificacion oficial', 1, '', '2015-12-15 18:50:18'),
+(3, 'Croquis del terreno', 'Imagen donde se muestre la superficie del terreno', 2, '', '2015-12-15 18:56:32'),
+(4, 'Adjunto para correo 1', 'correo 1', 3, 'uploads/archivos/gears_logo.png', '2015-12-15 18:57:08'),
+(5, 'Acta de nacimiento', 'Indentificacion oficial', 1, '', '2015-12-15 18:57:57'),
+(6, 'Recivo de luz', 'luz', 1, '', '2015-12-15 18:58:12'),
+(7, 'Recibo de agua', 'agua', 1, '', '2015-12-15 18:58:20'),
+(8, 'Escrituras del terreno', 'terreno', 1, '', '2015-12-15 18:58:48'),
+(9, 'Permiso de gobierno', 'gobierno', 2, '', '2015-12-15 18:59:13'),
+(10, 'Permiso vecinal', 'vecinal', 2, '', '2015-12-15 18:59:48'),
+(11, 'Adjunto para correo 2', 'correo 2', 3, 'uploads/archivos/frontera1.png', '2015-12-15 19:00:15'),
+(12, 'Adjunto para correo 3', 'correo 3', 3, 'uploads/archivos/Litorales.png', '2015-12-15 19:00:47');
 
 -- --------------------------------------------------------
 
@@ -54,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `banners` (
   `tipo` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `creado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 --
 -- Volcado de datos para la tabla `banners`
@@ -221,7 +254,7 @@ CREATE TABLE IF NOT EXISTS `tramites` (
   PRIMARY KEY (`id`),
   KEY `idCategoria` (`idCategoria`,`idSubCategoria`),
   KEY `idSubCategoria` (`idSubCategoria`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `tramites`
@@ -302,30 +335,12 @@ INSERT INTO `tramites_correos_archivos` (`id`, `idTramite`, `idCorreo`, `archivo
 CREATE TABLE IF NOT EXISTS `tramites_documentos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idTramite` int(11) NOT NULL,
-  `archivo` text COLLATE utf8_unicode_ci NOT NULL,
-  `descripcion` text COLLATE utf8_unicode_ci NOT NULL,
+  `idArchivo` int(11) NOT NULL,
   `creado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `modificado` timestamp NOT NULL,
-  `url` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `idTramite` (`idTramite`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=19 ;
-
---
--- Volcado de datos para la tabla `tramites_documentos`
---
-
-INSERT INTO `tramites_documentos` (`id`, `idTramite`, `archivo`, `descripcion`, `creado`, `modificado`, `url`) VALUES
-(7, 1, 'gdfgsdf sdfs', 'gdfgsdf sdfs', '2015-11-19 00:33:32', '0000-00-00 00:00:00', ''),
-(9, 2, 'dasdasd', 'dasdasd', '2015-11-19 17:25:02', '0000-00-00 00:00:00', ''),
-(11, 1, 'gfdgdfgds', 'gfdgdfgds', '2015-11-19 23:59:32', '0000-00-00 00:00:00', ''),
-(12, 2, 'dfasf asdf asdf asdf', 'dfasf asdf asdf asdf', '2015-11-20 16:21:59', '0000-00-00 00:00:00', ''),
-(13, 3, 'Acta de nacimiento', 'Acta de nacimiento', '2015-11-21 17:37:43', '0000-00-00 00:00:00', ''),
-(14, 3, 'Credencial de elector', 'Credencial de elector', '2015-11-21 17:37:59', '0000-00-00 00:00:00', ''),
-(15, 3, 'Titulo de la tierr', 'Titulo de la tierr', '2015-11-21 17:38:07', '0000-00-00 00:00:00', ''),
-(16, 4, 'Titulo de la propiedad', 'Titulo de la propiedad', '2015-12-07 18:09:42', '0000-00-00 00:00:00', ''),
-(17, 4, 'Credencial de elector', 'Credencial de elector', '2015-12-07 18:09:53', '0000-00-00 00:00:00', ''),
-(18, 4, 'Permiso para vender bebidas alcoholicas', 'Permiso para vender bebidas alcoholicas', '2015-12-07 18:10:19', '0000-00-00 00:00:00', '');
+  KEY `idTramite` (`idTramite`),
+  KEY `idArchivo` (`idArchivo`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=11 ;
 
 -- --------------------------------------------------------
 
@@ -503,6 +518,7 @@ ALTER TABLE `tramites_correos_archivos`
 -- Filtros para la tabla `tramites_documentos`
 --
 ALTER TABLE `tramites_documentos`
+  ADD CONSTRAINT `tramites_documentos_ibfk_2` FOREIGN KEY (`idArchivo`) REFERENCES `archivos` (`id`),
   ADD CONSTRAINT `tramites_documentos_ibfk_1` FOREIGN KEY (`idTramite`) REFERENCES `tramites` (`id`);
 
 --

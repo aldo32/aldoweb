@@ -49,6 +49,16 @@
             $("#tablaArchivos").DataTable({
                 stateSave: true,
             });
+
+            $("#tipo").change(function() {
+                tipo = $(this).val();
+                if (tipo == 3)
+                    $("#contentFile").fadeIn();
+                else
+                    $("#contentFile").fadeOut();
+            });
+
+            if ($("#tipo").val() == 3) $("#contentFile").fadeIn();
         });
     </script>
 
@@ -100,6 +110,10 @@
                                 <label>Descripción</label>
                                 <?php echo form_input(array('name'=>'descripcion','id'=>'descripcion', 'class'=>'form-control input-sm', 'value' =>set_value('descripcion')));?>
                             </div>
+                            <div class="form-group col-md-6">
+                                <label>Archivo de tipo:</label>
+                                <?php echo form_dropdown("tipo", $comboTipos, set_value("tipo"), "class='form-control input-sm' id='tipo'");?>
+                            </div>
                             <?php
                             if ($uploadErrors != "") {
                                 ?>
@@ -109,7 +123,7 @@
                                 <?php
                             }
                             ?>
-                            <div class="form-group col-md-12">
+                            <div class="form-group col-md-12" id="contentFile" style="display: none;">
                                 <label>Archivo</label>
                                 <input type="file" name="archivo" id="archivo" />
                             </div>
@@ -125,6 +139,7 @@
                             <th>ID</th>
                             <th>Nombre</th>
                             <th>Descripción</th>
+                            <th>Tipo</th>
                             <th>Archivo</th>
                             <th>Creado</th>
                             <th>Operaciones</th>
@@ -139,7 +154,16 @@
                                     <td><?php echo $row->id ?></td>
                                     <td><?php echo $row->nombre ?></td>
                                     <td><?php echo word_limiter($row->descripcion, 8) ?></td>
-                                    <td><a href="<?php echo base_url().$row->archivo ?>" class="nyroModal">Ver imagen</a></td>
+                                    <td><?php echo $row->nombreTipo ?></td>
+                                    <td>
+                                        <?php
+                                        if ($row->archivo != "") {
+                                            ?>
+                                            <a href="<?php echo base_url().$row->archivo ?>" class="nyroModal">Ver imagen</a>
+                                            <?php
+                                        }
+                                        ?>
+                                    </td>
                                     <td><?php echo $row->creado ?></td>
                                     <td><button class="btn btn-block btn-danger btn-xs" onclick="location='<?php echo base_url("archivos/eliminar/".$row->id) ?>'">Eliminar</button></td>
                                 </tr>

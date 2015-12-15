@@ -25,15 +25,19 @@ class Tramites extends CI_Controller {
     function nuevo() {
         $data = $this->general();
         $data["tramite"] = "";
+        $data["archivosTramite"] = "";
 
         $this->load->view("tramites/tramites_editar_view", $data);
     }
 
     function editar($id) {
 		$tramite = $this->tramites->getTramiteById($id);
+		$archivosTramite = $this->tramites->getArchivosTramite($tramite->id);
+
 		if ($tramite) {
 			$data = $this->general();
 			$data["tramite"] = $tramite;
+			$data["archivosTramite"] = $archivosTramite->archivos;
 
 			$this->load->view("tramites/tramites_editar_view", $data);
 		}
@@ -44,8 +48,6 @@ class Tramites extends CI_Controller {
 	}
 
     function guardar() {
-        //print_r($this->input->post("idArchivo"));
-        //exit();
         $id = $this->input->post("id");
 		$type = $this->input->post("type");
 
@@ -55,6 +57,7 @@ class Tramites extends CI_Controller {
 		$this->form_validation->set_rules('descripcion', '<strong>Descripcion</strong>', 'required|trim');
 		$this->form_validation->set_rules('idCategoria', '<strong>Categoria</strong>', 'required|valid_combo');
 		$this->form_validation->set_rules('idSubCategoria', '<strong>Subcategoria</strong>', 'required|valid_combo');
+        $this->form_validation->set_rules('idArchivo', '<strong>Archivos</strong>', 'required|valid_combo');
 
 		$this->form_validation->set_message('required', 'El campo %s es obligatorio');
 		$this->form_validation->set_message('valid_combo', 'Seleccione una opción para el campo %s');
@@ -73,13 +76,36 @@ class Tramites extends CI_Controller {
 			$register["descripcion"] = $this->input->post("descripcion");
 			$register["idCategoria"] = $this->input->post("idCategoria");
 			$register["idSubCategoria"] = $this->input->post("idSubCategoria");
+			$archivos = $this->input->post("archivos");
 
 			if ($type == "insert") {
 				$this->db->insert("tramites", $register);
-				$this->session->set_flashdata("alert", array("type"=>"alert-success", "image"=>"fa-check", "message"=>"El tramite <b>".$register['nombre']."</b> se creó correctamente"));
+				$id = $this->db->insert_id();
+
+                $archivos = explode(",", $archivos);
+                foreach ($archivos AS $row) {
+                    $docs="";
+                    $docs["idtramite"] = $id;
+                    $docs["idArchivo"] = $row;
+
+                    $this->db->insert("tramites_documentos", $docs);
+                }
+
+                $this->session->set_flashdata("alert", array("type"=>"alert-success", "image"=>"fa-check", "message"=>"El tramite <b>".$register['nombre']."</b> se creó correctamente"));
 				redirect("tramites");
 			}
 			else {
+			    $this->db->delete("tramites_documentos", array("idTramite"=>$tramite->id));
+
+                $archivos = explode(",", $archivos);
+                foreach ($archivos AS $row) {
+                    $docs="";
+                    $docs["idtramite"] = $id;
+                    $docs["idArchivo"] = $row;
+
+                    $this->db->insert("tramites_documentos", $docs);
+                }
+
 				$this->db->where("id", $tramite->id);
 				$this->db->update("tramites", $register);
 				$this->session->set_flashdata("alert", array("type"=>"alert-success", "image"=>"fa-check", "message"=>"El tramite <b>".$register['nombre']."</b> se actualizó correctamente"));
@@ -91,6 +117,7 @@ class Tramites extends CI_Controller {
 	function eliminar($id) {
 		$tramite = $this->tramites->getTramiteById($id);
 		if ($tramite) {
+            $this->db->delete('tramites_documentos', array('idTramite' => $tramite->id));
 			$this->db->delete('tramites', array('id' => $tramite->id));
 
 			$this->session->set_flashdata("alert", array("type"=>"alert-success", "image"=>"fa-check", "message"=>"Se eliminó el tramite correctamente"));
@@ -109,8 +136,11 @@ class Tramites extends CI_Controller {
 
 		if ($data["tramite"]) {
 			$data["reglas"] = $this->tramites->getReglasTramite($data["tramite"]->id);
+            $data["comboArchivosReglas"] = $this->tramites->getComboArchivosTramites(2);
+
             $data["documentos"] = $this->tramites->getDocumentosTramite($data["tramite"]->id);
             $data["correo"] = $this->tramites->getCorreoTramite($data["tramite"]->id);
+
 			$this->load->view("tramites/tramites_rdc_view", $data);
 		}
 		else {
@@ -558,7 +588,7 @@ class Tramites extends CI_Controller {
 
 		$data["comboCategorias"] = $this->categorias->getComboCategorias();
         $data["comboSubCategorias"] = $this->categorias->getComboSubCategorias();
-        $data["comboArchivos"] = $this->tramites->getComboArchivos();
+        $data["comboArchivosTramites"] = $this->tramites->getComboArchivosTramites(1);
 
 		return $data;
 	}

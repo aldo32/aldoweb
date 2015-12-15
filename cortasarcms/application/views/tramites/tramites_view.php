@@ -141,8 +141,10 @@
                         </table>
 
                     </div>
+                </section>
 
 
+                <section class="content">
                     <div class="box">
                         <div class="box-header">
                             <h3 class="box-title">Tramites realizados</h3>

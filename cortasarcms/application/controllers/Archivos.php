@@ -23,13 +23,20 @@ class Archivos extends CI_Controller
         $this->load->view('archivos/archivos_view', $data);
     }
 
-    function guardarArchivos() {
+    function guardarArchivos()
+    {
         $data = $this->general();
         $data["uploadErrors"] = "";
+        $tipo = $this->input->post("tipo");
+        $register = array();
+        $archivo="";
 
         $this->form_validation->set_rules('nombre', '<strong>Nombre</strong>', 'required|trim');
-        if ($_FILES['archivo']['name'] == "")
-            $this->form_validation->set_rules('archivo', '<strong>Archivo</strong>', 'required|trim');
+
+        if ($tipo == 3) {
+            if ($_FILES['archivo']['name'] == "")
+                $this->form_validation->set_rules('archivo', '<strong>Archivo</strong>', 'required|trim');
+        }
 
         $this->form_validation->set_message('required', 'El campo %s es obligatorio');
 
@@ -41,32 +48,37 @@ class Archivos extends CI_Controller
             $this->load->view('archivos/archivos_view', $data);
         }
         else {
-            $config['upload_path'] = './uploads/archivos';
-            $config['allowed_types'] = 'pdf|doc|docx|xls|xlsx|jpg|png|jpeg';
-            $config['max_size'] = 0;
-            $config['max_width'] = 0;
-            $config['max_height'] = 0;
-            $config['remove_spaces'] = true;
-            $config['overwrite'] = true;
+            if ($tipo == 3) {
+                $config['upload_path'] = './uploads/archivos';
+                $config['allowed_types'] = 'pdf|doc|docx|xls|xlsx|jpg|png|jpeg';
+                $config['max_size'] = 0;
+                $config['max_width'] = 0;
+                $config['max_height'] = 0;
+                $config['remove_spaces'] = true;
+                $config['overwrite'] = true;
 
-            $data["uploadErrors"] = "";
+                $data["uploadErrors"] = "";
 
-            $this->load->library("upload", $config);
+                $this->load->library("upload", $config);
 
-            if (!$this->upload->do_upload('archivo')) {
-                $data["uploadErrors"] .= "<b>" . $_FILES['archivo']['name'] . "</b>: " . $this->upload->display_errors("", "") . "<br>";
-                $data["alert"] = "";
+                if (!$this->upload->do_upload('archivo')) {
+                    $data["uploadErrors"] .= "<b>" . $_FILES['archivo']['name'] . "</b>: " . $this->upload->display_errors("", "") . "<br>";
+                    $data["alert"] = "";
 
-                $this->load->view('archivos/archivos_view', $data);
-            } else {
-                $register["nombre"] = $this->input->post("nombre");
-                $register["descripcion"] = $this->input->post("descripcion");
-                $register["archivo"] = "uploads/archivos/" . $this->upload->data('file_name');
-
-                $this->db->insert("archivos", $register);
-                $this->session->set_flashdata("alert", array("type"=>"alert-success", "image"=>"fa-check", "message"=>"El archivo se creó correctamente"));
-                redirect("archivos");
+                    $this->load->view('archivos/archivos_view', $data);
+                } else {
+                    $archivo = "uploads/archivos/" . $this->upload->data('file_name');
+                }
             }
+
+            $register["nombre"] = $this->input->post("nombre");
+            $register["descripcion"] = $this->input->post("descripcion");
+            $register["archivo"] = $archivo;
+            $register["tipo"] = $tipo;
+
+            $this->db->insert("archivos", $register);
+            $this->session->set_flashdata("alert", array("type" => "alert-success", "image" => "fa-check", "message" => "El archivo se creó correctamente"));
+            redirect("archivos");
         }
     }
 
@@ -100,8 +112,11 @@ class Archivos extends CI_Controller
         $data['footer'] = $this->load->view("general/general_footer_view", '', true);
         $data['control_sidebar'] = $this->load->view("general/general_control_sidebar_view", '', true);
 
-        $q = $this->db->get("archivos");
+        $q = $this->db->query("SELECT *, CASE tipo WHEN 1 THEN 'Tramite' WHEN 2 THEN 'Regla' WHEN 3 THEN 'Correo' END AS nombreTipo FROM archivos");
         $data["archivos"] = $q->result();
+
+        $options = array("1"=>"Tramites", "2"=>"Reglas", "3"=>"Correos");
+        $data["comboTipos"] = $options;
 
         return $data;
     }

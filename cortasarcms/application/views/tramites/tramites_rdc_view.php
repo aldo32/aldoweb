@@ -250,6 +250,13 @@ class correo {
                             <label>Regla</label>
                             <?php echo form_input(array('name'=>'regla','id'=>'regla', 'class'=>'form-control input-sm', 'value' =>set_value('regla')));?>
                         </div>
+                        <!--
+                        <div class="form-group col-md-4">
+                            <label>Archivos para la regla</label>
+                            <?php //echo form_dropdown("idArchivo", $comboArchivosReglas, set_value("idArchivo"), "class='' style='width: 100%' id='idArchivo'");?>
+                            <input type="hidden" name="archivos" id="archivos" val="" />
+                        </div>
+                        -->
                     </div>
                     <button type="button" class="btn btn-primary" id="addRule">Agregar Regla</button>
 
@@ -284,7 +291,10 @@ class correo {
                     </div>
 				</div>
 			</div>
+        </section>
 
+        <!--
+        <section class="content">
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">Documentos necesarios para el tramite</h3>
@@ -336,7 +346,10 @@ class correo {
                     </div>
                 </div>
             </div>
+        </section>
+        -->
 
+        <section class="content">
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">Configuración de correos por tramite</h3>
