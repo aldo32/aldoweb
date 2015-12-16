@@ -50,16 +50,19 @@ class correo {
             //add new rule
             $("#addRule").click(function() {
                 regla = $("#regla");
+                archivos = $("#idArchivo").multipleSelect("getSelects");
+
                 if (regla.val() == "") alert("Debe escribir una regla para el tramite");
                 else {
                     $("#messageRegla").html("<i class='fa fa-refresh fa-spin'></i>&nbsp;&nbsp;Guardando...");
                     $.ajax({
                         url: "<?php echo base_url("tramites/RDCaddRule") ?>",
-                        data: "idTramite="+idTramite+"&regla="+regla.val()+"&<?php echo $this->security->get_csrf_token_name()?>=<?php echo $this->security->get_csrf_hash()?>",
+                        data: "idTramite="+idTramite+"&regla="+regla.val()+"&archivos="+archivos+"&<?php echo $this->security->get_csrf_token_name()?>=<?php echo $this->security->get_csrf_hash()?>",
                         dataType: "html",
                         success: function(datos) {
                             $("#messageRegla").html(datos);
                             $("#regla").val("");
+                            $("#idArchivo").multipleSelect("uncheckAll");
                         },
                         type: "POST"
                     });
@@ -70,16 +73,18 @@ class correo {
             $(document).on("click", ".eliminarRegla", function() {
                 idRegla = $(this).attr("id");
 
-                $("#messageRegla").html("<i class='fa fa-refresh fa-spin'></i>&nbsp;&nbsp;Eliminando...");
-                $.ajax({
-                    url: "<?php echo base_url("tramites/RDCdeleteRule") ?>",
-                    data: "idTramite="+idTramite+"&idRegla="+idRegla+"&<?php echo $this->security->get_csrf_token_name()?>=<?php echo $this->security->get_csrf_hash()?>",
-                    dataType: "html",
-                    success: function(datos) {
-                        $("#messageRegla").html(datos);
-                    },
-                    type: "POST"
-                });
+                if (confirm("Realmente desea eliminar la regla?")) {
+                    $("#messageRegla").html("<i class='fa fa-refresh fa-spin'></i>&nbsp;&nbsp;Eliminando...");
+                    $.ajax({
+                        url: "<?php echo base_url("tramites/RDCdeleteRule") ?>",
+                        data: "idTramite="+idTramite+"&idRegla="+idRegla+"&<?php echo $this->security->get_csrf_token_name()?>=<?php echo $this->security->get_csrf_hash()?>",
+                        dataType: "html",
+                        success: function(datos) {
+                            $("#messageRegla").html(datos);
+                        },
+                        type: "POST"
+                    });
+                }
             });
 
             //add new document
@@ -216,6 +221,8 @@ class correo {
                     });
                 }
             });
+
+            $('#idArchivo').multipleSelect({single: false, placeholder: 'Buscar archivo', filter: true});
 		});
 	</script>
 
@@ -250,23 +257,22 @@ class correo {
                             <label>Regla</label>
                             <?php echo form_input(array('name'=>'regla','id'=>'regla', 'class'=>'form-control input-sm', 'value' =>set_value('regla')));?>
                         </div>
-                        <!--
                         <div class="form-group col-md-4">
-                            <label>Archivos para la regla</label>
-                            <?php //echo form_dropdown("idArchivo", $comboArchivosReglas, set_value("idArchivo"), "class='' style='width: 100%' id='idArchivo'");?>
-                            <input type="hidden" name="archivos" id="archivos" val="" />
+                            <label>Archivos para la regla:</label>
+                            <?php echo form_dropdown("idArchivo", $comboArchivosReglas, set_value("idArchivo"), "class='' style='width: 100%' id='idArchivo'");?>
+                            <labe>El archivo se selecciona solo si la regla lo requiere, de otro modo solo se guarda la descricion de esta.</labe>
                         </div>
-                        -->
                     </div>
                     <button type="button" class="btn btn-primary" id="addRule">Agregar Regla</button>
 
-                    <br><br>
+                    <br><br><br><br>
                     <div id="messageRegla">
                         <table id="tablaReglas" class="table table-bordered table-striped">
                             <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Nombre</th>
+                                <th>Documentos</th>
                                 <th>Creado</th>
                                 <th width="50">Operaciones</th>
                             </tr>
@@ -279,6 +285,12 @@ class correo {
                                         <tr>
                                             <td><?php echo $row->id ?></td>
                                             <td><?php echo $row->regla ?></td>
+                                            <td>
+                                                <?php
+                                                $documentos = $this->tramites->getDocumentosReglas($tramite->id, $row->id);
+                                                echo ($documentos) ? $documentos->nombres : "";
+                                                ?>
+                                            </td>
                                             <td><?php echo $row->creado ?></td>
                                             <td><a href="javascript:void(0);" class="eliminarRegla" id="<?php echo $row->id ?>"><button class="btn btn-block btn-danger btn-xs">Eliminar</button></a></td>
                                         </tr>

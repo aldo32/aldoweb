@@ -82,11 +82,27 @@ class Model_categorias extends CI_Model {
 			if ($q->num_rows() > 0) {
 				return FALSE;
 			}
+			else {
+				$sql = "DELETE FROM $table WHERE id=?";
+				$q=$this->db->query($sql, array($id));
+
+				return TRUE;
+			}
 		}
 
-		$sql = "DELETE FROM $table WHERE id=?";
-	    $q=$this->db->query($sql, array($id));
+		if ($type != "cat") {
+			//TO DO Agregar la busque de tramites asociados a la categoria tambien
+			$sql = "SELECT * FROM tramites WHERE idSubCategoria = $id LIMIT 1";
+			$q=$this->db->query($sql);
+			if ($q->num_rows() > 0) {
+				return FALSE;
+			}
+			else {
+				$sql = "DELETE FROM $table WHERE id=?";
+				$q=$this->db->query($sql, array($id));
 
-		return TRUE;
+				return TRUE;
+			}
+		}
 	}
 }

@@ -117,6 +117,10 @@ class Tramites extends CI_Controller {
 	function eliminar($id) {
 		$tramite = $this->tramites->getTramiteById($id);
 		if ($tramite) {
+            $this->db->delete('tramites_reglas', array('idTramite' => $tramite->id));
+            $this->db->delete('tramites_iniciados', array('idTramite' => $tramite->id));
+            $this->db->delete('tramites_correos_archivos', array('idTramite' => $tramite->id));
+            $this->db->delete('tramites_correos', array('idTramite' => $tramite->id));
             $this->db->delete('tramites_documentos', array('idTramite' => $tramite->id));
 			$this->db->delete('tramites', array('id' => $tramite->id));
 
@@ -152,11 +156,25 @@ class Tramites extends CI_Controller {
 	function RDCaddRule() {
 		$idTramite = $this->input->post("idTramite");
 		$regla = $this->input->post("regla");
+        $archivos = $this->input->post("archivos");
 
 		$register["idTramite"] = $idTramite;
 		$register["regla"] = $regla;
 
-		$this->db->insert("tramites_reglas", $register);
+        $this->db->insert("tramites_reglas", $register);
+        $idRegla = $this->db->insert_id();
+
+        if ($archivos != "") {
+            $archivos = explode(",", $archivos);
+            foreach ($archivos AS $row) {
+                $docs="";
+                $docs["idtramite"] = $idTramite;
+                $docs["idArchivo"] = $row;
+                $docs["idRegla"] = $idRegla;
+
+                $this->db->insert("tramites_reglas_documentos", $docs);
+            }
+        }
 
 		$reglas = $this->tramites->getReglasTramite($idTramite);
 
@@ -180,6 +198,7 @@ class Tramites extends CI_Controller {
 			<tr>
 				<th>ID</th>
 				<th>Nombre</th>
+                <th>Documentos</th>
 				<th>Creado</th>
 				<th width="50">Operaciones</th>
 			</tr>
@@ -192,6 +211,12 @@ class Tramites extends CI_Controller {
 					<tr>
 						<td><?php echo $row->id ?></td>
 						<td><?php echo $row->regla ?></td>
+						<td>
+                            <?php
+                            $documentos = $this->tramites->getDocumentosReglas($idTramite, $row->id);
+                            echo ($documentos) ? $documentos->nombres : "";
+                            ?>
+                        </td>
 						<td><?php echo $row->creado ?></td>
 						<td><a href="javascript:void(0);" class="eliminarRegla" id="<?php echo $row->id ?>"><button class="btn btn-block btn-danger btn-xs">Eliminar</button></a></td>
 					</tr>
@@ -208,7 +233,8 @@ class Tramites extends CI_Controller {
 		$idTramite = $this->input->post("idTramite");
 		$idRegla = $this->input->post("idRegla");
 
-		$this->db->delete('tramites_reglas', array('id' => $idRegla));
+        $this->db->delete('tramites_reglas_documentos', array('idRegla' => $idRegla, "idTramite"=>$idTramite));
+        $this->db->delete('tramites_reglas', array('id' => $idRegla));
 
 		$reglas = $this->tramites->getReglasTramite($idTramite);
 
@@ -232,6 +258,7 @@ class Tramites extends CI_Controller {
 			<tr>
 				<th>ID</th>
 				<th>Nombre</th>
+                <th>Documentos</th>
 				<th>Creado</th>
 				<th width="50">Operaciones</th>
 			</tr>
@@ -244,6 +271,12 @@ class Tramites extends CI_Controller {
 					<tr>
 						<td><?php echo $row->id ?></td>
 						<td><?php echo $row->regla ?></td>
+                        <td>
+                            <?php
+                            $documentos = $this->tramites->getDocumentosReglas($idTramite, $row->id);
+                            echo ($documentos) ? $documentos->nombres : "";
+                            ?>
+                        </td>
 						<td><?php echo $row->creado ?></td>
 						<td><a href="javascript:void(0);" class="eliminarRegla" id="<?php echo $row->id ?>"><button class="btn btn-block btn-danger btn-xs">Eliminar</button></a></td>
 					</tr>

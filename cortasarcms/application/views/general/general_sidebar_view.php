@@ -72,6 +72,11 @@
 						<i class="fa fa-circle-o text-aqua"></i> <span>Archivos</span>
 					</a>
 				</li>
+                <li class="treeview  <?php echo ($page == "secciones") ? "active" : ""; ?>">
+                    <a href="<?php echo base_url("secciones") ?>">
+                        <i class="fa fa-circle-o text-aqua"></i> <span>Secciones</span>
+                    </a>
+                </li>
 
 
 				<!--

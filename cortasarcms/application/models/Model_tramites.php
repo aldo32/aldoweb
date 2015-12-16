@@ -148,4 +148,17 @@ class Model_tramites extends CI_Model {
 			return $options;
 		}
 	}
+
+	function getDocumentosReglas($idTramite, $idRegla) {
+		$sql = "SELECT GROUP_CONCAT(idArchivo) AS ids FROM tramites_reglas_documentos WHERE idTramite=$idTramite AND idRegla=$idRegla";
+		$q = $this->db->query($sql);
+		$ids = $q->row();
+
+		if ($ids->ids != "") {
+			$sql = "SELECT GROUP_CONCAT(nombre) AS nombres FROM archivos WHERE id IN (".$ids->ids.")";
+			$q = $this->db->query($sql);
+			return $q->row();
+		}
+		else return false;
+	}
 }

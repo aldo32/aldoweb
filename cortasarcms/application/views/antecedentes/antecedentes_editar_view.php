@@ -113,62 +113,6 @@ class antecedente {
             </div>
         </section>
 
-
-        <section class="content">
-            <div class="box">
-                <div class="box-header">
-                    <h3 class="box-title">Nuestras Fiestas [Galeria]</h3>
-                </div>
-
-                <div class="box-body">
-                    <?php echo form_open_multipart("antecedentes/guardarImagen", array("name"=>"imageForm", "id"=>"imageForm"), array("id"=>$antecedente->id, "type"=>$type)); ?>
-                    <div class="row">
-                        <div class="form-group col-md-12">
-                            <label>Titulo</label>
-                            <?php echo form_input(array('name'=>'titulo','id'=>'titulo', 'class'=>'form-control input-sm', 'value' =>set_value('titulo')));?>
-                        </div>
-                        <div class="form-group col-md-12">
-                            <label>Imagen</label>
-                            <input type="file" name="imagen" id="imagen">
-                        </div>
-                    </div>
-
-                    <button class="btn btn-primary" type="submit">Guardar</button>
-                    <br>
-                    <?php echo form_close(); ?>
-                    <br><br>
-
-                    <table id="tablaBanners" class="table table-bordered table-striped">
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Titulo</th>
-                            <th>Imagen</th>
-                            <th>Creado</th>
-                            <th>Opciones</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php
-                        if (isset($bannersFiestas)) {
-                            foreach ($bannersFiestas as $row) {
-                                ?>
-                                <tr>
-                                    <td><?php echo $row->id ?></td>
-                                    <td><?php echo $row->titulo ?></td>
-                                    <td><a href="<?php echo base_url().$row->archivo ?>">Ver imagen</a></td>
-                                    <td><?php echo $row->creado ?></td>
-                                </tr>
-                                <?php
-                            }
-                        }
-                        ?>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
         <!-- Modal window to messages -->
         <div id="test" style="display: none;">
             <div class="<?php echo MODAL_CLASS ?>">

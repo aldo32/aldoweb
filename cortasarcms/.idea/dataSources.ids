@@ -34,6 +34,7 @@
     <table name="categorias" schema="" catalog="cortasar" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="nombre" sqlType="VARCHAR" precision="250" scale="0" nullable="false" jdbcType="12"/>
+      <column name="descripcion" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
       <column name="creado" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
       <primary-key name="PRIMARY" columns="id"/>
       <exported-key name="subcategorias_ibfk_1" table="subcategorias" schema="" catalog="cortasar" columns="idCategoria"/>
@@ -81,10 +82,20 @@
       <primary-key name="PRIMARY" columns="id"/>
       <exported-key name="usuarios_ibfk_1" table="usuarios" schema="" catalog="cortasar" columns="idPerfil"/>
     </table>
+    <table name="secciones" schema="" catalog="cortasar" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="seccion" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="titulo" sqlType="VARCHAR" precision="200" scale="0" nullable="false" jdbcType="12"/>
+      <column name="descripcion" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="creado" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="activo" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MQ=="/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
     <table name="subcategorias" schema="" catalog="cortasar" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="idCategoria" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="nombre" sqlType="VARCHAR" precision="250" scale="0" nullable="false" jdbcType="12"/>
+      <column name="descripcion" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
       <column name="creado" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
       <primary-key name="PRIMARY" columns="id"/>
       <foreign-key name="subcategorias_ibfk_1" columns="idCategoria" ref-table="categorias" ref-schema="" ref-catalog="cortasar" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
@@ -136,8 +147,8 @@
       <column name="idArchivo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="creado" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
       <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="tramites_documentos_ibfk_2" columns="idArchivo" ref-table="archivos" ref-schema="" ref-catalog="cortasar" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="tramites_documentos_ibfk_1" columns="idTramite" ref-table="tramites" ref-schema="" ref-catalog="cortasar" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="tramites_documentos_ibfk_2" columns="idArchivo" ref-table="archivos" ref-schema="" ref-catalog="cortasar" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
     </table>
     <table name="tramites_documentos_archivos" schema="" catalog="cortasar" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
@@ -165,6 +176,17 @@
       <column name="creado" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
       <primary-key name="PRIMARY" columns="id"/>
       <foreign-key name="tramites_reglas_ibfk_1" columns="idTramite" ref-table="tramites" ref-schema="" ref-catalog="cortasar" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+    <table name="tramites_reglas_documentos" schema="" catalog="cortasar" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="idTramite" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="idRegla" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="idArchivo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="creado" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="idArchivo" unique="false" columns="idArchivo"/>
+      <index name="idRegla" unique="false" columns="idRegla"/>
+      <index name="idTramite" unique="false" columns="idTramite"/>
     </table>
     <table name="usuarios" schema="" catalog="cortasar" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>

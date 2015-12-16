@@ -126,7 +126,7 @@ class Categorias extends CI_Controller {
 					redirect("categorias");
 				}
 				else {
-					$this->session->set_flashdata("alert", array("type"=>"alert-danger", "image"=>"fa-ban", "message"=>"Ne se puede eliminar la categoria, borre primero todos los registros asociados a este."));
+					$this->session->set_flashdata("alert", array("type"=>"alert-danger", "image"=>"fa-ban", "message"=>"Ne se puede eliminar la categoria/subcategorias, borre primero todos los registros asociados a este."));
 					redirect("categorias");
 				}
 			}
