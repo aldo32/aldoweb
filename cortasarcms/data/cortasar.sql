@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-12-2015 a las 20:54:41
+-- Tiempo de generación: 18-12-2015 a las 00:26:18
 -- Versión del servidor: 5.6.17
 -- Versión de PHP: 5.5.12
 
@@ -139,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `directorio` (
   `activo` tinyint(1) NOT NULL DEFAULT '1',
   `creado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 --
 -- Volcado de datos para la tabla `directorio`
@@ -408,7 +408,7 @@ CREATE TABLE IF NOT EXISTS `tramites_iniciados` (
   `actualizado` timestamp NOT NULL,
   PRIMARY KEY (`id`),
   KEY `idTramite` (`idTramite`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
 
 --
 -- Volcado de datos para la tabla `tramites_iniciados`
@@ -438,7 +438,7 @@ CREATE TABLE IF NOT EXISTS `tramites_reglas` (
   `creado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `idTramite` (`idTramite`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=33 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=30 ;
 
 --
 -- Volcado de datos para la tabla `tramites_reglas`
@@ -467,7 +467,7 @@ CREATE TABLE IF NOT EXISTS `tramites_reglas_documentos` (
   KEY `idTramite` (`idTramite`),
   KEY `idRegla` (`idRegla`),
   KEY `idArchivo` (`idArchivo`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=9 ;
 
 --
 -- Volcado de datos para la tabla `tramites_reglas_documentos`
@@ -497,7 +497,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   KEY `idPerfil` (`idPerfil`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Tabla de usuarios' AUTO_INCREMENT=43 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Tabla de usuarios' AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `usuarios`

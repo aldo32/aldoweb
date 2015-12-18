@@ -3095,4 +3095,368 @@
       <index name="visita" unique="false" columns="idProyecto,idUsuario,determinanteGSP,fecha"/>
     </table>
   </data-source>
+  <data-source name="MySQL - cubocesarfer@localhost" uuid="197263de-90cd-4347-9bd7-10678d144767">
+    <database-info product="MySQL" version="5.6.17" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="cubocesarfer"/>
+    <table name="catproductos" schema="" catalog="cubocesarfer" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="proyecto" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="liverpool" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="ph" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="soriana" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="wm" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="sears" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="juguetron" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="juguetronCodigo" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="division" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="true" jdbcType="-6"/>
+      <column name="categoria" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="true" jdbcType="-6"/>
+      <column name="subCategoria" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="true" jdbcType="-6"/>
+      <column name="upc" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="item" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="nombre" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="costoUnidad" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8"/>
+      <column name="activo" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="true" jdbcType="-6"/>
+      <column name="temporada" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="true" jdbcType="-6"/>
+      <column name="importacion" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="true" jdbcType="-6"/>
+      <column name="negocio" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="skuLiverpool" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="skuPalacio" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="skuSoriana" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="skuWalmart" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="skuSears" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="skuChedraui" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="skuJuguetron" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="skuComex" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="skuHeb" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="material" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="true" jdbcType="-6"/>
+      <column name="color" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="talla" sqlType="VARCHAR" precision="15" scale="0" nullable="true" jdbcType="12"/>
+      <column name="temporadaDetalle" sqlType="VARCHAR" precision="15" scale="0" nullable="true" jdbcType="12"/>
+      <column name="carryOver" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="true" jdbcType="-6"/>
+      <column name="modelo" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="true" jdbcType="-6"/>
+      <column name="chksum" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="activo" unique="false" columns="activo"/>
+      <index name="cat_sub" unique="false" columns="categoria,subCategoria"/>
+      <index name="categoria" unique="false" columns="categoria"/>
+      <index name="chksum" unique="false" columns="chksum"/>
+      <index name="color" unique="false" columns="color"/>
+      <index name="div_cat" unique="false" columns="division,categoria"/>
+      <index name="div_cat_sub" unique="false" columns="division,categoria,subCategoria"/>
+      <index name="div_cat_sub_mod" unique="false" columns="division,categoria,subCategoria,modelo"/>
+      <index name="div_cat_sub_mod_mat" unique="false" columns="division,categoria,subCategoria,modelo,material"/>
+      <index name="div_sub" unique="false" columns="division,subCategoria"/>
+      <index name="division" unique="false" columns="division"/>
+      <index name="importacion" unique="false" columns="importacion"/>
+      <index name="material" unique="false" columns="material"/>
+      <index name="modelo" unique="false" columns="modelo"/>
+      <index name="modelo_material" unique="false" columns="modelo,material"/>
+      <index name="negocio" unique="false" columns="negocio"/>
+      <index name="proy_activo" unique="false" columns="proyecto,activo"/>
+      <index name="proy_item" unique="false" columns="proyecto,item"/>
+      <index name="proy_juguetron" unique="false" columns="proyecto,juguetron"/>
+      <index name="proy_juguetron2" unique="false" columns="proyecto,juguetronCodigo"/>
+      <index name="proy_liverpool" unique="false" columns="proyecto,liverpool"/>
+      <index name="proy_ph" unique="false" columns="proyecto,ph"/>
+      <index name="proy_sears" unique="false" columns="proyecto,sears"/>
+      <index name="proy_soriana" unique="false" columns="proyecto,soriana"/>
+      <index name="proy_upc" unique="false" columns="proyecto,upc"/>
+      <index name="proy_wm" unique="false" columns="proyecto,wm"/>
+      <index name="skuChedraui" unique="false" columns="skuChedraui"/>
+      <index name="skuComex" unique="false" columns="skuComex"/>
+      <index name="skuHeb" unique="false" columns="skuHeb"/>
+      <index name="skuJuguetron" unique="false" columns="skuJuguetron"/>
+      <index name="skuLiverpool" unique="false" columns="skuLiverpool"/>
+      <index name="skuPalacio" unique="false" columns="skuPalacio"/>
+      <index name="skuSears" unique="false" columns="skuSears"/>
+      <index name="skuSoriana" unique="false" columns="skuSoriana"/>
+      <index name="skuWalmart" unique="false" columns="skuWalmart"/>
+      <index name="subCategoria" unique="false" columns="subCategoria"/>
+      <index name="talla" unique="false" columns="talla"/>
+      <index name="temporada" unique="false" columns="temporadaDetalle"/>
+      <index name="upc" unique="false" columns="upc"/>
+    </table>
+    <table name="cattiendas" schema="" catalog="cubocesarfer" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="idTiendaReal" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="folioTxt" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="grupo" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="true" jdbcType="-6"/>
+      <column name="formato" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="true" jdbcType="-6"/>
+      <column name="cadena" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="true" jdbcType="-6"/>
+      <column name="sucursal" sqlType="VARCHAR" precision="150" scale="0" nullable="true" jdbcType="12"/>
+      <column name="direccion" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12"/>
+      <column name="estado" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="ciudad" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="latitud" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8"/>
+      <column name="longitud" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8"/>
+      <column name="promotoria" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
+      <column name="chksum" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="idTiendaEmetrix" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="false" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="cadena" unique="false" columns="cadena"/>
+      <index name="chksum" unique="false" columns="chksum"/>
+      <index name="folioTxt" unique="false" columns="folioTxt"/>
+      <index name="form_cad" unique="false" columns="formato,cadena"/>
+      <index name="formato" unique="false" columns="formato"/>
+      <index name="gpo_cad" unique="false" columns="grupo,cadena"/>
+      <index name="gpo_form_cad" unique="false" columns="grupo,formato,cadena"/>
+      <index name="gpo_formato" unique="false" columns="grupo,formato"/>
+      <index name="gpo_tiendaReal" unique="false" columns="grupo,idTiendaReal"/>
+      <index name="grupo" unique="false" columns="grupo"/>
+      <index name="idTiendaReal" unique="false" columns="idTiendaReal"/>
+      <index name="promotoria" unique="false" columns="promotoria"/>
+    </table>
+    <table name="catxcadena" schema="" catalog="cubocesarfer" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="nombre" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="nombre" unique="false" columns="nombre"/>
+    </table>
+    <table name="catxcategoria" schema="" catalog="cubocesarfer" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="nombre" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="nombre" unique="false" columns="nombre"/>
+    </table>
+    <table name="catxdivision" schema="" catalog="cubocesarfer" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="nombre" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="nombre" unique="false" columns="nombre"/>
+    </table>
+    <table name="catxformato" schema="" catalog="cubocesarfer" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="nombre" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="nombre" unique="false" columns="nombre"/>
+    </table>
+    <table name="catxgrupo" schema="" catalog="cubocesarfer" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="nombre" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="nombre" unique="false" columns="nombre"/>
+    </table>
+    <table name="catxsubcategoria" schema="" catalog="cubocesarfer" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="nombre" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="nombre" unique="false" columns="nombre"/>
+    </table>
+    <table name="concentradov" schema="" catalog="cubocesarfer" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="proyecto" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="archivoCadena" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="idTienda" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="idTiendaReal" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="grupo" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="formato" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="cadena" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="sucursal" sqlType="VARCHAR" precision="150" scale="0" nullable="false" jdbcType="12"/>
+      <column name="promotoria" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="chksumt" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
+      <column name="idProducto" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="upc" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="item" sqlType="VARCHAR" precision="15" scale="0" nullable="false" jdbcType="12"/>
+      <column name="division" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="categoria" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="subCategoria" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="modelo" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="material" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="chksump" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
+      <column name="nombre" sqlType="VARCHAR" precision="250" scale="0" nullable="false" jdbcType="12"/>
+      <column name="costoUnidadMB" sqlType="DOUBLE" precision="22" scale="0" nullable="false" jdbcType="8"/>
+      <column name="ventasUnidades" sqlType="DOUBLE" precision="22" scale="0" nullable="false" jdbcType="8"/>
+      <column name="ventasImporte" sqlType="DOUBLE" precision="22" scale="0" nullable="false" jdbcType="8"/>
+      <column name="existenciasUnidades" sqlType="DOUBLE" precision="22" scale="0" nullable="false" jdbcType="8"/>
+      <column name="existenciasImporte" sqlType="DOUBLE" precision="22" scale="0" nullable="false" jdbcType="8"/>
+      <column name="fecha" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="fechaCarga" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="idArchivoCarga" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="tiendaFalta" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
+      <column name="productoFalta" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="fecha" unique="false" columns="fecha"/>
+      <index name="idTienda" unique="false" columns="fecha,idTienda"/>
+      <index name="producto_punto_selec" unique="false" columns="fecha,idProducto,idTienda"/>
+      <index name="producto_selec" unique="false" columns="fecha,idProducto,chksumt"/>
+      <index name="punto_selec" unique="false" columns="fecha,chksump,idTienda"/>
+      <index name="puntos" unique="false" columns="fecha,chksumt"/>
+      <index name="todo" unique="false" columns="fecha,chksump,chksumt"/>
+    </table>
+    <table name="tempchedraui" schema="" catalog="cubocesarfer" type="TABLE">
+      <column name="Id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="FechaCreacion" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="FechaCarga" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="Formato" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Sku" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Tienda" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="VtaImp" sqlType="DOUBLE" precision="22" scale="0" nullable="false" jdbcType="8"/>
+      <column name="VtaUni" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="Id"/>
+    </table>
+    <table name="tempcomercial" schema="" catalog="cubocesarfer" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="FechaCreacion" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="FechaCarga" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="Formato" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Tipo" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Fecha" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Num" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="NumTienda" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Upc" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="UniVend" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="UniCost" sqlType="DOUBLE" precision="22" scale="0" nullable="false" jdbcType="8"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="templiverpool" schema="" catalog="cubocesarfer" type="TABLE">
+      <column name="Id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="FechaCreacion" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="FechaCarga" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="Formato" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="CentroId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Centro" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ArticuloId" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Articulo" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Estado" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Modelo" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="EanUpc" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Temporada" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="VentasUni" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="VentasImp" sqlType="DOUBLE" precision="22" scale="0" nullable="false" jdbcType="8"/>
+      <column name="Borrar" sqlType="VARCHAR" precision="15" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="Id"/>
+      <index name="CentroId" unique="false" columns="CentroId"/>
+    </table>
+    <table name="temppalacio" schema="" catalog="cubocesarfer" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="FechaCreacion" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="FechaCarga" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="Formato" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Anio" sqlType="CHAR" precision="4" scale="0" nullable="false" jdbcType="1"/>
+      <column name="CostoArticulo" sqlType="VARCHAR" precision="15" scale="0" nullable="false" jdbcType="12"/>
+      <column name="AnioTemporada" sqlType="CHAR" precision="4" scale="0" nullable="false" jdbcType="1"/>
+      <column name="CanalDistribucion" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Centro" sqlType="VARCHAR" precision="35" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Clase" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ClaveCanalDistribucion" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="ClaveCentro" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="ClaveClase" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ClaveComprador" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ClaveDepartamento" sqlType="VARCHAR" precision="15" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ClaveDivision" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ClaveGrupoArticulos" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ClaveNegocio" sqlType="VARCHAR" precision="15" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ClaveProveedor" sqlType="VARCHAR" precision="15" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ClaveSubClase" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Comprador" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Departamento" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Dia" sqlType="CHAR" precision="10" scale="0" nullable="false" jdbcType="1"/>
+      <column name="DiaSemana" sqlType="CHAR" precision="2" scale="0" nullable="false" jdbcType="1"/>
+      <column name="Division" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="GrupoArticulos" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="IdJerarquia" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Marca" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="MarcasPropias" sqlType="VARCHAR" precision="15" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Mes" sqlType="CHAR" precision="2" scale="0" nullable="false" jdbcType="1"/>
+      <column name="MesAnio" sqlType="CHAR" precision="7" scale="0" nullable="false" jdbcType="1"/>
+      <column name="Negocio" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Proveedor" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Resurtible" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Semana" sqlType="CHAR" precision="8" scale="0" nullable="false" jdbcType="1"/>
+      <column name="SubClase" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Temporada" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12"/>
+      <column name="TipoStock" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Trimestre" sqlType="CHAR" precision="6" scale="0" nullable="false" jdbcType="1"/>
+      <column name="CuponesRtl" sqlType="CHAR" precision="1" scale="0" nullable="false" jdbcType="1"/>
+      <column name="DsctoEmpleadoRtl" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="DevolucionVentaRlt" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="DevolucionVentaUm" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="RebajasManualesRtl" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="RebajaAutomaticaRtl" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="SsmVendidoRtl" sqlType="CHAR" precision="1" scale="0" nullable="false" jdbcType="1"/>
+      <column name="VentaNetaCto" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="VentaNetaUm" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="VentaNetaCup" sqlType="DOUBLE" precision="22" scale="0" nullable="false" jdbcType="8"/>
+      <column name="ClaveArticulo" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Articulo" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Estilo" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Cfmsi" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Upc" sqlType="VARCHAR" precision="60" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Talla" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Color" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="FechaPrimeraEntrada" sqlType="CHAR" precision="10" scale="0" nullable="false" jdbcType="1"/>
+      <column name="FechaUltimaEntrada" sqlType="CHAR" precision="10" scale="0" nullable="false" jdbcType="1"/>
+      <column name="BigTicket" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ClaveEstatus" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="CentroComparable" sqlType="CHAR" precision="1" scale="0" nullable="false" jdbcType="1"/>
+      <column name="PrecioVentaCatalogo" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ClaveTipoArticulo" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Area" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ClaveArea" sqlType="VARCHAR" precision="40" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ClaveMarca" sqlType="VARCHAR" precision="15" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ClaveMarcasPropias" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ClaveEstilo" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ClaveTalla" sqlType="CHAR" precision="1" scale="0" nullable="false" jdbcType="1"/>
+      <column name="ClaveColor" sqlType="CHAR" precision="1" scale="0" nullable="false" jdbcType="1"/>
+      <column name="ClaveBigTicket" sqlType="CHAR" precision="1" scale="0" nullable="false" jdbcType="1"/>
+      <column name="IndicadorComp" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ClaveTallaDos" sqlType="CHAR" precision="1" scale="0" nullable="false" jdbcType="1"/>
+      <column name="TallaDos" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Estatus" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ClaveTipoStock" sqlType="CHAR" precision="1" scale="0" nullable="false" jdbcType="1"/>
+      <column name="TipoArticulo" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Modelo" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="EstiloGrupoCompras" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="GrupoCompras" sqlType="VARCHAR" precision="40" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="tempsoriana" schema="" catalog="cubocesarfer" type="TABLE">
+      <column name="Id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="FechaCreacion" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="FechaCarga" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="Formato" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="NumTienda" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Departamento" sqlType="VARCHAR" precision="60" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Articulo" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="FechaConsulta" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="UnidadesVendidas" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="UnidadesCompradas" sqlType="DOUBLE" precision="22" scale="0" nullable="false" jdbcType="8"/>
+      <column name="Existencias" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="ValorVentas" sqlType="DOUBLE" precision="22" scale="0" nullable="false" jdbcType="8"/>
+      <column name="ValorCompras" sqlType="DOUBLE" precision="22" scale="0" nullable="false" jdbcType="8"/>
+      <primary-key name="PRIMARY" columns="Id"/>
+    </table>
+    <table name="tempwalmart" schema="" catalog="cubocesarfer" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="FechaCreacion" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="FechaCarga" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="Formato" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Departamento" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="VendedorName" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Cadena" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Tienda" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="NumTienda" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Ean" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="VendedorNum" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Descripcion" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="UnitRetail" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="UnitCost" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Mu" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="PosQty" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="PosSales" sqlType="DOUBLE" precision="22" scale="0" nullable="false" jdbcType="8"/>
+      <column name="InvOnHand" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="InvOnHandRetail" sqlType="DOUBLE" precision="22" scale="0" nullable="false" jdbcType="8"/>
+      <column name="InvInWhse" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="InvInWhseRetail" sqlType="DOUBLE" precision="22" scale="0" nullable="false" jdbcType="8"/>
+      <column name="InvInTransit" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="InvInTransitRetail" sqlType="DOUBLE" precision="22" scale="0" nullable="false" jdbcType="8"/>
+      <column name="InvOnOrder" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="InvOnOrderRetail" sqlType="DOUBLE" precision="22" scale="0" nullable="false" jdbcType="8"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+  </data-source>
 </component>

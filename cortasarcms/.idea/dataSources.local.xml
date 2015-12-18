@@ -19,5 +19,11 @@
       <schema-pattern>emetrix.*</schema-pattern>
       <default-schemas>emetrix.*</default-schemas>
     </data-source>
+    <data-source name="MySQL - cubocesarfer@localhost" uuid="197263de-90cd-4347-9bd7-10678d144767">
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <schema-pattern>cubocesarfer.*</schema-pattern>
+      <default-schemas>cubocesarfer.*</default-schemas>
+    </data-source>
   </component>
 </project>
