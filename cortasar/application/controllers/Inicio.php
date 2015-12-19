@@ -10,6 +10,6 @@ class Inicio extends CI_Controller {
 	}
 
 	public function index() {
-		echo "listo";
+		$this->load->view("inicio/inicio_view");
 	}
 }
