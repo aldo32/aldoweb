@@ -10,6 +10,18 @@ class Inicio extends CI_Controller {
 	}
 
 	public function index() {
-		$this->load->view("inicio/inicio_view");
+		$data = $this->general();
+		$this->load->view("inicio/inicio_view", $data);
+	}
+
+
+	function general() {
+		$config['page'] = "home";
+
+		$data['includes'] = $this->load->view("general/general_includes_view", '', true);
+		$data['header'] = $this->load->view("general/general_header_view", $config, true);
+		$data['footer'] = $this->load->view("general/general_footer_view", '', true);
+
+		return $data;
 	}
 }

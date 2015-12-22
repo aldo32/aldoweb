@@ -33,10 +33,10 @@ class Archivos extends CI_Controller
 
         $this->form_validation->set_rules('nombre', '<strong>Nombre</strong>', 'required|trim');
 
-        if ($tipo == 3) {
+        /*if ($tipo == 2) {
             if ($_FILES['archivo']['name'] == "")
                 $this->form_validation->set_rules('archivo', '<strong>Archivo</strong>', 'required|trim');
-        }
+        }*/
 
         $this->form_validation->set_message('required', 'El campo %s es obligatorio');
 
@@ -48,9 +48,9 @@ class Archivos extends CI_Controller
             $this->load->view('archivos/archivos_view', $data);
         }
         else {
-            if ($tipo == 3) {
+            if ($_FILES['archivo']['name'] != "") {
                 $config['upload_path'] = './uploads/archivos';
-                $config['allowed_types'] = 'pdf|doc|docx|xls|xlsx|jpg|png|jpeg';
+                $config['allowed_types'] = 'pdf|doc|docx|xls|xlsx|jpg|png|jpeg|gif';
                 $config['max_size'] = 0;
                 $config['max_width'] = 0;
                 $config['max_height'] = 0;
@@ -112,10 +112,10 @@ class Archivos extends CI_Controller
         $data['footer'] = $this->load->view("general/general_footer_view", '', true);
         $data['control_sidebar'] = $this->load->view("general/general_control_sidebar_view", '', true);
 
-        $q = $this->db->query("SELECT *, CASE tipo WHEN 1 THEN 'Tramite' WHEN 2 THEN 'Regla' WHEN 3 THEN 'Correo' END AS nombreTipo FROM archivos");
+        $q = $this->db->query("SELECT *, CASE tipo WHEN 1 THEN 'Tramite' WHEN 2 THEN 'Regla' END AS nombreTipo FROM archivos");
         $data["archivos"] = $q->result();
 
-        $options = array("1"=>"Tramites", "2"=>"Reglas", "3"=>"Correos");
+        $options = array("1"=>"Tramites", "2"=>"Reglas");
         $data["comboTipos"] = $options;
 
         return $data;

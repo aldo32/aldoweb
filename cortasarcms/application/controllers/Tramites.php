@@ -68,6 +68,7 @@ class Tramites extends CI_Controller {
 			$data = $this->general();
 			$data["type"] = $type;
 			$data["tramite"] = $tramite;
+            $data["archivosTramite"] = "";
 
 			$this->load->view("tramites/tramites_editar_view", $data);
 		}
@@ -495,6 +496,16 @@ class Tramites extends CI_Controller {
                 $("#tablaFilesEmail").DataTable({
                     stateSave: true,
                 });
+
+                $(".nyroModal").nyroModal({
+                    closeOnEscape: true,
+                    closeOnClick: true,
+                    showCloseButton: true,
+                    callbacks: {
+                        afterClose: function() {
+                        }
+                    }
+                });
             });
         </script>
 
@@ -515,7 +526,7 @@ class Tramites extends CI_Controller {
                     ?>
                     <tr>
                         <td><?php echo $row->id ?></td>
-                        <td><a href="<?php echo base_url().$row->archivo?>" target="_blank"><?php echo $tmp[3]; ?></a></td>
+                        <td><a href="<?php echo base_url().$row->archivo?>" target="_blank" class="nyroModal"><?php echo $tmp[3]; ?></a></td>
                         <td><?php echo $row->creado ?></td>
                         <td><a href="javascript:void(0);" class="eliminarArchivoEmail" id="<?php echo $row->id."-".$idCorreo ?>"><button class="btn btn-block btn-danger btn-xs">Eliminar</button></a></td>
                     </tr>
@@ -605,6 +616,16 @@ class Tramites extends CI_Controller {
             </div>
         </div>
         <?php
+    }
+
+    function comboSubCategoria() {
+        $idCategoria =  $this->input->post("idCategoria");
+        $comboSubCategorias = $this->categorias->getComboSubCategoriasByCategoria($idCategoria);
+
+        ?>
+        <label>Sub Categoria</label>
+        <?php
+        echo form_dropdown("idSubCategoria", $comboSubCategorias, set_value("idSubCategoria"), "class='form-control input-sm' id='idSubCategoria'");
     }
 
 

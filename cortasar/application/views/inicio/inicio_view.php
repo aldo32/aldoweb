@@ -6,20 +6,7 @@
 
 		<title>Cortasar - Inicio</title>
 
-		<link href="<?php echo base_url()?>/resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
-		<link href="<?php echo base_url()?>/resources/css/tether.css" rel="stylesheet" type="text/css" />
-		<link href="<?php echo base_url()?>/resources/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
-		<link href="<?php echo base_url()?>/resources/js/jqueryui/jquery-ui.css" rel="stylesheet" type="text/css" />
-		<link href="<?php echo base_url()?>/resources/css/carrusel.css" rel="stylesheet" type="text/css" />
-        <link href="<?php echo base_url()?>/resources/css/jquery.bxslider.css" rel="stylesheet" type="text/css" />
-
-
-		<script src="<?php echo base_url()?>/resources/js/jquery-1.11.3.js" type="text/javascript"></script>
-		<script src="<?php echo base_url()?>/resources/bootstrap/js/bootstrap.js" type="text/javascript"></script>
-		<script src="<?php echo base_url()?>/resources/js/tether.js" type="text/javascript"></script>
-		<script src="<?php echo base_url()?>/resources/js/jquery.dataTables.js" type="text/javascript"></script>
-		<script src="<?php echo base_url()?>/resources/js/jqueryui/jquery-ui.js" type="text/javascript"></script>
-        <script src="<?php echo base_url()?>/resources/js/jquery.bxslider.js" type="text/javascript"></script>
+        <?php echo $includes ?>
 
 		<script type="text/javascript">		
 		$(document).ready(function() {
@@ -40,39 +27,12 @@
             .fright { float: right; }
             .marginR20 { margin-right: 20px; }
             .lineH50 { line-height: 50px; }
+            #logo_menu { position: absolute; left: 5px; top: -5px; }
 		</style>
 	</head>
 <body class="hold-transition skin-blue sidebar-mini">
-<div class="navbar-wrapper">
-	<div class="container">
-		<nav class="navbar navbar-default">
-			<div class="container-fluid">
-				<!-- Brand and toggle get grouped for better mobile display -->
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-						<span class="sr-only"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<div><img src="<?php echo base_url() ?>resources/images/logo.jpg" width="150" height="50" /></div>
-				</div>
 
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Home</a></li>
-						<li><a href="#">Antecedentes</a></li>
-						<li><a href="#">Plan municipal</a></li>
-						<li><a href="#">Por que invertir</a></li>
-						<li><a href="#">Tramites y servicios</a></li>
-						<li><a href="#">Consulta y recomendación</a></li>
-					</ul>
-				</div><!-- /.navbar-collapse -->
-			</div><!-- /.container-fluid -->
-		</nav>
-	</div>
-</div>
+<?php echo $header; ?>
 
 <div id="myCarousel" class="carousel slide" data-ride="carousel" style="margin-bottom: 30px">
 	<!-- Indicators -->
@@ -83,7 +43,7 @@
 	</ol>
 	<div class="carousel-inner" role="listbox">
         <div class="item active">
-            <img class="first-slide" src="<?php echo base_url()?>resources/4.jpg" alt="uno">
+            <img class="first-slide" src="<?php echo base_url()?>resources/1.jpg" alt="uno">
             <div class="container">
                 <div class="carousel-caption">
                     <h1 style="margin: 0px;">Titulo</h1>
@@ -93,7 +53,7 @@
             </div>
         </div>
 		<div class="item">
-			<img class="second-slide" src="<?php echo base_url()?>resources/3.jpg" alt="dos">
+			<img class="second-slide" src="<?php echo base_url()?>resources/2.jpg" alt="dos">
 			<div class="container">
 				<div class="carousel-caption">
                     <h1 style="margin: 0px;">Titulo</h1>
@@ -103,7 +63,7 @@
 			</div>
 		</div>
 		<div class="item">
-			<img class="third-slide" src="<?php echo base_url()?>resources/2.jpg" alt="3">
+			<img class="third-slide" src="<?php echo base_url()?>resources/3.jpg" alt="3">
 			<div class="container">
 				<div class="carousel-caption">
                     <h1 style="margin: 0px;">Titulo</h1>
@@ -151,34 +111,9 @@
         </div>
     </div>
 
-    <br><br>
-    <div class="row">
-        <div class="col-lg-12 text-center">
-            <div style="width: 100%; text-align: center;" class="clearfix">
-                <a href="#">Terminos y condiciones</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="#">Giros</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="#">Estadisticas</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="#">Directorio</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="#">Contactanos</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="#">Politicas de privacidad</a>
-            </div>
-        </div>
-    </div>
+    <?php echo $footer; ?>
 
-    <br>
-    <div class="row">
-        <div class="col-lg-12 text-center">
-            <div style="width: 100%; height: 60px; line-height: 60px; background: silver;">
-                copyright
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                Siguenos:  Facebook    twitter    google
-            </div>
-        </div>
-    </div>
 </div>
 
 </body>
 </html>
-meridian_ozero hotmail
-conbustion

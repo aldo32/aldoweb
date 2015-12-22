@@ -105,4 +105,19 @@ class Model_categorias extends CI_Model {
 			}
 		}
 	}
+
+	function getComboSubCategoriasByCategoria($idCategoria) {
+		$sql = "SELECT * FROM subcategorias WHERE idCategoria = $idCategoria";
+
+		$q=$this->db->query($sql);
+		$options["-1"] = "Seleccione una subcategoria";
+		if ($q->num_rows() > 0)
+		{
+			foreach ($q->result() AS $row)
+				$options[$row->id]=$row->nombre;
+
+			$q->free_result();
+			return $options;
+		}
+	}
 }

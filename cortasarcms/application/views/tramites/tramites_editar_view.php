@@ -64,6 +64,28 @@ class tramite {
     			);
                 <?php
             }
+
+            if (isset($_POST['idCategoria'])) {
+                ?>
+                $("#content-sub").html("<i class='fa fa-refresh fa-spin'></i>&nbsp;&nbsp;cargando...");
+                $.ajax({
+                    url: "<?php echo base_url("tramites/comboSubCategoria") ?>",
+                    data: "idCategoria="+<?php echo $_POST['idCategoria'] ?>,
+                    dataType: "html",
+                    success: function(datos) {
+                        $("#content-sub").html(datos);
+                        <?php
+                        if (isset($_POST['idSubCategoria'])) {
+                            ?>
+                            $("#idSubCategoria").val("<?php echo $_POST["idSubCategoria"] ?>");
+                            <?php
+                        }
+                        ?>
+                    },
+                    type: "POST"
+                });
+                <?php
+            }
             ?>
 
             $("#sendForm").click(function() {
@@ -75,6 +97,22 @@ class tramite {
                 var valuesArray = archivosTramite.split(",");
                 $('#idArchivo').multipleSelect("setSelects", valuesArray);
             }
+
+            $("#idCategoria").change(function() {
+                var id = $(this).val();
+                if (id != "-1") {
+                    $("#content-sub").html("<i class='fa fa-refresh fa-spin'></i>&nbsp;&nbsp;cargando...");
+                    $.ajax({
+                        url: "<?php echo base_url("tramites/comboSubCategoria") ?>",
+                        data: "idCategoria="+id,
+                        dataType: "html",
+                        success: function(datos) {
+                            $("#content-sub").html(datos);
+                        },
+                        type: "POST"
+                    });
+                }
+            });
 		});
 		</script>
 
@@ -117,9 +155,11 @@ class tramite {
                                     <label>Categoria</label>
                                     <?php echo form_dropdown("idCategoria", $comboCategorias, set_value("idCategoria", $tramite->idCategoria), "class='form-control input-sm' id='idCategoria'");?>
                                 </div>
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-4" id="content-sub">
                                     <label>Sub Categoria</label>
-                                    <?php echo form_dropdown("idSubCategoria", $comboSubCategorias, set_value("idSubCategoria", $tramite->idSubCategoria), "class='form-control input-sm' id='idSubCategoria'");?>
+                                    <?php
+                                    $comboSubCategorias = array("-1"=>"Seleccione una subcategoria");
+                                    echo form_dropdown("idSubCategoria", $comboSubCategorias, set_value("idSubCategoria", $tramite->idSubCategoria), "class='form-control input-sm' id='idSubCategoria'");?>
                                 </div>
                             </div>
 

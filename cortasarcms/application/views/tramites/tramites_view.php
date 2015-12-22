@@ -151,17 +151,6 @@
                         </div>
 
                         <div class="box-body">
-                            <?php
-                            if ($alert != "") {
-                                ?>
-                                <div class="alert <?php echo $alert["type"] ?> alert-dismissable" id="messageAlert">
-                                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                                    <h4><i class="icon fa <?php echo $alert["image"] ?>"></i> Mensaje!</h4>
-                                    <?php echo $alert["message"]; ?>
-                                </div>
-                                <?php
-                            }
-                            ?>
                             <table id="tablaTramitesIniciados" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>

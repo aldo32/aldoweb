@@ -50,15 +50,15 @@
                 stateSave: true,
             });
 
-            $("#tipo").change(function() {
+            /*$("#tipo").change(function() {
                 tipo = $(this).val();
-                if (tipo == 3)
+                if (tipo == 2)
                     $("#contentFile").fadeIn();
                 else
                     $("#contentFile").fadeOut();
-            });
+            });*/
 
-            if ($("#tipo").val() == 3) $("#contentFile").fadeIn();
+            /*if ($("#tipo").val() == 2) $("#contentFile").fadeIn();*/
         });
     </script>
 
@@ -123,8 +123,8 @@
                                 <?php
                             }
                             ?>
-                            <div class="form-group col-md-12" id="contentFile" style="display: none;">
-                                <label>Archivo</label>
+                            <div class="form-group col-md-12" id="contentFile">
+                                <label>Archivo<br>pdf|doc|docx|xls|xlsx|jpg|png|jpeg|gif</label>
                                 <input type="file" name="archivo" id="archivo" />
                             </div>
                         </div>
