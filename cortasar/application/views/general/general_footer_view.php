@@ -13,9 +13,9 @@
 </div>
 
 <br>
-<div class="row">
+<div class="row" style="background: yellow;">
     <div class="col-lg-12 text-center">
-        <div style="width: 100%; height: 60px; line-height: 60px; background: silver;">
+        <div style="width: 100%; height: 60px; line-height: 60px; background: yellow;">
             <div class="col-lg-4 col-lg-offset-4">
                 <div class="fleft">Copyright</div>
                 <div>

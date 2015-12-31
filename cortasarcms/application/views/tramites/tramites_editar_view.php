@@ -38,7 +38,6 @@ class tramite {
 
         <!-- bootstrap wysihtml5 - text editor -->
         <link rel="stylesheet" href="<?php echo base_url()?>/resources/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
-
         <script src="<?php echo base_url()?>/resources/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 
 		<script type="text/javascript">
@@ -113,6 +112,8 @@ class tramite {
                     });
                 }
             });
+
+            $("#descripcion").wysihtml5();
 		});
 		</script>
 
@@ -144,9 +145,12 @@ class tramite {
                                     <label>Nombre</label>
                                     <?php echo form_input(array('name'=>'nombre','id'=>'nombre', 'class'=>'form-control input-sm', 'value' =>set_value('nombre', $tramite->nombre)));?>
                                 </div>
-                                <div class="form-group col-md-4">
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-12">
                                     <label>Descripción</label>
-                                    <?php echo form_input(array('name'=>'descripcion','id'=>'descripcion', 'class'=>'form-control input-sm', 'value' =>set_value('descripcion', $tramite->descripcion)));?>
+                                    <textarea style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid rgb(221, 221, 221); padding: 0px;" name="descripcion" id="descripcion" placeholder="Descripción"><?php echo set_value("descripcion", $tramite->descripcion) ?></textarea>
                                 </div>
                             </div>
 

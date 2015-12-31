@@ -119,4 +119,47 @@ class RestTramites extends REST_Controller {
          * que debe realizar el tramite nuevamente.
          * */
     }
+
+    function comboTramites_post() {
+        $sql = "SELECT *, (SELECT nombre FROM categorias WHERE id = tramites.idCategoria) AS nombreCategoria, (SELECT nombre FROM subcategorias WHERE id = tramites.idSubCategoria) AS nombreSubCategoria FROM tramites";
+        $q = $this->db->query($sql);
+        $tramites = $q->result();
+
+        foreach ($tramites AS $row)
+            $opciones[$row->id] = $row->nombreCategoria." - ".$row->nombreSubCategoria." - ".$row->nombre;
+
+        $this->response($opciones);
+    }
+
+    function getTramiteById_post() {
+        $idTramite = $this->post("idTramite");
+
+        $q = $this->db->get_where("tramites", array("id"=>$idTramite));
+        $this->response($q->row());
+    }
+
+    function documentosTramite_post() {
+        $idTramite = $this->post("idTramite");
+
+        $sql = "SELECT *, (SELECT nombre FROM archivos WHERE id = tramites_documentos.idArchivo) AS nombreArchivo FROM tramites_documentos WHERE idTramite = $idTramite";
+        $q = $this->db->query($sql);
+        $this->response($q->result());
+    }
+
+    function reglasTramite_post() {
+        $idTramite = $this->post("idTramite");
+
+        $sql = "SELECT * FROM tramites_reglas WHERE idTramite =  $idTramite";
+        $q = $this->db->query($sql);
+        $this->response($q->result());
+    }
+
+    function documentosReglasTramite_post() {
+        $idTramite = $this->post("idTramite");
+        $idRegla = $this->post("idRegla");
+
+        $sql = "SELECT *, (SELECT nombre FROM archivos WHERE id = tramites_reglas_documentos.idArchivo) AS nombreArchivo FROM tramites_reglas_documentos WHERE idTramite = $idTramite AND idRegla = $idRegla";
+        $q = $this->db->query($sql);
+        $this->response($q->result());
+    }
 }

@@ -21,9 +21,18 @@ class RestNoticias extends REST_Controller
      * RETURN SUCCESS: noticias[]
      * RETURN ERROR: status, message
      */
-    function obtenerNoticias_get()
+    function obtenerNoticias_post()
     {
-        $q = $this->db->get_where("noticias", array("activo"=>1));
+        $sql = "
+            SELECT
+                n.titulo,
+                n.id,
+                n.autor,
+                n.creado,
+                (SELECT archivo FROM noticias_archivos WHERE idNoticia = n.id AND extencion = '.jpg' LIMIT 1) AS archivo
+            FROM
+              noticias n";
+        $q = $this->db->query($sql);
         $noticias = $q->result();
 
         $this->response($noticias);
@@ -57,5 +66,14 @@ class RestNoticias extends REST_Controller
         $archivos = $q->row();
 
         $this->response($archivos);
+    }
+
+    function obtenerNoticiasBanners_post()
+    {
+        $sql = "SELECT n.titulo, n.id, n.autor, n.creado, na.archivo FROM noticias n, noticias_archivos na WHERE na.idNoticia = n.id AND n.banner = 1 AND na.extencion = '.jpg' ";
+        $q = $this->db->query($sql);
+        $noticias = $q->result();
+
+        $this->response($noticias);
     }
 }

@@ -186,6 +186,7 @@ class Noticias extends CI_Controller
                     //guardando en bd
                     $register["idNoticia"] = $idNoticia;
                     $register["archivo"] = "uploads/noticias/multimedia/" . $this->upload->data('file_name');
+                    $register["extencion"] = $this->upload->data('file_ext');
 
                     //checa si el archivo ya existe para no duplicar registros
                     $sql = "SELECT * FROM noticias_archivos WHERE archivo LIKE '%".$register["archivo"]."%' AND idNoticia = $idNoticia LIMIT 1";

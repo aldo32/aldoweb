@@ -99,7 +99,7 @@
                                     <th width="70">Op</th>
                                     <th>ID</th>
 									<th>Nombre</th>
-                                    <th>Descripción</th>
+                                    <th width="300">Descripción</th>
                                     <th>Categoria</th>
                                     <th>Subcategoria</th>
                                     <th>Creado</th>
@@ -128,7 +128,7 @@
                                             </td>
                                             <td><?php echo $row->id ?></td>
 											<td><?php echo $row->nombre ?></td>
-                                            <td><?php echo $row->descripcion ?></td>
+                                            <td><?php echo word_limiter($row->descripcion, 8) ?></td>
                                             <td><?php echo $row->nombreCategoria ?></td>
                                             <td><?php echo $row->nombreSubCategoria ?></td>
                                             <td><?php echo $row->creado ?></td>

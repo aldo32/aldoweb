@@ -27,10 +27,9 @@
             .fright { float: right; }
             .marginR20 { margin-right: 20px; }
             .lineH50 { line-height: 50px; }
-            #logo_menu { position: absolute; left: 5px; top: -5px; }
 		</style>
 	</head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body>
 
 <?php echo $header; ?>
 
@@ -42,36 +41,26 @@
 		<li data-target="#myCarousel" data-slide-to="2"></li>
 	</ol>
 	<div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <img class="first-slide" src="<?php echo base_url()?>resources/1.jpg" alt="uno">
-            <div class="container">
-                <div class="carousel-caption">
-                    <h1 style="margin: 0px;">Titulo</h1>
-                    <p>Pequeña descripcion del banner</p>
-                    <p><a class="btn btn-sm btn-primary" href="#" role="button">ver mas</a></p>
+        <?php
+        if (isset($banners)) {
+            $i=0;
+            foreach ($banners as $row) {
+                ?>
+                <div class="item <?php echo ($i == 0) ? "active" : ""; ?>">
+                    <img class="first-slide" src="<?php echo URL_CMS.$row->archivo?>" alt="<?php echo $row->titulo ?>">
+                    <div class="container">
+                        <div class="carousel-caption">
+                            <h1 style="margin: 0px;"><?php echo $row->titulo ?></h1>
+                            <p><?php echo $row->autor." [".$row->creado."]" ?></p>
+                            <p><a class="btn btn-sm btn-primary" href="<?php echo base_url("noticias/".$row->id)?>" role="button">ver mas</a></p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-		<div class="item">
-			<img class="second-slide" src="<?php echo base_url()?>resources/2.jpg" alt="dos">
-			<div class="container">
-				<div class="carousel-caption">
-                    <h1 style="margin: 0px;">Titulo</h1>
-                    <p>Pequeña descripcion del banner</p>
-					<p><a class="btn btn-sm btn-primary" href="#" role="button">Learn more</a></p>
-				</div>
-			</div>
-		</div>
-		<div class="item">
-			<img class="third-slide" src="<?php echo base_url()?>resources/3.jpg" alt="3">
-			<div class="container">
-				<div class="carousel-caption">
-                    <h1 style="margin: 0px;">Titulo</h1>
-                    <p>Pequeña descripcion del banner</p>
-					<p><a class="btn btn-sm btn-primary" href="#" role="button">Browse gallery</a></p>
-				</div>
-			</div>
-		</div>
+                <?php
+                $i++;
+            }
+        }
+        ?>
 	</div>
 	<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
 		<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -96,17 +85,22 @@
         <div class="col-lg-12">
             <p><h2 class="text-center">Noticias</h2></p>
             <div id="noticias">
-                <div class="slide"><img src="http://placehold.it/560x300&text=FooBar1"></div>
-                <div class="slide"><img src="http://placehold.it/560x300&text=FooBar1"></div>
-                <div class="slide"><img src="http://placehold.it/560x300&text=FooBar1"></div>
-                <div class="slide"><img src="http://placehold.it/560x300&text=FooBar1"></div>
-                <div class="slide"><img src="http://placehold.it/560x300&text=FooBar1"></div>
-                <div class="slide"><img src="http://placehold.it/560x300&text=FooBar1"></div>
-                <div class="slide"><img src="http://placehold.it/560x300&text=FooBar1"></div>
-                <div class="slide"><img src="http://placehold.it/560x300&text=FooBar1"></div>
-                <div class="slide"><img src="http://placehold.it/560x300&text=FooBar1"></div>
-                <div class="slide"><img src="http://placehold.it/560x300&text=FooBar1"></div>
-                <div class="slide"><img src="http://placehold.it/560x300&text=FooBar1"></div>
+                <?php
+                if (isset($noticias)) {
+                    foreach ($noticias AS $row) {
+                        if ($row->archivo != "") {
+                            ?>
+                            <a href="<?php echo base_url("noticias/".$row->id) ?>"><div class="slide"><img src="<?php echo URL_CMS.$row->archivo ?>"><?php echo $row->titulo ?></div></a>
+                            <?php
+                        }
+                        else {
+                            ?>
+                            <a href="<?php echo base_url("noticias/".$row->id) ?>"><div class="slide"><img src="<?php echo base_url() ?>resources/images/default.png" alt=""><?php echo $row->titulo ?></div></a>
+                            <?php
+                        }
+                    }
+                }
+                ?>
             </div>
         </div>
     </div>

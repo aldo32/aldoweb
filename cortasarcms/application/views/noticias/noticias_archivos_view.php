@@ -125,7 +125,10 @@
                                 <tr>
                                     <td><?php echo $row->id ?></td>
                                     <td><?php echo $row->archivo ?></td>
-                                    <td><a href="<?php echo base_url().$row->archivo?>" class="nyroModal">Ver archivo</a></td>
+                                    <?php
+                                    $tmp = explode(".", $row->archivo);
+                                    ?>
+                                    <td><a href="<?php echo base_url().$row->archivo?>" class="<?php echo ($tmp[1] == "jpg" || $tmp[1] == "png" || $tmp[1] == "jpeg") ? "nyroModal" : ""; ?>">Ver archivo</a></td>
                                     <td><?php echo $row->creado ?></td>
                                     <td><button class="btn btn-danger btn-xs eliminarImagen" type="button" vid="<?php echo $row->id."-".$noticia->id ?>">Eliminar archivo</button></td>
                                 </tr>

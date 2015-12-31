@@ -3041,9 +3041,9 @@ fieldset[disabled] .btn {
   opacity: .65;
 }
 .btn-default {
-  color: #333;
-  background-color: #fff;
-  border-color: #ccc;
+  color: #000;
+  background-color: yellow;
+  border-color: #000;
 }
 .btn-default:hover,
 .btn-default:focus,
@@ -4511,13 +4511,13 @@ fieldset[disabled] .navbar-default .btn-link:focus {
 }
 .navbar-inverse .navbar-nav > li > a:hover,
 .navbar-inverse .navbar-nav > li > a:focus {
-  color: #fff;
+  color: yellow;
   background-color: transparent;
 }
 .navbar-inverse .navbar-nav > .active > a,
 .navbar-inverse .navbar-nav > .active > a:hover,
 .navbar-inverse .navbar-nav > .active > a:focus {
-  color: #fff;
+  color: yellow;
   background-color: #080808;
 }
 .navbar-inverse .navbar-nav > .disabled > a,
