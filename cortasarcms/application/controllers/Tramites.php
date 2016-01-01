@@ -561,8 +561,9 @@ class Tramites extends CI_Controller {
     }
 
     function viewDownloadDocsTramite($idTramiteIniciado, $idTramite) {
-        $tramitesDocumentos = $this->db->get_where("tramites_documentos", array("idTramite"=>$idTramite));
-        $tramitesDocumentos = $tramitesDocumentos->result();
+        $sql = "SELECT *, (SELECT nombre FROM archivos WHERE id = tramites_documentos.idArchivo) AS nombreArchivo, (SELECT descripcion FROM archivos WHERE id = tramites_documentos.idArchivo) AS descripcionArchivo FROM tramites_documentos WHERE idTramite = $idTramite";
+        $q = $this->db->query($sql);
+        $tramitesDocumentos = $q->result();
 
         $tramiteIniciado = $this->db->get_where("tramites_iniciados", array("id"=>$idTramiteIniciado));
         $tramiteIniciado = $tramiteIniciado->result();
@@ -571,9 +572,9 @@ class Tramites extends CI_Controller {
         $tramitesDocumentosArchivos = $tramitesDocumentosArchivos->result();
 
         ?>
-        <div class="box box-primary" style="width: 400px; height:300px; overflow: auto;">
+        <div class="box box-primary" style="width: 700px; height:350px; overflow: auto;">
             <div class="">
-                <h4 class="box-title" style="margin: 8px;">Documentos necesarios para el tramite</h4>
+                <h4 class="box-title" style="margin: 18px;">Documentos necesarios para el tramite</h4>
             </div>
             <div class="box-body">
                 <div class="row" style="margin: 0px; padding: 0px;">
@@ -583,7 +584,7 @@ class Tramites extends CI_Controller {
                             foreach ($tramitesDocumentos AS $row) {
                                 ?>
                                 <ul style="margin: 0px;">
-                                    <li><?php echo $row->archivo." - ".$row->descripcion?></li>
+                                    <li><?php echo $row->nombreArchivo?></li>
                                 </ul>
                                 <?php
                             }

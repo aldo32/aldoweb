@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-    <title>Cortasar - Tramites y servicios</title>
+    <title>Cortazar - Tramites y servicios</title>
 
     <?php echo $includes ?>
 
@@ -122,6 +122,11 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-10 col-lg-offset-1">
+            <?php
+            if ($alert != "") {
+                echo "<h3>".$alert["message"]."</h3>";
+            }
+            ?>
             <label>Encuentra aquí el tipo de tramite</label>
             <?php echo form_dropdown("comboTramites", $comboTramites, set_value("comboTramites"), "class='' style='width: 100%' id='comboTramites'");?>
             <input type="hidden" name="archivos" id="archivos" val="" />
@@ -132,7 +137,7 @@
     <div class="row">
         <div class="col-lg-10 col-lg-offset-1" id="response"></div>
         <br>
-        <div class="col-lg-10 col-lg-offset-1" id="mapa" style="height: 300px;">
+        <div class="col-lg-10 col-lg-offset-1" id="mapa" style="height: 400px; margin-top: 20px;">
 
         </div>
     </div>

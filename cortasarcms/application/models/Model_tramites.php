@@ -91,8 +91,8 @@ class Model_tramites extends CI_Model {
 		return $q->row();
 	}
 
-	function checkUrlFileDocumento($archivo, $idTramite) {
-		$sql = "SELECT * FROM tramites_documentos_archivos WHERE archivo LIKE '%$archivo%' AND idTramite = $idTramite LIMIT 1";
+	function checkUrlFileDocumento($archivo, $idTramite, $idTramiteIniciado) {
+		$sql = "SELECT * FROM tramites_documentos_archivos WHERE archivo LIKE '%$archivo%' AND idTramite = $idTramite AND idTramiteIniciado = $idTramiteIniciado LIMIT 1";
 		$q = $this->db->query($sql);
 
 		return $q->row();
@@ -160,5 +160,10 @@ class Model_tramites extends CI_Model {
 			return $q->row();
 		}
 		else return false;
+	}
+
+	function getCorreoArchivosTramite($idTramite, $idCorreo) {
+		$q = $this->db->get_where("tramites_correos_archivos", array("idTramite"=>$idTramite, "idCorreo"=>$idCorreo));
+		return $q->result();
 	}
 }

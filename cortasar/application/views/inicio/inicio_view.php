@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-		<title>Cortasar - Inicio</title>
+		<title>Cortazar - Inicio</title>
 
         <?php echo $includes ?>
 
@@ -12,9 +12,9 @@
 		$(document).ready(function() {
             $('#noticias').bxSlider({
                 slideWidth: 560,
-                minSlides: 3,
-                maxSlides: 3,
-                moveSlides: 3,
+                minSlides: 4,
+                maxSlides: 4,
+                moveSlides: 4,
                 slideMargin: 10,
                 ticker: false,
             });

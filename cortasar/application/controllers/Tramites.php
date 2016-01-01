@@ -16,6 +16,7 @@ class Tramites extends CI_Controller {
         $comboTramites = $this->consumeRest($url, $params);
 
         $data["comboTramites"] = json_decode($comboTramites, true);
+        $data["alert"] = $this->session->flashdata('alert');
 
         $this->load->view("tramites_view", $data);
     }
@@ -36,7 +37,6 @@ class Tramites extends CI_Controller {
         <div>Seleccione la ubicación del terreno y precione el boton siguiente para continuar con el tramite</div>
         <br>
         <button class="btn btn-default" type="button" id="nextTramite">Siguiente</button>
-        <br>
         <?php
     }
 
@@ -72,11 +72,40 @@ class Tramites extends CI_Controller {
         $this->load->view("tramites_documentos_view", $data);
     }
 
+    function guardarTramite() {
+        $data = $this->general();
+
+        $nombre = $this->input->post("nombre");
+        $correo = $this->input->post("correo");
+        $idTramite = $this->input->post("idTramite");
+        $lat = $this->input->post("lat");
+        $lng = $this->input->post("lng");
+
+        //save tramite
+        $url = URL_CMS."RestTramites/iniciarTramite";
+        $params = array("nombre"=>$nombre, "correo"=>$correo, "idTramite"=>$idTramite, "latitud"=>$lat, "longitud"=>$lng);
+        $j=0;
+        for ($i = 0; $i < count($_FILES["documentos"]["name"]); $i++) {
+            if ($_FILES["documentos"]["name"][$i] != "") {
+                $params["upload[$j]"] = new CurlFile($_FILES["documentos"]["tmp_name"][$i], $_FILES["documentos"]["type"][$i], $_FILES["documentos"]["name"][$i]);
+                $j++;
+            }
+        }
+        $res = $this->consumeRest($url, $params);
+        $res = json_decode($res);
+
+        if ($res->status == "success") {
+            $this->session->set_flashdata("alert", array("message"=>"Tu tramite se a iniciado, nosotros nos comunicamos contigo para darte seguimiento de este"));
+            redirect("tramites");
+        }
+    }
+
     public function consumeRest($url, $params) {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_VERBOSE, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
 
         $res = curl_exec($ch);
