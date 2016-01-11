@@ -27,13 +27,24 @@
             .fright { float: right; }
             .marginR20 { margin-right: 20px; }
             .lineH50 { line-height: 50px; }
+            .slide p { font-size: 12px; font-weight: bold; }
+            #news-title { background: #222; padding: 3px; color: #FFFFFF; font-weight: bold; margin-bottom: 15px; }
+
+            #app-wrap { background: url("resources/images/back_app.jpg") #222 repeat-x; height: 233px; }
+            #app-content { width: 750px; margin: 0 auto; margin-top: 30px; position: relative; }
+
+            .button-general { width: 130px; height: 29px; color: #000000; font-weight: bold; padding: 3px; background: url("resources/images/bg-button.png"); }
+            #download-app-content { position: absolute; top: 100px; left: 570px; }
+
+            #app-img { width: 1038px; margin: 0 auto; position: relative; }
+            #app-img-text { width: 400px; position: absolute; top: 350px; left: 610px; font-weight: bold; }
 		</style>
 	</head>
 <body>
 
 <?php echo $header; ?>
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel" style="margin-bottom: 30px">
+<div id="myCarousel" class="carousel slide clearfix" data-ride="carousel" style="width: 80%; margin: 0 auto; margin-bottom: 30px; margin-top: 30px;">
 	<!-- Indicators -->
 	<ol class="carousel-indicators" style="bottom: 0px;">
 		<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -64,38 +75,30 @@
 	</div>
 	<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
 		<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-		<span class="sr-only">Previous</span>
+		<span class="sr-only">Anterior</span>
 	</a>
 	<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
 		<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-		<span class="sr-only">Next</span>
+		<span class="sr-only">Siguiente</span>
 	</a>
 </div>
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2">
-            <div class="fleft marginR20"><img src="<?php echo base_url()?>resources/images/download.png" width="50" height="50"/></div>
-            <div class="fleft"><p class="lineH50">Descargar la aplicación de cortazar</p></div>
-            <div class="fright"><button class="btn btn-default" type="button">Descargar</button></div>
-        </div>
-    </div>
-    <br><br>
-    <div class="row">
-        <div class="col-lg-12">
-            <p><h2 class="text-center">Noticias</h2></p>
+    <div class="col-md-8 col-md-offset-2">
+        <div class="row">
+            <div class="col-md-12" id="news-title">Noticias más recientes</div>
             <div id="noticias">
                 <?php
                 if (isset($noticias)) {
                     foreach ($noticias AS $row) {
                         if ($row->archivo != "") {
                             ?>
-                            <a href="<?php echo base_url("noticias/".$row->id) ?>"><div class="slide"><img src="<?php echo URL_CMS.$row->archivo ?>"><?php echo $row->titulo ?></div></a>
+                            <a href="<?php echo base_url("noticias/".$row->id) ?>"><div class="slide"><img src="<?php echo URL_CMS.$row->archivo ?>"><p><?php echo $row->titulo ?></p></div></a>
                             <?php
                         }
                         else {
                             ?>
-                            <a href="<?php echo base_url("noticias/".$row->id) ?>"><div class="slide"><img src="<?php echo base_url() ?>resources/images/default.png" alt=""><?php echo $row->titulo ?></div></a>
+                            <a href="<?php echo base_url("noticias/".$row->id) ?>"><div class="slide"><img src="<?php echo base_url() ?>resources/images/default.png" alt=""><p><?php echo $row->titulo ?></p></div></a>
                             <?php
                         }
                     }
@@ -104,10 +107,31 @@
             </div>
         </div>
     </div>
-
-    <?php echo $footer; ?>
-
 </div>
+
+<div class="container-fluid">
+    <div class="row" id="app-wrap">
+        <div id="app-content" class="clearfix">
+            <img src="<?php echo base_url() ?>resources/images/content_app.png" width="700" height="165" />
+
+            <div id="download-app-content">
+                <input type="button" name="download-app" id="download-app" class="button-general" value="DESCARGAR" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row" id="app-img">
+        <img src="<?php echo base_url() ?>resources/images/bg-app.png" width="1038" height="721" />
+        <div id="app-img-text">
+            Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta)
+            Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta)
+        </div>
+    </div>
+</div>
+
+<?php echo $footer; ?>
 
 </body>
 </html>

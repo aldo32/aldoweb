@@ -1,6 +1,12 @@
 <style>
+    #footer-wrap { width: 959px; margin: 0 auto; height: 50px; background: url("resources/images/bg-footer.png"); }
 </style>
-<br>
+
+<div class="container-fluid">
+    <div class="row text-center" id="footer-wrap">
+        aldo
+    </div>
+</div>
 <div class="row" style="background: black; color: #FFFFFF; font-weight: bold;">
     <div class="col-lg-12">
         <div style="width: 100%; height: 50px; line-height: 50px; background: black;">
