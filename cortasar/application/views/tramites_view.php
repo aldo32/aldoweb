@@ -147,11 +147,8 @@
         <input type="hidden" name="lng" id="lng" value="" />
         <input type="hidden" name="idTramite" id="idTramite" value="" />
     <?php echo form_close(); ?>
-
-
-    <?php echo $footer; ?>
-
 </div>
 
+<?php echo $footer; ?>
 </body>
 </html>

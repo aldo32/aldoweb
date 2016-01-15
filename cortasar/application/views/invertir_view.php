@@ -35,10 +35,8 @@
         ?>
         </div>
     </div>
-
-    <?php echo $footer; ?>
-
 </div>
 
+<?php echo $footer; ?>
 </body>
 </html>

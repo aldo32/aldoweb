@@ -16,7 +16,7 @@
 
 				if(email != "" && password != "") {
 					$.ajax({
-				        url: "./login/access",
+				        url: "<?php echo base_url() ?>/login/access",
 				        data: "email="+email+"&password="+password+"&<?php echo $this->security->get_csrf_token_name()?>=<?php echo $this->security->get_csrf_hash()?>",
 				        dataType: "json",
 				        success: function(datos) {

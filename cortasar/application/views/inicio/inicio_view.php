@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-		<title>Cortazar - Inicio</title>
+    <title>Cortazar - Inicio</title>
 
-        <?php echo $includes ?>
+    <?php echo $includes ?>
 
-		<script type="text/javascript">		
-		$(document).ready(function() {
+    <script type="text/javascript">
+        $(document).ready(function() {
             $('#noticias').bxSlider({
                 slideWidth: 560,
                 minSlides: 4,
@@ -18,40 +18,46 @@
                 slideMargin: 10,
                 ticker: false,
             });
-		});
-		</script>
+        });
+    </script>
 
-		<style>
-            .carousel-caption {padding: 0px;}
-            .fleft { float: left; }
-            .fright { float: right; }
-            .marginR20 { margin-right: 20px; }
-            .lineH50 { line-height: 50px; }
-            .slide p { font-size: 12px; font-weight: bold; }
-            #news-title { background: #222; padding: 3px; color: #FFFFFF; font-weight: bold; margin-bottom: 15px; }
+    <style>
+        .carousel-caption {padding: 0px;}
+        .fleft { float: left; }
+        .fright { float: right; }
+        .marginR20 { margin-right: 20px; }
+        .lineH50 { line-height: 50px; }
+        .slide p { font-size: 12px; font-weight: bold; }
+        #news-title { background: #222; padding: 3px; color: #FFFFFF; font-weight: bold; margin-bottom: 15px; }
+        #app-wrap { background: url("resources/images/back_app.jpg") #222 repeat-x; height: 233px; }
+        #app-content { width: 750px; margin: 0 auto; margin-top: 30px; position: relative; }
+        .button-general { width: 130px; height: 29px; color: #000000; font-weight: bold; padding: 3px; background: url("resources/images/bg-button.png"); }
+        #download-app-content { position: absolute; top: 100px; left: 570px; }
+        #app-img { width: 1038px; margin: 0 auto; position: relative; }
+        #app-img-text { width: 400px; position: absolute; top: 350px; left: 610px; font-weight: bold; }
 
-            #app-wrap { background: url("resources/images/back_app.jpg") #222 repeat-x; height: 233px; }
-            #app-content { width: 750px; margin: 0 auto; margin-top: 30px; position: relative; }
-
-            .button-general { width: 130px; height: 29px; color: #000000; font-weight: bold; padding: 3px; background: url("resources/images/bg-button.png"); }
-            #download-app-content { position: absolute; top: 100px; left: 570px; }
-
-            #app-img { width: 1038px; margin: 0 auto; position: relative; }
-            #app-img-text { width: 400px; position: absolute; top: 350px; left: 610px; font-weight: bold; }
-		</style>
-	</head>
+        @media screen and (max-width: 800px) {
+            #descargarApp { width: 500px; height: 105px; margin: 0 auto; }
+            #download-app-content { top: 60px; left: 370px; }
+            #app-img { margin: 0px; float: left;}
+            #appImage { width: 588px; height: 421px; }
+            #app-img-text { top: 200px; left: 280px; width: 300px; font-size: 10px; }
+            #app-content { margin-top: 60px; }
+        }
+    </style>
+</head>
 <body>
 
 <?php echo $header; ?>
 
 <div id="myCarousel" class="carousel slide clearfix" data-ride="carousel" style="width: 80%; margin: 0 auto; margin-bottom: 30px; margin-top: 30px;">
-	<!-- Indicators -->
-	<ol class="carousel-indicators" style="bottom: 0px;">
-		<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-		<li data-target="#myCarousel" data-slide-to="1"></li>
-		<li data-target="#myCarousel" data-slide-to="2"></li>
-	</ol>
-	<div class="carousel-inner" role="listbox">
+    <!-- Indicators -->
+    <ol class="carousel-indicators" style="bottom: 0px;">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
         <?php
         if (isset($banners)) {
             $i=0;
@@ -72,15 +78,15 @@
             }
         }
         ?>
-	</div>
-	<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-		<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-		<span class="sr-only">Anterior</span>
-	</a>
-	<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-		<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-		<span class="sr-only">Siguiente</span>
-	</a>
+    </div>
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Anterior</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Siguiente</span>
+    </a>
 </div>
 
 <div class="container-fluid">
@@ -112,7 +118,7 @@
 <div class="container-fluid">
     <div class="row" id="app-wrap">
         <div id="app-content" class="clearfix">
-            <img src="<?php echo base_url() ?>resources/images/content_app.png" width="700" height="165" />
+            <img src="<?php echo base_url() ?>resources/images/content_app.png" width="700" height="165" id="descargarApp" />
 
             <div id="download-app-content">
                 <input type="button" name="download-app" id="download-app" class="button-general" value="DESCARGAR" />
@@ -123,7 +129,7 @@
 
 <div class="container-fluid">
     <div class="row" id="app-img">
-        <img src="<?php echo base_url() ?>resources/images/bg-app.png" width="1038" height="721" />
+        <img src="<?php echo base_url() ?>resources/images/bg-app.png" width="1038" height="721" id="appImage" />
         <div id="app-img-text">
             Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta)
             Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta)

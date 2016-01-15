@@ -109,11 +109,8 @@
             </div>
         </div>
     <?php echo form_close(); ?>
-
-
-    <?php echo $footer; ?>
-
 </div>
 
+<?php echo $footer; ?>
 </body>
 </html>
