@@ -69,7 +69,7 @@
                         <div class="carousel-caption">
                             <h1 style="margin: 0px;"><?php echo $row->titulo ?></h1>
                             <p><?php echo $row->autor." [".$row->creado."]" ?></p>
-                            <p><a class="btn btn-sm btn-primary" href="<?php echo base_url("noticias/".$row->id)?>" role="button">ver mas</a></p>
+                            <p><a class="btn btn-sm btn-primary" href="<?php echo base_url("noticias/index/".$row->id)?>" role="button">ver mas</a></p>
                         </div>
                     </div>
                 </div>
@@ -99,12 +99,12 @@
                     foreach ($noticias AS $row) {
                         if ($row->archivo != "") {
                             ?>
-                            <a href="<?php echo base_url("noticias/".$row->id) ?>"><div class="slide"><img src="<?php echo URL_CMS.$row->archivo ?>"><p><?php echo $row->titulo ?></p></div></a>
+                            <a href="<?php echo base_url("noticias/index/".$row->id) ?>"><div class="slide"><img src="<?php echo URL_CMS.$row->archivo ?>"><p><?php echo $row->titulo ?></p></div></a>
                             <?php
                         }
                         else {
                             ?>
-                            <a href="<?php echo base_url("noticias/".$row->id) ?>"><div class="slide"><img src="<?php echo base_url() ?>resources/images/default.png" alt=""><p><?php echo $row->titulo ?></p></div></a>
+                            <a href="<?php echo base_url("noticias/index/".$row->id) ?>"><div class="slide"><img src="<?php echo base_url() ?>resources/images/default.png" alt=""><p><?php echo $row->titulo ?></p></div></a>
                             <?php
                         }
                     }

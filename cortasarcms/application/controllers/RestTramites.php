@@ -28,7 +28,7 @@ class RestTramites extends REST_Controller {
         $latitud = $this->post("latitud");
         $longitud = $this->post("longitud");
         $numFiles = count($_FILES["upload"]["name"]);
-        $tramite = $this->tramites->getTramiteById($idTramite);
+        //$tramite = $this->tramites->getTramiteById($idTramite);
         $numFilesUpload = 0;
         $estatusCorreo = "";
 

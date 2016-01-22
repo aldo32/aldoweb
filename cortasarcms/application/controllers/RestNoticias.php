@@ -44,9 +44,9 @@ class RestNoticias extends REST_Controller
      * RETURN SUCCESS: noticia[]
      * RETURN ERROR: status, message
      */
-    function obtenerNoticia_get()
+    function obtenerNoticia_post()
     {
-        $idNoticia = $this->get("idNoticia");
+        $idNoticia = $this->post("idNoticia");
         $q = $this->db->get_where("noticias", array("id"=>$idNoticia, "activo"=>1));
         $noticia = $q->row();
 

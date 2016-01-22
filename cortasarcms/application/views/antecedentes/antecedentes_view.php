@@ -105,7 +105,7 @@
                                         </div>
                                     </td>
                                     <td><?php echo $row->id ?></td>
-                                    <td><?php echo word_limiter($row->descripcion, 8) ?></td>
+                                    <td><?php echo "..." ?></td>
                                     <td><?php echo $row->creado ?></td>
                                 </tr>
                                 <?php

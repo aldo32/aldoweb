@@ -74,7 +74,7 @@ class Tramites extends CI_Controller {
 		}
 		else {
 			$register["nombre"] = $this->input->post("nombre");
-			$register["descripcion"] = $this->input->post("descripcion");
+			$register["descripcion"] = $this->input->post("descripcion", false);
 			$register["idCategoria"] = $this->input->post("idCategoria");
 			$register["idSubCategoria"] = $this->input->post("idSubCategoria");
 			$archivos = $this->input->post("archivos");

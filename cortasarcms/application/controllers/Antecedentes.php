@@ -54,7 +54,7 @@ class Antecedentes extends CI_Controller
             $this->load->view('antecedentes/antecedentes_editar_view', $data);
         }
         else {
-            $register["descripcion"] = $this->input->post("descripcion");
+            $register["descripcion"] = $this->input->post("descripcion", false);
 
             if ($type == "insert") {
                 $this->db->insert("antecedentes", $register);

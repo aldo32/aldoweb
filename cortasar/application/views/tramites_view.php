@@ -112,6 +112,7 @@
     <style>
         .fleft { float: left; }
         .fright { float: right; }
+        .titulo_tramite { width: 100%; height: 38px; line-height: 38px; color: #fff; font-weight: bold; padding-left: 5px; margin-bottom: 20px; background: url('resources/images/back_titulo.png') no-repeat; }
     </style>
 </head>
 <body>
@@ -121,13 +122,13 @@
 <br><br><br><br><br><br>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-10 col-lg-offset-1">
+        <div class="col-lg-8 col-lg-offset-2">
             <?php
             if ($alert != "") {
                 echo "<h3>".$alert["message"]."</h3>";
             }
             ?>
-            <label>Encuentra aquí el tipo de tramite</label>
+            <div class="titulo_tramite">Encuentra aquí el tipo de tramite</div>
             <?php echo form_dropdown("comboTramites", $comboTramites, set_value("comboTramites"), "class='' style='width: 100%' id='comboTramites'");?>
             <input type="hidden" name="archivos" id="archivos" val="" />
         </div>
@@ -148,6 +149,7 @@
         <input type="hidden" name="idTramite" id="idTramite" value="" />
     <?php echo form_close(); ?>
 </div>
+<br><br>
 
 <?php echo $footer; ?>
 </body>

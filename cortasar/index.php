@@ -2,7 +2,8 @@
 //constants
 define("MODAL_CLASS", "modal-primary");
 define("TIMER_ALERT", "7000");
-define("URL_CMS", "http://www.sicksadworld.com.mx/cortazarcms/");
+//define("URL_CMS", "http://www.sicksadworld.com.mx/cortazarcms/");
+define("URL_CMS", "http://localhost/cortazarcms/");
 
 /*
  *---------------------------------------------------------------

@@ -60,6 +60,8 @@ class categoria {
                 <?php
             }
             ?>
+
+            CKEDITOR.replace('descripcion');
 		});
 		</script>
 
@@ -107,7 +109,7 @@ class categoria {
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label>Descripción</label>
-                                    <?php echo form_input(array('name'=>'descripcion','id'=>'descripcion', 'class'=>'form-control input-sm', 'value' =>set_value('descripcion', $categoria->descripcion)));?>
+                                    <textarea name="descripcion" id="descripcion"><?php echo set_value('descripcion', $categoria->descripcion) ?></textarea>
                                 </div>
                             </div>
                             <button class="btn btn-primary" type="submit">Guardar</button>

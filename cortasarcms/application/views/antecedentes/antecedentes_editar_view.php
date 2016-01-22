@@ -64,11 +64,13 @@ class antecedente {
             }
             ?>
 
-            $("#descripcion").wysihtml5();
+            //$("#descripcion").wysihtml5();
 
             $("#tablaBanners").DataTable({
                 stateSave: true,
             });
+
+            CKEDITOR.replace('descripcion');
         });
     </script>
 

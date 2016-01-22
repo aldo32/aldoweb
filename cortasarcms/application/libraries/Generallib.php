@@ -64,7 +64,7 @@ class Generallib {
 		$config['smtp_timeout'] = '7';
 		$config['smtp_user']    = 'isc.aldo@gmail.com';
 		$config['smtp_pass']    = 'aldoma32';
-		$config['charset']    = 'utf-8';
+		$config['charset']    = 'iso-8859-1';
 		$config['newline']    = "\r\n";
 		$config['mailtype'] = 'html'; // or html
 		$config['validation'] = TRUE; // bool whether to validate email or

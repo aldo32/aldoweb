@@ -40,7 +40,7 @@
 
     <br>
     <div class="row">
-        <div class="col-lg-12" style="text-align: center">
+        <div class="col-lg-10 col-lg-offset-1">
             <?php
             if (isset($antecedentes)) {
                 foreach ($antecedentes as $row) {
@@ -61,9 +61,7 @@
                 if (isset($fiestas)) {
                     foreach ($fiestas AS $row) {
                         ?>
-                        <a href="<?php echo base_url("fiestas/".$row->id) ?>">
-                            <div class="slide"><img src="<?php echo URL_CMS.$row->archivo ?>"><?php echo $row->titulo ?></div>
-                        </a>
+                        <div class="slide"><img src="<?php echo URL_CMS.$row->archivo ?>"><?php echo $row->titulo ?></div>
                         <?php
                     }
                 }

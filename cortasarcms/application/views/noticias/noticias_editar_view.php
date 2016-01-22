@@ -69,7 +69,7 @@ class noticia {
             }
             ?>
 
-            $("#nota").wysihtml5();
+            CKEDITOR.replace('nota');
         });
     </script>
 

@@ -58,7 +58,7 @@ class Noticias extends CI_Controller
         }
         else {
             $register["titulo"] = $this->input->post("titulo");
-            $register["nota"] = $this->input->post("nota");
+            $register["nota"] = $this->input->post("nota", false);
             $register["descripcion"] = $this->input->post("descripcion");
             $register["autor"] = $this->input->post("autor");
             $register["formato"] = $this->input->post("formato");

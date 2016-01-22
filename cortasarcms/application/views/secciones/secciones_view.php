@@ -15,6 +15,10 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
+            <?php
+            if (isset($seccion)) echo "CKEDITOR.replace('descripcion');";
+            ?>
+
             $('.nyroModal').nyroModal({
                 closeOnEscape: true,
                 closeOnClick: true,
@@ -26,40 +30,9 @@
             });
 
             $("#seccion").change(function() {
-                id = $(this).val();
-
-                $("#contentSection").html("<i class='fa fa-refresh fa-spin'></i>&nbsp;&nbsp;cargando...");
-                $.ajax({
-                    url: "<?php echo base_url("secciones/showSection") ?>",
-                    data: "idSection="+id,
-                    dataType: "html",
-                    success: function(datos) {
-                        $("#contentSection").html(datos);
-                    },
-                    type: "POST"
-                });
+                $("#formGetSection").submit();
             });
 
-            $(document).on("click", "#saveSection", function() {
-                var idSection = $("#seccion").val();
-                var titulo = $("#titulo").val();
-                var descripcion = $("#descripcion").val();
-                var activo = $('input[name=activo]:checked').val()
-
-                if (descripcion == "") alert("Debe escribir una descripción");
-                else {
-                    $.ajax({
-                        url: "<?php echo base_url("secciones/saveSection") ?>",
-                        data: "idSection="+idSection+"&titulo="+titulo+"&descripcion="+descripcion+"&activo="+activo,
-                        dataType: "html",
-                        success: function(datos) {
-                            //$("#contentSection").html(datos);
-                            alert("La sección se actualizo correctamente");
-                        },
-                        type: "POST"
-                    });
-                }
-            });
         });
     </script>
 </head>
@@ -98,20 +71,49 @@
                         <?php
                     }
                     ?>
-
-                    <div class="row">
-                        <div class="form-group col-md-4">
-                            <label>Categoria</label>
-                            <?php echo form_dropdown("seccion", $comboSecciones, set_value("seccion"), "class='form-control input-sm' id='seccion'");?>
+                    <?php echo form_open("secciones/getSection", array("id"=>"formGetSection"))?>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label>Categoria</label>
+                                <?php echo form_dropdown("seccion", $comboSecciones, set_value("seccion"), "class='form-control input-sm' id='seccion'");?>
+                            </div>
                         </div>
+                        <br>
+                    <?php echo form_close(); ?>
+
+                    <?php echo form_open("secciones/saveSection", array("id"=>"formSaveSection"))?>
+                        <div id="contentSection">
+                            <?php
+                            if (isset($seccion)) {
+                                ?>
+                                <input type="hidden" name="seccion" value="<?php echo $seccion->seccion ?>">
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label>Titulo</label>
+                                        <?php echo form_input(array('name'=>'titulo','id'=>'titulo', 'class'=>'form-control input-sm', 'value' =>set_value('titulo', $seccion->titulo)));?>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label>Descripción</label>
+                                        <textarea style="" name="descripcion" id="descripcion" placeholder="Escriba la descrición"><?php echo $seccion->descripcion ?></textarea>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label>Activo&nbsp;&nbsp;</label>
+                                        Si&nbsp;&nbsp;
+                                        <input type="radio" name="activo" value="1" <?php if ($seccion->activo == 1) { echo "checked"; }  ?>  />
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        No&nbsp;&nbsp;
+                                        <input type="radio" name="activo" value="0" <?php if ($seccion->activo == 0) { echo "checked"; }  ?>  />
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-primary" id="saveSection" type="submit">Guardar</button>
+                                <?php
+                            }
+                            ?>
+                        </div>
+
                     </div>
-                    <br>
-
-                    <div id="contentSection">
-
-                    </div>
-
-                </div>
+                <?php echo form_close(); ?>
         </section>
     </div>
 

@@ -36,13 +36,13 @@ class Secciones extends CI_Controller
             }
 
             ?>
-            <!-- bootstrap wysihtml5 - text editor -->
-            <link rel="stylesheet" href="<?php echo base_url()?>/resources/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
-            <script src="<?php echo base_url()?>/resources/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+            <!-- CKeditor -->
+            <script src="<?php echo base_url()?>resources/ckeditor/ckeditor.js" type="text/javascript"></script>
 
             <script>
             $(document).ready(function() {
-                $("#descripcion").wysihtml5();
+                //$("#descripcion").wysihtml5();
+                //CKEDITOR.replace('descripcionSeccion');
             });
             </script>
 
@@ -53,7 +53,7 @@ class Secciones extends CI_Controller
                 </div>
                 <div class="form-group col-md-12">
                     <label>Descripción</label>
-                    <textarea style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid rgb(221, 221, 221); padding: 0px;" name="descripcion" id="descripcion" placeholder="Escriba la descrición"><?php echo set_value("descripcion", $descripcion) ?></textarea>
+                    <textarea style="" name="descripcionSeccion" id="descripcionSeccion" placeholder="Escriba la descrición"><?php  ?></textarea>
                 </div>
                 <div class="form-group col-md-12">
                     <label>Activo&nbsp;&nbsp;</label>
@@ -72,10 +72,27 @@ class Secciones extends CI_Controller
 
     }
 
+    function getSection() {
+        $data = $this->general();
+        $data["alert"] = $this->session->flashdata('alert');
+
+        $idSeccion = $this->input->post("seccion");
+
+        $q = $this->db->get_where("secciones", array("seccion"=>$idSeccion));
+        $seccion = $q->row();
+
+        if (isset($seccion))
+            $data["seccion"] = $seccion;
+        else
+            $data["seccion"] = "";
+
+        $this->load->view("secciones/secciones_view", $data);
+    }
+
     function saveSection() {
-        $idSeccion = $this->input->post("idSection");
+        $idSeccion = $this->input->post("seccion");
         $titulo = $this->input->post("titulo");
-        $descripcion = $this->input->post("descripcion");
+        $descripcion = $this->input->post("descripcion", false);
         $activo = $this->input->post("activo");
 
         $q = $this->db->get_where("secciones", array("seccion"=>$idSeccion));
@@ -83,8 +100,8 @@ class Secciones extends CI_Controller
 
         if (isset($seccion)) {
             //update
-            $this->db->where(array("seccion"=>$seccion->id, "seccion"=>$idSeccion));
-            $this->db->update("secciones", array("titulo"=>$titulo, "descripcion"=>$descripcion, "activo"=>$activo));
+            $sql = "UPDATE secciones SET titulo='".$titulo."', descripcion='".$descripcion."', activo=$activo WHERE id = $seccion->id AND seccion=$idSeccion";
+            $q = $this->db->query($sql);
         }
         else {
             //insert
@@ -95,6 +112,21 @@ class Secciones extends CI_Controller
 
             $this->db->insert("secciones", $register);
         }
+
+        $data = $this->general();
+        $data["alert"] = array("type"=>"error", "image"=>"ban", "message"=>"Se actualizo correctamente la sección");
+
+        $idSeccion = $this->input->post("seccion");
+
+        $q = $this->db->get_where("secciones", array("seccion"=>$idSeccion));
+        $seccion = $q->row();
+
+        if (isset($seccion))
+            $data["seccion"] = $seccion;
+        else
+            $data["seccion"] = "";
+
+        $this->load->view("secciones/secciones_view", $data);
     }
 
 

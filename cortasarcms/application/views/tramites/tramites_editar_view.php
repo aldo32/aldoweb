@@ -46,7 +46,8 @@ class tramite {
 
             $('#idArchivo').multipleSelect({single: false, placeholder: 'Buscar archivo', filter: true});
 
-            $("#reglas").wysihtml5();
+            //$("#reglas").wysihtml5();
+            CKEDITOR.replace('descripcion');
 
             <?php
             if (validation_errors() != "") {
@@ -113,7 +114,7 @@ class tramite {
                 }
             });
 
-            $("#descripcion").wysihtml5();
+            //$("#descripcion").wysihtml5();
 		});
 		</script>
 
@@ -150,7 +151,7 @@ class tramite {
                             <div class="row">
                                 <div class="form-group col-md-12">
                                     <label>Descripción</label>
-                                    <textarea style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid rgb(221, 221, 221); padding: 0px;" name="descripcion" id="descripcion" placeholder="Descripción"><?php echo set_value("descripcion", $tramite->descripcion) ?></textarea>
+                                    <textarea name="descripcion" id="descripcion" placeholder="Descripción"><?php echo set_value("descripcion", $tramite->descripcion) ?></textarea>
                                 </div>
                             </div>
 

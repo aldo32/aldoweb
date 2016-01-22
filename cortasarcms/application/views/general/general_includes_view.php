@@ -52,3 +52,4 @@
 
     <link href="<?php echo base_url()?>resources/select/multiple-select.css" rel="stylesheet"/>
     <script src="<?php echo base_url()?>resources/select/jquery.multiple.select.js"></script>
+    <script src="<?php echo base_url()?>resources/ckeditor/ckeditor.js" type="text/javascript"></script>

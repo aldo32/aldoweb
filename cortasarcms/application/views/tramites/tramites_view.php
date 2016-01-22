@@ -92,6 +92,7 @@
 
                         <a href="<?php echo base_url("tramites/nuevo") ?>"><button class="btn btn-primary">Crear nuevo tramite</button></a>
                         <br><br>
+                        <h3>Nota: El tramite debe tener un correo creado en el módulo de [Reglas documentos y correo] para que se pueda enviar la información del tramite al usuario</h3>
 
                         <table id="tablaTramites" class="table table-bordered table-striped">
                             <thead>

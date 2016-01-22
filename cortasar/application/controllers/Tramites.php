@@ -93,9 +93,10 @@ class Tramites extends CI_Controller {
         }
         $res = $this->consumeRest($url, $params);
         $res = json_decode($res);
+        print_r($res);
 
         if ($res->status == "success") {
-            $this->session->set_flashdata("alert", array("message"=>"Tu tramite se a iniciado, nosotros nos comunicamos contigo para darte seguimiento de este"));
+            $this->session->set_flashdata("alert", array("message"=>"Tu tramite ha iniciado, nosotros nos comunicamos contigo para darte seguimiento"));
             redirect("tramites");
         }
     }
