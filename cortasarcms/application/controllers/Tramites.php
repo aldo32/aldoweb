@@ -568,7 +568,7 @@ class Tramites extends CI_Controller {
         $tramiteIniciado = $this->db->get_where("tramites_iniciados", array("id"=>$idTramiteIniciado));
         $tramiteIniciado = $tramiteIniciado->result();
 
-        $tramitesDocumentosArchivos = $this->db->get_where("tramites_documentos_archivos", array("idTramite"=>$idTramite));
+        $tramitesDocumentosArchivos = $this->db->get_where("tramites_documentos_archivos", array("idTramite"=>$idTramite, "idTramiteIniciado"=>$idTramiteIniciado));
         $tramitesDocumentosArchivos = $tramitesDocumentosArchivos->result();
 
         ?>

@@ -32,7 +32,6 @@ class RestTramites extends REST_Controller {
         $numFilesUpload = 0;
         $estatusCorreo = "";
 
-        //insertando en tramites iniciados
         $q = $this->db->get_where("tramites_documentos", array("idTramite"=>$idTramite));
         $numDocumentos = sizeof($q->result());
 
