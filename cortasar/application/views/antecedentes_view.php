@@ -21,10 +21,6 @@
         });
     </script>
 
-    <style>
-        .fleft { float: left; }
-        .fright { float: right; }
-    </style>
 </head>
 <body>
 

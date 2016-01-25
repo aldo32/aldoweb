@@ -22,7 +22,7 @@
     #app-content { margin-top: 60px; }
 }
 
-.navbar-brand { padding: 0px; margin-right: 10px; }
+.navbar-brand { padding: 0px; margin-right: 20px; } 
 .navbar-brand img { margin-left: 20px; }
 .navbar-inverse { background: url("../images/back_menu.jpg") #222 repeat-x; }
 .navbar { border-radius: 0px; margin: 0px; }

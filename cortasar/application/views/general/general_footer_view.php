@@ -27,10 +27,11 @@
             </div>
         </div>
     </div>
-</div>
 
-<div class="row">
-    <div class="col-md-12 text-center">
-        <div id="text-footer">2012 Manuel Vallejo Blvd. Adolfo L. Mateos 1161 A-16, int. 804 C.P. 01490 Tel. (55)13579313 | Privacy Policy</div>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div id="text-footer">2012 Manuel Vallejo Blvd. Adolfo L. Mateos 1161 A-16, int. 804 C.P. 01490 Tel. (55)13579313 | Privacy Policy</div>
+        </div>
     </div>
 </div>
+
