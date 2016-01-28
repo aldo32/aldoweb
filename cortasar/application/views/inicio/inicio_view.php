@@ -65,7 +65,7 @@
 </div>
 
 <div class="container-fluid">
-    <div class="col-md-8 col-md-offset-2">
+    <div class="col-md-10 col-md-offset-1">
         <div class="row">
             <div class="col-md-12" id="news-title">Noticias más recientes</div>
             <div id="noticias">
@@ -93,7 +93,7 @@
 <div class="container-fluid">
     <div class="row" id="app-wrap">
         <div id="app-content" class="clearfix">
-            <img src="<?php echo base_url() ?>resources/images/content_app.png" width="700" height="165" id="descargarApp" />
+            <img src="<?php echo base_url() ?>resources/images/content_app.png" id="descargarApp" />
 
             <div id="download-app-content">
                 <input type="button" name="download-app" id="download-app" class="button-general" value="DESCARGAR" />
@@ -104,10 +104,12 @@
 
 <div class="container-fluid">
     <div class="row" id="app-img">
-        <img src="<?php echo base_url() ?>resources/images/bg-app.png" width="1038" height="721" id="appImage" />
-        <div id="app-img-text">
-            Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta)
-            Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta)
+        <div class="col-md-12">
+            <div><img src="<?php echo base_url() ?>resources/images/bg-app.png" width="1038" height="721" id="appImage" /></div>
+            <div id="app-img-text">
+                Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta)
+                Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta)
+            </div>
         </div>
     </div>
 </div>

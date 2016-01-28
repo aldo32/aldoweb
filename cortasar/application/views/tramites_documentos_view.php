@@ -23,12 +23,6 @@
             });
         });
     </script>
-
-    <style>
-        .fleft { float: left; }
-        .fright { float: right; }
-        .titulo_tramite { width: 100%; height: 38px; line-height: 38px; color: #fff; font-weight: bold; padding-left: 5px; margin-bottom: 20px; background: url('../resources/images/back_titulo.png') no-repeat; }
-    </style>
 </head>
 <body>
 
@@ -43,6 +37,7 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
                 <h1><?php echo $tramite->nombre ?></h1>
+                <h3 style="color: red;"><?php if ($alert != "") { echo $alert["message"]; } ?></h3>
                 <div class="titulo_tramite">Datos generales</div>
                 <div class="form-group col-md-12">
                     <label>Nombre completo</label>

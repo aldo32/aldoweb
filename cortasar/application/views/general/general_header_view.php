@@ -16,7 +16,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li <?php echo ($page == "home") ? "class='active'" : "" ?>><a href="<?php echo base_url("inicio") ?>" class="link-menu">Home</a></li>
-                    <li <?php echo ($page == "antecedentes") ? "class='active'" : "" ?>><a href="<?php echo base_url("antecedentes") ?>" class="link-menu">Home</a></li>
+                    <li <?php echo ($page == "antecedentes") ? "class='active'" : "" ?>><a href="<?php echo base_url("antecedentes") ?>" class="link-menu">Antecedentes</a></li>
                     <li <?php echo ($page == "plan") ? "class='active'" : "" ?>><a href="<?php echo base_url()?>resources/plan_desarrollo.pdf" target="_blank" class="link-menu">Plan municipal</a></li>
                     <li <?php echo ($page == "invertir") ? "class='active'" : "" ?>><a href="<?php echo base_url("invertir") ?>" class="link-menu">Por que invertir</a></li>
                     <li <?php echo ($page == "tramites") ? "class='active'" : "" ?>><a href="<?php echo base_url("tramites") ?>" class="link-menu">Tramites y servicios</a></li>

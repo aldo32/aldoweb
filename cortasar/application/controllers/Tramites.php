@@ -40,12 +40,13 @@ class Tramites extends CI_Controller {
         <?php
     }
 
-    function tramitesDocumentos() {
+    function tramitesDocumentos($idTramiteGet="", $latGet="", $lngGet="") {
         $data = $this->general();
+        $data["alert"] = $this->session->flashdata('alert');
 
-        $lat = $this->input->post("lat");
-        $lng = $this->input->post("lng");
-        $idTramite = $this->input->post("idTramite");
+        $lat = ($this->input->post("lat") == "") ? $latGet : $this->input->post("lat");
+        $lng = ($this->input->post("lng") == "") ? $lngGet : $this->input->post("lng");
+        $idTramite = ($this->input->post("idTramite") == "") ? $idTramiteGet : $this->input->post("idTramite");
 
         //get tramite
         $url = URL_CMS."RestTramites/getTramiteById";
@@ -93,11 +94,14 @@ class Tramites extends CI_Controller {
         }
         $res = $this->consumeRest($url, $params);
         $res = json_decode($res);
-        print_r($res);
 
         if ($res->status == "success") {
             $this->session->set_flashdata("alert", array("message"=>"Tu tramite ha iniciado, nosotros nos comunicamos contigo para darte seguimiento"));
             redirect("tramites");
+        }
+        if ($res->status == "archivos") {
+            $this->session->set_flashdata("alert", array("message"=>"Debe seleccionar un archivo antes de continuar"));
+            redirect("tramites/tramitesDocumentos/".$idTramite."/".$lat."/".$lng);
         }
     }
 

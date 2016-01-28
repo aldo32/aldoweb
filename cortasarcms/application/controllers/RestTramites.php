@@ -22,6 +22,16 @@ class RestTramites extends REST_Controller {
     function iniciarTramite_post() {
         $this->load->library("upload");
 
+        //validando que seleccionen un archivo para el tramite para poder continuar
+        if (!isset($_FILES["upload"]["name"])) {
+            $this->response(array(
+                    "status"=>"archivos",
+                    "message"=>"No se ha seleccionado ningun archivo",
+                    )
+            );
+            exit();
+        }
+
         $nombre = $this->post("nombre");
         $email = $this->post("correo");
         $idTramite = $this->post("idTramite");
@@ -67,7 +77,8 @@ class RestTramites extends REST_Controller {
             $config['max_width'] = 0;
             $config['max_height'] = 0;
             $config['remove_spaces'] = true;
-            $config['overwrite'] = true;
+            $config['overwrite'] = false;
+            $config['encrypt_name'] = true;
 
             $uploadErrors = "";
             $uploadFiles = "";
