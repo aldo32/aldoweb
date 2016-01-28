@@ -58,15 +58,16 @@ class Generallib {
 
 	function sendEmail($message, $from, $fromMessage, $to, $subject, $archivos) {
 
-		$config['protocol']    = 'smtp';
+		$config['protocol']    = 'mail';
 		$config['smtp_host']    = 'ssl://smtp.gmail.com';
 		$config['smtp_port']    = '465';
 		$config['smtp_timeout'] = '7';
 		$config['smtp_user']    = 'isc.aldo@gmail.com';
 		$config['smtp_pass']    = 'aldoma32';
-		$config['charset']    = 'utf8';
+		$config['charset']    = 'utf-8';
 		$config['newline']    = "\r\n";
 		$config['mailtype'] = 'html'; // or html
+		$config['validate'] = true;
 
 		$this->CI->load->library('email', $config);
 		$this->CI->email->set_newline("\r\n");
