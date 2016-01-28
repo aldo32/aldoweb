@@ -120,6 +120,19 @@ class Noticias extends CI_Controller
         $noticia = $q->row();
 
         if ($noticia) {
+            //borrando archivos fisicos de noticias archivos
+            $res = $this->db->get_where("noticias_archivos", array("idNoticia"=>$noticia->id));
+            $na = $res->result();
+
+            foreach ($na AS $row) {
+                if (file_exists("./".$row->archivo))
+                    unlink("./".$row->archivo);
+            }
+
+            //borrando registros de noticias_archivos
+            $this->db->delete("noticias_archivos", array("idNoticia"=>$noticia->id));
+
+            //borrando el registro de noticias
             $this->db->delete('noticias', array('id' => $noticia->id));
 
             $this->session->set_flashdata("alert", array("type"=>"alert-success", "image"=>"fa-check", "message"=>"La noticia <b>".$noticia->titulo."</b> se eliminó correctamente"));
@@ -163,7 +176,8 @@ class Noticias extends CI_Controller
         $config['max_width'] = 0;
         $config['max_height'] = 0;
         $config['remove_spaces'] = true;
-        $config['overwrite'] = true;
+        $config['overwrite'] = false;
+        $config['encrypt_name'] = true;
 
         $uploadErrors = "";
 

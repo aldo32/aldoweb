@@ -15,7 +15,13 @@ class Tramites extends CI_Controller {
         $params = array();
         $comboTramites = $this->consumeRest($url, $params);
 
+        //get combo categorias
+        $url = URL_CMS."RestCategorias/obtenerCategorias";
+        $params = array();
+        $categorias = $this->consumeRest($url, $params);
+
         $data["comboTramites"] = json_decode($comboTramites, true);
+        $data["categorias"] = json_decode($categorias);
         $data["alert"] = $this->session->flashdata('alert');
 
         $this->load->view("tramites_view", $data);

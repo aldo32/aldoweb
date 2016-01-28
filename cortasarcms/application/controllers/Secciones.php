@@ -140,7 +140,7 @@ class Secciones extends CI_Controller
         $data['footer'] = $this->load->view("general/general_footer_view", '', true);
         $data['control_sidebar'] = $this->load->view("general/general_control_sidebar_view", '', true);
 
-        $options = array(""=>"Seleccione una opción para continuar", "1"=>"Por que invertir", "2"=>"Quienes somos", "3"=>"Misión y visión");
+        $options = array(""=>"Seleccione una opción para continuar", "1"=>"Por que invertir", "2"=>"Términos y condiciones", "3"=>"Políticas de privacidad");
         $data["comboSecciones"] = $options;
 
         return $data;

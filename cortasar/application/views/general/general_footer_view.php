@@ -10,6 +10,12 @@
     }
 </style>
 
+<script>
+    $(document).ready(function() {
+        $(".nyroModal").nyroModal();
+    });
+</script>
+
 <div class="container-fluid">
     <div class="row" style="background: #222; padding: 15px;">
         <div class="col-md-12">
@@ -18,12 +24,10 @@
                 <div class="fleft" style="margin-right: 15px;"><a href="#"><img src="<?php echo base_url()?>resources/images/twitter_ico.png" width="28" height="28" /></a></div>
                 <div class="fleft" style="margin-right: 55px;"><a href="#"><img src="<?php echo base_url()?>resources/images/facebook_ico.png" width="28" height="28" /></a></div>
 
-                <div class="fleft" style="margin-right: 15px;"><a href="#" class="link-footer" >Terminos y condiciones</a></div>
-                <div class="fleft" style="margin-right: 15px;"><a href="#" class="link-footer">Giros</a></div>
-                <div class="fleft" style="margin-right: 15px;"><a href="#" class="link-footer">Estadisticas</a></div>
-                <div class="fleft" style="margin-right: 15px;"><a href="#" class="link-footer">Directorio</a></div>
-                <div class="fleft" style="margin-right: 15px;"><a href="#" class="link-footer">Contactanos</a></div>
-                <div class="fleft" style="margin-right: 15px;"><a href="#" class="link-footer">Politicas de privacidad</a></div>
+                <div class="fleft" style="margin-right: 15px;"><a href="<?php echo base_url("inicio/terminos") ?>" class="link-footer nyroModal" >Terminos y condiciones</a></div>
+                <div class="fleft" style="margin-right: 15px;"><a href="<?php echo base_url("inicio/directorio") ?>" class="link-footer nyroModal">Directorio</a></div>
+                <div class="fleft" style="margin-right: 15px;"><a href="<?php echo base_url("inicio/contacto") ?>" class="link-footer nyroModal">Contactanos</a></div>
+                <div class="fleft" style="margin-right: 15px;"><a href="<?php echo base_url("inicio/politicas") ?>" class="link-footer nyroModal">Políticas de privacidad</a></div>
             </div>
         </div>
     </div>

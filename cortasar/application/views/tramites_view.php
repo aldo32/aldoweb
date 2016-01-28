@@ -1,3 +1,19 @@
+<?php
+function consumeRest($url, $params) {
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_VERBOSE, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+
+    $res = curl_exec($ch);
+    curl_close($ch);
+
+    return $res;
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,10 +28,12 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#comboTramites').multipleSelect({single: true, placeholder: 'Buscar tramite', filter: true});
+            //$('#comboTramites').multipleSelect({single: true, placeholder: 'Buscar tramite', filter: true});
 
-            $('#comboTramites').change(function(){
-                var idTramite = $(this).val();
+            $( "#accordion" ).accordion();
+
+            $('.seleccionarTramite').click(function(){
+                var idTramite = $(this).attr("id");
                 $("#idTramite").val(idTramite);
 
                 //get tramite info
@@ -26,6 +44,9 @@
                     dataType: "html",
                     success: function(datos) {
                         $("#response").html(datos);
+                        $('html, body').animate({
+                            scrollTop: 600
+                        }, 1000);
                     },
                     type: "POST"
                 });
@@ -119,7 +140,7 @@
 
 <?php echo $header; ?>
 
-<br><br><br><br><br><br>
+<br><br>
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2">
@@ -129,8 +150,36 @@
             }
             ?>
             <div class="titulo_tramite">Encuentra aquí el tipo de tramite</div>
-            <?php echo form_dropdown("comboTramites", $comboTramites, set_value("comboTramites"), "class='' style='width: 100%' id='comboTramites'");?>
+            <?php //echo form_dropdown("comboTramites", $comboTramites, set_value("comboTramites"), "class='' style='width: 100%' id='comboTramites'");?>
             <input type="hidden" name="archivos" id="archivos" val="" />
+
+            <div id="accordion">
+                <?php
+                if (isset($categorias)) {
+                    foreach ($categorias->categoria AS $categoria) {
+                        //obteniendo tramites de la categoria
+                        $url = URL_CMS."RestCategorias/obtenerTramitesPorCategoria";
+                        $params = array("idCategoria"=>$categoria->id);
+                        $tramites = json_decode(consumeRest($url, $params));
+                        ?>
+                        <h3><?php echo $categoria->nombre ?></h3>
+                        <div style="font-size: 11px;">
+                            <?php
+                            foreach ($tramites AS $row) {
+                                ?>
+                                <p>
+                                    <button class="btn btn-default btn-sm seleccionarTramite" type="button" id="<?php echo $row->id ?>">Iniciar</button>
+                                    <?php echo $row->nombre ?>
+                                </p>
+                                <?php
+                            }
+                            ?>
+                        </div>
+                        <?php
+                    }
+                }
+                ?>
+            </div>
         </div>
     </div>
 

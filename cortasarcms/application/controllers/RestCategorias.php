@@ -55,7 +55,7 @@ class RestCategorias extends REST_Controller {
      * RETURN SUCCESS: status, categorias[],
      * RETURN ERROR: status, message
      */
-    function obtenerCategorias_get() {
+    function obtenerCategorias_post() {
         $q = $this->db->get("categorias");
         $categorias = $q->result();
 
@@ -87,5 +87,14 @@ class RestCategorias extends REST_Controller {
 
         $this->db->db_debug = TRUE;
         $this->response($response);
+    }
+
+    function obtenerTramitesPorCategoria_post() {
+        $idCategoria = $this->post("idCategoria");
+
+        $q = $this->db->get_where("tramites", array("idCategoria"=>$idCategoria));
+        $tramites = $q->result();
+
+        $this->response($tramites);
     }
 }

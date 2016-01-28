@@ -64,12 +64,12 @@ class Generallib {
 		$config['smtp_timeout'] = '7';
 		$config['smtp_user']    = 'isc.aldo@gmail.com';
 		$config['smtp_pass']    = 'aldoma32';
-		$config['charset']    = 'iso-8859-1';
+		$config['charset']    = 'utf8';
 		$config['newline']    = "\r\n";
 		$config['mailtype'] = 'html'; // or html
-		$config['validation'] = TRUE; // bool whether to validate email or
 
 		$this->CI->load->library('email', $config);
+		$this->CI->email->set_newline("\r\n");
 
 		$this->CI->email->from($from, $fromMessage);
 		$this->CI->email->to($to);
@@ -84,6 +84,6 @@ class Generallib {
 		}
 
 		$this->CI->email->send();
-		$this->CI->email->print_debugger();
+		return $this->CI->email->print_debugger();
 	}
 }

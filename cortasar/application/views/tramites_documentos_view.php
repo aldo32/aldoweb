@@ -15,7 +15,9 @@
             $("#saveTramite").click(function() {
                 if (confirm("Esta seguro que desea continuar con el tramite?")) {
                     if ($("#nombre").val() == "") alert("Debe ingresar su nombre completo");
-                    else if ($("#correo").val() == "") alert("debe ingresar una cuenta de correo");
+                    else if ($("#correo").val() == "") alert("Debe ingresar una cuenta de correo");
+                    else if ($("#ccorreo").val() == "") alert("Debe confirmar la cuenta correo");
+                    else if ($("#correo").val() != $("#ccorreo").val()) alert("Las cuentas de correo no coinciden");
                     else {
                         $("#saveForm").submit();
                     }
@@ -43,9 +45,13 @@
                     <label>Nombre completo</label>
                     <?php echo form_input(array('name'=>'nombre','id'=>'nombre', 'class'=>'form-control input-sm', 'value' =>set_value('nombre')));?>
                 </div>
-                <div class="form-group col-md-12" style="margin-bottom: 50px;">
+                <div class="form-group col-md-12">
                     <label>Correo</label>
                     <?php echo form_input(array('name'=>'correo','id'=>'correo', 'class'=>'form-control input-sm', 'value' =>set_value('correo')));?>
+                </div>
+                <div class="form-group col-md-12" style="margin-bottom: 50px;">
+                    <label>Confirmar correo</label>
+                    <?php echo form_input(array('name'=>'ccorreo','id'=>'ccorreo', 'class'=>'form-control input-sm', 'value' =>set_value('ccorreo')));?>
                 </div>
 
                 <h2 style="margin: 0px; padding: 0px;">&nbsp;</h2>

@@ -37,4 +37,28 @@ class RestGeneral extends REST_Controller
 
         $this->response($invertir);
     }
+
+    function obtenerTerminos_post() {
+        $sql = "SELECT * FROM  secciones WHERE seccion = 2 LIMIT 1";
+        $q = $this->db->query($sql);
+        $invertir = $q->row();
+
+        $this->response($invertir);
+    }
+
+    function obtenerPoliticas_post() {
+        $sql = "SELECT * FROM  secciones WHERE seccion = 3 LIMIT 1";
+        $q = $this->db->query($sql);
+        $invertir = $q->row();
+
+        $this->response($invertir);
+    }
+
+    function obtenerDirectorio_post() {
+        $sql = "SELECT * FROM  directorio WHERE activo=1";
+        $q = $this->db->query($sql);
+        $directorio = $q->result();
+
+        $this->response($directorio);
+    }
 }

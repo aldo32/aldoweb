@@ -15,6 +15,12 @@ class Inicio extends CI_Controller {
 		$this->load->view('inicio/inicio_view', $data);
 	}
 
+	function testmail() {
+        echo "enviando";
+        echo $this->generallib->sendEmail("Mensaje de prueba", "isc.aldo@hotmail.com", "from", "isc.aldo@gmail.com", "prueba", null);
+        echo "<br>despues";
+	}
+
 	function general() {
 		$config['usuario'] = $this->usuarioSession;
 		$config['page'] = "inicio";
