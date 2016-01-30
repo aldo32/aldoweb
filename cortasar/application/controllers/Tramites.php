@@ -94,7 +94,8 @@ class Tramites extends CI_Controller {
         $j=0;
         for ($i = 0; $i < count($_FILES["documentos"]["name"]); $i++) {
             if ($_FILES["documentos"]["name"][$i] != "") {
-                $params["upload[$j]"] = new CurlFile($_FILES["documentos"]["tmp_name"][$i], $_FILES["documentos"]["type"][$i], $_FILES["documentos"]["name"][$i]);
+                //$params["upload[$j]"] = new CurlFile($_FILES["documentos"]["tmp_name"][$i], $_FILES["documentos"]["type"][$i], $_FILES["documentos"]["name"][$i]);
+                $params["upload[$j]"] = '@'.$_FILES["documentos"]["tmp_name"][$i];
                 $j++;
             }
         }
