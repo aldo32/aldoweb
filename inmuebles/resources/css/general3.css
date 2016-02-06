@@ -1,0 +1,200 @@
+#listado .form-contacto{
+	/*Formulario de contacto viejo en los listados (quitar)*/
+	min-width: 400px;
+   	background-color: white;
+}
+.social-icons{
+	/*Footer en resoluciones pequeñas (agregar)*/
+	width:100%;
+}
+/*formulario de contacto para inmobiliarias plusvalia (agregar)*/
+
+.form-contacto.inmobiliaria {
+    width: 400px;
+    border: 2px solid #fff;
+    box-shadow: 0 0 12px #000;
+    background-color: #fff;
+    padding:10px;
+}
+#form-consultarDatos{
+	margin-top:10px;
+}
+
+#form-consultarDatos .btn{
+	margin-top:10px;
+} 
+
+.form-contacto.inmobiliaria img {
+	
+	float:left;
+	margin-right: 15px;
+}
+
+.caracteristicas-aviso dl dd i.icon-superficie_total,
+.caracteristicas-aviso dl dd i.icon-superficie_cubierta,
+.caracteristicas-aviso dl dd i.icon-ficha_precio,
+.caracteristicas-aviso dl dd i.icon-antiguedad,
+.caracteristicas-aviso dl dd i.icon-etapa-desarrollo{
+	/*Iconos faltantes en ficha vieja (quitar)*/
+	width:0;margin:0;
+}
+
+/*cambio de imagen en landing inmobiliarias imovelweb (agregar)*/
+
+.landing-pub .landing-pub-body .landing-pub-body-bg {
+    background: url(/css/img/landings/photo-inm.jpg)right 30px no-repeat;
+    width: auto;
+    height: 510px;
+    margin: 0;
+    -webkit-box-shadow: inset 30px 0 30px -5px #fff;
+    -moz-box-shadow: inset 30px 0 30px -5px #fff;
+    box-shadow: inset 30px 0 30px -5px #fff;
+}
+
+
+	
+/*cambio de ancho y centrado de flecha desplegable en el footer plusvalia (agregar)*/
+.social-icons {
+    width: 95%;
+}
+
+.display-buttom {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: grey;
+    text-align: center;
+    background: #fff;
+    -webkit-box-shadow: 0 2px 2px gray;
+    -moz-box-shadow: 0 2px 2px gray;
+    box-shadow: 0 2px 2px gray;
+    border: 1px solid #eee;
+    position: absolute;
+    left: 50%;
+    top: -50%;
+    z-index: 10;
+    font-size: 11px;
+}
+
+.footer-visible .display-buttom .fa {
+	text-align:center; 
+	padding-top:12%;
+	padding-left:4%;
+}
+
+.footer-options {
+    float: left;
+    width: 30%;
+    padding-top: 15px;
+    padding-left: 10px;
+}
+
+.footer-legal {
+    float: right;
+    text-align: right;
+    width: 30%;
+    padding-top: 15px;
+    padding-right: 10px;
+}
+
+.footer-visible a {
+    color: #000;
+}
+
+.footer-visible a:hover {
+    opacity:0.8;
+}
+
+.contenedor-footer {
+    width: 100%;
+    
+}
+
+.contenedor-footer.footer-oculto .footer-desplegable {
+    display:block;
+}
+
+.contenedor-footer.footer-oculto .footer-content {
+	display:none;
+}
+.footer-desplegable {
+    color: #000;
+}
+.social-icons {
+    padding-top: 10px;
+}
+
+/*cambio de estilos para el filtro precios*/
+
+.facetas-default .price-filter span{
+	padding:0px 10px 5px 5px;
+} 
+
+.facetas-default .price-filter .aplicar button {
+	text-align:left; 
+	margin-left:5px; 
+	margin-top:15px;
+}
+
+.price-filter .peso-dolar {
+	padding-top:10px;
+}
+
+/*cambio de estilos para formulario de contacto RELA menos Ecuador*/
+
+ body:not(.Ecuador) .datos-inmobiliaria .datos-inmobiliaria-logo {
+    float: left;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    width: 100%;
+    display: block;
+    cursor: pointer;
+}
+body:not(.Ecuador) .datos-inmobiliaria .datos-inmobiliaria-logo .datos-inmobiliaria-title {
+    color: #666;
+    font-size: 16px;
+    margin-left: 0px;
+    float: none;
+    display: block;
+    max-width: 100%;
+    line-height: normal;
+    display:block;
+}
+
+body:not(.Ecuador) .mostrardatos-form .mostrardatos-data .phone {
+    color: #f60;
+    float: left;
+    font-size: 14px;
+    font-weight: 200;
+    margin-bottom: 10px;
+    margin-right: 15px;
+    width: 100%;
+}
+
+body:not(.Ecuador) .datos-inmobiliaria .datos-inmobiliaria-logo img {
+    border: 1px solid #999;
+    -webkit-box-shadow: 0 0 3px 1px #cecece;
+    -moz-box-shadow: 0 0 3px 1px #cecece;
+    box-shadow: 0 0 3px 1px #cecece;
+    width: 80px;
+    max-width: 120px;
+    max-height: 120px;
+    min-height: 60px;
+    float: left;
+    display: block;
+    margin: 5px 0px;
+}
+
+
+
+
+/*LOGOS IMOVE...*/
+.header .logo-header-wrap .logo-header.imovelclass{
+	background-image: url("/css/img/logos/imovelclass.svg");
+}
+.header .logo-header-wrap .logo-header.imoveiscuritiba{
+	background-image: url("/css/img/logos/imoveiscuritiba.svg");
+}
+
+
