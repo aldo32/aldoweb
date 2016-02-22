@@ -57,7 +57,7 @@
             };
             window.onload = function() {
                 //LOAD ELEMENTS AFTER PAGE FULL LOAD
-                loadScript('http://static2.navent.com/js/plugins/facebook/fb-api_bum_v6f31c671325a8a71f041b1c5ae01c752.js');
+
             };
         }());
         $(function(){
@@ -148,12 +148,6 @@
                                                         <img style="width: 280px; height: 200px; margin-left: 0px; margin-top: 0px;" class="rsImg rsMainSlideImage" src="<?php echo base_url() ?>resources/images/36113560.jpg">
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div style="display: block;" class="rsArrow rsArrowLeft rsArrowDisabled">
-                                                <div class="rsArrowIcn"></div>
-                                            </div>
-                                            <div style="display: block;" class="rsArrow rsArrowRight">
-                                                <div class="rsArrowIcn"></div>
                                             </div>
                                         </div>
                                     </div>

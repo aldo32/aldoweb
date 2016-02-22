@@ -9,6 +9,7 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>resources/pagina/estilo1.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>resources/pagina/estilo2.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>resources/pagina/estilo3.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>resources/pagina/estilo5.css">
         <link href="<?php echo base_url()?>resources/css/font-awesome.css" rel="stylesheet">
 
         <meta http-equiv="Content-Language" content="es">
