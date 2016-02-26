@@ -11,6 +11,7 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>resources/pagina/estilo3.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>resources/pagina/estilo5.css">
         <link href="<?php echo base_url()?>resources/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>resources/galeria/coin-slider-styles.css">
 
         <meta http-equiv="Content-Language" content="es">
         <script src="<?php echo base_url()?>resources/pagina/jquery.js"></script>
@@ -22,3 +23,4 @@
         <script type="text/javascript" src="<?php echo base_url()?>resources/pagina/plugin2.js" defer="defer"></script>
         <script type="text/javascript" src="<?php echo base_url()?>resources/pagina/plugin3.js" defer="defer"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>resources/pagina/conversion.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>resources/galeria/coin-slider.js"></script>

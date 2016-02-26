@@ -75,7 +75,7 @@
     <div class="container">
         <!--LOGO-->
         <div class="logo-header-wrap" style="width: 100px;">
-            <a href="http://www.inmuebles24.com/" title="Inmuebles24.com" class="logo-header inmuebles24  "></a>
+            <a href="#" title="" class="logo-header inmuebles24  "></a>
         </div>
 
         <div class="header-searchbox-wrap">
@@ -94,7 +94,7 @@
         <div class="row">
             <div class="span24" itemprop="breadcrumb">
                 <ul class="breadcrumb pull-left oculto-print">
-                    <li><a href="http://www.inmuebles24.com/">Inmuebles24</a><span class="divider"></span></li>
+                    <li><a href="#">Inmuebles</a><span class="divider"></span></li>
                     <li><span>Todos los inmuebles</span></li>
                 </ul>
             </div>

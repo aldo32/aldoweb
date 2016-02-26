@@ -857,13 +857,7 @@ $(function() {
 			$(this).data("valueOld",value);
 		});
 	}
-	inputSearchbox.typeahead({
-		name: 'zonas',
-		prefetch: '../databuscador.bum?idPais='+config.idPais,
-		remote: '../geosugerencias.bum?query=%QUERY&idPais='+config.idPais,
-        template: '<strong>{{zona}}</strong>{{#zonaPadre}},&nbsp;{{zonaPadre}}{{/zonaPadre}}',
-        engine: Hogan
-	}).focus();
+
 	
 	inputSearchbox.on("typeahead:selected typeahead:autocompleted", function(e,datum) { 
 		$('input[name="idSubZona"]').val(datum.idSubZona ? datum.idSubZona : '');

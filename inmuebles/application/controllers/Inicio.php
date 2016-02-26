@@ -9,6 +9,14 @@ class Inicio extends CI_Controller {
 
 	public function index() {
         $data = $this->general();
+
+        //obteniendo banner del home
+        //get noticias
+        $url = "http://sicksadworld.com.mx/servicios/banners.php";
+        $params = array();
+        $banners = json_decode($this->consumeRest($url, $params), true);
+
+        $data["banners"] = $banners;
 		$this->load->view("inicio_view", $data);
 	}
 
@@ -30,4 +38,17 @@ class Inicio extends CI_Controller {
 
         return $data;
 	}
+
+    function consumeRest($url, $params) {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+
+        $res = curl_exec($ch);
+        curl_close($ch);
+
+        return $res;
+    }
 }

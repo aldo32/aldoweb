@@ -57,7 +57,6 @@
             };
             window.onload = function() {
                 //LOAD ELEMENTS AFTER PAGE FULL LOAD
-                loadScript('http://static2.navent.com/js/plugins/facebook/fb-api_bum_v6f31c671325a8a71f041b1c5ae01c752.js');
             };
         }());
         $(function(){
@@ -77,25 +76,13 @@
         <div class="logo-header-wrap">
             <a class="logo-header" href="/"></a>
         </div>
-        <!--NAV-->
-        <nav class="header-nav">
-
-            <div class="dropdown pull-right position-relative">
-                &nbsp;
-                <button data-toggle="dropdown" class="btn btn-noframe">
-                    <i class="ticon ticon-options"></i>
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a href="/blog">Home</a></li>
-                    <li><a href="/blog">Departamentos</a></li>
-                    <li><a href="/blog">Terrenos</a></li>
-                </ul>
-            </div>
-        </nav>
     </div>
 </header>
 
-<div class="section-search lazyBg " style="background-image: url(&quot;http://akstatic.inmuebles24.com/css/img/home-img-2.jpg&quot;); background-size: cover; max-width: 100%; height: calc(100% - 55px);">
+<?php
+$banner = array_rand($banners["inmuebles"], 1);
+?>
+<div class="section-search lazyBg " style="background-image: url('<?php echo $banners["inmuebles"][$banner]["img_banner"] ?>'); background-size: cover; max-width: 100%; height: calc(100% - 55px);">
 
     <!-- Nueva caja logos BEG -->
     <input id="idNameProyecto" value=" - " type="hidden">
@@ -107,53 +94,28 @@
                 <h1>Busca inmuebles en México</h1>
 
                 <form id="searchbox" action="/listado.bum" method="post">
-
                     <div class="control-group">
-                        <div class="searchbox-tipodeoperacion">
-                            <label for="searchbox-home_tipodeoperacion">Operación</label>
-
-                            <div class="input-select">
-                                <select name="tipoDeOperacion" id="searchbox-home_tipodeoperacion" class="input-weight-xlarge input-block">
-                                    <option selected="selected" value="1">Comprar</option>
-                                    <option value="2">Rentar</option>
-                                    <option value="4">Temporal/Vacacional</option>
-                                    <option value="3">Traspaso</option>
-                                    <option value="desarrollosURL">Desarrollos</option>
-                                </select>
-                            </div>
-                        </div>
                         <div class="searchbox-tipodepropiedad">
                             <label for="searchbox-home_tipodepropiedad">Propiedad</label>
-
                             <div class="input-select">
                                 <select name="tipoDePropiedad" id="searchbox-home_tipodepropiedad" class="input-weight-xlarge input-block">
                                     <option selected="selected" value="2">Departamento</option>
-                                    <option value="1">Casa</option>
-                                    <option value="3">Terreno / Lote</option>
-                                    <option value="4">Oficina</option>
-                                    <option value="8|21|22">Bodegas</option>
-                                    <option value="Otros">Otros</option>
+                                    <option value="1">Casas</option>
+                                    <option value="2">Terrenos</option>
+                                    <option value="3">Departamentos</option>
+                                    <option value="4">Bodegas</option>
+                                    <option value="5">Otros</option>
+                                    <option value="6">Local</option>
+                                    <option value="7">Nave</option>
+                                    <option value="8">Rancho</option>
                                 </select>
                             </div>
                         </div>
                     </div>
 
                     <div class="control-group">
-                        <label for="searchbox-home.ubicacion">Colonia, Municipio o Delegación, Estado o Proyecto</label>
-                        <button class="btn-pointer js-geolocate" data-loadingtext="Cargando"><i class="ticon ticon-pointer"></i></button>
-
-                        <span class="twitter-typeahead" style="position: relative; display: inline-block; direction: ltr;">
-                            <input type="text" disabled="" spellcheck="off" autocomplete="off" class="tt-hint" style="position: absolute; top: 0px; left: 0px; border-color: transparent; box-shadow: none; background: rgb(255, 255, 255) none repeat scroll 0% 0%;">
-                            <input type="text" placeholder="Ingresa Colonia, Municipio o Delegación, Estado o Proyecto" class="input-weight-xlarge input-block tt-query" id="searchbox-home_ubicacion" name="ubicacion" autocomplete="off" spellcheck="false" style="position: relative; vertical-align: top; background-color: transparent;" dir="auto">
-                            <span style="position: absolute; left: -9999px; visibility: hidden; white-space: nowrap; font-family: Roboto,sans-serif; font-size: 20px; font-style: normal; font-variant: normal; font-weight: 400; word-spacing: 0px; letter-spacing: 0px; text-indent: 0px; text-rendering: optimizelegibility; text-transform: none;"></span>
-                            <span class="tt-dropdown-menu flat" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none; right: auto; visibility: visible;">
-                                <div class="tt-dataset-zonas" style="display: none;">
-                                    <span class="tt-suggestions" style="display: block;"></span>
-                                </div>
-                            </span>
-                        </span>
+                        <input type="text" placeholder="Ingresa Colonia, Municipio o Delegación, Estado o Proyecto" class="" id="ubicacion" name="ubicacion" autocomplete="off" spellcheck="false" style="width: 765px; font-size: 16px;">
                     </div>
-
                     <div class="searchbox-submit">
                         <button type="submit" id="submitBtn" class="btn btn-xlarge btn-block btn-primary">Buscar</button>
                     </div>
@@ -186,9 +148,16 @@
     <h3 class="h1">Desarrollos destacados en México <small><a href="#">Ver todos</a></small></h3>
     <div class="row">
         <div class="span24">
-
             <div style="overflow: hidden;" class="frame" id="slider-desarrollos">
                 <div style="transform: translateZ(0px) translateX(-108px); width: 14160px;" class="slidee clearfix">
+
+                    <?php
+                    if (isset($banners)) {
+                        foreach($banners["inmuebles"] as $row) {
+                            print_r($row);
+                        }
+                    }
+                    ?>
                     <div class="slideee">
                         <ul class="grid-posts unstyled">
                             <li class="post post-desarrollo vertical " id="aviso-1029756" data-aviso="1029756">

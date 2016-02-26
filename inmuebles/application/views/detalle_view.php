@@ -6,6 +6,12 @@
 
     <?php echo $includes; ?>
 
+    <script>
+    $(document).ready(function() {
+        $('#coinslider').coinslider({width: 780, height: 370, delay: 5000,});
+    });
+    </script>
+
 
 </head>
 
@@ -44,28 +50,21 @@
                     </div>
 
                     <!-- GALERIA -->
-                    <div class="royalSlider rsDefault rsHor">
+                    <div class="royalSlider" id="coinslider">
+                        <img src='<?php echo base_url();?>resources/images/24302921_002.jpg' style="width: 780px; height: 370px;" width="780" height="370">
+                        <img src='<?php echo base_url();?>resources/images/home-img-1.jpg' style="width: 780px; height: 370px;" width="780" height="370">
                     </div>
 
                     <div class="card-content">
                         <!-- BRADCRUMBS -->
                         <div itemprop="breadcrumb">
                             <ul class="breadcrumb no-margin pull-left oculto-print">
-                                <li><a href="http://www.inmuebles24.com/">Inmuebles24</a><span class="divider"></span>
+                                <li><a href="http://www.inmuebles24.com/">Inmuebles</a><span class="divider"></span>
                                 </li>
                                 <li><a href="http://www.inmuebles24.com/departamentos.html">Departamento</a><span
                                         class="divider"></span></li>
-                                <li><a href="http://www.inmuebles24.com/departamentos-en-nuevo-leon.html">Nuevo León</a><span
-                                        class="divider"></span></li>
-                                <li>
-                                    <a href="http://www.inmuebles24.com/departamentos-en-monterrey.html">Monterrey</a><span
-                                        class="divider"></span></li>
-                                <li>
-                                    <a href="http://www.inmuebles24.com/departamentos-en-centro-ciudad-de-monterrey.html">Centro</a><span
-                                        class="divider"></span></li>
                                 <span>La Capital</span>
                             </ul>
-                            <span class="code no-margin"><small>Cod.:</small>&nbsp;1011368</span>
                         </div>
                     </div>
                 </div>
