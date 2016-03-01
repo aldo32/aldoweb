@@ -16,6 +16,19 @@ class Inicio extends CI_Controller {
         $params = array();
         $banners = json_decode($this->consumeRest($url, $params), true);
 
+        //get inmubles por categoria
+        $url = "http://sicksadworld.com.mx/servicios/inmueblesPorCategoria.php";
+        $params = array("categoria"=>1);
+        $inmueblesCasas = json_decode($this->consumeRest($url, $params), true);
+        print_r($inmueblesCasas);
+        exit();
+
+        $params = array("categoria"=>3);
+        $inmueblesDepartamentos = json_decode($this->consumeRest($url, $params), true);
+
+        $params = array("categoria"=>6);
+        $inmueblesOficinas = json_decode($this->consumeRest($url, $params), true);
+
         $data["banners"] = $banners;
 		$this->load->view("inicio_view", $data);
 	}
