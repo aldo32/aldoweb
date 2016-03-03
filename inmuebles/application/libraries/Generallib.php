@@ -56,7 +56,7 @@ class Generallib {
 		return @$xx;
 	}
 
-	function sendEmail($message, $from, $fromMessage, $to, $subject) {
+	function sendEmail($message, $from, $fromMessage, $to, $subject, $archivos) {
 
 		$config['protocol']    = 'smtp';
 		$config['smtp_host']    = 'ssl://smtp.gmail.com';
@@ -67,9 +67,10 @@ class Generallib {
 		$config['charset']    = 'utf-8';
 		$config['newline']    = "\r\n";
 		$config['mailtype'] = 'html'; // or html
-		$config['validation'] = TRUE; // bool whether to validate email or
+		$config['validate'] = true;
 
 		$this->CI->load->library('email', $config);
+		$this->CI->email->set_newline("\r\n");
 
 		$this->CI->email->from($from, $fromMessage);
 		$this->CI->email->to($to);
@@ -77,7 +78,13 @@ class Generallib {
 		$this->CI->email->subject($subject);
 		$this->CI->email->message($message);
 
+		if (!empty($archivos)) {
+			foreach ($archivos AS $row) {
+				$this->CI->email->attach($row->archivo);
+			}
+		}
+
 		$this->CI->email->send();
-		$this->CI->email->print_debugger();
+		return $this->CI->email->print_debugger();
 	}
 }

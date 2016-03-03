@@ -114,7 +114,7 @@ $banner = array_rand($banners["inmuebles"], 1);
                     </div>
 
                     <div class="control-group">
-                        <input type="text" placeholder="Ingresa Colonia, Municipio o Delegación, Estado o Proyecto" class="" id="ubicacion" name="ubicacion" autocomplete="off" spellcheck="false" style="width: 765px; font-size: 16px;">
+                        <input type="text" placeholder="Ingresa Colonia, Municipio o Delegación, Estado o Proyecto" class="" id="ubicacion" name="ubicacion" autocomplete="off" spellcheck="false" style="width: 70%; font-size: 16px;">
                     </div>
                     <div class="searchbox-submit">
                         <button type="submit" id="submitBtn" class="btn btn-xlarge btn-block btn-primary">Buscar</button>
@@ -145,7 +145,7 @@ $banner = array_rand($banners["inmuebles"], 1);
 </div>
 
 <div class="container">
-    <h3 class="h1">Desarrollos destacados en México <small><a href="#">Ver todos</a></small></h3>
+    <h3 class="h1">Desarrollos destacados en México</h3>
     <div class="row">
         <div class="span24">
             <div style="overflow: hidden;" class="frame" id="slider-desarrollos">
@@ -160,14 +160,14 @@ $banner = array_rand($banners["inmuebles"], 1);
                                     <li class="post post-desarrollo  ">
                                         <label class="post-action post-action-check stopPropagation"><input checked="checked" type="checkbox"></label>
                                         <div class="post-thumb">
-                                            <a href="" title="<?php echo $row["descripcion"] ?>">
+                                            <a href="<?php echo base_url() ?>inicio/detalle/<?php echo $row['id_inmueble']."/".$row['tipo_inmueble'] ?>" title="<?php echo $row["descripcion"] ?>">
                                                 <img src="<?php  echo base_url()?>resources/pagina/blank.png" data-real-src="<?php echo $row["img_banner"] ?>" class="foto-principal lazyDesarrollos" alt="" height="100%" width="100%">
                                             </a>
                                         </div>
 
                                         <!--Tag desarrollo-->
                                         <div class="post-info">
-                                            <h4 class="post-title"><a href="#" title=""><?php echo $row["descripcion"] ?></a></h4>
+                                            <h4 class="post-title"><a href="<?php echo base_url() ?>inicio/detalle/<?php echo $row['id_inmueble']."/".$row['tipo_inmueble'] ?>" title=""><?php echo $row["descripcion"] ?></a></h4>
                                             <span class="post-sub-title"><i class="ticon ticon-pointer"></i>&nbsp; <?php echo $row['direccion_calle'] ?></span>
                                             <ul class="post-content">
                                                 <li>Tipo <b><?php echo $row['venta_renta'] ?></b></li>
@@ -472,22 +472,26 @@ $banner = array_rand($banners["inmuebles"], 1);
 
 <div class="section-ciudades">
     <div class="container">
-        <h3 class="h1">Propiedades por ciudad <small><a href="/inmuebles.html" title="Propiedades por ciudad">Ver todas</a></small></h3>
+        <h3 class="h1">Propiedades por categoria</h3>
         <div class="row unstyled">
             <div class="span8">
                 <div class="box">
                     <div class="box-thumb">
-                        <a href="/inmuebles-en-monterrey.html"><img src="<?php  echo base_url()?>resources/pagina/blank.png" data-real-src="http://akstatic.inmuebles24.com/css/img/ciudades_monterey.jpg" class="lazyFoot" alt="Monterrey" height="94" width="264"></a>
+                        <a href=""><img src="<?php  echo base_url()?>resources/pagina/blank.png" data-real-src="<?php echo base_url() ?>resources/images/categoria_casas.jpg" class="lazyFoot" alt="Monterrey" height="94" width="264"></a>
                     </div>
                     <div class="box-info">
-                        <h3 class="box-title"><a href="/inmuebles-en-monterrey.html">Monterrey</a></h3>
+                        <h3 class="box-title">Casas</h3>
                         <ul class="box-content">
-                            <li><a href="/departamentos-en-venta-en-monterrey.html">Departamentos en venta en Monterrey</a></li>
-                            <li><a href="/departamentos-en-renta-en-monterrey.html">Departamentos en renta en Monterrey</a></li>
-                            <li><a href="/casas-en-venta-en-monterrey.html">Casas en venta en Monterrey</a></li>
-                            <li><a href="/casas-en-renta-en-monterrey.html">Casas en renta en Monterrey</a></li>
-                            <li><a href="/locales-comerciales-en-renta-en-monterrey.html">Locales Comerciales en renta en Monterrey</a></li>
-                            <li><a href="/oficinas-en-renta-en-monterrey.html">Oficinas en renta en Monterrey</a></li>
+                            <?php
+                            if (isset($inmueblesCasas)) {
+                                for ($i=0; $i<sizeof($inmueblesCasas["inmuebles"]); $i++) {
+                                    ?>
+                                    <li><a href="<?php echo base_url() ?>inicio/detalle/<?php echo $inmueblesCasas["inmuebles"][$i]['id_inmueble']."/".$inmueblesCasas["inmuebles"][$i]['tipo_inmueble'] ?>"><?php echo $inmueblesCasas["inmuebles"][$i]['descripcion'] ?></a></li>
+                                    <?php
+                                    if ($i > 5 ) break;
+                                }
+                            }
+                            ?>
                         </ul>
                     </div>
                 </div>
@@ -495,17 +499,21 @@ $banner = array_rand($banners["inmuebles"], 1);
             <div class="span8">
                 <div class="box">
                     <div class="box-thumb">
-                        <a href="/inmuebles-en-miguel-hidalgo.html"><img src="<?php  echo base_url()?>resources/pagina/blank.png" data-real-src="http://akstatic.inmuebles24.com/css/img/ciudades_miguelhidalgo.jpg" class="lazyFoot" alt="Miguel Hidalgo" height="94" width="264"></a>
+                        <a href=""><img src="<?php  echo base_url()?>resources/pagina/blank.png" data-real-src="<?php echo base_url() ?>resources/images/categoria_departamentos.jpg" class="lazyFoot" alt="Miguel Hidalgo" height="94" width="264"></a>
                     </div>
                     <div class="box-info">
-                        <h3 class="box-title"><a href="/inmuebles-en-miguel-hidalgo.html">Miguel Hidalgo</a></h3>
+                        <h3 class="box-title">Departamentos</h3>
                         <ul class="box-content">
-                            <li><a href="/departamentos-en-venta-en-miguel-hidalgo.html">Departamentos en venta en Miguel Hidalgo</a></li>
-                            <li><a href="/departamentos-en-renta-en-miguel-hidalgo.html">Departamentos en renta en Miguel Hidalgo</a></li>
-                            <li><a href="/casas-en-venta-en-miguel-hidalgo.html">Casas en venta en Miguel Hidalgo</a></li>
-                            <li><a href="/casas-en-renta-en-miguel-hidalgo.html">Casas en renta en Miguel Hidalgo</a></li>
-                            <li><a href="/locales-comerciales-en-renta-en-miguel-hidalgo.html">Locales Comerciales en renta en Miguel Hidalgo</a></li>
-                            <li><a href="/oficinas-en-renta-en-miguel-hidalgo.html">Oficinas en renta en Miguel Hidalgo</a></li>
+                            <?php
+                            if (isset($inmueblesDepartamentos)) {
+                                for ($i=0; $i<sizeof($inmueblesDepartamentos["inmuebles"]); $i++) {
+                                    ?>
+                                    <li><a href="<?php echo base_url() ?>inicio/detalle/<?php echo $inmueblesDepartamentos["inmuebles"][$i]['id_inmueble']."/".$inmueblesDepartamentos["inmuebles"][$i]['tipo_inmueble'] ?>"><?php echo $inmueblesDepartamentos["inmuebles"][$i]['descripcion'] ?></a></li>
+                                    <?php
+                                    if ($i > 5 ) break;
+                                }
+                            }
+                            ?>
                         </ul>
                     </div>
                 </div>
@@ -513,17 +521,21 @@ $banner = array_rand($banners["inmuebles"], 1);
             <div class="span8">
                 <div class="box">
                     <div class="box-thumb">
-                        <a href="/inmuebles-en-huixquilucan.html"><img src="<?php  echo base_url()?>resources/pagina/blank.png" data-real-src="http://akstatic.inmuebles24.com/css/img/ciudades_huixquilucan.jpg" class="lazyFoot" alt="Huixquilucan" height="94" width="264"></a>
+                        <a href=""><img src="<?php  echo base_url()?>resources/pagina/blank.png" data-real-src="<?php echo base_url() ?>resources/images/categoria_oficinas.jpg" class="lazyFoot" alt="Huixquilucan" height="94" width="264"></a>
                     </div>
                     <div class="box-info">
-                        <h3 class="box-title"><a href="/inmuebles-en-huixquilucan.html">Huixquilucan</a></h3>
+                        <h3 class="box-title">Oficinas</h3>
                         <ul class="box-content">
-                            <li><a href="/departamentos-en-venta-en-huixquilucan.html">Departamentos en venta en Huixquilucan</a></li>
-                            <li><a href="/departamentos-en-renta-en-huixquilucan.html">Departamentos en renta en Huixquilucan</a></li>
-                            <li><a href="/casas-en-venta-en-huixquilucan.html">Casas en venta en Huixquilucan</a></li>
-                            <li><a href="/casas-en-renta-en-huixquilucan.html">Casas en renta en Huixquilucan</a></li>
-                            <li><a href="/locales-comerciales-en-renta-en-huixquilucan.html">Locales Comerciales en renta en Huixquilucan</a></li>
-                            <li><a href="/oficinas-en-renta-en-huixquilucan.html">Oficinas en renta en Huixquilucan</a></li>
+                            <?php
+                            if (isset($inmueblesOficinas)) {
+                                for ($i=0; $i<sizeof($inmueblesOficinas["inmuebles"]); $i++) {
+                                    ?>
+                                    <li><a href="<?php echo base_url() ?>inicio/detalle/<?php echo $inmueblesOficinas["inmuebles"][$i]['id_inmueble']."/".$inmueblesOficinas["inmuebles"][$i]['tipo_inmueble'] ?>"><?php echo $inmueblesOficinas["inmuebles"][$i]['descripcion'] ?></a></li>
+                                    <?php
+                                    if ($i > 5 ) break;
+                                }
+                            }
+                            ?>
                         </ul>
                     </div>
                 </div>
