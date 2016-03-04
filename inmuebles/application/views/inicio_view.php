@@ -93,13 +93,12 @@ $banner = array_rand($banners["inmuebles"], 1);
             <div class="searchbox searchbox-home">
                 <h1>Busca inmuebles en México</h1>
 
-                <form id="searchbox" action="/listado.bum" method="post">
+                <form id="searchbox" action="<?php echo base_url("inicio/buscar") ?>" method="post">
                     <div class="control-group">
                         <div class="searchbox-tipodepropiedad">
                             <label for="searchbox-home_tipodepropiedad">Propiedad</label>
                             <div class="input-select">
-                                <select name="tipoDePropiedad" id="searchbox-home_tipodepropiedad" class="input-weight-xlarge input-block">
-                                    <option selected="selected" value="2">Departamento</option>
+                                <select name="tipoPropiedad" id="" class="input-weight-xlarge input-block">
                                     <option value="1">Casas</option>
                                     <option value="2">Terrenos</option>
                                     <option value="3">Departamentos</option>

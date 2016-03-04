@@ -36,11 +36,6 @@ class Inicio extends CI_Controller {
 		$this->load->view("inicio_view", $data);
 	}
 
-    function buscar() {
-        $data = $this->general();
-        $this->load->view("buscar_view", $data);
-    }
-
     function detalle($idInmueble = "", $tipoInmueble="") {
         $data = $this->general();
 
@@ -202,6 +197,27 @@ class Inicio extends CI_Controller {
             echo "Listo";
         }
 	}
+
+    function buscar() {
+        $tipoPropiedad = $this->input->post("tipoPropiedad");
+        $ubicacion = $this->input->post("ubicacion");
+
+        $inmueble_type = $tipoPropiedad;
+        $inmueble_venta_renta = "";
+        $inmueble_precio = "";
+        $inmueble_codigo_postal = "";
+        $inmueble_id = "";
+
+        //obtener detalle del inmueble
+        $url = "http://sicksadworld.com.mx/servicios/buscarInmuebles.php";
+        $params = array("inmueble_type"=>$inmueble_type, "inmueble_venta_renta"=>$inmueble_venta_renta, "inmueble_precio"=>$inmueble_precio, "inmueble_codigo_postal"=>$inmueble_codigo_postal, 'inmueble_id'=>$inmueble_id);
+        $resultado = json_decode($this->consumeRest($url, $params), true);
+        print_r($resultado);
+        exit();
+
+        $data = $this->general();
+        $this->load->view("buscar_view", $data);
+    }
 
     function consumeRest($url, $params) {
         $ch = curl_init();
