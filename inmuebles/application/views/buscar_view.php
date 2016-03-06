@@ -1,3 +1,18 @@
+<?php
+function consumeRest($url, $params) {
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+
+    $res = curl_exec($ch);
+    curl_close($ch);
+
+    return $res;
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +29,11 @@
                 setTimeout(function(){
                     $('.bifurcador-wrap').fadeOut('200');
                 },12000);
+            });
+
+            $('#bxslider2').bxSlider({
+                auto: true,
+                autoControls: false
             });
         });
 
@@ -80,8 +100,33 @@
 
         <div class="header-searchbox-wrap">
             <div style="position: relative; width: 100%">
-                <div style="float: left; margin-right: 15px;"><input type="text" name="search" placeholder="Busca tu inmueble" style="width: 990px; margin-top: 0px;"></div>
-                <div style="float: left; margin-top: 2px;"><button data-url-destino="#" data-action="buscar" class="btn btn-noframe">Buscar</button></div>
+                <form id="searchbox" action="<?php echo base_url("inicio/buscar") ?>" method="post">
+                    <div style="float: left; margin-left: 50px; margin-right: 5px;">
+                        <select name="tipoPropiedad" id="" class="">
+                            <option value="1">Casas</option>
+                            <option value="2">Bodega</option>
+                            <option value="3">Departamentos</option>
+                            <option value="4">Locales</option>
+                            <option value="5">nave_industrial &nbsp;&nbsp;&nbsp;</option>
+                            <option value="6">Oficinas</option>
+                            <option value="7">Rancho</option>
+                            <option value="8">Terrenos</option>
+                        </select>
+                    </div>
+                    <div style="float: left; margin-right: 5px;">
+                        <select name="ventaRenta" id="" class="">
+                            <option value="Venta">Venta &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+                            <option value="Renta">Renta</option>
+                        </select>
+                    </div>
+                    <div style="float: left; margin-right: 5px;">
+                        <input type="text" placeholder="Precio" class="" id="" name="precio" spellcheck="false" style="width: 100%; font-size: 16px;">
+                    </div>
+                    <div style="float: left; margin-right: 5px;">
+                        <input type="text" placeholder="C.P." class="" id="" name="cp" spellcheck="false" style="width: 100%; font-size: 16px;">
+                    </div>
+                    <div style="float: left; margin-top: 2px;"><button class="btn btn-noframe" type="submit">Buscar</button></div>
+                </form>
             </div>
         </div>
     </div>
@@ -92,15 +137,16 @@
 <div class="content">
     <div class="container">
         <div class="row">
+            <!--
             <div class="span24" itemprop="breadcrumb">
                 <ul class="breadcrumb pull-left oculto-print">
                     <li><a href="#">Inmuebles</a><span class="divider"></span></li>
                     <li><span>Todos los inmuebles</span></li>
                 </ul>
             </div>
-
+            -->
             <!-- MAIN -->
-            <div class="span19 pull-right main">
+            <div class="span19 pull-right main" style="width: 100%;">
 
                 <!-- banner ZP -->
                 <!-- banner ZP -->
@@ -108,12 +154,10 @@
                 <!-- NAV-->
                 <div class="clearfix">
                     <h1 class="pull-left h2">
-                        <span id="id-resultado-busqueda">114</span> Propiedades e inmuebles más baratos que contenga "renta iztapalapa" en México
+                        <span id="id-resultado-busqueda"><?php echo sizeof($resultado["inmuebles"]) ?></span> Propiedades e inmuebles encontrados
                     </h1>
+                    <!--
                     <div class="pull-right acciones-listado">
-
-
-
                             <span class="dropdown-orden">
                             	<span class="hidden-old-desktop hidden-phone hidden-tablet">Ordenar por:</span>
                             </span>
@@ -126,78 +170,69 @@
                             </ul>
                         </div>
                     </div>
+                    -->
                 </div>
 
                 <div class="section-listado" id="vistaList">
                     <div class="clearfix">
                         <ul class="list-posts unstyled clearfix">
-                            <li class="post      simple" id="aviso-50861126" data-aviso="50861126" data-href="/propiedades/bodega-en-renta-col.-guadalupe-del-moral-del.-50861126.html">
-                                <div class="post-pic">
-                                    <span class="post-destacado">Desarrollo</span>
-                                    <!-- INSERT SLIDER BEG-->
-                                    <div style="height: 200px;" class="royalSlider rsDefault slideme rsHor rs-ld">
-                                        <div style="width: 280px; height: 200px;" class="rsOverflow">
-                                            <div style="transition-duration: 0s; transform: translate3d(0px, 0px, 0px);" class="rsContainer">
-                                                <div style="left: 0px;" class="rsSlide ">
-                                                    <div style="visibility: visible; opacity: 1; transition: opacity 400ms ease-in-out 0s;" class="rsContent" data-id="36113560">
-                                                        <img style="width: 280px; height: 200px; margin-left: 0px; margin-top: 0px;" class="rsImg rsMainSlideImage" src="<?php echo base_url() ?>resources/images/36113560.jpg">
-                                                    </div>
+                            <?php
+                            if (isset($resultado["inmuebles"])) {
+                                for ($i=0; $i<sizeof($resultado["inmuebles"]); $i++) {
+
+                                    //obtener detalle del inmueble
+                                    $url = "http://sicksadworld.com.mx/servicios/getInmueble.php";
+                                    $params = array("id_inmueble"=>$resultado['inmuebles'][$i]["id_inmueble"], "tipo_inmueble"=>$resultado['inmuebles'][$i]["tipo_inmueble"]);
+                                    $detalle = json_decode(consumeRest($url, $params), true);
+                                    ?>
+                                    <li class="post      simple" id="" data-aviso="">
+                                        <div class="post-pic" style="margin-left: 0px;">
+                                            <div style="height: 200px;" class="royalSlider rsDefault slideme rsHor rs-ld">
+                                                <div style="width: 280px; height: 200px;" class="rsOverflow" id="bxslider2">
+                                                    <img style="width: 280px; height: 200px; margin-left: 0px; margin-top: 0px;" class="rsImg rsMainSlideImage" src="<?php echo $resultado["inmuebles"][$i]["img_banner"] ?>">
                                                 </div>
-                                                <div style="left: 288px;" class="rsSlide ">
-                                                    <div class="rsContent" data-id="36113561">
-                                                        <img style="width: 280px; height: 200px; margin-left: 0px; margin-top: 0px;" class="rsImg rsMainSlideImage" src="<?php echo base_url() ?>resources/images/36113560.jpg">
+                                            </div>
+                                            <!-- INSERT SLIDER END -->
+                                        </div>
+
+                                        <div class="post-text" style="margin-right: 70px;">
+                                            <div class="post-text-desc">
+                                                <div>
+                                                    <h4 class="post-title"><a href="<?php echo base_url() ?>inicio/detalle/<?php echo $resultado['inmuebles'][$i]["id_inmueble"]."/".$resultado['inmuebles'][$i]["tipo_inmueble"] ?>" title=""><?php echo $detalle["detalle_inmueble"]["descripcion"] ?></a></h4>
+                                                    <p>
+                                                        <?php echo $detalle["detalle_inmueble"]["descripcion"] ?>
+                                                    </p>
+                                                    <a href="<?php echo base_url() ?>inicio/detalle/<?php echo $resultado['inmuebles'][$i]["id_inmueble"]."/".$resultado['inmuebles'][$i]["tipo_inmueble"] ?>" title="" class="post-link">ver detalles</a>
+                                                </div>
+                                            </div>
+
+                                            <div class="post-text-pay">
+                                                <ul class="misc unstyled">
+                                                    <li class="misc-m2totales"><?php echo (isset($detalle["detalle_inmueble"]["terreno_m2"])) ? $detalle["detalle_inmueble"]["terreno_m2"] : "" ?></li>
+                                                    <li class="misc-banos"><?php echo (isset($detalle["detalle_inmueble"]["banos"])) ? $detalle["detalle_inmueble"]["banos"] : "0" ?> Baños</li>
+                                                </ul>
+                                                <div>
+                                                    <p class="price"><span>MN $<?php echo (is_numeric($detalle["detalle_inmueble"]["precio"])) ? number_format($detalle["detalle_inmueble"]["banos"], 2) : $detalle["detalle_inmueble"]["banos"]; ?></span></p>
+
+                                                    <div class="buttons">
+                                                        <a href="<?php echo base_url() ?>inicio/detalle/<?php echo $resultado['inmuebles'][$i]["id_inmueble"]."/".$resultado['inmuebles'][$i]["tipo_inmueble"] ?>">
+                                                        <button class="btn btn-primary btn-large js-contact" data-aviso-id="50861126">
+                                                            <i class="ticon-phone"></i>
+                                                            Contactar
+                                                        </button>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <!-- INSERT SLIDER END -->
-                                </div>
-
-                                <div class="post-text">
-                                    <div class="post-text-desc">
-                                        <div>
-                                            <h4 class="post-title"><a href="http://www.inmuebles24.com/propiedades/bodega-en-renta-col.-guadalupe-del-moral-del.-50861126.html" title="Bodega en Renta, Col. Guadalupe del Moral, Del. iztapalapa">Bodega en Renta, Col. Guadalupe del Moral, Del. Iztapalapa</a></h4>
-                                            <p>
-                                                Bodega Comercial en renta con excelente ubicación, a
-                                                una cuadra de rojo gomez y el eje 6, cerca de la central de abasto, de
-                                                1,075m2 y otra de 378m2 se pueden rentar juntas o por separado en $ 100
-                                                por m2, Visítelas.
-                                            </p>
-                                            <a href="http://www.inmuebles24.com/propiedades/bodega-en-renta-col.-guadalupe-del-moral-del.-50861126.html" title="Bodega en Renta, Col. Guadalupe del Moral, Del. Iztapalapa" class="post-link">ver detalles</a>
-                                        </div>
-                                    </div>
-
-                                    <div class="post-text-pay">
-                                        <ul class="misc unstyled">
-                                            <li class="misc-m2totales">1075 m²<span>totales</span></li>
-                                            <li class="misc-banos">2<span>baños</span></li>
-                                        </ul>
-                                        <div>
-                                            <p class="price"><span> MN 100</span></p>
-
-                                            <div class="buttons">
-                                                <!-- bt fav state on -->
-                                                <button class="btn ticon-heart-empty" title="Agregar a favoritos" data-action="agregarfavorito" data-aviso-id="50861126" data-loading-text="...">
-                                                    <span class="hide">Marcar como favorito</span>
-                                                </button>
-                                                <!-- bt fav state off -->
-                                                <button class="hide btn ticon-fav" title="Quitar de favoritos" data-action="removerfavorito" data-aviso-id="50861126" data-loading-text="...">
-                                                    <span class="hide">Quitar de favoritos</span>
-                                                </button>
-                                                <!-- bt contact -->
-                                                <button class="btn btn-primary btn-large js-contact" data-aviso-id="50861126">
-                                                    <i class="ticon-phone"></i>
-                                                    Contactar
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
+                                    </li>
+                                    <?php
+                                }
+                            }
+                            ?>
                         </ul>
                     </div>
-
+                    <!--
                     <div class="pagination pagination-centered">
                         <ul>
                             <li class="pagination-action-prev disabled"><a href="#" rel="prev"><i class="ticon ticon-prev"></i><span>&nbsp;Anterior</span></a></li>
@@ -209,6 +244,7 @@
                             <li class="pagination-action-next "><a href="http://www.inmuebles24.com/inmuebles-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa-pagina-2.html" rel="next"><span>Siguiente&nbsp;</span><i class="ticon ticon-next"></i></a></li>
                         </ul>
                     </div>
+                    -->
 
                 </div>
                 <div class="section-listado oculto" id="map">
@@ -219,8 +255,8 @@
                 </div>
                 <!-- BANNERS -->
             </div>
-
             <!-- FILTERS -->
+            <!--
             <div class="span5 pull-left">
 
                 <div class="section-appliedfilters">
@@ -231,158 +267,38 @@
                         </ul>
                     </div>
                 </div>
+                -->
 
-
+                <!--
                 <div class="section-filters">
                     <div class="nav-collapsible" data-ui-collapsible="">
                         <ul>
                             <li class="padre  ">
-                                <div class="a-title"><h4>Estado</h4></div>
-                                <div class="facetas-default">
-                                    <ul class="facetas-ul">
-                                        <li><a href="http://www.inmuebles24.com/inmuebles-en-distrito-federal-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="Distrito Federal (76)" data-url-list="/inmuebles-en-distrito-federal-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/inmuebles-en-distrito-federal-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">Distrito Federal <span>(76)</span></a></li>
-                                        <li><a href="http://www.inmuebles24.com/inmuebles-en-jalisco-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="Jalisco (11)" data-url-list="/inmuebles-en-jalisco-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/inmuebles-en-jalisco-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">Jalisco <span>(11)</span></a></li>
-                                        <li><a href="http://www.inmuebles24.com/inmuebles-en-puebla-provincia-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="Puebla (10)" data-url-list="/inmuebles-en-puebla-provincia-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/inmuebles-en-puebla-provincia-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">Puebla <span>(10)</span></a></li>
-                                        <li><a href="http://www.inmuebles24.com/inmuebles-en-edo.-de-mexico-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="Edo. de México (6)" data-url-list="/inmuebles-en-edo.-de-mexico-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/inmuebles-en-edo.-de-mexico-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">Edo. de México <span>(6)</span></a></li>
-                                        <li><a href="http://www.inmuebles24.com/inmuebles-en-veracruz-provincia-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="Veracruz (3)" data-url-list="/inmuebles-en-veracruz-provincia-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/inmuebles-en-veracruz-provincia-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">Veracruz <span>(3)</span></a></li>
-
-                                        <li class="padre cerrado">
-                                            <ul>
-                                                <li><a href="http://www.inmuebles24.com/inmuebles-en-guanajuato-provincia-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="Guanajuato (1)" data-url-list="/inmuebles-en-guanajuato-provincia-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/inmuebles-en-guanajuato-provincia-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">Guanajuato <span>(1)</span></a></li>
-                                                <li><a href="http://www.inmuebles24.com/inmuebles-en-hidalgo-provincia-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="Hidalgo (1)" data-url-list="/inmuebles-en-hidalgo-provincia-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/inmuebles-en-hidalgo-provincia-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">Hidalgo <span>(1)</span></a></li>
-                                                <li><a href="http://www.inmuebles24.com/inmuebles-en-michoacan-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="Michoacán (1)" data-url-list="/inmuebles-en-michoacan-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/inmuebles-en-michoacan-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">Michoacán <span>(1)</span></a></li>
-                                                <li><a href="http://www.inmuebles24.com/inmuebles-en-morelos-provincia-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="Morelos (1)" data-url-list="/inmuebles-en-morelos-provincia-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/inmuebles-en-morelos-provincia-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">Morelos <span>(1)</span></a></li>
-                                                <li><a href="http://www.inmuebles24.com/inmuebles-en-nuevo-leon-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="Nuevo León (1)" data-url-list="/inmuebles-en-nuevo-leon-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/inmuebles-en-nuevo-leon-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">Nuevo León <span>(1)</span></a></li>
-                                                <li><a href="http://www.inmuebles24.com/inmuebles-en-queretaro-provincia-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="Querétaro (2)" data-url-list="/inmuebles-en-queretaro-provincia-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/inmuebles-en-queretaro-provincia-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">Querétaro <span>(2)</span></a></li>
-                                                <li><a href="http://www.inmuebles24.com/inmuebles-en-quintana-roo-provincia-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="Quintana Roo (1)" data-url-list="/inmuebles-en-quintana-roo-provincia-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/inmuebles-en-quintana-roo-provincia-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">Quintana Roo <span>(1)</span></a></li>
-                                            </ul>
-                                            <a href="#" rel="nofollow" class="mas-menos mas"><span class="collapsible-expand"></span>Ver más</a>
-                                            <a href="#" rel="nofollow" class="mas-menos menos oculto"><span class="collapsible-collapse"></span>Ver menos</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-
-                            <li class="padre  ">
                                 <div class="a-title"><h4>Tipo de operacion</h4></div>
                                 <div class="facetas-default">
                                     <ul class="facetas-ul">
-                                        <li><a href="http://www.inmuebles24.com/inmuebles-en-renta-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="Renta (110)" data-url-list="/inmuebles-en-renta-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/inmuebles-en-renta-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">Renta <span>(110)</span></a></li>
-                                        <li><a href="http://www.inmuebles24.com/inmuebles-en-venta-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="Venta (11)" data-url-list="/inmuebles-en-venta-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/inmuebles-en-venta-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">Venta <span>(11)</span></a></li>
-                                        <li><a href="http://www.inmuebles24.com/inmuebles-en-temporal-vacacional-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="Temporal/Vacacional (1)" data-url-list="/inmuebles-en-temporal-vacacional-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/inmuebles-en-temporal-vacacional-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">Temporal/Vacacional <span>(1)</span></a></li>
+                                        <li><a href="" rel="nofollow" title="Renta" data-url-list="" data-url-grid="">Renta <span>(0)</span></a></li>
+                                        <li><a href="" rel="nofollow" title="Venta" data-url-list="" data-url-grid="">Venta <span>(0)</span></a></li>
                                     </ul>
                                 </div>
                             </li>
+
                             <li class="padre  ">
                                 <div class="a-title"><h4>Tipo de propiedad</h4></div>
                                 <div class="facetas-default">
                                     <ul class="facetas-ul">
-                                        <li><a href="http://www.inmuebles24.com/departamentos-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="Departamento (44)" data-url-list="/departamentos-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/departamentos-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">Departamento <span>(44)</span></a></li>
-                                        <li><a href="http://www.inmuebles24.com/casas-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="Casa (30)" data-url-list="/casas-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/casas-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">Casa <span>(30)</span></a></li>
-                                        <li><a href="http://www.inmuebles24.com/locales-comerciales-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="Local Comercial (12)" data-url-list="/locales-comerciales-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/locales-comerciales-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">Local Comercial <span>(12)</span></a></li>
-                                        <li><a href="http://www.inmuebles24.com/bodegas-comerciales-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="Bodega comercial (10)" data-url-list="/bodegas-comerciales-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/bodegas-comerciales-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">Bodega comercial <span>(10)</span></a></li>
-                                        <li><a href="http://www.inmuebles24.com/edificio-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="Edificio (8)" data-url-list="/edificio-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/edificio-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">Edificio <span>(8)</span></a></li>
-
-                                        <li class="padre cerrado">
-                                            <ul>
-                                                <li><a href="http://www.inmuebles24.com/oficinas-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="Oficina (5)" data-url-list="/oficinas-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/oficinas-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">Oficina <span>(5)</span></a></li>
-                                                <li><a href="http://www.inmuebles24.com/casa-en-condominio-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="Casa en condominio (2)" data-url-list="/casa-en-condominio-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/casa-en-condominio-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">Casa en condominio <span>(2)</span></a></li>
-                                                <li><a href="http://www.inmuebles24.com/terrenos-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="Terreno / Lote (1)" data-url-list="/terrenos-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/terrenos-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">Terreno / Lote <span>(1)</span></a></li>
-                                                <li><a href="http://www.inmuebles24.com/inmueble-productivo-urbano-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="Inmueble productivo urbano (1)" data-url-list="/inmueble-productivo-urbano-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/inmueble-productivo-urbano-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">Inmueble productivo urbano <span>(1)</span></a></li>
-                                                <li><a href="http://www.inmuebles24.com/bodega-galpon-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="Bodega-Galpón (1)" data-url-list="/bodega-galpon-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/bodega-galpon-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">Bodega-Galpón <span>(1)</span></a></li>
-                                            </ul>
-                                            <a href="#" rel="nofollow" class="mas-menos mas"><span class="collapsible-expand"></span>Ver más</a>
-                                            <a href="#" rel="nofollow" class="mas-menos menos oculto"><span class="collapsible-collapse"></span>Ver menos</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="padre  ">
-                                <div class="a-title"><h4>Precio</h4></div>
-                                <div class="facetas-default">
-                                    <ul class="facetas-ul">
-                                        <li class="price-filter">
-                                            <form method="POST">
-                                                <div class="input-money">
-                                                    <table>
-                                                        <tbody><tr class="desde">
-                                                            <td class="coin"><span>desde</span><i class="simbolo-moneda">MN</i></td>
-                                                            <td class="input-coin"><input placeholder="Min." name="preciomin" id="preciomin" maxlength="15" class="soloEntero formatearPrecio" data-numericoconcomas="numericoconcomas" type="text"></td>
-                                                        </tr>
-                                                        </tbody></table>
-                                                    <table>
-                                                        <tbody><tr class="desde">
-                                                            <td class="coin"><span>hasta</span><i class="simbolo-moneda">MN</i></td>
-                                                            <td class="input-coin"><input placeholder="Max." name="preciomax" id="preciomax" maxlength="15" class="soloEntero formatearPrecio" data-numericoconcomas="numericoconcomas" type="text"></td>
-                                                        </tr>
-                                                        </tbody></table>
-                                                </div>
-                                                <div class="aplicar">
-                                                    <button type="submit" class="btn btn-medium" id="botonPrecio">Aplicar</button>
-                                                </div>
-                                            </form>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-
-                            <li class="padre  ">
-                                <div class="a-title"><h4>Recámaras</h4></div>
-                                <div class="facetas-default">
-                                    <ul class="facetas-ul">
-                                        <li><a href="http://www.inmuebles24.com/inmuebles-con-2-recamaras-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="2 recámaras (29)" data-url-list="/inmuebles-con-2-recamaras-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/inmuebles-con-2-recamaras-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">2 recámaras <span>(29)</span></a></li>
-                                        <li><a href="http://www.inmuebles24.com/inmuebles-con-3-recamaras-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="3 recámaras (29)" data-url-list="/inmuebles-con-3-recamaras-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/inmuebles-con-3-recamaras-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">3 recámaras <span>(29)</span></a></li>
-                                        <li><a href="http://www.inmuebles24.com/inmuebles-con-1-recamara-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="1 recámara (12)" data-url-list="/inmuebles-con-1-recamara-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/inmuebles-con-1-recamara-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">1 recámara <span>(12)</span></a></li>
-                                        <li><a href="http://www.inmuebles24.com/inmuebles-con-4-recamaras-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="4 recámaras (7)" data-url-list="/inmuebles-con-4-recamaras-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/inmuebles-con-4-recamaras-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">4 recámaras <span>(7)</span></a></li>
-                                        <li><a href="http://www.inmuebles24.com/inmuebles-con-5-recamaras-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="5 recámaras (1)" data-url-list="/inmuebles-con-5-recamaras-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/inmuebles-con-5-recamaras-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">5 recámaras <span>(1)</span></a></li>
+                                        <li><a href="#" title="casas" id="1">Casas <span>(0)</span></a></li>
+                                        <li><a href="#" title="casas" id="2">Bodega <span>(0)</span></a></li>
+                                        <li><a href="#" title="casas" id="3">Departamentos <span>(0)</span></a></li>
+                                        <li><a href="#" title="casas" id="4">Locales <span>(0)</span></a></li>
+                                        <li><a href="#" title="casas" id="5">Nave Industrial <span>(0)</span></a></li>
 
 
                                         <li class="padre cerrado">
                                             <ul>
-                                                <li><a href="http://www.inmuebles24.com/inmuebles-con-10-recamaras-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="Más de 10 recámaras (1)" data-url-list="/inmuebles-con-10-recamaras-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/inmuebles-con-10-recamaras-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">Más de 10 recámaras <span>(1)</span></a></li>
-                                            </ul>
-                                            <a href="#" rel="nofollow" class="mas-menos mas"><span class="collapsible-expand"></span>Ver más</a>
-                                            <a href="#" rel="nofollow" class="mas-menos menos oculto"><span class="collapsible-collapse"></span>Ver menos</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="padre cerrado ">
-                                <div class="a-title"><h4>Estacionamientos</h4></div>
-                                <div class="facetas-default">
-                                    <ul class="facetas-ul">
-                                        <li><a href="http://www.inmuebles24.com/inmuebles-con-2-estacionamientos-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="Para 2 autos (29)" data-url-list="/inmuebles-con-2-estacionamientos-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/inmuebles-con-2-estacionamientos-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">Para 2 autos <span>(29)</span></a></li>
-                                        <li><a href="http://www.inmuebles24.com/inmuebles-con-1-estacionamiento-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="Para 1 auto (25)" data-url-list="/inmuebles-con-1-estacionamiento-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/inmuebles-con-1-estacionamiento-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">Para 1 auto <span>(25)</span></a></li>
-                                        <li><a href="http://www.inmuebles24.com/inmuebles-con-3-estacionamientos-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="Para 3 autos (13)" data-url-list="/inmuebles-con-3-estacionamientos-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/inmuebles-con-3-estacionamientos-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">Para 3 autos <span>(13)</span></a></li>
-                                        <li><a href="http://www.inmuebles24.com/inmuebles-con-10-estacionamientos-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="Para más de 10 autos (9)" data-url-list="/inmuebles-con-10-estacionamientos-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/inmuebles-con-10-estacionamientos-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">Para más de 10 autos <span>(9)</span></a></li>
-                                        <li><a href="http://www.inmuebles24.com/inmuebles-con-4-estacionamientos-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="Para 4 autos (4)" data-url-list="/inmuebles-con-4-estacionamientos-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/inmuebles-con-4-estacionamientos-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">Para 4 autos <span>(4)</span></a></li>
-                                        <li class="padre cerrado">
-                                            <ul>
-                                                <li><a href="http://www.inmuebles24.com/inmuebles-con-6-estacionamientos-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="Para 6 autos (3)" data-url-list="/inmuebles-con-6-estacionamientos-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/inmuebles-con-6-estacionamientos-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">Para 6 autos <span>(3)</span></a></li>
-                                                <li><a href="http://www.inmuebles24.com/inmuebles-con-5-estacionamientos-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="Para 5 autos (3)" data-url-list="/inmuebles-con-5-estacionamientos-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/inmuebles-con-5-estacionamientos-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">Para 5 autos <span>(3)</span></a></li>
-                                            </ul>
-                                            <a href="#" rel="nofollow" class="mas-menos mas"><span class="collapsible-expand"></span>Ver más</a>
-                                            <a href="#" rel="nofollow" class="mas-menos menos oculto"><span class="collapsible-collapse"></span>Ver menos</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-
-                            <li class="padre cerrado ">
-                                <div class="a-title"><h4>Baños</h4></div>
-                                <div class="facetas-default">
-                                    <ul class="facetas-ul">
-                                        <li><a href="http://www.inmuebles24.com/inmuebles-con-2-banos-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="2 baños (36)" data-url-list="/inmuebles-con-2-banos-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/inmuebles-con-2-banos-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">2 baños <span>(36)</span></a></li>
-                                        <li><a href="http://www.inmuebles24.com/inmuebles-con-1-bano-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="1 baño (29)" data-url-list="/inmuebles-con-1-bano-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/inmuebles-con-1-bano-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">1 baño <span>(29)</span></a></li>
-                                        <li><a href="http://www.inmuebles24.com/inmuebles-con-3-banos-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="3 baños (13)" data-url-list="/inmuebles-con-3-banos-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/inmuebles-con-3-banos-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">3 baños <span>(13)</span></a></li>
-                                        <li><a href="http://www.inmuebles24.com/inmuebles-con-4-banos-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="4 baños (11)" data-url-list="/inmuebles-con-4-banos-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/inmuebles-con-4-banos-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">4 baños <span>(11)</span></a></li>
-                                        <li><a href="http://www.inmuebles24.com/inmuebles-con-9-banos-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="9 baños (2)" data-url-list="/inmuebles-con-9-banos-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/inmuebles-con-9-banos-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">9 baños <span>(2)</span></a></li>
-                                        <li class="padre cerrado">
-                                            <ul>
-                                                <li><a href="http://www.inmuebles24.com/inmuebles-con-6-banos-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="6 baños (2)" data-url-list="/inmuebles-con-6-banos-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/inmuebles-con-6-banos-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">6 baños <span>(2)</span></a></li>
-                                                <li><a href="http://www.inmuebles24.com/inmuebles-con-5-banos-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="5 baños (1)" data-url-list="/inmuebles-con-5-banos-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/inmuebles-con-5-banos-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">5 baños <span>(1)</span></a></li>
-                                                <li><a href="http://www.inmuebles24.com/inmuebles-con-10-banos-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="Más de 10 baños (1)" data-url-list="/inmuebles-con-10-banos-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/inmuebles-con-10-banos-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">Más de 10 baños <span>(1)</span></a></li>
-                                                <li><a href="http://www.inmuebles24.com/inmuebles-con-7-banos-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" rel="nofollow" title="7 baños (1)" data-url-list="/inmuebles-con-7-banos-ordenado-por-precio-ascendente-busquedaext-renta-iztapalapa.html" data-url-grid="/inmuebles-con-7-banos-ordenado-por-precio-ascendente-grid-busquedaext-renta-iztapalapa.html">7 baños <span>(1)</span></a></li>
+                                                <li><a href="#" title="casas" id="6">Oficinas <span>(0)</span></a></li>
+                                                <li><a href="#" title="casas" id="7">Ranchos <span>(0)</span></a></li>
+                                                <li><a href="#" title="casas" id="8">Terrenos <span>(0)</span></a></li>
                                             </ul>
                                             <a href="#" rel="nofollow" class="mas-menos mas"><span class="collapsible-expand"></span>Ver más</a>
                                             <a href="#" rel="nofollow" class="mas-menos menos oculto"><span class="collapsible-collapse"></span>Ver menos</a>
@@ -394,6 +310,7 @@
                     </div>
                 </div>
             </div>
+            -->
         </div>
     </div>
 </div>

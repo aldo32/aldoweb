@@ -29,6 +29,7 @@ class Inicio extends CI_Controller {
         $params = array("categoria"=>6);
         $inmueblesOficinas = json_decode($this->consumeRest($url, $params), true);
 
+        $data["mensajeError"] = $this->session->flashdata('mensajeError');
         $data["banners"] = $banners;
         $data["inmueblesCasas"] = $inmueblesCasas;
         $data["inmueblesDepartamentos"] = $inmueblesDepartamentos;
@@ -167,56 +168,118 @@ class Inicio extends CI_Controller {
         return $data;
 	}
 
-	function informacionInmueble() {
+	function enviarInformacionInmueble() {
 	    $idInmueble = $this->input->post("idInmueble");
 	    $tipoInmueble = $this->input->post("tipoInmueble");
+        $mensaje = $this->input->post("mensaje");
+        $nombre = $this->input->post("nombre");
+        $telefono = $this->input->post("telefono");
+        $email = $this->input->post("email");
+
+        $inmueble = "";
+        switch ($tipoInmueble) {
+            case 1: $inmueble = "casas"; break;
+            case 2: $inmueble = "bodegas"; break;
+            case 3: $inmueble = "departamentos"; break;
+            case 4: $inmueble = "locales"; break;
+            case 5: $inmueble = "nave_industrial"; break;
+            case 6: $inmueble = "oficinas"; break;
+            case 7: $inmueble = "rancho"; break;
+            case 8: $inmueble = "terrenos"; break;
+        }
 
         $this->form_validation->set_rules('mensaje', '<strong>Mensaje</strong>', 'required|trim');
         $this->form_validation->set_rules('nombre', '<strong>Nombre</strong>', 'required|trim');
-        $this->form_validation->set_rules('telefono', '<strong>Teléfono</strong>', 'required|trim');
+        $this->form_validation->set_rules('telefono', '<strong>Teléfono</strong>', 'required|trim|numeric');
         $this->form_validation->set_rules('email', '<strong>Email</strong>', 'required|trim|valid_email');
 
         $this->form_validation->set_message('required', 'El campo %s es obligatorio');
+        $this->form_validation->set_message('numeric', 'Campo %s solo numerico');
         $this->form_validation->set_message('valid_email', 'El email no es valido');
 
         if ($this->form_validation->run()==FALSE) {
             $this->form_validation->set_error_delimiters('', '<br>');
 
-            //obtener detalle del inmueble
-            $url = "http://sicksadworld.com.mx/servicios/getInmueble.php";
-            $params = array("id_inmueble"=>$idInmueble, "tipo_inmueble"=>$tipoInmueble);
-            $detalle = json_decode($this->consumeRest($url, $params), true);
-
-            $data = $this->general();
-            $data["detalle"] = $detalle;
-            $data["idInmueble"] = $idInmueble;
-            $data["tipoInmueble"] = $tipoInmueble;
-            $this->load->view("detalle_view", $data);
+            echo "<p class='valError'>".validation_errors()."</p>";
         }
         else {
-            echo "Listo";
+            $message = '
+                <style>
+                #modal-wraper {
+                    border-radius: 10px 10px 10px 10px;
+                    -moz-border-radius: 10px 10px 10px 10px;
+                    -webkit-border-radius: 10px 10px 10px 10px;
+                    border: 0px solid #000000;
+                    background: #64aee3;
+                    color: #000;
+                    position: relative;
+                    padding: 15px;
+                }
+                #modal-content { padding-left: 10px; padding-right: 10px; padding-bottom: 10px; text-align: justify }
+                </style>
+
+                <div id="modal-wraper">
+                    <div id="modal-content">
+                        <h3>Comentarios sobre el inmueble</h3>
+                        <br>
+                        <div>Tipo inmueble: '.$inmueble.' </div>
+                        <div>Inmueble: '.$idInmueble.' </div>
+                        <br><br>
+
+                        <div><b>Nombre:</b> '.$nombre.'</div>
+                        <div><b>Telefono:</b> '.$telefono.'</div>
+                        <div><b>Email:</b> '.$email.'</div>
+                        <br><br>
+                        <div><b>Mensaje:</b><br> '.$mensaje.'</div>
+                    </div>
+                </div>
+            ';
+
+            $this->generallib->sendEmail($message, $email, $email, "isc.aldo@hotmail.com", "Mensaje de posible cliente", null);
+            echo "<b>Tu mensaje se a enviado con éxito. Gracias</b>";
         }
 	}
 
     function buscar() {
-        $tipoPropiedad = $this->input->post("tipoPropiedad");
-        $ubicacion = $this->input->post("ubicacion");
+        $data = $this->general();
 
-        $inmueble_type = $tipoPropiedad;
-        $inmueble_venta_renta = "";
-        $inmueble_precio = "";
-        $inmueble_codigo_postal = "";
+        if ($_POST) {
+            $tipoPropiedad = $this->input->post("tipoPropiedad");
+            $ventaRenta = $this->input->post("ventaRenta");
+            $precio = $this->input->post("precio");
+            $cp = $this->input->post("cp");
+            $inmueble_id = "";
+        }
+        else {
+            $tipoPropiedad = "";
+            $ventaRenta = "";
+            $precio = "";
+            $cp = "";
+            $inmueble_id = "";
+        }
+
+        /*
+        $tipoPropiedad = "1";
+        $ventaRenta = "Venta";
+        $precio = "";
+        $cp = "76800";
         $inmueble_id = "";
+        */
 
         //obtener detalle del inmueble
         $url = "http://sicksadworld.com.mx/servicios/buscarInmuebles.php";
-        $params = array("inmueble_type"=>$inmueble_type, "inmueble_venta_renta"=>$inmueble_venta_renta, "inmueble_precio"=>$inmueble_precio, "inmueble_codigo_postal"=>$inmueble_codigo_postal, 'inmueble_id'=>$inmueble_id);
+        $params = array("tipo_inmueble"=>$tipoPropiedad, "venta_renta"=>$ventaRenta, "precio"=>$precio, "codigo_postal"=>$cp, 'id_inmueble'=>$inmueble_id);
         $resultado = json_decode($this->consumeRest($url, $params), true);
-        print_r($resultado);
-        exit();
 
-        $data = $this->general();
-        $this->load->view("buscar_view", $data);
+        if ($resultado["idError"] != 0) {
+            $this->session->set_flashdata("mensajeError", array("mensaje"=>$resultado["mensajeError"]));
+            redirect("inicio");
+        }
+        else {
+            //print_r($resultado); exit();
+            $data["resultado"] = $resultado;
+            $this->load->view("buscar_view", $data);
+        }
     }
 
     function consumeRest($url, $params) {

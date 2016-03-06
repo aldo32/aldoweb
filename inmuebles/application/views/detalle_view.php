@@ -11,11 +11,37 @@
     <script>
     $(document).ready(function() {
         //$('#coinslider').coinslider({width: 780, height: 370, delay: 5000,});
-        $('#coinslider').bxSlider({
+        $('#bxslider').bxSlider({
             auto: true,
             autoControls: false
         });
         initMap()
+
+        $("#enviarInformacionInmueble").click(function(e) {
+            e.preventDefault();
+
+            idInmueble = $("#idInmueble").val();
+            tipoInmueble = $("#tipoInmueble").val();
+            mensaje = $("#mensaje").val();
+            nombre = $("#nombre").val();
+            telefono = $("#telefono").val();
+            email = $("#email").val();
+
+            $("#messageInfo").html("Enviando...");
+            $.ajax({
+                url: "<?php echo base_url("inicio/enviarInformacionInmueble") ?>",
+                data: "idInmueble="+idInmueble+"&tipoInmueble="+tipoInmueble+"&mensaje="+mensaje+"&nombre="+nombre+"&telefono="+telefono+"&email="+email,
+                dataType: "html",
+                success: function(datos) {
+                    //$("#mensaje").val("");
+                    //$("#nombre").val("");
+                    //$("#telefono").val("");
+                    //$("#email").val("");
+                    $("#messageInfo").html(datos);
+                },
+                type: "POST"
+            });
+        });
     });
 
     function initMap() {
@@ -51,8 +77,33 @@
 
         <div class="header-searchbox-wrap">
             <div style="position: relative; width: 100%">
-                <div style="float: left; margin-right: 15px;"><input type="text" name="search" placeholder="Busca tu inmueble" style="width: 990px; margin-top: 0px;"></div>
-                <div style="float: left; margin-top: 2px;"><button data-url-destino="#" data-action="buscar" class="btn btn-noframe">Buscar</button></div>
+                <form id="searchbox" action="<?php echo base_url("inicio/buscar") ?>" method="post">
+                    <div style="float: left; margin-left: 50px; margin-right: 5px;">
+                        <select name="tipoPropiedad" id="" class="">
+                            <option value="1">Casas</option>
+                            <option value="2">Bodega</option>
+                            <option value="3">Departamentos</option>
+                            <option value="4">Locales</option>
+                            <option value="5">nave_industrial &nbsp;&nbsp;&nbsp;</option>
+                            <option value="6">Oficinas</option>
+                            <option value="7">Rancho</option>
+                            <option value="8">Terrenos</option>
+                        </select>
+                    </div>
+                    <div style="float: left; margin-right: 5px;">
+                        <select name="ventaRenta" id="" class="">
+                            <option value="Venta">Venta &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+                            <option value="Renta">Renta</option>
+                        </select>
+                    </div>
+                    <div style="float: left; margin-right: 5px;">
+                        <input type="text" placeholder="Precio" class="" id="" name="precio" spellcheck="false" style="width: 100%; font-size: 16px;">
+                    </div>
+                    <div style="float: left; margin-right: 5px;">
+                        <input type="text" placeholder="C.P." class="" id="" name="cp" spellcheck="false" style="width: 100%; font-size: 16px;">
+                    </div>
+                    <div style="float: left; margin-top: 2px;"><button class="btn btn-noframe" type="submit">Buscar</button></div>
+                </form>
             </div>
         </div>
     </div>
@@ -76,7 +127,7 @@
                     </div>
 
                     <!-- GALERIA -->
-                    <div id="coinslider">
+                    <div id="bxslider">
                         <?php
                         for ($i=0; $i<sizeof($detalle["imagenes"]); $i++) {
                             ?>
@@ -111,13 +162,13 @@
                                         <span class="valor"><?php echo $detalle["detalle_inmueble"]["precio"] ?></span>
                                     </li>
                                     <li>
-                                        <span class="nombre"><i class="licon licon-dormitorios"></i><?php echo $detalle["detalle_inmueble"]["recamaras"] ?> Recamaras</span>
+                                        <span class="nombre"><i class="licon licon-dormitorios"></i><?php echo (isset($detalle["detalle_inmueble"]["recamaras"])) ? $detalle["detalle_inmueble"]["recamaras"] : "NA" ?> Recamaras</span>
                                     </li>
                                     <li>
-                                        <span class="nombre"><i class="licon licon-banos"></i>Hasta <?php echo $detalle["detalle_inmueble"]["banos"] ?> Baños</span>
+                                        <span class="nombre"><i class="licon licon-banos"></i>Hasta <?php echo (isset($detalle["detalle_inmueble"]["banos"])) ? $detalle["detalle_inmueble"]["banos"] : "0" ?> Baños</span>
                                     </li>
                                     <li>
-                                        <span class="nombre"><i class="licon licon-garages"></i>Hasta <?php echo $detalle["detalle_inmueble"]["accesos_estacionamiento"] ?> Estacionamientos</span>
+                                        <span class="nombre"><i class="licon licon-garages"></i>Hasta <?php echo (isset($detalle["detalle_inmueble"]["accesos_estacionamiento"])) ? $detalle["detalle_inmueble"]["accesos_estacionamiento"] : "0" ?> Estacionamientos</span>
                                     </li>
                                 </ul>
                             </div>
@@ -130,7 +181,7 @@
                                     </li>
                                     <li>
                                         <span class="nombre">Desde</span>
-                                        <span class="valor" title="">MN $<?php echo number_format($detalle["detalle_inmueble"]["precio"], 2) ?></span>
+                                        <span class="valor" title="">MN $<?php echo (is_numeric($detalle["detalle_inmueble"]["precio"])) ? number_format($detalle["detalle_inmueble"]["precio"], 2) : $detalle["detalle_inmueble"]["precio"] ?></span>
                                         <br>
                                         <button class="btn btn-link no-padding-left"></button>
                                     </li>
@@ -178,9 +229,9 @@
                                     <ul>
                                         <li><?php echo $detalle["detalle_inmueble"]["venta_renta"] ?></li>
                                         <li>Terreno <?php echo $detalle["detalle_inmueble"]["terreno_m2"] ?>m</li>
-                                        <li>Construido <?php echo $detalle["detalle_inmueble"]["construccion_m2"] ?>m</li>
-                                        <li>Patios: <?php echo $detalle["detalle_inmueble"]["patios"] ?></li>
-                                        <li><?php echo $detalle["detalle_inmueble"]["condicion"] ?></li>
+                                        <li>Construido <?php echo (isset($detalle["detalle_inmueble"]["construccion_m2"])) ? $detalle["detalle_inmueble"]["construccion_m2"] : "0" ?>m</li>
+                                        <li>Patios: <?php echo (isset($detalle["detalle_inmueble"]["patios"])) ? $detalle["detalle_inmueble"]["patios"] : 0; ?></li>
+                                        <?php echo (isset($detalle["detalle_inmueble"]["condicion"])) ? "<li>".$detalle["detalle_inmueble"]["condicion"]."</li>" : "" ?></li>
                                     </ul>
                                 </div>
                             </div>
@@ -205,7 +256,7 @@
                     <div class="card-content">
                         <p class="h2 precios no-margin">
                             <span class="nombre">Precio  Desde</span>
-                            <span class="valor pull-right" title="">MN $<?php echo number_format($detalle["detalle_inmueble"]["precio"], 2) ?></span>
+                            <span class="valor pull-right" title="">MN $<?php echo (is_numeric($detalle["detalle_inmueble"]["precio"])) ? number_format($detalle["detalle_inmueble"]["precio"], 2) : $detalle["detalle_inmueble"]["precio"] ?></span>
                         </p>
                         <div class="precios">
                         </div>
@@ -220,37 +271,33 @@
 
                                     <div class="consultarAviso-formulario">
                                         <form class="consultarAviso" id="id-consultar-aviso-1" action="<?php echo base_url("inicio/informacionInmueble") ?>" method="post">
-                                            <?php
-                                            if (validation_errors() != "") {
-                                                echo "<p class='valError'>".validation_errors()."</p>";
-                                            }
-                                            ?>
+                                            <div id="messageInfo"></div>
 
-                                            <input type="hidden" name="idInmueble" value="<?php echo $idInmueble ?>">
-                                            <input type="hidden" name="tipoInmueble" value="<?php echo $tipoInmueble ?>">
+                                            <input type="hidden" id="idInmueble" name="idInmueble" value="<?php echo $idInmueble ?>">
+                                            <input type="hidden" id="tipoInmueble" name="tipoInmueble" value="<?php echo $tipoInmueble ?>">
 
                                             <div class="control-group">
                                                 <div class="controls">
-                                                    <textarea name="mensaje" placeholder="Mensaje" class="input-block open-form"><?php echo set_value("mensaje") ?></textarea>
+                                                    <textarea name="mensaje" id="mensaje" placeholder="Mensaje" class="input-block open-form"><?php echo set_value("mensaje") ?></textarea>
                                                 </div>
                                             </div>
                                             <div class="control-group">
                                                 <div class="controls">
-                                                    <input name="nombre" value="<?php echo set_value("nombre") ?>" placeholder="Nombre y Apellido" class="input-block " maxlength="180" type="text">
+                                                    <input name="nombre" id="nombre" value="<?php echo set_value("nombre") ?>" placeholder="Nombre y Apellido" class="input-block " maxlength="180" type="text">
                                                 </div>
                                             </div>
                                             <div class="control-group">
                                                 <div class="controls">
-                                                    <input name="telefono" value="<?php echo set_value("telefono") ?>" placeholder="Teléfono" class="input-block " maxlength="50" type="text">
+                                                    <input name="telefono" id="telefono" value="<?php echo set_value("telefono") ?>" placeholder="Teléfono" class="input-block " maxlength="50" type="text">
                                                 </div>
                                             </div>
                                             <div class="control-group">
                                                 <div class="controls">
-                                                    <input required="" name="email" value="<?php echo set_value("email") ?>" placeholder="E-mail" class="input-block close-form" id="emailFormConsulta" maxlength="110" type="email">
+                                                    <input required="" name="email" id="email" value="<?php echo set_value("email") ?>" placeholder="E-mail" class="input-block close-form" id="emailFormConsulta" maxlength="110" type="email">
                                                 </div>
                                             </div>
                                             <div class="control-group clearfix">
-                                                <button type="submit" class="btn btn-primary btn-large btn-block" data-action="consultaraviso" data-tipo-anunciante="lancamentos">
+                                                <button type="submit" class="btn btn-primary btn-large btn-block" data-action="consultaraviso" data-tipo-anunciante="" id="enviarInformacionInmueble">
                                                     Contactar anunciante
                                                 </button>
                                                 <small class="coment no-margin" style="color: #000;">
@@ -260,24 +307,6 @@
                                                 </small>
                                             </div>
                                         </form>
-                                        <div class="consultarAviso-enviando">
-                                            <div>
-                                                <img
-                                                    src="<?php echo base_url()  ?>resources/images/ajax-loader-2k.gif"
-                                                    height="52" width="52">
-
-                                                <p>Enviando mensaje...</p>
-                                                <span class="a cancelarEnvio">Cancelar</span>
-                                            </div>
-                                        </div>
-                                        <div class="consultarAviso-enviado">
-                                            <div>
-                                                <i class="ticon ticon-ready"></i>
-
-                                                <p>Mensaje enviado</p>
-                                                <span class="a cancelarEnvio">Enviar otro mensaje</span>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -67,6 +67,11 @@
             });
         });
     </script>
+
+    <style>
+        .searchbox-home-wrap.flat input[name=precio]{width:427px;border:0;box-shadow:none;height:45px;float:left}
+        .searchbox-home-wrap.flat input[name=cp]{width:427px;border:0;box-shadow:none;height:45px;float:left}
+    </style>
 </head>
 
 <body id="home" class="Mexico panel-usuario" style="background: #64aee3;">
@@ -92,33 +97,50 @@ $banner = array_rand($banners["inmuebles"], 1);
         <div class="searchbox-home-wrap flat" data-provincia="Distrito Federal">
             <div class="searchbox searchbox-home">
                 <h1>Busca inmuebles en México</h1>
-
                 <form id="searchbox" action="<?php echo base_url("inicio/buscar") ?>" method="post">
-                    <div class="control-group">
-                        <div class="searchbox-tipodepropiedad">
-                            <label for="searchbox-home_tipodepropiedad">Propiedad</label>
+                    <div style="width: 100%; position: relative;">
+                        <div style="float: left;">
                             <div class="input-select">
-                                <select name="tipoPropiedad" id="" class="input-weight-xlarge input-block">
+                                <select name="tipoPropiedad" id="" class="input-weight-xlarge input-block" style="height: 45px; font-size: 18px;">
                                     <option value="1">Casas</option>
-                                    <option value="2">Terrenos</option>
+                                    <option value="2">Bodega</option>
                                     <option value="3">Departamentos</option>
-                                    <option value="4">Bodegas</option>
-                                    <option value="5">Otros</option>
-                                    <option value="6">Local</option>
-                                    <option value="7">Nave</option>
-                                    <option value="8">Rancho</option>
+                                    <option value="4">Locales</option>
+                                    <option value="5">nave_industrial &nbsp;&nbsp;&nbsp;</option>
+                                    <option value="6">Oficinas</option>
+                                    <option value="7">Rancho</option>
+                                    <option value="8">Terrenos</option>
                                 </select>
                             </div>
                         </div>
-                    </div>
+                        <div style="float: left; margin-right: 20px;">
+                            <div class="input-select">
+                                <select name="ventaRenta" id="" class="input-weight-xlarge input-block" style="height: 45px; font-size: 18px;">
+                                    <option value="Venta">Venta &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+                                    <option value="Renta">Renta</option>
+                                </select>
+                            </div>
+                        </div>
 
-                    <div class="control-group">
-                        <input type="text" placeholder="Ingresa Colonia, Municipio o Delegación, Estado o Proyecto" class="" id="ubicacion" name="ubicacion" autocomplete="off" spellcheck="false" style="width: 70%; font-size: 16px;">
-                    </div>
-                    <div class="searchbox-submit">
-                        <button type="submit" id="submitBtn" class="btn btn-xlarge btn-block btn-primary">Buscar</button>
+                        <div class="control-group">
+                            <input type="text" placeholder="Precio" class="" id="" name="precio" autocomplete="off" spellcheck="false" style="width: 20%; font-size: 16px;">
+                        </div>
+                        <div class="control-group">
+                            <input type="text" placeholder="Codigo Postal" class="" id="" name="cp" autocomplete="off" spellcheck="false" style="width: 20%; font-size: 16px;">
+                        </div>
+
+                        <div class="searchbox-submit">
+                            <button type="submit" id="submitBtn" class="btn btn-xlarge btn-block btn-primary">Buscar</button>
+                        </div>
                     </div>
                 </form>
+                <div style="width: 100%; position: relative; text-align: center;">
+                    <div style="width: 300px; margin: 0 auto;">
+                        <div style="text-shadow: 2px 2px 2px rgba(150, 150, 150, 1); font-weight: bold; font-size: 20px;">
+                            <?php if(isset($mensajeError)) { echo $mensajeError["mensaje"]; } ?>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -176,7 +198,7 @@ $banner = array_rand($banners["inmuebles"], 1);
                                             </ul>
 
                                             <div class="post-price">
-                                                <span class="precio-signo ">Desde</span>&nbsp;<span class="precio-valor ">$<?php echo number_format($row['precio'], 2) ?></span>
+                                                <span class="precio-signo ">Desde</span>&nbsp;<span class="precio-valor ">$<?php echo (is_numeric($row['precio'])) ? number_format($row['precio'], 2) : $row['precio'] ?></span>
                                             </div>
                                         </div>
                                         <div class="post-actions-wrap">
