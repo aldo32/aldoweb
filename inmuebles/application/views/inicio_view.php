@@ -5,6 +5,8 @@
 
     <?php echo $includes; ?>
 
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+
     <script>
         $(function(){
             $(window).load(function(){
@@ -66,15 +68,51 @@
                 realestate().auth.updateEmailInputsConCookie();
             });
         });
+
+        function initMap() {
+            var latitude = 0;
+            var longitude = 0;
+
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 19.436499, lng: -99.143655},
+                zoom: 8
+            });
+            var infoWindow = new google.maps.InfoWindow({map: map});
+
+            // Try HTML5 geolocation.
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    $.ajax({
+                        type: "POST",
+                        url: "<?php echo base_url("inicio/obtenerBanners") ?>",
+                        data: {
+                            latitud: position.coords.latitude,
+                            longitud: position.coords.longitude
+                        },
+                        success: function (data) {
+                            $("#inmueblesDestacados").html(data);
+                        }
+                    });
+                }, function() {
+                    handleLocationError(true, infoWindow, map.getCenter());
+                });
+            } else {
+                // Browser doesn't support Geolocation
+                handleLocationError(false, infoWindow, map.getCenter());
+            }
+        }
+
     </script>
 
     <style>
-        .searchbox-home-wrap.flat input[name=precio]{width:427px;border:0;box-shadow:none;height:45px;float:left}
+        .searchbox-home-wrap.flat input[name=precio1]{width:427px;border:0;box-shadow:none;height:45px;float:left}
+        .searchbox-home-wrap.flat input[name=precio2]{width:427px;border:0;box-shadow:none;height:45px;float:left}
         .searchbox-home-wrap.flat input[name=cp]{width:427px;border:0;box-shadow:none;height:45px;float:left}
     </style>
 </head>
 
 <body id="home" class="Mexico panel-usuario" style="background: #64aee3;">
+<div id="map"></div>
 <header class="header  -home clearfix oculto-print">
     <div class="container">
         <!--LOGO-->
@@ -103,13 +141,16 @@ $banner = array_rand($banners["inmuebles"], 1);
                             <div class="input-select">
                                 <select name="tipoPropiedad" id="" class="input-weight-xlarge input-block" style="height: 45px; font-size: 18px;">
                                     <option value="1">Casas</option>
-                                    <option value="2">Bodega</option>
-                                    <option value="3">Departamentos</option>
-                                    <option value="4">Locales</option>
-                                    <option value="5">nave_industrial &nbsp;&nbsp;&nbsp;</option>
+                                    <option value="9">Fraccionamientos</option>
                                     <option value="6">Oficinas</option>
+                                    <option value="3">Departamentos</option>
+                                    <option value="6">Oficinas</option>
+                                    <option value="4">Locales</option>
+                                    <option value="2">Bodega</option>
+                                    <option value="5">Naves industriales &nbsp;&nbsp;&nbsp;</option>
                                     <option value="7">Rancho</option>
                                     <option value="8">Terrenos</option>
+                                    <option value="10">Desarrollos</option>
                                 </select>
                             </div>
                         </div>
@@ -118,15 +159,21 @@ $banner = array_rand($banners["inmuebles"], 1);
                                 <select name="ventaRenta" id="" class="input-weight-xlarge input-block" style="height: 45px; font-size: 18px;">
                                     <option value="Venta">Venta &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
                                     <option value="Renta">Renta</option>
+                                    <option value="Traspaso">Traspaso</option>
+                                    <option value="Vacaciones/Intercambio">Vacaciones/Intercambio</option>
+                                    <option value="Desarrollos">Desarrollos</option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="control-group">
-                            <input type="text" placeholder="Precio" class="" id="" name="precio" autocomplete="off" spellcheck="false" style="width: 20%; font-size: 16px;">
+                            <input type="text" placeholder="Precio desde" class="" id="" name="precio1" autocomplete="off" spellcheck="false" style="width: 15%; font-size: 16px;">
                         </div>
                         <div class="control-group">
-                            <input type="text" placeholder="Codigo Postal" class="" id="" name="cp" autocomplete="off" spellcheck="false" style="width: 20%; font-size: 16px;">
+                            <input type="text" placeholder="Hasta" class="" id="" name="precio2" autocomplete="off" spellcheck="false" style="width: 15%; font-size: 16px;">
+                        </div>
+                        <div class="control-group">
+                            <input type="text" placeholder="Id, Ciudad, C.P." class="" id="" name="cp" autocomplete="off" spellcheck="false" style="width: 20%; font-size: 16px;">
                         </div>
 
                         <div class="searchbox-submit">
@@ -170,7 +217,7 @@ $banner = array_rand($banners["inmuebles"], 1);
     <div class="row">
         <div class="span24">
             <div style="overflow: hidden;" class="frame" id="slider-desarrollos">
-                <div style="transform: translateZ(0px) translateX(-108px); width: 14160px;" class="slidee clearfix">
+                <div id="inmueblesDestacados" style="transform: translateZ(0px) translateX(-108px); width: 14160px;" class="slidee clearfix">
 
                     <?php
                     if (isset($banners)) {

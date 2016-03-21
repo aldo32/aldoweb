@@ -10,23 +10,27 @@ class Inicio extends CI_Controller {
 	public function index() {
         $data = $this->general();
 
+        //get remote ip
+        $ip = $_SERVER['REMOTE_ADDR'];
+        $ip = "189.217.206.151";
+        $tmp = file_get_contents("http://api.ipinfodb.com/v3/ip-city/?key=b891067734535f410b10170ca70014d33247e483a5ceb35ce358b190d15a0573&format=json&ip=".$ip);
+        $countryUser = json_decode($tmp);
+
         //obteniendo banner del home
         //get noticias
         $url = "http://sicksadworld.com.mx/servicios/banners.php";
-        $params = array();
+        $params = array("latitud"=>$countryUser->latitude, "longitud"=>$countryUser->longitude, "estado"=>$countryUser->regionName);
         $banners = json_decode($this->consumeRest($url, $params), true);
 
         //get inmubles por categoria
         $url = "http://sicksadworld.com.mx/servicios/inmueblesPorCategoria.php";
-        $params = array("categoria"=>1);
+        $params = array("categoria"=>1, "estado"=>$countryUser->regionName);
         $inmueblesCasas = json_decode($this->consumeRest($url, $params), true);
-        //print_r($inmueblesCasas);
-        //exit();
 
-        $params = array("categoria"=>3);
+        $params = array("categoria"=>3, "estado"=>$countryUser->regionName);
         $inmueblesDepartamentos = json_decode($this->consumeRest($url, $params), true);
 
-        $params = array("categoria"=>6);
+        $params = array("categoria"=>6, "estado"=>$countryUser->regionName);
         $inmueblesOficinas = json_decode($this->consumeRest($url, $params), true);
 
         $data["mensajeError"] = $this->session->flashdata('mensajeError');
@@ -36,6 +40,59 @@ class Inicio extends CI_Controller {
         $data["inmueblesOficinas"] = $inmueblesOficinas;
 		$this->load->view("inicio_view", $data);
 	}
+
+    /*
+    function obtenerBanners() {
+        //obteniendo banner del home
+        //get noticias
+        $url = "http://sicksadworld.com.mx/servicios/banners.php";
+        $params = array();
+        $banners = json_decode($this->consumeRest($url, $params), true);
+
+        if (isset($banners)) {
+            foreach($banners["inmuebles"] as $row) {
+                ?>
+                <div class="slideee">
+                    <ul class="grid-posts unstyled">
+                        <li class="post post-desarrollo  ">
+                            <label class="post-action post-action-check stopPropagation"><input checked="checked" type="checkbox"></label>
+                            <div class="post-thumb">
+                                <a href="<?php echo base_url() ?>inicio/detalle/<?php echo $row['id_inmueble']."/".$row['tipo_inmueble'] ?>" title="<?php echo $row["descripcion"] ?>">
+                                    <img src="<?php  echo base_url()?>resources/pagina/blank.png" data-real-src="<?php echo $row["img_banner"] ?>" class="foto-principal lazyDesarrollos" alt="" height="100%" width="100%">
+                                </a>
+                            </div>
+
+                            <!--Tag desarrollo-->
+                            <div class="post-info">
+                                <h4 class="post-title"><a href="<?php echo base_url() ?>inicio/detalle/<?php echo $row['id_inmueble']."/".$row['tipo_inmueble'] ?>" title=""><?php echo $row["descripcion"] ?></a></h4>
+                                <span class="post-sub-title"><i class="ticon ticon-pointer"></i>&nbsp; <?php echo $row['direccion_calle'] ?></span>
+                                <ul class="post-content">
+                                    <li>Tipo <b><?php echo $row['venta_renta'] ?></b></li>
+                                    <li><b><?php echo $row['recamaras'] ?></b> Recamaras</li>
+                                    <li><b><?php echo $row['banos'] ?></b> Baños</li>
+                                    <li><b><?php echo $row['terreno_m2'] ?> metros</b> de terreno</li>
+                                </ul>
+
+                                <div class="post-price">
+                                    <span class="precio-signo ">Desde</span>&nbsp;<span class="precio-valor ">$<?php echo (is_numeric($row['precio'])) ? number_format($row['precio'], 2) : $row['precio'] ?></span>
+                                </div>
+                            </div>
+                            <div class="post-actions-wrap">
+                                <div class="post-actions">
+                                    <span class="post-action post-action-fav" title="Agregar a favoritos" data-action="agregarfavorito" data-aviso-id="51246025" data-loading-text="..."><span class="hide">Marcar como favorito</span></span>
+                                    <span class="post-action post-action-fav" title="Quitar de favoritos" data-action="removerfavorito" data-aviso-id="51246025" data-loading-text="..."><span class="hide">Quitar de favoritos</span></span>
+                                    <span class="post-action post-action-x-fav" title="Quitar de favoritos" data-action="removerfavorito" data-aviso-id="51246025" data-loading-text="..."><span class="hide">Quitar de favoritos</span></span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <?php
+                break;
+            }
+        }
+    }
+    */
 
     function detalle($idInmueble = "", $tipoInmueble="") {
         $data = $this->general();
@@ -246,14 +303,16 @@ class Inicio extends CI_Controller {
         if ($_POST) {
             $tipoPropiedad = $this->input->post("tipoPropiedad");
             $ventaRenta = $this->input->post("ventaRenta");
-            $precio = $this->input->post("precio");
+            $precio1 = $this->input->post("precio1");
+            $precio2 = $this->input->post("precio2");
             $cp = $this->input->post("cp");
             $inmueble_id = "";
         }
         else {
             $tipoPropiedad = "";
             $ventaRenta = "";
-            $precio = "";
+            $precio1 = "";
+            $precio2 = "";
             $cp = "";
             $inmueble_id = "";
         }
@@ -268,7 +327,7 @@ class Inicio extends CI_Controller {
 
         //obtener detalle del inmueble
         $url = "http://sicksadworld.com.mx/servicios/buscarInmuebles.php";
-        $params = array("tipo_inmueble"=>$tipoPropiedad, "venta_renta"=>$ventaRenta, "precio"=>$precio, "codigo_postal"=>$cp, 'id_inmueble'=>$inmueble_id);
+        $params = array("tipo_inmueble"=>$tipoPropiedad, "venta_renta"=>$ventaRenta, "precio"=>$precio1.",".$precio2, "codigo_postal"=>$cp, 'id_inmueble'=>$inmueble_id);
         $resultado = json_decode($this->consumeRest($url, $params), true);
 
         if ($resultado["idError"] != 0) {

@@ -78,29 +78,38 @@
         <div class="header-searchbox-wrap">
             <div style="position: relative; width: 100%">
                 <form id="searchbox" action="<?php echo base_url("inicio/buscar") ?>" method="post">
-                    <div style="float: left; margin-left: 50px; margin-right: 5px;">
+                    <div style="float: left; margin-left: 20px; margin-right: 5px;">
                         <select name="tipoPropiedad" id="" class="">
                             <option value="1">Casas</option>
-                            <option value="2">Bodega</option>
-                            <option value="3">Departamentos</option>
-                            <option value="4">Locales</option>
-                            <option value="5">nave_industrial &nbsp;&nbsp;&nbsp;</option>
+                            <option value="9">Fraccionamientos</option>
                             <option value="6">Oficinas</option>
+                            <option value="3">Departamentos</option>
+                            <option value="6">Oficinas</option>
+                            <option value="4">Locales</option>
+                            <option value="2">Bodega</option>
+                            <option value="5">Naves industriales &nbsp;&nbsp;&nbsp;</option>
                             <option value="7">Rancho</option>
                             <option value="8">Terrenos</option>
+                            <option value="10">Desarrollos</option>
                         </select>
                     </div>
                     <div style="float: left; margin-right: 5px;">
                         <select name="ventaRenta" id="" class="">
                             <option value="Venta">Venta &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
                             <option value="Renta">Renta</option>
+                            <option value="Traspaso">Traspaso</option>
+                            <option value="Vacaciones/Intercambio">Vacaciones/Intercambio</option>
+                            <option value="Desarrollos">Desarrollos</option>
                         </select>
                     </div>
-                    <div style="float: left; margin-right: 5px;">
-                        <input type="text" placeholder="Precio" class="" id="" name="precio" spellcheck="false" style="width: 100%; font-size: 16px;">
+                    <div style="float: left; margin-left: 0px;">
+                        <input type="text" placeholder="Precio desde" class="" id="" name="precio1" spellcheck="false" style="width: 80%; font-size: 16px;">
                     </div>
-                    <div style="float: left; margin-right: 5px;">
-                        <input type="text" placeholder="C.P." class="" id="" name="cp" spellcheck="false" style="width: 100%; font-size: 16px;">
+                    <div style="float: left; margin-left: -35px;">
+                        <input type="text" placeholder="Hasta" class="" id="" name="precio2" spellcheck="false" style="width: 80%; font-size: 16px;">
+                    </div>
+                    <div style="float: left; margin-left: -35px;">
+                        <input type="text" placeholder="Id, Ciudad, C.P." class="" id="" name="cp" spellcheck="false" style="width: 100%; font-size: 16px;">
                     </div>
                     <div style="float: left; margin-top: 2px;"><button class="btn btn-noframe" type="submit">Buscar</button></div>
                 </form>
