@@ -132,9 +132,9 @@ function consumeRest($url, $params) {
                         <input type="text" placeholder="Hasta" class="" id="" name="precio2" spellcheck="false" style="width: 80%; font-size: 16px;">
                     </div>
                     <div style="float: left; margin-left: -35px;">
-                        <input type="text" placeholder="Id, Ciudad, C.P." class="" id="" name="cp" spellcheck="false" style="width: 100%; font-size: 16px;">
+                        <input type="text" placeholder="Id, Ciudad, C.P." class="idCpCiudad" id="" name="cp" spellcheck="false" style="width: 100%; font-size: 16px;">
                     </div>
-                    <div style="float: left; margin-top: 2px;"><button class="btn btn-noframe" type="submit">Buscar</button></div>
+                    <div style="float: left; margin-top: 2px;"><button class="btn btn-noframe buttonBuscarInm" type="submit">Buscar</button></div>
                 </form>
             </div>
         </div>
@@ -221,7 +221,7 @@ function consumeRest($url, $params) {
                                                     <li class="misc-banos"><?php echo (isset($detalle["detalle_inmueble"]["banos"])) ? $detalle["detalle_inmueble"]["banos"] : "0" ?> Baños</li>
                                                 </ul>
                                                 <div>
-                                                    <p class="price"><span>MN $<?php echo (is_numeric($detalle["detalle_inmueble"]["precio"])) ? number_format($detalle["detalle_inmueble"]["banos"], 2) : $detalle["detalle_inmueble"]["banos"]; ?></span></p>
+                                                    <p class="price"><span>MN $<?php echo (is_numeric($detalle["detalle_inmueble"]["precio"])) ? number_format($detalle["detalle_inmueble"]["precio"], 2) : $detalle["detalle_inmueble"]["precio"]; ?></span></p>
 
                                                     <div class="buttons">
                                                         <a href="<?php echo base_url() ?>inicio/detalle/<?php echo $resultado['inmuebles'][$i]["id_inmueble"]."/".$resultado['inmuebles'][$i]["tipo_inmueble"] ?>">

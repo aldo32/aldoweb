@@ -117,7 +117,7 @@
     <div class="container">
         <!--LOGO-->
         <div class="logo-header-wrap">
-            <a class="logo-header" href="/"></a>
+            <a class="logo-header" href="<?php echo base_url("inicio") ?>"></a>
         </div>
     </div>
 </header>
@@ -173,11 +173,11 @@ $banner = array_rand($banners["inmuebles"], 1);
                             <input type="text" placeholder="Hasta" class="" id="" name="precio2" autocomplete="off" spellcheck="false" style="width: 15%; font-size: 16px;">
                         </div>
                         <div class="control-group">
-                            <input type="text" placeholder="Id, Ciudad, C.P." class="" id="" name="cp" autocomplete="off" spellcheck="false" style="width: 20%; font-size: 16px;">
+                            <input type="text" placeholder="Id, Ciudad, C.P." class="idCpCiudad" id="" name="cp" autocomplete="off" spellcheck="false" style="width: 20%; font-size: 16px;">
                         </div>
 
                         <div class="searchbox-submit">
-                            <button type="submit" id="submitBtn" class="btn btn-xlarge btn-block btn-primary">Buscar</button>
+                            <button type="submit" id="submitBtn" class="btn btn-xlarge btn-block btn-primary buttonBuscarInm">Buscar</button>
                         </div>
                     </div>
                 </form>

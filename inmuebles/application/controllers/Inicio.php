@@ -106,11 +106,31 @@ class Inicio extends CI_Controller {
             $data["detalle"] = $detalle;
             $data["idInmueble"] = $idInmueble;
             $data["tipoInmueble"] = $tipoInmueble;
+            $data["nombreTipoInmueble"] = $this->getTipoInmueble($tipoInmueble);
             $this->load->view("detalle_view", $data);
         }
         else {
             redirect("inicio");
         }
+    }
+
+    function getTipoInmueble($tipoInmueble) {
+        $tipo_inmuble = "";
+        switch ($tipoInmueble) {
+            case 1: $tipo_inmuble = "Casa"; break;
+            case 2: $tipo_inmuble = "Terreno"; break;
+            case 3: $tipo_inmuble = "Departamento"; break;
+            case 4: $tipo_inmuble = "Bodega"; break;
+            case 5: $tipo_inmuble = "Oficina"; break;
+            case 6: $tipo_inmuble = "Local"; break;
+            case 7: $tipo_inmuble = "Nave"; break;
+            case 8: $tipo_inmuble = "Rancho"; break;
+            case 9: $tipo_inmuble = "Otros"; break;
+
+            default: $tipo_inmuble = "No definido"; break;
+        }
+
+        return $tipo_inmuble;
     }
 
     function contacto() {
@@ -325,8 +345,9 @@ class Inicio extends CI_Controller {
         $inmueble_id = "";
         */
 
-        //obtener detalle del inmueble
+        //buscar inmueble
         $url = "http://sicksadworld.com.mx/servicios/buscarInmuebles.php";
+        //$url = "http://localhost/serviciosprop/buscarInmuebles.php";
         $params = array("tipo_inmueble"=>$tipoPropiedad, "venta_renta"=>$ventaRenta, "precio"=>$precio1.",".$precio2, "codigo_postal"=>$cp, 'id_inmueble'=>$inmueble_id);
         $resultado = json_decode($this->consumeRest($url, $params), true);
 
@@ -338,6 +359,36 @@ class Inicio extends CI_Controller {
             //print_r($resultado); exit();
             $data["resultado"] = $resultado;
             $this->load->view("buscar_view", $data);
+        }
+    }
+
+    function searchLatlong() {
+        $search = $this->input->post("search");
+
+        $url = 'http://maps.google.com/maps/api/geocode/json?address='.urlencode($search);
+        $result = file_get_contents($url);
+        $info = json_decode($result);
+
+        if (count($info->results) > 0) {
+            if (count($info->results) > 1) {
+                foreach ($info->results AS $result) {
+                    $place[] = $result->formatted_address;
+                }
+
+                echo json_encode(array("status"=>"places", "places"=>$place));
+            }
+            else {
+                echo json_encode(array(
+                    "status"=>"finded",
+                    "lat_noreste"=>$info->results[0]->geometry->bounds->northeast->lat,
+                    "lon_noreste"=>$info->results[0]->geometry->bounds->northeast->lon,
+                    "lat_sureste"=>$info->results[0]->geometry->bounds->southwest->lat,
+                    "lon_sureste"=>$info->results[0]->geometry->bounds->southwest->lon,
+                ));
+            }
+        }
+        else {
+            echo json_encode(array("status"=>"error", "message"=>"No se encontro ningun resultado"));
         }
     }
 

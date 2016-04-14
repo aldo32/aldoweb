@@ -29,5 +29,28 @@
         <script>
             $(document).ready(function() {
                 $(".nyroModal").nyroModal();
+
+                $(".buttonBuscarInm").click(function(e) {
+                    e.preventDefault();
+                    search = $(".idCpCiudad").val();
+
+                    if (!$.isNumeric(search)) {
+                        //buscando latidudes y longitudes del texto ingresado
+                        $.ajax({
+                            url: "<?php echo base_url("inicio/searchLatlong") ?>",
+                            data: "search="+search,
+                            dataType: "json",
+                            success: function(datos) {
+                                if (datos.status == "success") {
+
+                                }
+                            },
+                            type: "POST"
+                        });
+                    }
+                    else {
+                        $("#searchbox").submit();
+                    }
+                });
             });
         </script>

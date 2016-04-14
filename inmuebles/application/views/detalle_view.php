@@ -109,9 +109,9 @@
                         <input type="text" placeholder="Hasta" class="" id="" name="precio2" spellcheck="false" style="width: 80%; font-size: 16px;">
                     </div>
                     <div style="float: left; margin-left: -35px;">
-                        <input type="text" placeholder="Id, Ciudad, C.P." class="" id="" name="cp" spellcheck="false" style="width: 100%; font-size: 16px;">
+                        <input type="text" placeholder="Id, Ciudad, C.P." class="idCpCiudad" id="" name="cp" spellcheck="false" style="width: 100%; font-size: 16px;">
                     </div>
-                    <div style="float: left; margin-top: 2px;"><button class="btn btn-noframe" type="submit">Buscar</button></div>
+                    <div style="float: left; margin-top: 2px;"><button class="btn btn-noframe buttonBuscarInm" type="submit">Buscar</button></div>
                 </form>
             </div>
         </div>
@@ -165,21 +165,32 @@
                         <div class="card aviso-datos">
                             <div class="card-content">
                                 <h3>Datos principales</h3>
-                                <ul>
-                                    <li>
-									    <span class="nombre"><i class="licon licon-ficha_precio"></i>Precio  desde</span>
-                                        <span class="valor"><?php echo $detalle["detalle_inmueble"]["precio"] ?></span>
-                                    </li>
-                                    <li>
-                                        <span class="nombre"><i class="licon licon-dormitorios"></i><?php echo (isset($detalle["detalle_inmueble"]["recamaras"])) ? $detalle["detalle_inmueble"]["recamaras"] : "NA" ?> Recamaras</span>
-                                    </li>
-                                    <li>
-                                        <span class="nombre"><i class="licon licon-banos"></i>Hasta <?php echo (isset($detalle["detalle_inmueble"]["banos"])) ? $detalle["detalle_inmueble"]["banos"] : "0" ?> Baños</span>
-                                    </li>
-                                    <li>
-                                        <span class="nombre"><i class="licon licon-garages"></i>Hasta <?php echo (isset($detalle["detalle_inmueble"]["accesos_estacionamiento"])) ? $detalle["detalle_inmueble"]["accesos_estacionamiento"] : "0" ?> Estacionamientos</span>
-                                    </li>
-                                </ul>
+                                <div class="list list-checkmark no-margin">
+                                    <ul>
+                                        <li><b><i class="licon licon-ficha_precio"></i>ID </b><?php echo $detalle["detalle_inmueble"]["idcasa"] ?></li>
+                                        <li><b><i class="licon licon-ficha_precio"></i>Promotor </b><?php echo $detalle["detalle_inmueble"]["promotor"] ?></li>
+                                        <li><b><i class="licon licon-ficha_precio"></i>Tipo de operación </b><?php echo $detalle["detalle_inmueble"]["venta_renta"] ?></li>
+                                        <li><b><i class="licon licon-ficha_precio"></i>Crédito </b><?php echo $detalle["detalle_inmueble"]["credito"] ?></li>
+                                        <li><b><i class="licon licon-ficha_precio"></i>Precio </b><?php echo $detalle["detalle_inmueble"]["precio"] ?></li>
+                                        <li><b><i class="licon licon-ficha_precio"></i>Tipo de inmueble </b><?php echo $nombreTipoInmueble ?></li>
+                                        <li><b><i class="licon licon-ficha_precio"></i>Información extra </b><?php echo $detalle["detalle_inmueble"]["descripcion"] ?></li>
+                                        <li><b><i class="licon licon-ficha_precio"></i>Dirección </b><?php echo $detalle["detalle_inmueble"]["direccion_calle"]." #".$detalle["detalle_inmueble"]["direccion_numero"]." C.P.".$detalle["detalle_inmueble"]["direccion_codigo_postal"]." ".$detalle["detalle_inmueble"]["direccion_municipio"]." ".$detalle["detalle_inmueble"]["direccion_estado"]." ".$detalle["detalle_inmueble"]["direccion_pais"] ?></li>
+                                        <li><b><i class="licon licon-ficha_precio"></i>Contrucción en m2 </b><?php echo $detalle["detalle_inmueble"]["terreno_m2"] ?></li>
+                                        <li><b><i class="licon licon-ficha_precio"></i>Cocina </b><?php echo $detalle["detalle_inmueble"]["cocina_equipada"] ?></li>
+                                        <li><b><i class="licon licon-ficha_precio"></i>Recamaras </b><?php echo $detalle["detalle_inmueble"]["recamaras"] ?></li>
+                                        <li><b><i class="licon licon-ficha_precio"></i>Baños </b><?php echo $detalle["detalle_inmueble"]["banos"] ?></li>
+                                        <li><b><i class="licon licon-ficha_precio"></i>Servicios básicos </b><?php echo $detalle["detalle_inmueble"]["servicios_basicos"] ?></li>
+                                        <li><b><i class="licon licon-ficha_precio"></i>Alberca </b><?php echo $detalle["detalle_inmueble"]["alberca"] ?></li>
+                                        <li><b><i class="licon licon-ficha_precio"></i>Amueblada </b><?php echo $detalle["detalle_inmueble"]["amueblada"] ?></li>
+                                        <li><b><i class="licon licon-ficha_precio"></i>Mascotas </b><?php echo $detalle["detalle_inmueble"]["mascotas"] ?></li>
+                                        <li><b><i class="licon licon-ficha_precio"></i>Mantenimiento y vigilancia </b><?php echo $detalle["detalle_inmueble"]["mantenimiento_vigilancia"] ?></li>
+                                        <li><b><i class="licon licon-ficha_precio"></i>Accesos y estacionamientos </b><?php echo $detalle["detalle_inmueble"]["accesos_estacionamiento"] ?></li>
+                                        <li><b><i class="licon licon-ficha_precio"></i>Escuelas </b><?php echo $detalle["detalle_inmueble"]["escuelas_cercanas"] ?></li>
+                                        <li><b><i class="licon licon-ficha_precio"></i>Gasolinerias </b><?php echo $detalle["detalle_inmueble"]["gasolineras"] ?></li>
+                                        <li><b><i class="licon licon-ficha_precio"></i>Tiendas de conveniencia </b><?php echo $detalle["detalle_inmueble"]["tiendas_conveniencia"] ?></li>
+                                        <li><b><i class="licon licon-ficha_precio"></i>Parques </b><?php echo $detalle["detalle_inmueble"]["parques_cercanos"] ?></li>
+                                    </ul>
+                                </div>
                             </div>
 
                             <div class="card-content">
