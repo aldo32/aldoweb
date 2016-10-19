@@ -1,46 +1,39 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>title</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
 
-	<style>
-		#background {
-			position: fixed;
-			top: 50%;
-			left: 50%;
-			min-width: 100%;
-			min-height: 100%;
-			width: auto;
-			height: auto;
-			z-index: -100;
-			-webkit-transform: translateX(-50%) translateY(-50%);
-			transform: translateX(-50%) translateY(-50%);
-			background: url(polina.jpg) no-repeat;
-			background-size: cover;
-		}
-		.container h1 {
-			color: white;
-	</style>
+	<title>Aldo's world</title>
+
+	<script type="text/javascript" src="<?php echo base_url() ?>resources/js/jquery-3.1.1.js"></script>
+	<script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url() ?>resources/js/bootstrap.js"></script>
+
+	<link rel="stylesheet" href="<?php echo base_url() ?>resources/css/bootstrap.css">
+	<link rel="stylesheet" href="<?php echo base_url() ?>resources/css/hexagon.min.css">
+	<link rel="stylesheet" href="<?php echo base_url() ?>resources/css/main.css">
 
 </head>
 <body>
-<video autoplay loop muted poster="screenshot.jpg" id="background">
-	<source src="http://techslides.com/demos/sample-videos/small.mp4" type="video/mp4">
+<video autoplay loop muted poster="" id="background">
+	<source src="<?php echo base_url(); ?>resources/back-video.mp4" type="video/mp4">
 </video>
 
 <div class="container">
-
 	<div class="row">
-
-		<div class="col-md-12">
-
-			<h1>www.viewlike.us</h1>
-
+		<div class="col-xl-12">
+			<div class="col-xl-3">
+				<div class="hexagon-xl hexagon-default hexagon-hover"></div>
+			</div>
+			<div class="col-xl-3">
+				<div class="hexagon-xl hexagon-default hexagon-hover"></div>
+			</div>
+			<div class="col-xl-3">
+				<div class="hexagon-xl hexagon-default hexagon-hover"></div>
+			</div>
 		</div>
-
 	</div>
-
 </div>
 
 </body>
