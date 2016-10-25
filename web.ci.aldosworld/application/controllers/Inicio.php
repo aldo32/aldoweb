@@ -7,4 +7,9 @@ class Inicio extends CI_Controller {
 	{
 		$this->load->view('inicio_view');
 	}
+
+    function test()
+    {
+        echo "Aldo";
+    }
 }
