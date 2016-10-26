@@ -73,3 +73,5 @@ a:hover { text-decoration: none; }
 
 .form-control { border: 3px solid #D75F17; }
 
+.footer { background: #222222; border-top: 5px solid #19A6DF; outline: 2px solid #D75F17; height: 100px; }
+

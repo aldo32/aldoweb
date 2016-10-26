@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="<?php echo base_url() ?>resources/css/main.css">
     <link rel="stylesheet" href="<?php echo base_url() ?>resources/nyroModal/styles/nyroModal.css">
     <link href="https://fonts.googleapis.com/css?family=Advent+Pro:200" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
     <script type="text/javascript" src="<?php echo base_url() ?>resources/js/jquery-3.1.1.js"></script>
     <script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script><!-- Tether for Bootstrap -->
@@ -75,9 +76,24 @@
                 <li><a href="#about">Conocimientos</a></li>
                 <li><a href="#contact">Acerca de mi</a></li>
                 <li><a href="#contact">Contacto</a></li>
+                <li><a href="#contact">Blog</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Blog</a></li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-facebook-square hvr-grow" aria-hidden="true" style="color: #D75F17; font-size: 22px;"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-twitter-square hvr-grow" aria-hidden="true" style="color: #D75F17; font-size: 22px;"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-linkedin-square hvr-grow" aria-hidden="true" style="color: #D75F17; font-size: 22px;"></i>
+                    </a>
+                </li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -317,13 +333,32 @@
                     <label for="asunto">Asunto:</label>
                     <textarea class="form-control" id="asunto"></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Enviar</button>
+                <button type="submit" class="btn btn-primary" style="background: #19A6DF;">Enviar</button>
             </form>
         </div>
     </div>
 </div>
 <br><br>
 
+<br><br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Blog, noticias y algo más</h1>
+        </div>
+    </div>
+</div>
+<br><br>
+
+<footer class="footer">
+    <div class="container">
+        <br>
+        <p class="text-center" style="font-size: 12px;">
+            Aldo Marañon Andrade<br>
+            Desarrollador de software y aplicaciones web
+        </p>
+    </div>
+</footer>
 
 </body>
 </html>
