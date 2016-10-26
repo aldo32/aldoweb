@@ -67,5 +67,9 @@ a:hover { text-decoration: none; }
 .hvr-overline-from-left[data-count='85']:hover:before, .hvr-overline-from-left[data-count='85']:focus:before, .hvr-overline-from-left[data-count='85']:active:before { right: 15%; }
 .hvr-overline-from-left[data-count='90']:hover:before, .hvr-overline-from-left[data-count='90']:focus:before, .hvr-overline-from-left[data-count='90']:active:before { right: 10%; }*/
 
+@media screen and (max-width: 700px) {
+    .me-image { display: none; }
+}
 
+.form-control { border: 3px solid #D75F17; }
 

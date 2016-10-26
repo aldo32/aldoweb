@@ -51,8 +51,8 @@
       <file leaf-file-name="inicio_view.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/views/inicio_view.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3882545">
-              <caret line="255" column="81" selection-start-line="255" selection-start-column="81" selection-end-line="255" selection-end-column="81" />
+            <state vertical-scroll-proportion="0.29363784">
+              <caret line="254" column="136" selection-start-line="254" selection-start-column="136" selection-end-line="254" selection-end-column="136" />
               <folding />
             </state>
           </provider>
@@ -71,8 +71,8 @@
       <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/css/main.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-16.791666">
-              <caret line="60" column="62" selection-start-line="60" selection-start-column="62" selection-end-line="60" selection-end-column="62" />
+            <state vertical-scroll-proportion="-23.041666">
+              <caret line="73" column="42" selection-start-line="73" selection-start-column="42" selection-end-line="73" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -119,8 +119,8 @@
         <option value="$PROJECT_DIR$/application/controllers/Inicio.php" />
         <option value="$PROJECT_DIR$/application/views/modals/project_view.php" />
         <option value="$PROJECT_DIR$/resources/css/hover.css" />
-        <option value="$PROJECT_DIR$/resources/css/main.css" />
         <option value="$PROJECT_DIR$/resources/css/hexagons.css" />
+        <option value="$PROJECT_DIR$/resources/css/main.css" />
         <option value="$PROJECT_DIR$/application/views/inicio_view.php" />
       </list>
     </option>
@@ -694,14 +694,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/css/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.791666">
-          <caret line="60" column="62" selection-start-line="60" selection-start-column="62" selection-end-line="60" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/nyroModal/styles/nyroModal.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-13.75">
@@ -710,10 +702,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/resources/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-23.041666">
+          <caret line="73" column="42" selection-start-line="73" selection-start-column="42" selection-end-line="73" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/inicio_view.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3882545">
-          <caret line="255" column="81" selection-start-line="255" selection-start-column="81" selection-end-line="255" selection-end-column="81" />
+        <state vertical-scroll-proportion="0.29363784">
+          <caret line="254" column="136" selection-start-line="254" selection-start-column="136" selection-end-line="254" selection-end-column="136" />
           <folding />
         </state>
       </provider>

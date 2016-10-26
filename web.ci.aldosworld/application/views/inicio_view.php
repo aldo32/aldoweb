@@ -32,7 +32,7 @@
             hex = $('.hex');
             for(var i = 0; i < hex.length; i = i + 1)
             {
-                $(hex[i]).delay(150 * i).fadeIn();
+                $(hex[i]).delay(100 * i).fadeIn();
             }
 
             /*$('.hvr-overline-from-left').mouseover(function() {
@@ -44,8 +44,16 @@
                 $(this).find("span").html("");
             });*/
 
-            porcent = $('.hvr-overline-from-left').attr('data-count');
-            $('.hvr-overline-from-left').find("span").hide().html(porcent+"%").fadeIn();
+            $('.hvr-overline-from-left').each(function(i) {
+                porcent = $(this).attr('data-count');
+                $(this).find("span").hide().html(porcent+"%").fadeIn();
+            });
+
+            $(window).scroll(function() {
+                if ($(this).scrollTop() == 1415) {
+
+                }
+            });
         });
     </script>
 
@@ -244,9 +252,17 @@
     <div class="row">
         <div class="col-md-12">
             <h1>Conocimientos</h1>
-            <p>Listado de tecnologías que he utilizado en todos los proyectos que he desarrollado</p>
+            <p>Tecnologías que he utilizado en todos los proyectos que he desarrollado y el porcentaje de habilidad en cada uno de ellos</p>
         </div>
         <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="25">PHP <span></span></div> </div>
+        <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="50">Codeigniter <span></span></div> </div>
+        <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="100">Administración de servidores <span></span></div> </div>
+        <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="75">SQL <span></span></div> </div>
+        <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="50">Laravel <span></span></div> </div>
+        <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="80">Mysql <span></span></div> </div>
+        <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="25">Postgres <span></span></div> </div>
+        <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="50">Desarrollo API <span></span></div> </div>
+        <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="75">PHP <span></span></div> </div>
         <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="50">Codeigniter <span></span></div> </div>
         <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="100">Administración de servidores <span></span></div> </div>
         <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="75">SQL <span></span></div> </div>
@@ -260,15 +276,53 @@
 <br><br>
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-2">
+            <img src="<?php echo base_url()?>resources/img/key_open.png" class="me-image" />
+        </div>
+        <div class="col-md-8">
             <h1>Acerce de mi</h1>
+            <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500 Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500</p>
             <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500</p>
+            <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500 Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500</p>
             <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500</p>
+            <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500 Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500</p>
+            <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500</p>
+        </div>
+        <div class="col-md-2">
+            <img src="<?php echo base_url()?>resources/img/key_close.png" class="me-image" />
         </div>
     </div>
 </div>
 <br><br>
 
+<br><br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Contacto</h1>
+            <p>Necesitas información para que juntos desarrollemos una solución web? Escribeme!!</p>
+            <br>
+        </div>
+        <div class="col-md-6 col-centered">
+            <form>
+                <div class="form-group">
+                    <label for="email">Email address:</label>
+                    <input type="email" class="form-control" id="email">
+                </div>
+                <div class="form-group">
+                    <label for="name">Nombre:</label>
+                    <input type="text" class="form-control" id="name">
+                </div>
+                <div class="form-group">
+                    <label for="asunto">Asunto:</label>
+                    <textarea class="form-control" id="asunto"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+        </div>
+    </div>
+</div>
+<br><br>
 
 
 </body>
