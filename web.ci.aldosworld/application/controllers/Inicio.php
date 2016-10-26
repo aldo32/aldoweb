@@ -8,8 +8,9 @@ class Inicio extends CI_Controller {
 		$this->load->view('inicio_view');
 	}
 
-    function test()
+    function showProject($id)
     {
-        echo "Aldo";
+        $data["id"] = $id;
+        $this->load->view("modals/project_view", $data);
     }
 }

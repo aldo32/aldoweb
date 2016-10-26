@@ -25,7 +25,27 @@
 
     <script>
         $(function() {
-            $('.nyroModal').nyroModal();
+            $('.nyroModal').nyroModal({
+                showCloseButton: false,
+            });
+
+            hex = $('.hex');
+            for(var i = 0; i < hex.length; i = i + 1)
+            {
+                $(hex[i]).delay(150 * i).fadeIn();
+            }
+
+            /*$('.hvr-overline-from-left').mouseover(function() {
+                porcent = $(this).attr('data-count');
+                $(this).find("span").hide().html(porcent+"%").fadeIn();
+            });*/
+            /*$('.hvr-overline-from-left').mouseout(function() {
+                porcent = $(this).attr('data-count');
+                $(this).find("span").html("");
+            });*/
+
+            porcent = $('.hvr-overline-from-left').attr('data-count');
+            $('.hvr-overline-from-left').find("span").hide().html(porcent+"%").fadeIn();
         });
     </script>
 
@@ -64,18 +84,17 @@
             <p>
                 <h1>Portafolio de trabajo</h1>
                 ISC Aldo Marañon Andrade<br>
-                <a class="nyroModal" href="<?php echo base_url("inicio/test") ?>">Aldo</a>
             </p>
         </div>
     </div>
 </div>
 
 <ul id="hexGrid">
-    <li class="hex nyroModal">
-        <a class="hexIn" href="#">
-            <img src="https://farm7.staticflickr.com/6083/6055581292_d94c2d90e3.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
+    <li class="hex">
+        <a class="hexIn nyroModal" href="<?php echo base_url("inicio/showProject/1") ?>">
+            <img src="<?php echo base_url()?>resources/proyectos/azteca_movil_thumb.png" alt="Azteca movil" />
+            <h1>Azteca movil</h1>
+            <p>Portal web que con información acerca de las diferentes promociones que ofrecen</p>
         </a>
     </li>
     <li class="hex">
@@ -227,13 +246,30 @@
             <h1>Conocimientos</h1>
             <p>Listado de tecnologías que he utilizado en todos los proyectos que he desarrollado</p>
         </div>
+        <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="25">PHP <span></span></div> </div>
+        <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="50">Codeigniter <span></span></div> </div>
+        <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="100">Administración de servidores <span></span></div> </div>
+        <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="75">SQL <span></span></div> </div>
+        <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="25">Laravel <span></span></div> </div>
+        <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="80">Mysql <span></span></div> </div>
+        <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="25">Postgres <span></span></div> </div>
+        <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="50">Desarrollo API <span></span></div> </div>
+    </div>
+</div>
+
+<br><br>
+<div class="container">
+    <div class="row">
         <div class="col-md-12">
-            <a href="#" class="hvr-overline-from-left">PHP</a>
-            <a href="#" class="hvr-overline-from-left">Codeigniter</a>
-            <a href="#" class="hvr-overline-from-left">Administración de servidores</a>
+            <h1>Acerce de mi</h1>
+            <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500</p>
+            <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500</p>
         </div>
     </div>
 </div>
 <br><br>
+
+
+
 </body>
 </html>

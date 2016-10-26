@@ -17,6 +17,7 @@
     clear: both;
 }
 .hex {
+    display: none;
     position: relative;
     list-style-type: none;
     float: left;

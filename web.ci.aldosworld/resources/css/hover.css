@@ -2261,7 +2261,7 @@
   transition-timing-function: ease-out;
 }
 .hvr-overline-from-left:hover:before, .hvr-overline-from-left:focus:before, .hvr-overline-from-left:active:before {
-  right: 0;
+    right: 0;
 }
 
 /* Overline From Center */
