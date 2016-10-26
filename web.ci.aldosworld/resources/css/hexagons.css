@@ -2,15 +2,13 @@
     margin: 0;
     padding: 0;
 }
-body {
-    background: rgb(123, 158, 158);
-}
+
 #hexGrid {
     overflow: hidden;
-    width: 90%;
+    width: 60%;
     margin: 0 auto;
     padding:0.866% 0;
-    font-family: 'Raleway', sans-serif;
+    /*font-family: 'Raleway', sans-serif;*/
     font-size: 15px;
 }
 #hexGrid:after {
@@ -60,7 +58,7 @@ body {
     left:-1%; /* prevent line on the right where background doesn't cover image */
     padding: 5%;
     box-sizing:border-box;
-    background-color: rgba(0, 128, 128, 0.8);
+    background-color: rgba(128, 128, 128, 0.8);
     font-weight: 300;
     -webkit-transition:  -webkit-transform .2s ease-out, opacity .3s ease-out;
             transition:          transform .2s ease-out, opacity .3s ease-out;
@@ -69,6 +67,7 @@ body {
     bottom: 50%;
     padding-top:50%;
     font-size: 1.5em;
+    color: #ffffff;
     z-index: 1;
     -webkit-transform:translateY(-100%) translatez(-1px);
         -ms-transform:translateY(-100%) translatez(-1px);
@@ -82,10 +81,12 @@ body {
     width: 10%;
     text-align: center;
     border-bottom: 1px solid #fff;
+    color: #ffffff;
 }
 .hex p {
     top: 50%;
     padding-bottom:50%;
+    color: #ffffff;
     -webkit-transform:translateY(100%) translatez(-1px);
         -ms-transform:translateY(100%) translatez(-1px);
             transform:translateY(100%) translatez(-1px);
