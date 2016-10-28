@@ -13,4 +13,9 @@ class Inicio extends CI_Controller {
         $data["id"] = $id;
         $this->load->view("modals/project_view", $data);
     }
+
+    function blog($id)
+    {
+        echo "Próximamente";
+    }
 }

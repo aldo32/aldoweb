@@ -33,7 +33,7 @@
             hex = $('.hex');
             for(var i = 0; i < hex.length; i = i + 1)
             {
-                $(hex[i]).delay(100 * i).fadeIn();
+                $(hex[i]).delay(50 * i).fadeIn();
             }
 
             /*$('.hvr-overline-from-left').mouseover(function() {
@@ -81,17 +81,17 @@
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a href="#">
-                        <i class="fa fa-facebook-square hvr-grow" aria-hidden="true" style="color: #D75F17; font-size: 22px;"></i>
+                        <i class="fa fa-facebook-square hvr-grow icon-social" aria-hidden="true"></i>
                     </a>
                 </li>
                 <li>
                     <a href="#">
-                        <i class="fa fa-twitter-square hvr-grow" aria-hidden="true" style="color: #D75F17; font-size: 22px;"></i>
+                        <i class="fa fa-twitter-square hvr-grow icon-social" aria-hidden="true"></i>
                     </a>
                 </li>
                 <li>
                     <a href="#">
-                        <i class="fa fa-linkedin-square hvr-grow" aria-hidden="true" style="color: #D75F17; font-size: 22px;"></i>
+                        <i class="fa fa-linkedin-square hvr-grow icon-social" aria-hidden="true"></i>
                     </a>
                 </li>
             </ul>
@@ -309,9 +309,72 @@
         </div>
     </div>
 </div>
-<br><br>
 
 <br><br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Blog, noticias y algo más</h1>
+            <br>
+        </div>
+
+        <div class="col-md-4">
+            <p><img class="proyect-image" src="<?php echo base_url() ?>resources/proyectos/azteca_movil_thumb.png" /></p>
+            <h3>Titulo de articulo</h3>
+            <p><?php echo word_limiter("Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500 Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500", 20) ?></p>
+            <a href="<?php echo base_url("inicio/blog/1")?>" target="_blank"><button type="submit" class="btn btn-primary btn-sm">Leer más</button></a>
+            <div class="fb-share-button pull-right" data-href="http://aldosworld.com" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Faldosworld.com%2F&amp;src=sdkpreparse">Compartir</a></div>
+            <p>&nbsp;</p>
+        </div>
+
+        <div class="col-md-4">
+            <p><img class="proyect-image" src="<?php echo base_url() ?>resources/proyectos/azteca_movil_thumb.png" /></p>
+            <h3>Titulo de articulo</h3>
+            <p><?php echo word_limiter("Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500 Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500", 20) ?></p>
+            <a href="<?php echo base_url("inicio/blog/1")?>" target="_blank"><button type="submit" class="btn btn-primary btn-sm">Leer más</button></a>
+            <div class="fb-share-button pull-right" data-href="http://aldosworld.com" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Faldosworld.com%2F&amp;src=sdkpreparse">Compartir</a></div>
+            <p>&nbsp;</p>
+        </div>
+
+        <div class="col-md-4">
+            <p><img class="proyect-image" src="<?php echo base_url() ?>resources/proyectos/azteca_movil_thumb.png" /></p>
+            <h3>Titulo de articulo</h3>
+            <p><?php echo word_limiter("Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500 Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500", 20) ?></p>
+            <a href="<?php echo base_url("inicio/blog/1")?>" target="_blank"><button type="submit" class="btn btn-primary btn-sm">Leer más</button></a>
+            <div class="fb-share-button pull-right" data-href="http://aldosworld.com" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Faldosworld.com%2F&amp;src=sdkpreparse">Compartir</a></div>
+            <p>&nbsp;</p>
+        </div>
+
+        <div class="col-md-4">
+            <p><img class="proyect-image" src="<?php echo base_url() ?>resources/proyectos/azteca_movil_thumb.png" /></p>
+            <h3>Titulo de articulo</h3>
+            <p><?php echo word_limiter("Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500 Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500", 20) ?></p>
+            <a href="<?php echo base_url("inicio/blog/1")?>" target="_blank"><button type="submit" class="btn btn-primary btn-sm">Leer más</button></a>
+            <div class="fb-share-button pull-right" data-href="http://aldosworld.com" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Faldosworld.com%2F&amp;src=sdkpreparse">Compartir</a></div>
+            <p>&nbsp;</p>
+        </div>
+
+        <div class="col-md-4">
+            <p><img class="proyect-image" src="<?php echo base_url() ?>resources/proyectos/azteca_movil_thumb.png" /></p>
+            <h3>Titulo de articulo</h3>
+            <p><?php echo word_limiter("Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500 Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500", 20) ?></p>
+            <a href="<?php echo base_url("inicio/blog/1")?>" target="_blank"><button type="submit" class="btn btn-primary btn-sm">Leer más</button></a>
+            <div class="fb-share-button pull-right" data-href="http://aldosworld.com" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Faldosworld.com%2F&amp;src=sdkpreparse">Compartir</a></div>
+            <p>&nbsp;</p>
+        </div>
+
+        <div class="col-md-4">
+            <p><img class="proyect-image" src="<?php echo base_url() ?>resources/proyectos/azteca_movil_thumb.png" /></p>
+            <h3>Titulo de articulo</h3>
+            <p><?php echo word_limiter("Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500 Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500", 20) ?></p>
+            <a href="<?php echo base_url("inicio/blog/1")?>" target="_blank"><button type="submit" class="btn btn-primary btn-sm">Leer más</button></a>
+            <div class="fb-share-button pull-right" data-href="http://aldosworld.com" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Faldosworld.com%2F&amp;src=sdkpreparse">Compartir</a></div>
+            <p>&nbsp;</p>
+        </div>
+    </div>
+</div>
+
+
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -333,18 +396,9 @@
                     <label for="asunto">Asunto:</label>
                     <textarea class="form-control" id="asunto"></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary" style="background: #19A6DF;">Enviar</button>
-            </form>
-        </div>
-    </div>
-</div>
-<br><br>
 
-<br><br>
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <h1>Blog, noticias y algo más</h1>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
         </div>
     </div>
 </div>
@@ -353,12 +407,21 @@
 <footer class="footer">
     <div class="container">
         <br>
-        <p class="text-center" style="font-size: 12px;">
+        <p class="text-center footer-text">
             Aldo Marañon Andrade<br>
             Desarrollador de software y aplicaciones web
         </p>
     </div>
 </footer>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.8&appId=406258719451778";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
 
 </body>
 </html>

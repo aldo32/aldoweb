@@ -75,3 +75,45 @@ a:hover { text-decoration: none; }
 
 .footer { background: #222222; border-top: 5px solid #19A6DF; outline: 2px solid #D75F17; height: 100px; }
 
+.icon-social { color: #D75F17; font-size: 22px; }
+
+.btn-primary { background: #19A6DF; }
+
+.footer-text { font-size: 12px; }
+
+/*Modal*/
+.modal-header {
+    border-bottom: 1px solid #D75F17;
+}
+
+.modal-footer {
+    border-top: 1px solid #D75F17;
+}
+
+.modal-content {
+    padding: 10px;;
+}
+
+.modal-body p { margin: 0px; }
+.proyect-image {
+    border: 5px solid #D75F17;
+    -webkit-box-shadow: 0px 2px 7px 2px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 2px 7px 2px rgba(0,0,0,0.75);
+    box-shadow: 0px 2px 7px 2px rgba(0,0,0,0.75);
+    width: 100%;
+    height: auto;
+}
+
+
+/*ADMIN LOGIN*/
+.login-wrap {
+    margin-top: 100px;
+    background-color: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.8);
+    color: #222222;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 20px;
+}
+
