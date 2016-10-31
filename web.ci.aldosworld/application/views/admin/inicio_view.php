@@ -22,11 +22,11 @@
     </script>
 
 </head>
-<body>
+<body style="background: #F8F8F8;">
 
 <?php echo $menu ?>
 
-<div class="container">
+<div class="container" style="padding-top: 50px;">
     <div class="row">
         <div class="col-md-12">
             <h3>Administrados Aldo's world</h3>
