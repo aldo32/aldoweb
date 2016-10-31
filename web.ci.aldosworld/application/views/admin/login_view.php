@@ -36,7 +36,10 @@
         <div class="row">
             <div class="col-md-4 col-centered login-wrap">
                 <h3>Administrador</h3>
+
                 <p><?php echo (validation_errors() != "") ? validation_errors() : ""; ?></p>
+                <p><?php echo (isset($message)) ? $message : ""; ?></p>
+
                 <?php echo form_open("adminaldo/login", array("name"=>"loginForm", "id"=>"loginForm"), array()); ?>
                     <div class="form-group">
                         <label for="email">Email address:</label>

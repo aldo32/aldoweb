@@ -408,7 +408,7 @@
     <div class="container">
         <br>
         <p class="text-center footer-text">
-            Aldo Marañon Andrade<br>
+            ISC Aldo Marañon Andrade<br>
             Desarrollador de software y aplicaciones web
         </p>
     </div>
