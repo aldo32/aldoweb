@@ -247,8 +247,266 @@ class Adminaldo extends CI_Controller
         $session = $this->checkSession();
         $data = $this->generalViews();
         $data["session"] = $session;
+        $data["message"] = $this->session->flashdata();
+
         $data["skills"] = $this->db->get("skills")->result();
 
         $this->load->view("admin/skills_view", $data);
+    }
+
+    function skillsNew()
+    {
+        $session = $this->checkSession();
+        $data = $this->generalViews();
+        $data["session"] = $session;
+        $data["skill"] = "";
+
+        $this->load->view("admin/skills_edit_view", $data);
+    }
+
+    function skillsSave()
+    {
+        $session = $this->checkSession();
+        $data = $this->generalViews();
+        $data["session"] = $session;
+        $type = $this->input->post("type");
+        $skilId = $this->input->post("skillId");
+        $skill = "";
+
+        if ($type == "update") {
+            $data["skill"] = $this->db->get_where("skills", array("id"=>$skilId))->row();
+        }
+
+        $this->form_validation->set_rules('name', '<strong>Nombre</strong>', 'required|trim');
+
+        $this->form_validation->set_message('required', 'El campo %s es obligatorio');
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->form_validation->set_error_delimiters('<small>', '</small><br>');
+            $this->load->view("admin/skills_edit_view", $data);
+        }
+        else {
+            $skill["name"] = $this->input->post("name");
+            $skill["porcent"] = $this->input->post("porcent");
+
+            //save data
+            if ($type == "insert") {
+                $this->db->insert("skills", $skill);
+                $flash = array("message"=>"El skill se creó correctamente", "type"=>"success");
+                $this->session->set_flashdata($flash);
+                redirect("adminaldo/skills");
+            }
+            else {
+                $this->db->where(array("id"=>$skilId));
+                $this->db->update("skills", $skill);
+
+                $flash = array("message"=>"El proyecto se actualizó correctamente", "type"=>"success");
+                $this->session->set_flashdata($flash);
+                redirect("adminaldo/skills");
+            }
+        }
+    }
+
+    function skillsEdit($skillId)
+    {
+        $session = $this->checkSession();
+        $data = $this->generalViews();
+        $data["session"] = $session;
+
+        $skill = $this->db->get_where("skills", array("id"=>$skillId))->row();
+
+        if ($skill) {
+            $data["skill"] = $skill;
+            $this->load->view("admin/skills_edit_view", $data);
+        }
+        else {
+            $flash = array("message"=>"No se encontro el skil en la base de datos", "type"=>"danger");
+            $this->session->set_flashdata($flash);
+            redirect("adminaldo/skills");
+        }
+    }
+
+    function skillsDelete($skillId)
+    {
+        $session = $this->checkSession();
+        $data = $this->generalViews();
+        $data["session"] = $session;
+
+        $skill = $this->db->get_where("skills", array("id"=>$skillId))->row();
+
+        if ($skill) {
+            $this->db->where("id", $skill->id);
+            $this->db->delete("skills");
+
+            $flash = array("message"=>"El skill se eilimino correctamente", "type"=>"success");
+            $this->session->set_flashdata($flash);
+            redirect("adminaldo/skills");
+        }
+        else {
+            $flash = array("message"=>"No se encontro el skil en la base de datos", "type"=>"danger");
+            $this->session->set_flashdata($flash);
+            redirect("adminaldo/skills");
+        }
+    }
+
+    function blog()
+    {
+        $session = $this->checkSession();
+        $data = $this->generalViews();
+        $data["session"] = $session;
+        $data["message"] = $this->session->flashdata();
+
+        //get all blogs
+        $data["blogs"] = $this->db->get("blog")->result();
+
+        $this->load->view("admin/blogs_view", $data);
+    }
+
+    function blogNew()
+    {
+        $session = $this->checkSession();
+        $data = $this->generalViews();
+        $data["session"] = $session;
+        $data["blog"] = "";
+
+        $this->load->view("admin/blogs_edit_view", $data);
+    }
+
+    function blogsSave()
+    {
+        $session = $this->checkSession();
+        $data = $this->generalViews();
+        $data["session"] = $session;
+        $type = $this->input->post("type");
+        $blogId = $this->input->post("blogId");
+        $blog = "";
+        $data["blog"] = new stdClass();
+        $data["blog"]->image = "";
+
+        if ($type == "update") {
+            $data["blog"] = $this->db->get_where("blog", array("id"=>$blogId))->row();
+        }
+
+        $this->form_validation->set_rules('name', '<strong>Nombre</strong>', 'required|trim');
+        $this->form_validation->set_rules('body', '<strong>body</strong>', 'required|trim');
+        if (empty($_FILES['imageBlog']['name']) && $data["blog"]->image == "") {
+            $this->form_validation->set_rules('imageBlog', '<strong>Imagen</strong>', 'required');
+        }
+
+        $this->form_validation->set_message('required', 'El campo %s es obligatorio');
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->form_validation->set_error_delimiters('<small>', '</small><br>');
+            $this->load->view("admin/blogs_edit_view", $data);
+        }
+        else {
+            $blog["name"] = $this->input->post("name");
+            $blog["body"] = $this->input->post("body");
+            $blog["source_url"] = $this->input->post("source_url");
+            $blog["video_embed"] = $this->input->post("video_embed");
+
+            if ($data["blog"]->image == "") {
+                //upload file
+                $config['upload_path'] = './resources/uploads/blog/';
+                $config['allowed_types'] = 'gif|jpg|png';
+                $config['file_name'] = uniqid("image_");
+                $config['max_size'] = 0;
+                $config['max_width'] = 0;
+                $config['max_height'] = 0;
+
+                $this->load->library('upload', $config);
+
+                if (!$this->upload->do_upload('imageBlog')) {
+                    $data["error_upload"] = $this->upload->display_errors();
+                    $this->load->view("admin/blogs_edit_view", $data);
+                }
+                else {
+                    $image = $this->upload->data();
+
+                    //create thumb
+                    $config['image_library'] = 'gd2';
+                    $config['source_image'] = './resources/uploads/blog/'.$image["file_name"];
+                    $config['create_thumb'] = TRUE;
+                    $config['maintain_ratio'] = TRUE;
+                    $config['width'] = 450;
+                    $config['height'] = 280;
+
+                    $this->load->library('image_lib', $config);
+
+                    if (!$this->image_lib->resize()) {
+                        $data["error_thumb"] = $this->image_lib->display_errors();
+                        $this->load->view("admin/blogs_edit_view", $data);
+                    }
+                    else {
+                        $blog["image"] = "resources/uploads/".$image["file_name"];
+                        $blog["image_thumb"] = "resources/uploads/".$image["raw_name"]."_thumb".$image["file_ext"];
+                    }
+                }
+            }
+
+            //save data
+            if ($type == "insert") {
+                $this->db->insert("blog", $blog);
+                $flash = array("message"=>"La entrada se creó correctamente", "type"=>"success");
+                $this->session->set_flashdata($flash);
+                redirect("adminaldo/blog");
+            }
+            else {
+                $this->db->where(array("id"=>$blogId));
+                $this->db->update("blog", $blog);
+
+                $flash = array("message"=>"La entrada se actualizó correctamente", "type"=>"success");
+                $this->session->set_flashdata($flash);
+                redirect("adminaldo/blog");
+            }
+        }
+    }
+
+    function blogsEdit($blogId)
+    {
+        $session = $this->checkSession();
+        $data = $this->generalViews();
+        $data["session"] = $session;
+
+        $blog = $this->db->get_where("projects", array("id"=>$blogId))->row();
+
+        if ($blog) {
+            $data["blog"] = $blog;
+            $this->load->view("admin/blogs_edit_view", $data);
+        }
+        else {
+            $flash = array("message"=>"No se encontro la entrada en la base de datos", "type"=>"danger");
+            $this->session->set_flashdata($flash);
+            redirect("adminaldo/blog");
+        }
+    }
+
+    function blogDeleteImage()
+    {
+        $blogId = $this->input->post("blogid");
+
+        //get project
+        $blog = $this->db->get_where("blog", array("id"=>$blogId))->row();
+
+        //delete images
+        if (file_exists("./".$blog->image) && $blog->image != "") {
+            unlink("./".$blog->image);
+        }
+        if (file_exists("./".$blog->image_thumb) && $blog->image_thumb != "") {
+            unlink("./".$blog->image_thumb);
+        }
+
+        $this->db->where(array("id"=>$blogId));
+        $this->db->update("blog", array("image"=>"", "image_thumb"=>""));
+
+        echo json_encode(array("status"=>"success"));
+    }
+
+    function blogDeleteItem()
+    {
+        $blogId = $this->input->post("blogId");
+        $active = ($this->input->post("active") == "false") ? 0 : 1;
+        $this->db->where("id", $blogId);
+        $this->db->update("blog", array("active"=>$active));
     }
 }

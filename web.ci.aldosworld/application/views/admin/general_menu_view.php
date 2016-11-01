@@ -12,7 +12,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="<?php echo base_url("adminaldo/projects") ?>">Proyectos</a></li>
                 <li><a href="<?php echo base_url("adminaldo/skills") ?>">Conocimientos</a></li>
-                <li><a href="#contact">Blog</a></li>
+                <li><a href="<?php echo base_url("adminaldo/blog") ?>">Blog</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>

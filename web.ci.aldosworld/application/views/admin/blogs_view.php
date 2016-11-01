@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="<?php echo base_url() ?>resources/img/favicon.ico">
 
-    <title>Skills</title>
+    <title>Blog</title>
 
     <?php echo $header ?>
 
@@ -17,7 +17,22 @@
         $(document).ready(function() {
             $('.nyroModal').nyroModal();
 
-            $('#skills').DataTable();
+            $('#blog').DataTable();
+
+            $(".active").click(function() {
+                active = $(this).is(":checked");
+                id = $(this).attr("id");
+
+                $.ajax({
+                    url: "<?php echo base_url('adminaldo/blogDeleteItem')?>",
+                    data: "blogid="+id+"&active="+active,
+                    dataType: "json",
+                    success: function(datos) {
+
+                    },
+                    type: "POST"
+                });
+            });
         });
     </script>
 
@@ -29,8 +44,8 @@
 <div class="container" style="padding-top: 50px;">
     <div class="row">
         <div class="col-md-12">
-            <h3>Conocimientos</h3>
-            <p><a href="<?php echo base_url("adminaldo/skillsNew") ?>"><button type="button" class="btn btn-primary">Crear nuevo skill</button></p></a>
+            <h3>Blog</h3>
+            <p><a href="<?php echo base_url("adminaldo/blogNew") ?>"><button type="button" class="btn btn-primary">Crear nueva entrada</button></p></a>
         </div>
         <div class="col-md-12">
 
@@ -44,27 +59,34 @@
             }
             ?>
 
-            <table id="skills">
+            <table id="blog">
                 <thead>
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
-                    <th>Porcentaje</th>
+                    <th>Creado</th>
                     <th>Acciones</th>
+                    <th>Activo</th>
+
                 </tr>
                 </thead>
                 <tbody>
                 <?php
-                if ($skills) {
-                    foreach ($skills AS $row) {
+                if ($blogs) {
+                    foreach ($blogs AS $row) {
                         ?>
                         <tr>
                             <td><?php echo $row->id ?></td>
                             <td><?php echo $row->name ?></td>
-                            <td><?php echo $row->porcent."%" ?></td>
+                            <td><?php echo $row->created ?></td>
                             <td>
-                                <a href="<?php echo base_url("adminaldo/skillsEdit/".$row->id) ?>"><button type="button" class="btn btn-primary btn-sm">Editar</button></a>
-                                <a href="<?php echo base_url("adminaldo/skillsDelete/".$row->id) ?>"><button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true" style="font-size: 15px;"></i></button></
+                                <a href="<?php echo base_url("adminaldo/blogsEdit/".$row->id) ?>"><button type="button" class="btn btn-primary btn-sm">Editar</button></a>
+                                <!--<button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true" style="font-size: 15px;"></i></button>-->
+                            </td>
+                            <td>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" id="<?php echo $row->id ?>" class="active" value="<?php echo $row->active ?>" <?php echo ($row->active) ? "checked" : "" ?>></label>
+                                </div>
                             </td>
                         </tr>
                         <?php
