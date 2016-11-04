@@ -114,6 +114,8 @@ class Adminaldo extends CI_Controller
         $type = $this->input->post("type");
         $projectId = $this->input->post("projectId");
         $project = "";
+        $data["project"] = new stdClass();
+        $data["project"]->image = "";
 
         if ($type == "update") {
             $data["project"] = $this->db->get_where("projects", array("id"=>$projectId))->row();
@@ -438,8 +440,8 @@ class Adminaldo extends CI_Controller
                         $this->load->view("admin/blogs_edit_view", $data);
                     }
                     else {
-                        $blog["image"] = "resources/uploads/".$image["file_name"];
-                        $blog["image_thumb"] = "resources/uploads/".$image["raw_name"]."_thumb".$image["file_ext"];
+                        $blog["image"] = "resources/uploads/blog/".$image["file_name"];
+                        $blog["image_thumb"] = "resources/uploads/blog/".$image["raw_name"]."_thumb".$image["file_ext"];
                     }
                 }
             }
@@ -468,7 +470,7 @@ class Adminaldo extends CI_Controller
         $data = $this->generalViews();
         $data["session"] = $session;
 
-        $blog = $this->db->get_where("projects", array("id"=>$blogId))->row();
+        $blog = $this->db->get_where("blog", array("id"=>$blogId))->row();
 
         if ($blog) {
             $data["blog"] = $blog;

@@ -62,6 +62,7 @@
             <table id="projects">
                 <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Nombre</th>
                         <th>Imagen</th>
                         <th>Creado</th>
@@ -76,6 +77,7 @@
                         foreach ($projects AS $row) {
                             ?>
                             <tr>
+                                <td><?php echo $row->id ?></td>
                                 <td><?php echo $row->name ?></td>
                                 <td><a href="<?php echo base_url().$row->image ?>" class="nyroModal">Ver imagen</a></td>
                                 <td><?php echo $row->created ?></td>

@@ -33,7 +33,7 @@
             hex = $('.hex');
             for(var i = 0; i < hex.length; i = i + 1)
             {
-                $(hex[i]).delay(50 * i).fadeIn();
+                $(hex[i]).delay(150 * i).fadeIn();
             }
 
             $('.hvr-overline-from-left').mouseover(function() {
@@ -107,7 +107,7 @@
             <br><br>
             <p>
                 <h1>Portafolio de trabajo</h1>
-                ISC Aldo Marañon Andrade<br>
+                Estos son algunos de los proyectos más representativos que he desarrollado<br>
             </p>
         </div>
     </div>
