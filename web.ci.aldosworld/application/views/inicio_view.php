@@ -33,22 +33,22 @@
             hex = $('.hex');
             for(var i = 0; i < hex.length; i = i + 1)
             {
-                $(hex[i]).delay(50 * i).fadeIn();
+                $(hex[i]).delay(150 * i).fadeIn();
             }
 
-            /*$('.hvr-overline-from-left').mouseover(function() {
-                porcent = $(this).attr('data-count');
-                $(this).find("span").hide().html(porcent+"%").fadeIn();
-            });*/
-            /*$('.hvr-overline-from-left').mouseout(function() {
-                porcent = $(this).attr('data-count');
-                $(this).find("span").html("");
-            });*/
-
-            $('.hvr-overline-from-left').each(function(i) {
+            $('.hvr-overline-from-left').mouseover(function() {
                 porcent = $(this).attr('data-count');
                 $(this).find("span").hide().html(porcent+"%").fadeIn();
             });
+            $('.hvr-overline-from-left').mouseout(function() {
+                porcent = $(this).attr('data-count');
+                $(this).find("span").html("");
+            });
+
+            /*$('.hvr-overline-from-left').each(function(i) {
+                porcent = $(this).attr('data-count');
+                $(this).find("span").hide().html(porcent+"%").fadeIn();
+            });*/
 
             $(window).scroll(function() {
                 if ($(this).scrollTop() == 1415) {
@@ -107,7 +107,7 @@
             <br><br>
             <p>
                 <h1>Portafolio de trabajo</h1>
-                ISC Aldo Marañon Andrade<br>
+                Estos son algunos de los proyectos más representativos que he desarrollado<br>
             </p>
         </div>
     </div>
@@ -269,23 +269,30 @@
         <div class="col-md-12">
             <h1>Conocimientos</h1>
             <p>Tecnologías que he utilizado en todos los proyectos que he desarrollado y el porcentaje de habilidad en cada uno de ellos</p>
+            <br>
         </div>
+        <div class="col-md-12">
+            <div class="col-md-4" style="border-top: 10px solid #D75F17; padding-bottom: 10px;">
+                <strong>Porcentaje de conocimiento adquirido</strong>
+            </div>
+        </div>
+        <?php $col = rand(3, 5) ?>
         <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="25">PHP <span></span></div> </div>
-        <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="50">Codeigniter <span></span></div> </div>
-        <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="100">Administración de servidores <span></span></div> </div>
-        <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="75">SQL <span></span></div> </div>
-        <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="50">Laravel <span></span></div> </div>
+        <div class="col-md-5"> <div class="hvr-overline-from-left" data-count="50">Codeigniter <span></span></div> </div>
+        <div class="col-md-4"> <div class="hvr-overline-from-left" data-count="100">Administración de servidores <span></span></div> </div>
+        <div class="col-md-4"> <div class="hvr-overline-from-left" data-count="75">SQL <span></span></div> </div>
+        <div class="col-md-5"> <div class="hvr-overline-from-left" data-count="50">Laravel <span></span></div> </div>
         <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="80">Mysql <span></span></div> </div>
-        <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="25">Postgres <span></span></div> </div>
-        <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="50">Desarrollo API <span></span></div> </div>
+        <div class="col-md-4"> <div class="hvr-overline-from-left" data-count="25">Postgres <span></span></div> </div>
+        <div class="col-md-4"> <div class="hvr-overline-from-left" data-count="50">Desarrollo API <span></span></div> </div>
         <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="75">PHP <span></span></div> </div>
-        <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="50">Codeigniter <span></span></div> </div>
+        <div class="col-md-5"> <div class="hvr-overline-from-left" data-count="50">Codeigniter <span></span></div> </div>
         <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="100">Administración de servidores <span></span></div> </div>
-        <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="75">SQL <span></span></div> </div>
+        <div class="col-md-4"> <div class="hvr-overline-from-left" data-count="75">SQL <span></span></div> </div>
         <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="25">Laravel <span></span></div> </div>
-        <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="80">Mysql <span></span></div> </div>
-        <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="25">Postgres <span></span></div> </div>
-        <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="50">Desarrollo API <span></span></div> </div>
+        <div class="col-md-5"> <div class="hvr-overline-from-left" data-count="80">Mysql <span></span></div> </div>
+        <div class="col-md-5"> <div class="hvr-overline-from-left" data-count="25">Postgres <span></span></div> </div>
+        <div class="col-md-4"> <div class="hvr-overline-from-left" data-count="50">Desarrollo API <span></span></div> </div>
     </div>
 </div>
 

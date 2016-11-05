@@ -20,7 +20,7 @@
                             <button type="submit" class="btn btn-primary disabled">Visitar sitio</button>
                         </p>
                     </div>
-                    <div class="col-md-7" style="height: 200px; overflow: auto; font-size: 14px;">
+                    <div class="col-md-7" style="height: 300px; overflow: auto; font-size: 14px;">
                         <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen.</p>
                         <br>
                         <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen.</p>
