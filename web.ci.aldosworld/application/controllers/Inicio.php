@@ -20,4 +20,17 @@ class Inicio extends CI_Controller {
         $data["project"] = $this->db->get_where("projects", array("id"=>$id, "active"=>1))->row();
         $this->load->view("modals/project_view", $data);
     }
+
+    function blog($id)
+    {
+        $data["blog"] = $this->db->get_where("blog", array("id"=>$id))->row();
+
+        if ($data["blog"]) {
+            $this->load->view("blog_view", $data);
+        }
+        else {
+            redirect("inicio");
+        }
+
+    }
 }

@@ -5,11 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="aldosword, sitio web que muestra los proyectos más importantes de mi carrera">
+    <meta name="author" content="Aldo Marañon Andrade">
+    <meta name="keywords" content="HTML,CSS,XML,JavaScript,PHP,aldo,aldo marañon,aldosworld,desaroollo,pagina,web,css,proyecto,programación,codeigniter">
     <link rel="icon" href="<?php echo base_url() ?>resources/img/favicon.ico">
 
-    <title>Test</title>
+    <title>Aldo's world</title>
 
     <link rel="stylesheet" href="<?php echo base_url() ?>resources/css/bootstrap.css">
     <link rel="stylesheet" href="<?php echo base_url() ?>resources/css/hexagons.css">
@@ -33,7 +34,7 @@
             hex = $('.hex');
             for(var i = 0; i < hex.length; i = i + 1)
             {
-                $(hex[i]).delay(150 * i).fadeIn();
+                $(hex[i]).delay(50 * i).fadeIn();
             }
 
             $('.hvr-overline-from-left').mouseover(function() {
@@ -151,6 +152,17 @@
     ?>
 </ul>
 
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 col-centered text-center">
+            <br><br>
+            <p>
+                La mayoría de los proyectos ya no estan en linea ya que por fechas de término o cambio de directivos se tuvieron que dar de baja<br>
+            </p>
+        </div>
+    </div>
+</div>
+
 <a id="conocimientos"></a>
 <br><br>
 <div class="container">
@@ -189,7 +201,7 @@
             <img src="<?php echo base_url()?>resources/img/key_open.png" class="me-image" />
         </div>
         <div class="col-md-8">
-            <h1>Acerce de mi</h1>
+            <h1>Acerca de mi</h1>
             <p>Diez años de experiencia en desarrollo, mantenimiento y administración de tecnologías de información, administración de proyectos, líder técnico, lider de proyectos, Lider de Area, experiencia en desarrollo de aplicaciones web bajo plataformas Linux, Mac y Windows bajo esquema MVC, desarrollo de aplicaciones en plataforma .NET, programación Orientada a Objetos y SQL avanzado.</p>
             <p>Me considero una persona profesional que sabe manejar la presión laboral y canalizarla hacia el aumento de la experiencia, además de ser autodidacta e ir aprendiendo las nuevas tecnologías que surgen el ambiente de las tecnologías de la información y el web. Además de buscar las metodologías y técnicas para un desarrollo eficiente y ágil.</p>
             <p>Administración de proyectos: Metodologías para el desarrollo de software que lleven al proyecto a la finalización correcta en tiempo y forma mediante la documentación de requerimientos y aplicación de estándares de desarrollo. Líder de proyectos: Administración de equipos de desarrollo mediante metodologías agiles para una mejor calidad en los productos terminados.</p>
@@ -215,10 +227,12 @@
             foreach ($blogs AS $blog) {
                 ?>
                 <div class="col-md-4">
-                    <p><img class="proyect-image" src="<?php echo base_url().$blog->image_thumb ?>" /></p>
-                    <h3><?php echo $blog->name ?></h3>
+                    <p><img class="proyect-image" src="<?php echo base_url().$blog->image_thumb ?>" style="height: 250px;" /></p>
+                    <div style="height: 50px;">
+                        <h3><?php echo word_limiter($blog->name, 11) ?></h3>
+                    </div>
                     <p><?php echo word_limiter($blog->body, 20) ?></p>
-                    <a href="<?php echo base_url("inicio/blog/".$blog->id)?>" target="_blank"><button type="submit" class="btn btn-primary btn-sm">Leer más</button></a>
+                    <a href="<?php echo base_url("inicio/blog/".$blog->id)?>"><button type="submit" class="btn btn-primary btn-sm">Leer más</button></a>
                     <div class="fb-share-button pull-right" data-href="<?php echo base_url("inicio/blog/".$blog->id) ?>" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Faldosworld.com%2F&amp;src=sdkpreparse">Compartir</a></div>
                     <p>&nbsp;</p>
                 </div>
@@ -235,7 +249,7 @@
     <div class="row">
         <div class="col-md-12">
             <h1>Contacto</h1>
-            <p>Necesitas información para que juntos desarrollemos una solución web? Escribeme!!</p>
+            <p>Necesitas información para que juntos desarrollemos una solución web? Escríbeme!!</p>
             <br>
         </div>
         <div class="col-md-6 col-centered">
@@ -279,5 +293,15 @@
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
 
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-40966556-2', 'auto');
+    ga('send', 'pageview');
+
+</script>
 </body>
 </html>
