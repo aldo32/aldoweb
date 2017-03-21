@@ -511,4 +511,60 @@ class Adminaldo extends CI_Controller
         $this->db->where("id", $blogId);
         $this->db->update("blog", array("active"=>$active));
     }
+
+    function sendemail()
+    {
+        $email = utf8_decode($this->input->post("email"));
+        $name = utf8_decode($this->input->post("name"));
+        $asunto = utf8_decode($this->input->post("asunto"));
+
+        /*
+        $config['protocol']    = 'smtp';
+        $config['smtp_host']    = 'ssl://smtp.gmail.com';
+        $config['smtp_port']    = '465';
+        $config['smtp_timeout'] = '10';
+        $config['smtp_user']    = 'isc.aldo@gmail.com';
+        $config['smtp_pass']    = 'aldoma32';
+        */
+        $config['charset']    = 'ISO-8859-1';
+        $config['newline']    = "\r\n";
+        $config['mailtype'] = 'html'; // or html*/
+
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+
+        $this->email->from($email, $name);
+        $this->email->to('isc.aldo@gmail.com');
+
+        $this->email->subject('Informacion de contacto');
+
+        $message = '
+            <!DOCTYPE html>
+            <html lang=\"en\">
+            <head>
+                <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+            </head>
+
+            <body>
+                <h2>Informaci&oacute;n de contacto</h2>
+                <br><br>
+                <p>Nombre: '.$name.'</p>
+                <p>Correo: '.$email.'</p>
+                <br><br>
+                <p>'.nl2br($asunto).'</p>
+                <br><br>
+                Listo!!
+            </body>
+            </html>
+        ';
+
+        $this->email->message($message);
+        $result = $this->email->send();
+
+        if ($result) {
+            echo json_encode(array("status"=>"success"));
+        } else {
+            echo json_encode(array("status"=>"error"));
+        }
+    }
 }

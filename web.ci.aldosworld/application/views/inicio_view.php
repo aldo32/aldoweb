@@ -4,10 +4,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:title" content="Aldo's World" />
+    <meta property="og:description" content="Aldo Marañon, Portafolio de proyectos" />
+    <meta property="og:image" content="http://aldosworld.890m.com/resources/img/logoaldo.png" />
+    <meta property="og:url" content="http://aldosworld.890m.com/" />
+
+    <meta content='Aldo Marañon, Portafolio de proyectos' />
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="aldosword, sitio web que muestra los proyectos más importantes de mi carrera">
-    <meta name="author" content="Aldo Marañon Andrade">
-    <meta name="keywords" content="HTML,CSS,XML,JavaScript,PHP,aldo,aldo marañon,aldosworld,desaroollo,pagina,web,css,proyecto,programación,codeigniter">
     <link rel="icon" href="<?php echo base_url() ?>resources/img/favicon.ico">
 
     <title>Aldo's world</title>
@@ -227,9 +231,13 @@
             foreach ($blogs AS $blog) {
                 ?>
                 <div class="col-md-4">
-                    <p><img class="proyect-image" src="<?php echo base_url().$blog->image_thumb ?>" style="height: 250px;" /></p>
+                    <p>
+                        <a href="<?php echo base_url("inicio/blog/".$blog->id)?>">
+                            <img class="proyect-image" src="<?php echo base_url().$blog->image_thumb ?>" style="height: 250px;" />
+                        </a>
+                    </p>
                     <div style="height: 50px;">
-                        <h3><?php echo word_limiter($blog->name, 11) ?></h3>
+                        <a href="<?php echo base_url("inicio/blog/".$blog->id)?>"><h3><?php echo word_limiter($blog->name, 11) ?></h3></a>
                     </div>
                     <p><?php echo word_limiter($blog->body, 20) ?></p>
                     <a href="<?php echo base_url("inicio/blog/".$blog->id)?>"><button type="submit" class="btn btn-primary btn-sm">Leer más</button></a>
@@ -253,10 +261,11 @@
             <br>
         </div>
         <div class="col-md-6 col-centered">
-            <form>
+            <div style="color: #d75f17" id="contact-message"></div>
+            <form name="contact" id="contact">
                 <div class="form-group">
                     <label for="email">Email address:</label>
-                    <input type="email" class="form-control" id="email">
+                    <input type="email" class="form-control" name="email" id="email">
                 </div>
                 <div class="form-group">
                     <label for="name">Nombre:</label>
@@ -267,11 +276,48 @@
                     <textarea class="form-control" id="asunto"></textarea>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Enviar</button>
+                <button type="submit" class="btn btn-primary" id="contactsend">Enviar</button>
             </form>
         </div>
     </div>
 </div>
+<script>
+ $(document).ready(function() {
+    $("#contact").submit(function(e) {
+        e.preventDefault();
+
+        email = $("#email").val();
+        name = $("#name").val();
+        asunto = $("#asunto").val();
+
+        if (email == "") {
+            $("#contact-message").html("El correo es obligatorio");
+        } else if (name == "") {
+            $("#contact-message").html("El nombre es obligatorio");
+        } else if (asunto == "") {
+            $("#contact-message").html("El asunto es obligatorio");
+        } else {
+            $.ajax({
+                url: "<?php echo base_url('adminaldo/sendemail')?>",
+                data: "email="+email+"&name="+name+"&asunto="+asunto,
+                dataType: "json",
+                success: function(datos) {
+                    if (datos.status == "success") {
+                        $("#contact-message").html("<h3>Tus datos han sido enviados, prónto me pondré en contacto. Gracias</h3>");
+                        $("#email").val("");
+                        $("#name").val("");
+                        $("#asunto").val("");
+                    }
+                    else {
+                        $("#contact-message").html("No se puedo enviar tus comentarios. Intentalo más tarde");
+                    }
+                },
+                type: "POST"
+            });
+        }
+    });
+ });
+</script>
 <br><br>
 
 <footer class="footer">
