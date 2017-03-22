@@ -4,12 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:title" content="Aldo's World" />
+    <meta property="og:description" content="Aldo Marañon, Portafolio de proyectos" />
+    <meta property="og:image" content="http://aldosworld.890m.com/resources/img/logoaldo.png" />
+    <meta property="og:url" content="http://aldosworld.890m.com/" />
+
+    <meta content='Aldo Marañon, Portafolio de proyectos' />
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
     <link rel="icon" href="<?php echo base_url() ?>resources/img/favicon.ico">
 
-    <title>Test</title>
+    <title>Aldo's world</title>
 
     <link rel="stylesheet" href="<?php echo base_url() ?>resources/css/bootstrap.css">
     <link rel="stylesheet" href="<?php echo base_url() ?>resources/css/hexagons.css">
@@ -33,7 +38,7 @@
             hex = $('.hex');
             for(var i = 0; i < hex.length; i = i + 1)
             {
-                $(hex[i]).delay(150 * i).fadeIn();
+                $(hex[i]).delay(50 * i).fadeIn();
             }
 
             $('.hvr-overline-from-left').mouseover(function() {
@@ -55,6 +60,14 @@
 
                 }
             });
+
+            $(document).on('click', '.item-menu', function(event){
+                event.preventDefault();
+
+                $('html, body').animate({
+                    scrollTop: $( $.attr(this, 'href') ).offset().top
+                }, 500);
+            });
         });
     </script>
 
@@ -72,25 +85,25 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Inicio</a></li>
-                <li><a href="#about">Conocimientos</a></li>
-                <li><a href="#contact">Acerca de mi</a></li>
-                <li><a href="#contact">Contacto</a></li>
-                <li><a href="#contact">Blog</a></li>
+                <li><a href="#inicio" class="item-menu">Inicio</a></li>
+                <li><a href="#conocimientos" class="item-menu">Conocimientos</a></li>
+                <li><a href="#acerca" class="item-menu">Acerca de mi</a></li>
+                <li><a href="#blog" class="item-menu">Blog</a></li>
+                <li><a href="#contacto" class="item-menu">Contacto</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="#">
+                    <a href="https://www.facebook.com/aldomaranon" target="_blank">
                         <i class="fa fa-facebook-square hvr-grow icon-social" aria-hidden="true"></i>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="https://twitter.com/isc_aldo_ma" target="_blank">
                         <i class="fa fa-twitter-square hvr-grow icon-social" aria-hidden="true"></i>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="https://mx.linkedin.com/in/aldo-mara%C3%B1on-andrade-89b13014" target="_blank">
                         <i class="fa fa-linkedin-square hvr-grow icon-social" aria-hidden="true"></i>
                     </a>
                 </li>
@@ -99,6 +112,7 @@
     </div>
 </nav>
 
+<a id="inicio"></a>
 <div class="container">
     <div class="row">
         <div class="col-md-4 col-centered text-center">
@@ -114,155 +128,46 @@
 </div>
 
 <ul id="hexGrid">
-    <li class="hex">
-        <a class="hexIn nyroModal" href="<?php echo base_url("inicio/showProject/1") ?>">
-            <img src="<?php echo base_url()?>resources/proyectos/azteca_movil_thumb.png" alt="Azteca movil" />
-            <h1>Azteca movil</h1>
-            <p>Portal web que con información acerca de las diferentes promociones que ofrecen</p>
-        </a>
-    </li>
-    <li class="hex">
-        <a class="hexIn" href="#">
-            <img src="https://farm3.staticflickr.com/2827/10384422264_d9c7299146.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-        </a>
-    </li>
-    <li class="hex">
-        <a class="hexIn" href="#">
-            <img src="https://farm8.staticflickr.com/7187/6895047173_d4b1a0d798.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-        </a>
-    </li>
-    <li class="hex">
-        <a class="hexIn" href="#">
-            <img src="https://farm4.staticflickr.com/3766/12953056854_b8cdf14f21.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-        </a>
-    </li>
-    <li class="hex">
-        <a class="hexIn" href="#">
-            <img src="https://farm7.staticflickr.com/6139/5986939269_10721b8017.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-        </a>
-    </li>
-    <li class="hex">
-        <a class="hexIn" href="#">
-            <img src="https://farm4.staticflickr.com/3165/5733278274_2626612c70.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-        </a>
-    </li>
-    <li class="hex">
-        <a class="hexIn" href="#">
-            <img src="https://farm8.staticflickr.com/7163/6822904141_50277565c3.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-        </a>
-    </li>
-    <li class="hex">
-        <a class="hexIn" href="#">
-            <img src="https://farm4.staticflickr.com/3771/13199704015_72aa535bd7.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-        </a>
-    </li>
-    <li class="hex">
-        <a class="hexIn" href="#">
-            <img src="https://farm7.staticflickr.com/6083/6055581292_d94c2d90e3.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-        </a>
-    </li>
-    <li class="hex">
-        <a class="hexIn" href="#">
-            <img src="https://farm8.staticflickr.com/7187/6895047173_d4b1a0d798.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-        </a>
-    </li>
-    <li class="hex">
-        <a class="hexIn" href="#">
-            <img src="https://farm3.staticflickr.com/2878/10944255073_973d2cd25c.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-        </a>
-    </li>
-    <li class="hex">
-        <a class="hexIn" href="#">
-            <img src="https://farm9.staticflickr.com/8461/8048823381_0fbc2d8efb.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-        </a>
-    </li>
-    <li class="hex">
-        <a class="hexIn" href="#">
-            <img src="https://farm5.staticflickr.com/4144/5053682635_b348b24698.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-        </a>
-    </li>
-    <li class="hex">
-        <a class="hexIn" href="#">
-            <img src="https://farm3.staticflickr.com/2827/10384422264_d9c7299146.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-        </a>
-    </li>
-    <li class="hex">
-        <a class="hexIn" href="#">
-            <img src="https://farm7.staticflickr.com/6217/6216951796_e50778255c.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-        </a>
-    </li>
-    <li class="hex">
-        <a class="hexIn" href="#">
-            <img src="https://farm7.staticflickr.com/6083/6055581292_d94c2d90e3.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-        </a>
-    </li>
-    <li class="hex">
-        <a class="hexIn" href="#">
-            <img src="https://farm3.staticflickr.com/2827/10384422264_d9c7299146.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-        </a>
-    </li>
-    <li class="hex">
-        <a class="hexIn" href="#">
-            <img src="https://farm8.staticflickr.com/7187/6895047173_d4b1a0d798.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-        </a>
-    </li>
-    <li class="hex">
-        <a class="hexIn" href="#">
-            <img src="https://farm4.staticflickr.com/3766/12953056854_b8cdf14f21.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-        </a>
-    </li>
-    <li class="hex">
-        <a class="hexIn" href="#">
-            <img src="https://farm3.staticflickr.com/2878/10944255073_973d2cd25c.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-        </a>
-    </li>
-    <li class="hex">
-        <a class="hexIn" href="#">
-            <img src="https://farm9.staticflickr.com/8461/8048823381_0fbc2d8efb.jpg" alt="" />
-            <h1>This is a title</h1>
-            <p>Some sample text about the article this hexagon leads to</p>
-        </a>
-    </li>
+    <?php
+    if (isset($projects)) {
+        foreach ($projects AS $project) {
+            ?>
+            <li class="hex">
+                <a class="hexIn nyroModal" href="<?php echo base_url()."inicio/showProject/".$project->id ?>">
+                    <img src="<?php echo base_url().$project->image_thumb?>" alt="<?php echo $project->name ?>" />
+                    <h1><?php echo $project->name ?></h1>
+                    <p><?php echo word_limiter($project->description, 10) ?></p>
+                </a>
+            </li>
+            <?php
+        }
+    }
+    else {
+        ?>
+        <li class="hex">
+            <a class="hexIn" href="#">
+                <img src="https://farm3.staticflickr.com/2827/10384422264_d9c7299146.jpg" alt="" />
+                <h1>No hay proyectos</h1>
+                <p>I'm sorry</p>
+            </a>
+        </li>
+        <?php
+    }
+    ?>
 </ul>
 
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 col-centered text-center">
+            <br><br>
+            <p>
+                La mayoría de los proyectos ya no estan en linea ya que por fechas de término o cambio de directivos se tuvieron que dar de baja<br>
+            </p>
+        </div>
+    </div>
+</div>
+
+<a id="conocimientos"></a>
 <br><br>
 <div class="container">
     <div class="row">
@@ -276,26 +181,23 @@
                 <strong>Porcentaje de conocimiento adquirido</strong>
             </div>
         </div>
-        <?php $col = rand(3, 5) ?>
-        <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="25">PHP <span></span></div> </div>
-        <div class="col-md-5"> <div class="hvr-overline-from-left" data-count="50">Codeigniter <span></span></div> </div>
-        <div class="col-md-4"> <div class="hvr-overline-from-left" data-count="100">Administración de servidores <span></span></div> </div>
-        <div class="col-md-4"> <div class="hvr-overline-from-left" data-count="75">SQL <span></span></div> </div>
-        <div class="col-md-5"> <div class="hvr-overline-from-left" data-count="50">Laravel <span></span></div> </div>
-        <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="80">Mysql <span></span></div> </div>
-        <div class="col-md-4"> <div class="hvr-overline-from-left" data-count="25">Postgres <span></span></div> </div>
-        <div class="col-md-4"> <div class="hvr-overline-from-left" data-count="50">Desarrollo API <span></span></div> </div>
-        <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="75">PHP <span></span></div> </div>
-        <div class="col-md-5"> <div class="hvr-overline-from-left" data-count="50">Codeigniter <span></span></div> </div>
-        <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="100">Administración de servidores <span></span></div> </div>
-        <div class="col-md-4"> <div class="hvr-overline-from-left" data-count="75">SQL <span></span></div> </div>
-        <div class="col-md-3"> <div class="hvr-overline-from-left" data-count="25">Laravel <span></span></div> </div>
-        <div class="col-md-5"> <div class="hvr-overline-from-left" data-count="80">Mysql <span></span></div> </div>
-        <div class="col-md-5"> <div class="hvr-overline-from-left" data-count="25">Postgres <span></span></div> </div>
-        <div class="col-md-4"> <div class="hvr-overline-from-left" data-count="50">Desarrollo API <span></span></div> </div>
+        <?php
+        if (isset($skills)) {
+            foreach ($skills AS $skill) {
+                $col = rand(3, 5);
+                ?>
+                <div class="col-md-<?php echo $col ?>"> <div class="hvr-overline-from-left" data-count="<?php echo $skill->porcent ?>"><?php echo $skill->name ?> <span></span></div> </div>
+                <?php
+            }
+        }
+        else {
+            ?><div class="col-md-3"> <div class="hvr-overline-from-left" data-count="100">NO SKILLS<span></span></div> </div><?php
+        }
+        ?>
     </div>
 </div>
 
+<a id="acerca"></a>
 <br><br>
 <div class="container">
     <div class="row">
@@ -303,13 +205,11 @@
             <img src="<?php echo base_url()?>resources/img/key_open.png" class="me-image" />
         </div>
         <div class="col-md-8">
-            <h1>Acerce de mi</h1>
-            <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500 Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500</p>
-            <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500</p>
-            <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500 Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500</p>
-            <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500</p>
-            <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500 Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500</p>
-            <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500</p>
+            <h1>Acerca de mi</h1>
+            <p>Diez años de experiencia en desarrollo, mantenimiento y administración de tecnologías de información, administración de proyectos, líder técnico, lider de proyectos, Lider de Area, experiencia en desarrollo de aplicaciones web bajo plataformas Linux, Mac y Windows bajo esquema MVC, desarrollo de aplicaciones en plataforma .NET, programación Orientada a Objetos y SQL avanzado.</p>
+            <p>Me considero una persona profesional que sabe manejar la presión laboral y canalizarla hacia el aumento de la experiencia, además de ser autodidacta e ir aprendiendo las nuevas tecnologías que surgen el ambiente de las tecnologías de la información y el web. Además de buscar las metodologías y técnicas para un desarrollo eficiente y ágil.</p>
+            <p>Administración de proyectos: Metodologías para el desarrollo de software que lleven al proyecto a la finalización correcta en tiempo y forma mediante la documentación de requerimientos y aplicación de estándares de desarrollo. Líder de proyectos: Administración de equipos de desarrollo mediante metodologías agiles para una mejor calidad en los productos terminados.</p>
+            <p>Administración de redes: Administración de redes y servidores en diferentes sistemas operativos, manejo de pfsense como adminitrador de redes y balanceo de cargas para estas</p>
         </div>
         <div class="col-md-2">
             <img src="<?php echo base_url()?>resources/img/key_close.png" class="me-image" />
@@ -317,6 +217,7 @@
     </div>
 </div>
 
+<a id="blog"></a>
 <br><br>
 <div class="container">
     <div class="row">
@@ -325,75 +226,46 @@
             <br>
         </div>
 
-        <div class="col-md-4">
-            <p><img class="proyect-image" src="<?php echo base_url() ?>resources/proyectos/azteca_movil_thumb.png" /></p>
-            <h3>Titulo de articulo</h3>
-            <p><?php echo word_limiter("Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500 Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500", 20) ?></p>
-            <a href="<?php echo base_url("inicio/blog/1")?>" target="_blank"><button type="submit" class="btn btn-primary btn-sm">Leer más</button></a>
-            <div class="fb-share-button pull-right" data-href="http://aldosworld.com" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Faldosworld.com%2F&amp;src=sdkpreparse">Compartir</a></div>
-            <p>&nbsp;</p>
-        </div>
-
-        <div class="col-md-4">
-            <p><img class="proyect-image" src="<?php echo base_url() ?>resources/proyectos/azteca_movil_thumb.png" /></p>
-            <h3>Titulo de articulo</h3>
-            <p><?php echo word_limiter("Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500 Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500", 20) ?></p>
-            <a href="<?php echo base_url("inicio/blog/1")?>" target="_blank"><button type="submit" class="btn btn-primary btn-sm">Leer más</button></a>
-            <div class="fb-share-button pull-right" data-href="http://aldosworld.com" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Faldosworld.com%2F&amp;src=sdkpreparse">Compartir</a></div>
-            <p>&nbsp;</p>
-        </div>
-
-        <div class="col-md-4">
-            <p><img class="proyect-image" src="<?php echo base_url() ?>resources/proyectos/azteca_movil_thumb.png" /></p>
-            <h3>Titulo de articulo</h3>
-            <p><?php echo word_limiter("Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500 Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500", 20) ?></p>
-            <a href="<?php echo base_url("inicio/blog/1")?>" target="_blank"><button type="submit" class="btn btn-primary btn-sm">Leer más</button></a>
-            <div class="fb-share-button pull-right" data-href="http://aldosworld.com" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Faldosworld.com%2F&amp;src=sdkpreparse">Compartir</a></div>
-            <p>&nbsp;</p>
-        </div>
-
-        <div class="col-md-4">
-            <p><img class="proyect-image" src="<?php echo base_url() ?>resources/proyectos/azteca_movil_thumb.png" /></p>
-            <h3>Titulo de articulo</h3>
-            <p><?php echo word_limiter("Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500 Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500", 20) ?></p>
-            <a href="<?php echo base_url("inicio/blog/1")?>" target="_blank"><button type="submit" class="btn btn-primary btn-sm">Leer más</button></a>
-            <div class="fb-share-button pull-right" data-href="http://aldosworld.com" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Faldosworld.com%2F&amp;src=sdkpreparse">Compartir</a></div>
-            <p>&nbsp;</p>
-        </div>
-
-        <div class="col-md-4">
-            <p><img class="proyect-image" src="<?php echo base_url() ?>resources/proyectos/azteca_movil_thumb.png" /></p>
-            <h3>Titulo de articulo</h3>
-            <p><?php echo word_limiter("Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500 Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500", 20) ?></p>
-            <a href="<?php echo base_url("inicio/blog/1")?>" target="_blank"><button type="submit" class="btn btn-primary btn-sm">Leer más</button></a>
-            <div class="fb-share-button pull-right" data-href="http://aldosworld.com" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Faldosworld.com%2F&amp;src=sdkpreparse">Compartir</a></div>
-            <p>&nbsp;</p>
-        </div>
-
-        <div class="col-md-4">
-            <p><img class="proyect-image" src="<?php echo base_url() ?>resources/proyectos/azteca_movil_thumb.png" /></p>
-            <h3>Titulo de articulo</h3>
-            <p><?php echo word_limiter("Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500 Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500", 20) ?></p>
-            <a href="<?php echo base_url("inicio/blog/1")?>" target="_blank"><button type="submit" class="btn btn-primary btn-sm">Leer más</button></a>
-            <div class="fb-share-button pull-right" data-href="http://aldosworld.com" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Faldosworld.com%2F&amp;src=sdkpreparse">Compartir</a></div>
-            <p>&nbsp;</p>
-        </div>
+        <?php
+        if (isset($blogs)) {
+            foreach ($blogs AS $blog) {
+                ?>
+                <div class="col-md-4">
+                    <p>
+                        <a href="<?php echo base_url("inicio/blog/".$blog->id)?>">
+                            <img class="proyect-image" src="<?php echo base_url().$blog->image_thumb ?>" style="height: 250px;" />
+                        </a>
+                    </p>
+                    <div style="height: 50px;">
+                        <a href="<?php echo base_url("inicio/blog/".$blog->id)?>"><h3><?php echo word_limiter($blog->name, 11) ?></h3></a>
+                    </div>
+                    <p><?php echo word_limiter($blog->body, 20) ?></p>
+                    <a href="<?php echo base_url("inicio/blog/".$blog->id)?>"><button type="submit" class="btn btn-primary btn-sm">Leer más</button></a>
+                    <div class="fb-share-button pull-right" data-href="<?php echo base_url("inicio/blog/".$blog->id) ?>" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Faldosworld.com%2F&amp;src=sdkpreparse">Compartir</a></div>
+                    <p>&nbsp;</p>
+                </div>
+                <?php
+            }
+        }
+        ?>
     </div>
 </div>
 
-
+<a id="contacto"></a>
+<br><br>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <h1>Contacto</h1>
-            <p>Necesitas información para que juntos desarrollemos una solución web? Escribeme!!</p>
+            <p>Necesitas información para que juntos desarrollemos una solución web? Escríbeme!!</p>
             <br>
         </div>
         <div class="col-md-6 col-centered">
-            <form>
+            <div style="color: #d75f17" id="contact-message"></div>
+            <form name="contact" id="contact">
                 <div class="form-group">
                     <label for="email">Email address:</label>
-                    <input type="email" class="form-control" id="email">
+                    <input type="email" class="form-control" name="email" id="email">
                 </div>
                 <div class="form-group">
                     <label for="name">Nombre:</label>
@@ -404,11 +276,48 @@
                     <textarea class="form-control" id="asunto"></textarea>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Enviar</button>
+                <button type="submit" class="btn btn-primary" id="contactsend">Enviar</button>
             </form>
         </div>
     </div>
 </div>
+<script>
+ $(document).ready(function() {
+    $("#contact").submit(function(e) {
+        e.preventDefault();
+
+        email = $("#email").val();
+        name = $("#name").val();
+        asunto = $("#asunto").val();
+
+        if (email == "") {
+            $("#contact-message").html("El correo es obligatorio");
+        } else if (name == "") {
+            $("#contact-message").html("El nombre es obligatorio");
+        } else if (asunto == "") {
+            $("#contact-message").html("El asunto es obligatorio");
+        } else {
+            $.ajax({
+                url: "<?php echo base_url('adminaldo/sendemail')?>",
+                data: "email="+email+"&name="+name+"&asunto="+asunto,
+                dataType: "json",
+                success: function(datos) {
+                    if (datos.status == "success") {
+                        $("#contact-message").html("<h3>Tus datos han sido enviados, prónto me pondré en contacto. Gracias</h3>");
+                        $("#email").val("");
+                        $("#name").val("");
+                        $("#asunto").val("");
+                    }
+                    else {
+                        $("#contact-message").html("No se puedo enviar tus comentarios. Intentalo más tarde");
+                    }
+                },
+                type: "POST"
+            });
+        }
+    });
+ });
+</script>
 <br><br>
 
 <footer class="footer">
@@ -430,5 +339,15 @@
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
 
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-40966556-2', 'auto');
+    ga('send', 'pageview');
+
+</script>
 </body>
 </html>

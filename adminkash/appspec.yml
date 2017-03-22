@@ -1,0 +1,18 @@
+version: 0.0
+os: linux
+files:
+  - source: /content/
+    destination: /srv/admin.kash.com
+permissions:
+   - object: /srv/admin.kash.com
+     pattern: "**"
+     owner: root
+hooks:
+  BeforeInstall:
+    - location: scripts/init_apache.sh
+      timeout: 300
+      runas: root
+  AfterInstall:
+    - location: scripts/get_creds.sh
+      timeout: 300
+      runas: root
