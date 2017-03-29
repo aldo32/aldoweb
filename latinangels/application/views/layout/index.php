@@ -16,8 +16,8 @@
 
 <div class="container">
     <?php if ($content) { echo $content; } else { echo ""; } ?>
-</div>
 
-<?php if ($footer) { echo $footer; } else { echo ""; } ?>
+    <?php if ($footer) { echo $footer; } else { echo ""; } ?>
+</div>
 </body>
 </html>

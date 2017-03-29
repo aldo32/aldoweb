@@ -42,7 +42,7 @@ class MY_LayoutCore extends CI_Controller
         //load views with params data
         $this->template['includes'] = $this->load->view('layout/includes', "", true);
         $this->template['header'] = $this->load->view('layout/header', "", true);
-        $this->template['menu'] = $this->load->view('layout/menu', "", true);
+        $this->template['menu'] = $this->load->view('layout/menu', $this->data, true);
         $this->template['content'] = $this->load->view($this->content, $this->data, true);
         $this->template['footer'] = $this->load->view('layout/footer', "", true);
 
