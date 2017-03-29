@@ -60,7 +60,7 @@ class Inicio extends MY_LayoutCore {
         $this->data["language"] = $_SESSION["language"];
         $this->data["menu"] = "lenceria";
 
-        $this->content = "lenceria_view";
+        $this->content = "lenceria2_view";
         $this->generalLayout();
     }
 
