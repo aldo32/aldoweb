@@ -28,7 +28,11 @@
         <div class="col-md-8">
             <div class="wrap-video">
                 <!--<div id="videoembed" style="position:relative;height:0;"><iframe src="https://www.youtube.com/embed/wSPQNMm3yQQ" width="100%" height="100%" frameborder="0" style="position:absolute;width:100%;height:100%;left:0" allowfullscreen></iframe></div>-->
-                <div id="videoembed" style="position:relative;height:0;"><iframe width="560" height="315" src="https://www.youtube.com/embed/wSPQNMm3yQQ" frameborder="0" style="position:absolute;width:100%;height:100%;left:0" allowfullscreen></iframe></div>
+                <!--<div id="videoembed" style="position:relative;height:0;"><iframe width="560" height="315" src="https://www.youtube.com/embed/wSPQNMm3yQQ" frameborder="0" style="position:absolute;width:100%;height:100%;left:0" allowfullscreen></iframe></div>-->
+                <video width="100%" height="100%" controls>
+                    <source src="<?php echo base_url() ?>resources/images/video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
             </div>
             <br>
             <a href="<?php echo base_url("inicio/vervideo") ?>" target="_self">
